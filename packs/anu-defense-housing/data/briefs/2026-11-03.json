@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-03",
+  "title": "Today's top defense-tech headlines",
+  "big": "31 new stories since the last brief. The busiest areas: allies & theaters and drones & air autonomy.",
+  "stories": [
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Airborne Laser Weapon For Tactical Aircraft Being Developed By Germany",
+      "what": "The new initiative aims to eventually equip Luftwaffe combat aircraft with a laser capable of shooting down drones and missiles. The post Airborne Laser Weapon For Tactical Aircraft Being Developed By Germany appeared first on TWZ .",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261103-airborne-laser-weapon-for-tactical-aircraft-being-"
+    },
+    {
+      "tag": "Allies & theaters",
+      "h": "India orders next-gen corvettes for $5.7b under broad naval modernization push",
+      "what": "New Delhi is spending big money on new corvettes from domestic shipbuilders, carrier-capable fighters from France and submarines from Germany.",
+      "you": "Allies' wars and budgets are the testing ground and a big second market for new defense tech.",
+      "ref": "u-20261103-india-orders-next-gen-corvettes-for-5-7b-under-bro"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Sweden’s Saab launches family of AI agents for future aircraft projects",
+      "what": "Key to the autonomous project is Saab’s AI Fighter Jet Pilot Academy, designed to develop the agents and, in parallel, establish infrastructure necessary to “create, train and evaluate” them, says the firm.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261103-sweden-s-saab-launches-family-of-ai-agents-for-fut"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "Australia preps Bluebottle USV for submarine-hunting role",
+      "what": "\"I want potential adversaries to understand that, when they see an Ocius Bluebottle USV, it’s a signal to get out of our ocean,” Minister for Defence Industry Pat Conroy said.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261103-australia-preps-bluebottle-usv-for-submarine-hunti"
+    },
+    {
+      "tag": "Space",
+      "h": "Japan’s Astroscale and Germany’s OHB explore in-orbit servicing work",
+      "what": "Japanese satellite-servicing company Astroscale and German space firm OHB have signed a memorandum of understanding to explore working together on technology to protect satellites and other infrastructure in orbit, with a focus on linking Astroscale’s British…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261103-japan-s-astroscale-and-germany-s-ohb-explore-in-or"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Bill-of-materials compliance and magnet sourcing",
+    "why": "Maps every part to its country of origin, flags NDAA, Blue UAS and the 2027 magnet ban, and finds compliant suppliers. The 1 Jan 2027 magnet ban and China's 10 Nov deadline hit hundreds of hardware vendors at once."
+  },
+  "auto": true
+}

@@ -1,0 +1,169 @@
+[
+  {
+    "id": "i-fleet",
+    "order": 1,
+    "t": "Cross-vendor drone fleet operations",
+    "sectors": [
+      "air",
+      "ai"
+    ],
+    "cap": "Low",
+    "time": "6–12 mo",
+    "clash": "Low",
+    "what": "Tracks inventory, firmware, battery health, losses and operator training for thousands of drones from many vendors.",
+    "why": "Drone Dominance buys from 11+ vendors and nobody manages the mixed fleet. At 200k units, logistics is the bottleneck.",
+    "wedge": "One brigade's FPV fleet through a SBIR or CSO."
+  },
+  {
+    "id": "i-cuas-infra",
+    "order": 2,
+    "t": "Counter-drone detection for critical infrastructure",
+    "sectors": [
+      "cuas",
+      "sensing"
+    ],
+    "cap": "Medium",
+    "time": "9–18 mo",
+    "clash": "Medium",
+    "what": "Sensor fusion and attribution software (RF, radar, acoustic, camera) for bases, data centers, stadiums, prisons and utilities.",
+    "why": "$14.4B FY27 counter-UAS line plus the base-defense pilot. Commercial sites legally can only detect and report drones, so software is what they buy.",
+    "wedge": "Commercial sites first, then DoD installations."
+  },
+  {
+    "id": "i-te",
+    "order": 3,
+    "t": "Synthetic data and test & evaluation for autonomy",
+    "sectors": [
+      "ai",
+      "policy"
+    ],
+    "cap": "Low",
+    "time": "6–12 mo",
+    "clash": "Low",
+    "what": "Simulation and synthetic sensor data to train and certify autonomy when GPS is denied and radios are jammed.",
+    "why": "New autonomy policy (the June 2026 memo, CSIS definitions) means systems need verification evidence, and the new command gets test powers.",
+    "wedge": "Per-campaign service for startups going into gauntlets."
+  },
+  {
+    "id": "i-bom",
+    "order": 4,
+    "t": "Bill-of-materials compliance and magnet sourcing",
+    "sectors": [
+      "minerals",
+      "mfg"
+    ],
+    "cap": "Low",
+    "time": "3–9 mo",
+    "clash": "None",
+    "what": "Maps every part to its country of origin, flags NDAA, Blue UAS and the 2027 magnet ban, and finds compliant suppliers.",
+    "why": "The 1 Jan 2027 magnet ban and China's 10 Nov deadline hit hundreds of hardware vendors at once.",
+    "wedge": "SaaS for drone and munitions startups. Fastest path to revenue."
+  },
+  {
+    "id": "i-nav",
+    "order": 5,
+    "t": "GPS-denied navigation module ('Intel Inside' for drones)",
+    "sectors": [
+      "air",
+      "sensing",
+      "ew"
+    ],
+    "cap": "Medium",
+    "time": "12–18 mo",
+    "clash": "Medium",
+    "what": "A small vision, inertial and terminal-guidance board any airframe maker can integrate; later, quantum-ready.",
+    "why": "Jamming is everywhere; most vendors can't build autonomy in-house. As airframes become commodities, the margin sits in components like this.",
+    "wedge": "License to gauntlet runners-up."
+  },
+  {
+    "id": "i-capture",
+    "order": 6,
+    "t": "Contract intelligence and capture agent for small vendors",
+    "sectors": [
+      "policy",
+      "capital"
+    ],
+    "cap": "Low",
+    "time": "3–6 mo",
+    "clash": "None",
+    "what": "An LLM agent that watches SAM.gov, DIU, OTA consortia, budget documents and portfolio acquisition executives, matches openings to a product, and drafts responses.",
+    "why": "Thousands of new vendors are navigating DAWG and the new acquisition rules; turning valuations into orders is the stated test.",
+    "wedge": "Solo-founder friendly, per-seat pricing."
+  },
+  {
+    "id": "i-motor",
+    "order": 7,
+    "t": "Rare-earth-free drone motors",
+    "sectors": [
+      "minerals",
+      "air",
+      "mfg"
+    ],
+    "cap": "High",
+    "time": "18–30 mo",
+    "clash": "None",
+    "what": "Motors using ferrite or reluctance designs, or recycled magnets, for small drones and actuators.",
+    "why": "China controls heavy rare earths. A compliant motor is a chokepoint product every drone maker needs.",
+    "wedge": "Supply Taiwan's non-Chinese drone chain and US gauntlet vendors."
+  },
+  {
+    "id": "i-interceptor",
+    "order": 8,
+    "t": "Low-cost interceptor drone",
+    "sectors": [
+      "cuas",
+      "air"
+    ],
+    "cap": "High",
+    "time": "18–30 mo",
+    "clash": "Medium",
+    "what": "An autonomous interceptor under $5k for Shahed-class and FPV drones.",
+    "why": "Ukraine proved the concept, and Japan, the Gulf and US bases are buying. The cost-exchange crisis is acute.",
+    "wedge": "Partner with a Ukrainian team for combat data."
+  },
+  {
+    "id": "i-power",
+    "order": 9,
+    "t": "Tactical power and thermal systems for directed energy",
+    "sectors": [
+      "energy",
+      "cuas"
+    ],
+    "cap": "Medium",
+    "time": "12–24 mo",
+    "clash": "Low",
+    "what": "Batteries, power conditioning and cooling packs that let lasers and microwave weapons fire continuously on vehicles.",
+    "why": "Laser production has started (AeroVironment E-HEL) but fielding is slow (Iron Beam); power and cooling are the constraint.",
+    "wedge": "Sell to laser integrators as a subsystem."
+  },
+  {
+    "id": "i-ukraine-bridge",
+    "order": 10,
+    "t": "Ukraine-to-NATO technology licensing bridge",
+    "sectors": [
+      "global",
+      "capital"
+    ],
+    "cap": "Low",
+    "time": "6–12 mo",
+    "clash": "None",
+    "what": "Licenses combat-proven Ukrainian designs (ground robots, interceptors, software) and handles compliance and US or EU production.",
+    "why": "About 300 Ukrainian ground-drone firms and 500 FPV makers are looking for export routes; Brave1 is certifying exports.",
+    "wedge": "Start with ground robots for logistics."
+  },
+  {
+    "id": "i-mesh",
+    "order": 11,
+    "t": "Resilient mesh datalinks for swarms",
+    "sectors": [
+      "ew",
+      "air"
+    ],
+    "cap": "High",
+    "time": "18–36 mo",
+    "clash": "High",
+    "what": "Low-probability-of-intercept mesh radios that keep swarms coordinated under jamming.",
+    "why": "Autonomy at scale needs links that survive. Fiber works for one drone, not a swarm.",
+    "wedge": "Deep tech that both Lattice and Maven ecosystems would buy."
+  }
+]

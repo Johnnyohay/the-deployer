@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-15",
+  "title": "Today's top defense-tech headlines",
+  "big": "54 new stories since the last brief. The busiest areas: drones & air autonomy and budget, policy & acquisition reform.",
+  "stories": [
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Report to Congress on North Korea’s Nuclear Weapons and Missile Programs",
+      "what": "The following is the Oct. 13, 2026, Congressional Research Service report, North Korea’s Nuclear Weapons and Missile Programs.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261015-report-to-congress-on-north-korea-s-nuclear-weapon"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Pentagon needs $50B for mass drone production, Hegseth says",
+      "what": "Defense Secretary Pete Hegseth wants $50 billion in reconciliation funding to support the Pentagon's push to scale autonomous and robotic systems.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261014-pentagon-needs-50b-for-mass-drone-production-hegse"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Honeywell Aerospace’s counter-drone software unites data from multiple sensors into one",
+      "what": "Honeywell Aerospace’s SAMURAI system is designed to bring information from disparate sources into a single interface.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261015-honeywell-aerospace-s-counter-drone-software-unite"
+    },
+    {
+      "tag": "Space",
+      "h": "Agile Space Industries Expands to Seattle Area with New Bellevue Office",
+      "what": "BELLEVUE, Wash., Oct. 15, 2026 — Agile Space Industries, a leading provider of in-space chemical propulsion solutions, has expanded into the Seattle metropolitan area with the opening of a new [ ] The post Agile Space Industries Expands to Seattle Area with…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261015-agile-space-industries-expands-to-seattle-area-wit"
+    },
+    {
+      "tag": "Ground robotics",
+      "h": "Demining coalition hands Ukraine new Inguar armored vehicles",
+      "what": "Ukraine’s Support Forces, the branch that runs the military’s engineering and demining units, have received another batch of equipment from the international Demining Capability Coalition led by Lithuania and Iceland, including Ukrainian-built Inguar-3…",
+      "you": "Ground robots are moving from demos to real orders, starting with logistics and dangerous jobs.",
+      "ref": "u-20261015-demining-coalition-hands-ukraine-new-inguar-armore"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Rare-earth-free drone motors",
+    "why": "Motors using ferrite or reluctance designs, or recycled magnets, for small drones and actuators. China controls heavy rare earths. A compliant motor is a chokepoint product every drone maker needs."
+  },
+  "auto": true
+}

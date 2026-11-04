@@ -1,0 +1,688 @@
+[
+  {
+    "id": "palantir",
+    "name": "Palantir",
+    "sectors": [
+      "ai",
+      "missiledef"
+    ],
+    "type": "Public new entrant",
+    "hq": "US",
+    "status": "NASDAQ: PLTR · FY26 guide $8.15B",
+    "edge": "Ontology + AIP data layer; Maven becoming the DoD standard; $10B Army EA; commercial revenue funds R&D",
+    "latest": "Q2 revenue +93%; TITAN production; Golden Dome software",
+    "src": "https://www.sec.gov/Archives/edgar/data/0001321655/000132165526000039/a2026q2ex991pressrelease.htm"
+  },
+  {
+    "id": "anduril",
+    "name": "Anduril",
+    "sectors": [
+      "air",
+      "sea",
+      "missiledef",
+      "cuas",
+      "mfg",
+      "strike"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "$61B (May 2026)",
+    "edge": "Lattice software plus its own hardware and factories; builds before the contract",
+    "latest": "Arsenal-2 shipyard; FQ-44A Fury; IFPC downselect",
+    "src": "https://www.anduril.com/news/anduril-u-s-navy-invest-usd6-6-billion-to-expand-america-s-submarine-industrial-base"
+  },
+  {
+    "id": "scale",
+    "name": "Scale AI",
+    "sectors": [
+      "ai"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "CDAO deal $500M",
+    "edge": "Data labeling, evaluation and decision support for military AI",
+    "latest": "CDAO enterprise deal raised to $500M (May 2026)",
+    "src": "https://scale.com/blog/scale-ai-pentagon-cdao-500-million-agreement"
+  },
+  {
+    "id": "defense-unicorns",
+    "name": "Defense Unicorns",
+    "sectors": [
+      "ai",
+      "cyber"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "Up to $350M Army IDIQ",
+    "edge": "Open-source delivery stack for air-gapped and edge networks",
+    "latest": "Unified Defense Stack IDIQ (Oct 2026)",
+    "src": "https://edsnews.substack.com/p/defense-tech-intelligence-brief-october-a28"
+  },
+  {
+    "id": "vannevar",
+    "name": "Vannevar Labs",
+    "sectors": [
+      "ai",
+      "sensing"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "$1.5B (2024)",
+    "edge": "OSINT, SIGINT and targeting-support AI for national security",
+    "latest": "—",
+    "src": "https://sacra.com/c/vannevar-labs/"
+  },
+  {
+    "id": "govini",
+    "name": "Govini",
+    "sectors": [
+      "ai",
+      "policy"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": ">$100M ARR (2025)",
+    "edge": "Acquisition and supply-chain analytics for DoD",
+    "latest": "$150M from Bain Capital (Oct 2025)",
+    "src": "https://defensebriefing.co/intel/companies/scale-ai"
+  },
+  {
+    "id": "frontier-labs",
+    "name": "Anthropic · OpenAI · Google · xAI",
+    "sectors": [
+      "ai"
+    ],
+    "type": "AI labs",
+    "hq": "US",
+    "status": "CDAO frontier AI deals",
+    "edge": "Frontier models on classified networks (IL6/IL7)",
+    "latest": "Up to $200M prototype ceilings each; joint agentic AI contracts",
+    "src": "https://ai2027-tracker.com/predictions/dod-ai-contracting/"
+  },
+  {
+    "id": "helsing",
+    "name": "Helsing",
+    "sectors": [
+      "ai",
+      "air",
+      "global"
+    ],
+    "type": "Late-stage startup",
+    "hq": "Germany",
+    "status": "≈$18B",
+    "edge": "Europe's software-first champion; HX-2 strike drone in Ukraine",
+    "latest": "Raised at ~$18B (2026)",
+    "src": "https://finance.yahoo.com/sectors/technology/articles/daniel-ek-backed-defense-tech-173832791.html"
+  },
+  {
+    "id": "shield-ai",
+    "name": "Shield AI",
+    "sectors": [
+      "air",
+      "ai",
+      "sea"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "$12.7B (Mar 2026)",
+    "edge": "Hivemind AI pilot licensed to others' airframes; V-BAT; X-BAT jet",
+    "latest": "$150M Navy X-BAT export work; Taiwan Thunder Tiger deal",
+    "src": "https://dc.fortune.com/2026/03/26/shield-ai-revenue-series-g-funding-12-billion-valuation"
+  },
+  {
+    "id": "neros",
+    "name": "Neros",
+    "sectors": [
+      "air",
+      "mfg"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "$250M raise",
+    "edge": "Volume FPV drones (Archer) with no Chinese parts; ~1,200/week",
+    "latest": "$500M Army PBAS IDIQ",
+    "src": "https://www.govconwire.com/articles/neros-500m-army-archer-fpv-contract"
+  },
+  {
+    "id": "skydio",
+    "name": "Skydio",
+    "sectors": [
+      "air"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "$2.2B (2024), reportedly raising higher",
+    "edge": "Leading US quadcopter maker; Blue UAS; autonomy",
+    "latest": "Back in market at a higher valuation",
+    "src": "https://dronehub.ai/blog/top-us-drone-companies"
+  },
+  {
+    "id": "aerovironment",
+    "name": "AeroVironment",
+    "sectors": [
+      "air",
+      "cuas"
+    ],
+    "type": "Public incumbent",
+    "hq": "US",
+    "status": "NASDAQ: AVAV",
+    "edge": "Switchblade (ramping to 1,200+/month); LOCUST laser",
+    "latest": "$464.8M E-HEL laser production (Sep 2026)",
+    "src": "https://defensescoop.com/2026/09/02/army-awards-aerovironment-nearly-500m-contract-laser-weapons/"
+  },
+  {
+    "id": "kratos",
+    "name": "Kratos",
+    "sectors": [
+      "air",
+      "strike"
+    ],
+    "type": "Public incumbent",
+    "hq": "US",
+    "status": "NASDAQ: KTOS",
+    "edge": "Low-cost jet drones (Valkyrie), target drones, hypersonic test",
+    "latest": "CCA Inc 2 contender",
+    "src": "https://defensescoop.com/2026/07/30/air-force-cca-drone-program-increment-2-downselect/"
+  },
+  {
+    "id": "general-atomics",
+    "name": "General Atomics",
+    "sectors": [
+      "air",
+      "energy"
+    ],
+    "type": "Private incumbent",
+    "hq": "US",
+    "status": "Private",
+    "edge": "YFQ-42 CCA in production; GA-EMS microreactor",
+    "latest": "CCA production; Janus selection",
+    "src": "https://www.airandspaceforces.com/air-force-general-atomics-anduril-cca-production-contracts/"
+  },
+  {
+    "id": "saronic",
+    "name": "Saronic",
+    "sectors": [
+      "sea",
+      "mfg"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "$9.25B (Apr 2026)",
+    "edge": "Autonomous surface vessels plus its own shipyard",
+    "latest": "$1.75B Series D",
+    "src": "https://newmarketpitch.com/blogs/news/defense-tech-top-startups-valuation"
+  },
+  {
+    "id": "blue-water",
+    "name": "Blue Water Autonomy",
+    "sectors": [
+      "sea"
+    ],
+    "type": "Early startup",
+    "hq": "US",
+    "status": "Raising",
+    "edge": "Long-endurance autonomous ships built at Conrad Shipyard",
+    "latest": "Navy mapping IDIQ; suing over MUSV",
+    "src": "https://news.usni.org/2026/07/15/blue-water-autonomy-saildrone-sue-navy-over-musv-rejection"
+  },
+  {
+    "id": "havocai",
+    "name": "HavocAI",
+    "sectors": [
+      "sea",
+      "ai"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Collaborative autonomy software for boat swarms",
+    "latest": "MUSV at-sea testing; Hanwha 200-ft ASV deal",
+    "src": "https://www.nationaldefensemagazine.org/articles/2026/6/25/company-offering-collaborative-maritime-autonomy-to-the-navy"
+  },
+  {
+    "id": "saildrone",
+    "name": "Saildrone",
+    "sectors": [
+      "sea",
+      "sensing"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Wind and solar ocean drones for maritime surveillance",
+    "latest": "Suing Navy over MUSV",
+    "src": "https://news.usni.org/2026/07/15/blue-water-autonomy-saildrone-sue-navy-over-musv-rejection"
+  },
+  {
+    "id": "overland",
+    "name": "Overland AI",
+    "sectors": [
+      "ground"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Off-road ground autonomy",
+    "latest": "$24.5M with Rangers; $20M breaching; ILTM",
+    "src": "https://thedefensepost.com/2026/10/08/overland-ai-us-army-rangers/"
+  },
+  {
+    "id": "forterra",
+    "name": "Forterra",
+    "sectors": [
+      "ground"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Autonomy kits for military trucks and vehicles",
+    "latest": "Breaching and ILTM awards",
+    "src": "https://thedefensepost.com/2026/09/10/overland-ai-autonomous-breaching/"
+  },
+  {
+    "id": "scout",
+    "name": "Scout AI",
+    "sectors": [
+      "ground",
+      "ai"
+    ],
+    "type": "Early startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Foundation-model ('robot brain') autonomy for ground vehicles",
+    "latest": "Army ISV autonomy prototype",
+    "src": "https://www.defensedaily.com/forterra-overland-ai-scout-ai-nab-army-contracts-for-autonomous-ground-vehicles/advanced-transformational-technology/"
+  },
+  {
+    "id": "spacex",
+    "name": "SpaceX / Starshield",
+    "sectors": [
+      "space",
+      "missiledef"
+    ],
+    "type": "Late-stage private",
+    "hq": "US",
+    "status": "Private",
+    "edge": "Launch plus constellation scale; the military's LEO backbone",
+    "latest": "$6.45B SB-AMTI + SDN backbone (May 2026)",
+    "src": "https://defensescoop.com/2026/05/27/space-force-awards-spacex-contract-backbone-satcom-network/"
+  },
+  {
+    "id": "true-anomaly",
+    "name": "True Anomaly",
+    "sectors": [
+      "space",
+      "missiledef"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "$650M Series D",
+    "edge": "Space domain awareness and proximity operations (Jackal)",
+    "latest": "GHOST-R; SBI prototype",
+    "src": "https://defensescoop.com/2026/09/21/ghostr-satellite-program-contract-awards-northrop-grumman-true-anomaly/"
+  },
+  {
+    "id": "york",
+    "name": "York Space Systems",
+    "sectors": [
+      "space",
+      "capital"
+    ],
+    "type": "Public new entrant",
+    "hq": "US",
+    "status": "IPO Jan 2026 ($629M)",
+    "edge": "SDA satellite buses at volume",
+    "latest": "Acquiring ALL.SPACE (~$355M)",
+    "src": "https://www.nasdaqprivatemarket.com/insights/weekly-commentary/from-battlefield-to-bell-defense-tech-ipos/"
+  },
+  {
+    "id": "apex-k2",
+    "name": "Apex · K2 Space",
+    "sectors": [
+      "space",
+      "mfg"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Mass-produced satellite buses (Apex) and very large buses (K2)",
+    "latest": "STRATFI alumni; scaling production",
+    "src": "https://payloadspace.com/spacewerx-announces-2026-stratfi-awardees/"
+  },
+  {
+    "id": "castelion",
+    "name": "Castelion",
+    "sectors": [
+      "strike",
+      "mfg"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "≈$13B (reported)",
+    "edge": "Low-cost hypersonic strike (Blackbeard), built at volume",
+    "latest": "Production deal; Project Ranger 500+/yr",
+    "src": "https://nm.news/2026/05/19/castelion-defense-contract/"
+  },
+  {
+    "id": "ursa",
+    "name": "Ursa Major",
+    "sectors": [
+      "strike",
+      "mfg"
+    ],
+    "type": "Going public",
+    "hq": "US",
+    "status": "$2.3B SPAC",
+    "edge": "Solid rocket motors and hypersonic propulsion",
+    "latest": "$137M Navy SRM award (Oct 2026)",
+    "src": "https://thedefensepost.com/2026/10/08/ursa-major-us-rocket-motors/"
+  },
+  {
+    "id": "voyager",
+    "name": "Voyager Technologies",
+    "sectors": [
+      "strike",
+      "space"
+    ],
+    "type": "Public new entrant",
+    "hq": "US",
+    "status": "NYSE: VOYG",
+    "edge": "Propulsion, space and defense systems",
+    "latest": "Anduril partnership (Sep 2026)",
+    "src": "https://investors.voyagertechnologies.com/news/news-details/2026/Anduril-and-Voyager-Establish-Strategic-Partnership-Across-Advanced-Weapons-and-Propulsion/default.aspx"
+  },
+  {
+    "id": "epirus",
+    "name": "Epirus",
+    "sectors": [
+      "cuas"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Leonidas high-power microwave counter-swarm",
+    "latest": "Base-defense pilot; Marines order",
+    "src": "https://thedefensepost.com/2026/08/11/us-marines-microwave-weapon/"
+  },
+  {
+    "id": "chaos",
+    "name": "CHAOS Industries",
+    "sectors": [
+      "cuas",
+      "sensing"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "$4.5B",
+    "edge": "Low-cost networked radar and timing",
+    "latest": "$510M raise",
+    "src": "https://www.govconwire.com/articles/chaos-industries-funding-uas-detection"
+  },
+  {
+    "id": "heaviside",
+    "name": "Heaviside Industries",
+    "sectors": [
+      "ew"
+    ],
+    "type": "Early startup",
+    "hq": "US",
+    "status": "$99M Army production",
+    "edge": "MOTH spectrum analyzer",
+    "latest": "First EW call-for-solutions production award",
+    "src": "https://defensescoop.com/2026/09/11/army-awards-196m-sensor-production-contracts-electronic-warfare/"
+  },
+  {
+    "id": "ri",
+    "name": "Research Innovations",
+    "sectors": [
+      "ew",
+      "sensing"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "$96.9M Army production",
+    "edge": "AI-driven Dragonfly sensors",
+    "latest": "First EW call-for-solutions production award",
+    "src": "https://defensescoop.com/2026/09/11/army-awards-196m-sensor-production-contracts-electronic-warfare/"
+  },
+  {
+    "id": "qctrl",
+    "name": "Q-CTRL",
+    "sectors": [
+      "sensing"
+    ],
+    "type": "Growth startup",
+    "hq": "Australia",
+    "status": "—",
+    "edge": "Quantum navigation without GPS (Ironstone Opal)",
+    "latest": "DARPA RoQS; DIU with Lockheed",
+    "src": "https://q-ctrl.com/blog/darpa-selects-q-ctrl-to-develop-next-generation-quantum-sensors-for-navigation-on-advanced-defense-platforms"
+  },
+  {
+    "id": "sandboxaq",
+    "name": "SandboxAQ",
+    "sectors": [
+      "sensing",
+      "ai"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "AQNav magnetic-anomaly navigation",
+    "latest": "DIU Transition of Quantum Sensing",
+    "src": "https://www.gpsworld.com/sandboxaq-defense-innovation-unit-advance-quantum-navigation-for-gps-denied-operations/"
+  },
+  {
+    "id": "hadrian",
+    "name": "Hadrian",
+    "sectors": [
+      "mfg"
+    ],
+    "type": "Late-stage startup",
+    "hq": "US",
+    "status": "$7.87B (Aug 2026)",
+    "edge": "Automated precision-machining factories",
+    "latest": "$1.37B Series D",
+    "src": "https://www.bloomberg.com/news/articles/2026-08-06/defense-startup-hadrian-valued-at-7-87-billion-in-new-round"
+  },
+  {
+    "id": "divergent",
+    "name": "Divergent · Firestorm",
+    "sectors": [
+      "mfg",
+      "air"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Additive and distributed manufacturing; drones built in hours",
+    "latest": "—",
+    "src": "https://newmarketpitch.com/blogs/news/defense-tech-top-startups-fundraising"
+  },
+  {
+    "id": "karman",
+    "name": "Karman Space & Defense",
+    "sectors": [
+      "mfg",
+      "capital",
+      "strike"
+    ],
+    "type": "Public new entrant",
+    "hq": "US",
+    "status": "NYSE: KRMN · ~+200% since IPO",
+    "edge": "Roll-up of missile, space and naval subsystems",
+    "latest": "Walker Precision $93M; Seemann/MSC $220M",
+    "src": "https://tracxn.com/d/acquisitions/acquisitions-by-karman-space-defense/__hV8cmMitNIaaTMA2i6HH__EZ_BN41YsQkm_M48LnNtI"
+  },
+  {
+    "id": "mp",
+    "name": "MP Materials",
+    "sectors": [
+      "minerals"
+    ],
+    "type": "Public",
+    "hq": "US",
+    "status": "NYSE: MP · DoD shareholder",
+    "edge": "The only US rare-earth mine plus a magnet plant; DoD $110/kg price floor",
+    "latest": "Added to China's export-control list (Jun 2026)",
+    "src": "https://www.bloomberg.com/news/articles/2026-06-22/china-places-two-us-rare-earths-producers-on-export-control-list"
+  },
+  {
+    "id": "radiant",
+    "name": "Radiant",
+    "sectors": [
+      "energy"
+    ],
+    "type": "Growth startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Kaleidos portable microreactor",
+    "latest": "Janus pick (Fort Benning); 15-unit deal",
+    "src": "https://www.militarytimes.com/industry/techwatch/2026/08/26/us-army-taps-5-firms-to-build-on-base-microreactors-in-nuclear-energy-push/"
+  },
+  {
+    "id": "valar",
+    "name": "Valar Atomics · Antares",
+    "sectors": [
+      "energy"
+    ],
+    "type": "Early startup",
+    "hq": "US",
+    "status": "—",
+    "edge": "Air-transportable microreactors",
+    "latest": "Valar Ward 250 airlifted by C-17; Antares picked for Fort Bragg",
+    "src": "https://www.idga.org/command-and-control/articles/project-janus-explained-why-the-us-army-wants-microreactors-on-military-bases-by-2028"
+  },
+  {
+    "id": "lockheed",
+    "name": "Lockheed Martin",
+    "sectors": [
+      "primes",
+      "missiledef",
+      "strike",
+      "space"
+    ],
+    "type": "Prime",
+    "hq": "US",
+    "status": "NYSE: LMT · backlog $230B",
+    "edge": "PAC-3, THAAD, PrSM, F-35; Navy CCA control system",
+    "latest": "Raised FY guide to ~$80.75B midpoint",
+    "src": "https://www.govconwire.com/articles/lockheed-martin-q2-2026-earnings-guidance"
+  },
+  {
+    "id": "rtx",
+    "name": "RTX",
+    "sectors": [
+      "primes",
+      "missiledef",
+      "strike"
+    ],
+    "type": "Prime",
+    "hq": "US",
+    "status": "NYSE: RTX · backlog $289B",
+    "edge": "Patriot, SM-series, radars, HACM",
+    "latest": "Record backlog Q2'26",
+    "src": "https://www.foreignpolicyjournal.com/2026/07/26/lockheed-martin-nyse-lmt-rtx-nyse-rtx-and-northrop-grumman-nyse-noc-post-record-backlogs-raise-guidance-after-q2-results/"
+  },
+  {
+    "id": "northrop",
+    "name": "Northrop Grumman",
+    "sectors": [
+      "primes",
+      "space",
+      "air"
+    ],
+    "type": "Prime",
+    "hq": "US",
+    "status": "NYSE: NOC",
+    "edge": "B-21, space, solid rocket motors; YFQ-48A CCA",
+    "latest": "GHOST-R; record backlog",
+    "src": "https://www.airandspaceforces.com/air-force-designates-northrop-new-cca-yfq-48a/"
+  },
+  {
+    "id": "l3harris",
+    "name": "L3Harris",
+    "sectors": [
+      "primes",
+      "ew",
+      "space"
+    ],
+    "type": "Prime",
+    "hq": "US",
+    "status": "NYSE: LHX",
+    "edge": "EW (NGJ-LB), tactical radios, missile-tracking satellites, rocket motors (Aerojet)",
+    "latest": "$876M NGJ low band",
+    "src": "https://www.armyrecognition.com/news/navy-news/2026/u-s-navy-awards-l3harris-876m-to-advance-next-generation-jammer-low-band-for-ea-18g-growler"
+  },
+  {
+    "id": "quantum-systems",
+    "name": "Quantum Systems",
+    "sectors": [
+      "air",
+      "global"
+    ],
+    "type": "Late-stage startup",
+    "hq": "Germany",
+    "status": "≈€7B",
+    "edge": "Vector ISR drones, combat-proven in Ukraine",
+    "latest": "€1B Series D (Jul 2026)",
+    "src": "https://dronehub.ai/blog/european-defense-drone-investment-landscape"
+  },
+  {
+    "id": "tekever",
+    "name": "Tekever",
+    "sectors": [
+      "air",
+      "global"
+    ],
+    "type": "Late-stage startup",
+    "hq": "Portugal",
+    "status": "$6.4B",
+    "edge": "Long-endurance ISR drones",
+    "latest": "$580M Series D (Sep 2026)",
+    "src": "https://www.cnbc.com/2026/09/23/ai-drone-maker-ukraine-war-defense-tech.html"
+  },
+  {
+    "id": "stark",
+    "name": "Stark",
+    "sectors": [
+      "air",
+      "global"
+    ],
+    "type": "Growth startup",
+    "hq": "Germany",
+    "status": "€500M raise",
+    "edge": "Loitering munitions",
+    "latest": "Sequoia, Founders Fund, NATO Innovation Fund (Jun 2026)",
+    "src": "https://dronehub.ai/blog/european-defense-drone-investment-landscape"
+  },
+  {
+    "id": "rafael",
+    "name": "Rafael",
+    "sectors": [
+      "cuas",
+      "missiledef",
+      "global"
+    ],
+    "type": "State-owned prime",
+    "hq": "Israel",
+    "status": "State-owned",
+    "edge": "Iron Dome; Iron Beam 100kW-class laser",
+    "latest": "Iron Dome + Iron Beam integration tests",
+    "src": "https://thedefensepost.com/2026/08/11/israel-iron-beam-operational-delay/"
+  },
+  {
+    "id": "thunder-tiger",
+    "name": "Thunder Tiger",
+    "sectors": [
+      "sea",
+      "global"
+    ],
+    "type": "Public (Taiwan)",
+    "hq": "Taiwan",
+    "status": "TWSE",
+    "edge": "Taiwanese sea and air drones",
+    "latest": "Shield AI Hivemind integration",
+    "src": "https://www.armyrecognition.com/news/navy-news/2026/taiwan-moves-toward-autonomous-coastal-denial-network-with-shield-ai-hivemind-powered-thunder-tiger-sea-drones"
+  }
+]

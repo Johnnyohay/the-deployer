@@ -1,0 +1,285 @@
+[
+  {
+    "id": "r-csis-autonomy",
+    "t": "Defining Autonomy: Why Software, Not Drones, Will Decide the Next War",
+    "who": "CSIS · Jun 2026",
+    "u": "https://csis-website-prod.s3.amazonaws.com/s3fs-public/2026-06/260610_Bondar_Defining_Autonomy.pdf?VersionId=GemYFaNtnGfELgVl_nXIxg.bGKl2qCro",
+    "q": "research",
+    "sectors": [
+      "ai",
+      "policy"
+    ],
+    "why": "The case for the software-layer moat."
+  },
+  {
+    "id": "r-rand-drones",
+    "t": "Realizing the Promise of the Drone Revolution",
+    "who": "RAND · Apr 2026",
+    "u": "https://www.rand.org/pubs/perspectives/PEA3126-1.html",
+    "q": "research",
+    "sectors": [
+      "air"
+    ],
+    "why": "Lessons for Drone Dominance on cost, scale and adaptation."
+  },
+  {
+    "id": "r-cnas-munitions",
+    "t": "Drones, Missiles, and the U.S. Munitions Shortage",
+    "who": "CNAS · Sep 2026",
+    "u": "https://www.cnas.org/publications/reports/drones-missiles-and-the-u-s-munitions-shortage",
+    "q": "research",
+    "sectors": [
+      "strike",
+      "cuas"
+    ],
+    "why": "The cost-exchange problem."
+  },
+  {
+    "id": "r-csis-ukraine",
+    "t": "Ukraine's Future Vision for AI-Enabled Autonomous Warfare",
+    "who": "CSIS",
+    "u": "https://www.csis.org/analysis/ukraines-future-vision-and-current-capabilities-waging-ai-enabled-autonomous-warfare",
+    "q": "research",
+    "sectors": [
+      "global",
+      "air"
+    ],
+    "why": "Where autonomy is battle-tested."
+  },
+  {
+    "id": "r-csis-russia",
+    "t": "How Russia Is Building a Sovereign Drone Ecosystem",
+    "who": "CSIS · Apr 2026",
+    "u": "https://www.csis.org/analysis/how-russia-building-sovereign-drone-ecosystem-ai-driven-autonomy",
+    "q": "research",
+    "sectors": [
+      "adversary"
+    ],
+    "why": "The adversary's industrial model."
+  },
+  {
+    "id": "r-csis-rareearth",
+    "t": "Rare Earth Export Restrictions One Year Later",
+    "who": "CSIS",
+    "u": "https://www.csis.org/analysis/rare-earth-export-restrictions-one-year-later",
+    "q": "research",
+    "sectors": [
+      "minerals"
+    ],
+    "why": "The state of the magnet chokepoint."
+  },
+  {
+    "id": "r-pitchbook-q2",
+    "t": "Q2 2026 Defense Tech Report: Go Big or Go Early",
+    "who": "PitchBook",
+    "u": "https://pitchbook.com/news/reports/q2-2026-defense-tech-report-go-big-or-go-early-in-the-sectors-barbell-market",
+    "q": "research",
+    "sectors": [
+      "capital"
+    ],
+    "why": "Capital flows and exits."
+  },
+  {
+    "id": "r-pitchbook-q1",
+    "t": "Q1 2026 Defense Tech VC Trends",
+    "who": "PitchBook",
+    "u": "https://pitchbook.com/news/reports/q1-2026-defense-tech-vc-trends",
+    "q": "research",
+    "sectors": [
+      "capital"
+    ],
+    "why": "The record-quarter baseline."
+  },
+  {
+    "id": "r-bvp",
+    "t": "Defense tech roadmap: five frontiers for 2026",
+    "who": "Bessemer Venture Partners",
+    "u": "https://www.bvp.com/atlas/defense-tech-roadmap-five-frontiers-for-2026",
+    "q": "research",
+    "sectors": [
+      "capital",
+      "mfg"
+    ],
+    "why": "An investor's view of where the next category winners are."
+  },
+  {
+    "id": "r-greenwich",
+    "t": "Aerospace & Defense M&A Update Q1 2026",
+    "who": "Greenwich Capital Group",
+    "u": "https://greenwichgp.com/wp-content/uploads/2026/05/GCG-Aerospace-and-Defense-Q1-2026-Industry-Update.pdf",
+    "q": "research",
+    "sectors": [
+      "capital",
+      "primes"
+    ],
+    "why": "Deal flow and multiples."
+  },
+  {
+    "id": "r-nasdaq-ipo",
+    "t": "From Battlefield to Bell: Defense Tech IPOs in 2026",
+    "who": "Nasdaq Private Market",
+    "u": "https://www.nasdaqprivatemarket.com/insights/weekly-commentary/from-battlefield-to-bell-defense-tech-ipos/",
+    "q": "research",
+    "sectors": [
+      "capital"
+    ],
+    "why": "How the public listings are trading."
+  },
+  {
+    "id": "r-pltr-8k",
+    "t": "Palantir Q2 2026 earnings release (8-K)",
+    "who": "SEC EDGAR · Aug 2026",
+    "u": "https://www.sec.gov/Archives/edgar/data/0001321655/000132165526000039/a2026q2ex991pressrelease.htm",
+    "q": "primary",
+    "sectors": [
+      "ai"
+    ],
+    "why": "Ground truth on segment growth."
+  },
+  {
+    "id": "r-lmt-q2",
+    "t": "Lockheed Martin Q2 2026 results",
+    "who": "Lockheed Martin IR",
+    "u": "https://investors.lockheedmartin.com/news-releases/news-release-details/lockheed-martin-reports-second-quarter-2026-financial-results",
+    "q": "primary",
+    "sectors": [
+      "primes"
+    ],
+    "why": "The incumbents' baseline."
+  },
+  {
+    "id": "r-fy27",
+    "t": "FY2027 Budget Request Overview",
+    "who": "Dept. of War Comptroller",
+    "u": "https://comptroller.war.gov/Portals/45/Documents/defbudget/FY2027/FY2027_Budget_Request_Overview_Book.pdf",
+    "q": "primary",
+    "sectors": [
+      "policy"
+    ],
+    "why": "Source of DAWG, Drone Dominance and counter-UAS numbers."
+  },
+  {
+    "id": "r-crs-cr",
+    "t": "Overview of Continuing Appropriations for FY2027",
+    "who": "Congressional Research Service",
+    "u": "https://www.congress.gov/crs-product/R49353",
+    "q": "primary",
+    "sectors": [
+      "policy"
+    ],
+    "why": "What the stopgap allows and blocks."
+  },
+  {
+    "id": "r-crs-cca",
+    "t": "U.S. Air Force Collaborative Combat Aircraft (CCA)",
+    "who": "Congressional Research Service",
+    "u": "https://www.congress.gov/crs-product/IF12740",
+    "q": "primary",
+    "sectors": [
+      "air"
+    ],
+    "why": "The authoritative CCA explainer."
+  },
+  {
+    "id": "r-ndaa-hk",
+    "t": "FY 2026 NDAA: A Comprehensive Analysis (acquisition reform)",
+    "who": "Holland & Knight",
+    "u": "https://www.hklaw.com/en/insights/publications/2025/12/fy-2026-national-defense-authorization-act",
+    "q": "research",
+    "sectors": [
+      "policy"
+    ],
+    "why": "SPEED, FoRGED and portfolio acquisition executives explained."
+  },
+  {
+    "id": "r-gd-cbo",
+    "t": "CBO estimates Golden Dome will cost $1.2 trillion over 20 years",
+    "who": "The Hill",
+    "u": "https://thehill.com/policy/defense/5874629-golden-dome-missile-defense-cost/",
+    "q": "news",
+    "sectors": [
+      "missiledef"
+    ],
+    "why": "The independent cost view."
+  },
+  {
+    "id": "r-army-gd",
+    "t": "Report to Congress on the U.S. Army and Golden Dome",
+    "who": "USNI News / CRS",
+    "u": "https://news.usni.org/2026/08/25/report-to-congress-on-the-u-s-army-and-the-golden-dome-program",
+    "q": "primary",
+    "sectors": [
+      "missiledef"
+    ],
+    "why": "Who does what in the architecture."
+  },
+  {
+    "id": "r-ugv-ndm",
+    "t": "Army Still Years Away From Large-Scale Autonomous Ground Vehicle Ops",
+    "who": "National Defense Magazine · Feb 2026",
+    "u": "https://www.nationaldefensemagazine.org/articles/2026/2/12/army-still-years-away-from-large-scale--autonomous-ground-vehicle-ops",
+    "q": "news",
+    "sectors": [
+      "ground"
+    ],
+    "why": "A realistic timeline for ground autonomy."
+  },
+  {
+    "id": "r-taiwan-diplomat",
+    "t": "Taiwan's Special Defense Budget Cut Will Cost Its Drone Capabilities",
+    "who": "The Diplomat · May 2026",
+    "u": "https://thediplomat.com/2026/05/taiwans-special-defense-budget-cut-will-cost-its-drone-capabilities/",
+    "q": "news",
+    "sectors": [
+      "global"
+    ],
+    "why": "Budget politics behind Taiwan's drone plans."
+  },
+  {
+    "id": "r-defenseone-ukraine",
+    "t": "Lessons from Ukraine shaping the Army's drones, training and comms",
+    "who": "Defense One · Mar 2026",
+    "u": "https://www.defenseone.com/defense-systems/2026/03/army-needs-more-realistic-drone-training-more-versatile-drones/412389/",
+    "q": "news",
+    "sectors": [
+      "global",
+      "air",
+      "ew"
+    ],
+    "why": "How doctrine is changing."
+  },
+  {
+    "id": "r-arxiv-cuas",
+    "t": "Compact CNNs for AI-based drone detection",
+    "who": "arXiv · 2026",
+    "u": "https://arxiv.org/pdf/2607.16455",
+    "q": "research",
+    "sectors": [
+      "cuas",
+      "sensing"
+    ],
+    "why": "A technical starting point for detection builders."
+  },
+  {
+    "id": "r-arxiv-hpm",
+    "t": "Multi-physics simulation for HPM counter-UAS design",
+    "who": "arXiv · Feb 2026",
+    "u": "https://arxiv.org/pdf/2602.08477",
+    "q": "research",
+    "sectors": [
+      "cuas"
+    ],
+    "why": "Technical depth on directed energy."
+  },
+  {
+    "id": "r-eu-readiness",
+    "t": "Bolstering European Defence: Readiness 2030",
+    "who": "EEAS",
+    "u": "https://www.eeas.europa.eu/eeas/bolstering-european-defence-readiness-2030_en",
+    "q": "primary",
+    "sectors": [
+      "global"
+    ],
+    "why": "The EU's €800B framework and SAFE loans."
+  }
+]

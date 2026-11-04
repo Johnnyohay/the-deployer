@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-14",
+  "title": "Today's top defense-tech headlines",
+  "big": "53 new stories since the last brief. The busiest areas: drones & air autonomy and missiles, hypersonics & munitions.",
+  "stories": [
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "Navy Contracts Ursa Major to Develop Rocket Motors for Next-gen Missile Programs",
+      "what": "The U.S. Navy contracted Ursa Major to develop solid rocket motors for the sea service’s future Naval Modular Missile and Compact Air-to-Air Missile, the defense firm announced last week.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261014-navy-contracts-ursa-major-to-develop-rocket-motors"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Leonardo DRS wins $500M slot to supply counter-drone radar",
+      "what": "Leonardo DRS has won a spot on a Pentagon counter-drone contract worth up to $500 million, giving the company a path to sell its tactical radars to Joint Interagency Task Force 401, the U.S.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261014-leonardo-drs-wins-500m-slot-to-supply-counter-dron"
+    },
+    {
+      "tag": "Sensing, ISR & quantum",
+      "h": "Lockheed gets $117M for Apache radar-hunting sensors",
+      "what": "The U.S. Army has awarded Lockheed Martin a $117.1 million contract to keep supporting the second-generation radar frequency interferometer on its Apache attack helicopters, a passive sensor that lets crews find and pinpoint enemy radars without giving away…",
+      "you": "Better sensors and navigation that works without GPS are prerequisites for everything autonomous.",
+      "ref": "u-20261014-lockheed-gets-117m-for-apache-radar-hunting-sensor"
+    },
+    {
+      "tag": "Space",
+      "h": "Avio, Lockheed sign agreement for solid rocket motor production",
+      "what": "The deal will pave a path for Avio USA to become a new provider of motors on Lockheed Martin’s Extended Range GMLRS and the Precision Strike Missile.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261013-avio-lockheed-sign-agreement-for-solid-rocket-moto"
+    },
+    {
+      "tag": "Missile defense & Golden Dome",
+      "h": "Didn’t get picked for IFPC interceptor competition? Army says come demo anyway",
+      "what": "The service will continue working with the Lockheed Martin and Boeing-Anduril teams but also hosting “shoot-off opportunity” for additional vendors, explained Lt. Gen. Frank Lozano.",
+      "you": "Missile defense is one of the biggest budget lines this decade, and its software and sensors are open to newcomers.",
+      "ref": "u-20261014-didn-t-get-picked-for-ifpc-interceptor-competition"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Contract intelligence and capture agent for small vendors",
+    "why": "An LLM agent that watches SAM.gov, DIU, OTA consortia, budget documents and portfolio acquisition executives, matches openings to a product, and drafts responses. Thousands of new vendors are navigating DAWG and the new acquisition rules; turning valuations into orders is the stated test."
+  },
+  "auto": true
+}

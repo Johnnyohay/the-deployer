@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-18",
+  "title": "Today's top defense-tech headlines",
+  "big": "9 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Space",
+      "h": "Russian satellite shadows radar sat used by Ukraine",
+      "what": "A Russian military satellite has maneuvered to within about 5 km (3 miles) of a commercial radar imaging satellite owned by ICEYE and appears to be holding position there, in what independent tracker Jonathan McDowell said may be the first rendezvous in low…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261018-russian-satellite-shadows-radar-sat-used-by-ukrain"
+    },
+    {
+      "tag": "Budget, policy & acquisition reform",
+      "h": "Hegseth Thanks Young Americans in Knoxville Who Say 'Send Me'",
+      "what": "On the University of Tennessee campus in Knoxville, Secretary of War Pete Hegseth met with two groups of young Americans who opted to defend the nation, falling in line behind generations of Americans who served the nation since the nation was founded.",
+      "you": "Budget and policy moves decide which programs get real money and when; they're the earliest signal of demand.",
+      "ref": "u-20261017-hegseth-thanks-young-americans-in-knoxville-who-sa"
+    },
+    {
+      "tag": "Adversaries: China, Russia, Iran",
+      "h": "Russia has moved past ‘hybrid war.’ Why hasn’t Washington?",
+      "what": "Europe is adapting to Moscow’s increasingly brazen and kinetic operations. The US should catch up.",
+      "you": "What China, Russia and Iran field sets the requirements the Pentagon buys against.",
+      "ref": "u-20261018-russia-has-moved-past-hybrid-war-why-hasn-t-washin"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Slovenian firm arms drone killer systems with Gatling gun",
+      "what": "Slovenian turret maker Valhalla Turrets is preparing a new version of its Skythunder air defense system armed with General Dynamics Land Systems’ 20 mm M197 Gatling gun and 70 mm laser-guided rockets, designed to shoot down drones and protect critical…",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261018-slovenian-firm-arms-drone-killer-systems-with-gatl"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Ukraine-to-NATO technology licensing bridge",
+    "why": "Licenses combat-proven Ukrainian designs (ground robots, interceptors, software) and handles compliance and US or EU production. About 300 Ukrainian ground-drone firms and 500 FPV makers are looking for export routes; Brave1 is certifying exports."
+  },
+  "auto": true
+}

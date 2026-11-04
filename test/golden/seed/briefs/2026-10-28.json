@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-28",
+  "title": "Today's top defense-tech headlines",
+  "big": "52 new stories since the last brief. The busiest areas: allies & theaters and adversaries: china, russia, iran.",
+  "stories": [
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "US Air Force awards Lockheed Martin $694M hypersonic missile production contract",
+      "what": "The Air Force granted Lockheed Martin a $694 million contract in late September for the production and fielding of the AGM-183A Air-Launched Rapid Response Weapon, or ARRW.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261027-us-air-force-awards-lockheed-martin-694m-hypersoni"
+    },
+    {
+      "tag": "Space",
+      "h": "Flexell Space and Satoro Agree to Collaborate on In-Orbit Demonstration of Next-Generation Space Solar Cells",
+      "what": "– Two demonstration missions planned aboard SpaceX Falcon 9, one each in 2027 and 2028 – Satoro to provide “Satellite-as-a-service” solution; Flexell Space to supply solar cells and test modules [ ] The post Flexell Space and Satoro Agree to Collaborate on…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261028-flexell-space-and-satoro-agree-to-collaborate-on-i"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "BeeX shows ALPHA mine-killing drone in UK after U.S. Navy win",
+      "what": "Singapore-based BeeX used its ALPHA underwater drone to place explosive charges on a moored sea mine and a swinging steel target and then destroy both during a closed-door mine countermeasures demonstration in the United Kingdom, the company said on Oct. 27.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261028-beex-shows-alpha-mine-killing-drone-in-uk-after-u-"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Space Force to Issue Cislunar RFIs Seeking Commercial Tech, AI Autonomy Software",
+      "what": "The Space Force plans two cislunar RFIs seeking commercial tech and AI autonomy software it can field by the end of fiscal 2029. The post Space Force to Issue Cislunar RFIs Seeking Commercial Tech, AI Autonomy Software first appeared on Executive Gov .",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261027-space-force-to-issue-cislunar-rfis-seeking-commerc"
+    },
+    {
+      "tag": "Allies & theaters",
+      "h": "Defense Department selects Poland for new PAC-3 maintenance facility",
+      "what": "The US, in partnership with Lockheed Martin, Poland, Germany, the Netherlands and Sweden, announced the new facility aimed at scaling and speeding up Patriot interceptor repairs.",
+      "you": "Allies' wars and budgets are the testing ground and a big second market for new defense tech.",
+      "ref": "u-20261027-defense-department-selects-poland-for-new-pac-3-ma"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Tactical power and thermal systems for directed energy",
+    "why": "Batteries, power conditioning and cooling packs that let lasers and microwave weapons fire continuously on vehicles. Laser production has started (AeroVironment E-HEL) but fielding is slow (Iron Beam); power and cooling are the constraint."
+  },
+  "auto": true
+}

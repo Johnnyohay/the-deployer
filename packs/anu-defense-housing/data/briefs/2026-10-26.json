@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-26",
+  "title": "Today's top defense-tech headlines",
+  "big": "22 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Helsing unveils interceptor missiles designed to chase Russia’s fast-flying Geran drones",
+      "what": "Germany’s Helsing is offering a novel pair of air-defense missiles, plus the requisite AI software to organize intercepts, for downing fast attack drones for under $100,000 per shot.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261026-helsing-unveils-interceptor-missiles-designed-to-c"
+    },
+    {
+      "tag": "Space",
+      "h": "AFRL Moves Cargo Through Space with SpaceX Demonstration",
+      "what": "When a SpaceX Falcon 9 rocket took off from Cape Canaveral Space Force Station, Fla., on Oct.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261026-afrl-moves-cargo-through-space-with-spacex-demonst"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "South Korea bans missile maker LIG D A from bids over bribery",
+      "what": "South Korea’s Defense Acquisition Program Administration (DAPA) has barred LIG Defense Aerospace, the maker of the Cheongung air defense missile formerly known as LIG Nex1, from bidding on government contracts for two years after prosecutors accused the…",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261026-south-korea-bans-missile-maker-lig-d-a-from-bids-o"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "New Philippine Coast Guard Vessel Shadows Chinese Carrier Strike Group off Mindanao",
+      "what": "MANILA, Philippines — The Philippine Coast Guard’s new patrol vessel from Taiwan shadowed the Chinese Navy’s Liaoning Carrier Strike Group on Friday off Mindanao.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261026-new-philippine-coast-guard-vessel-shadows-chinese-"
+    },
+    {
+      "tag": "Electronic warfare & spectrum",
+      "h": "China’s H-6 bomber spotted with a new large jamming pod",
+      "what": "A Chinese H-6KG bomber has been seen carrying what appears to be a new large electronic jamming pod that closely resembles the pods carried by the J-16D, the People’s Liberation Army Air Force’s dedicated electronic warfare jet, military aviation analyst…",
+      "you": "Jamming and spectrum fights decide whether drones and radios work at all, so this quiet area keeps getting funded.",
+      "ref": "u-20261026-china-s-h-6-bomber-spotted-with-a-new-large-jammin"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Rare-earth-free drone motors",
+    "why": "Motors using ferrite or reluctance designs, or recycled magnets, for small drones and actuators. China controls heavy rare earths. A compliant motor is a chokepoint product every drone maker needs."
+  },
+  "auto": true
+}

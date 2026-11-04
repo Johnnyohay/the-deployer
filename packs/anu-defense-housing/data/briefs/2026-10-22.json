@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-22",
+  "title": "Today's top defense-tech headlines",
+  "big": "46 new stories since the last brief. The busiest areas: drones & air autonomy and maritime & undersea autonomy.",
+  "stories": [
+    {
+      "tag": "Space",
+      "h": "What a Russian Satellite Stalking a Commercial Spacecraft Means for the Space Force",
+      "what": "Over a two-week period beginning in late September and culminating in mid-October, a Russian satellite maneuvered dangerously close to a commercial Finnish satellite currently providing intelligence to the Ukrainian military.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261022-what-a-russian-satellite-stalking-a-commercial-spa"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Abrams tanks get kamikaze drone launcher",
+      "what": "General Dynamics Land Systems has rolled out an upgraded version of PERCH, a bolt-on kit that lets M1A2 Abrams tanks and Stryker armored vehicles launch AeroVironment’s Switchblade 300 loitering munitions, small drones that can scout ahead of a vehicle and…",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261022-abrams-tanks-get-kamikaze-drone-launcher"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Ukraine faces a new Russian cruise missile called Filin",
+      "what": "Ukraine’s military intelligence agency has published a detailed breakdown of Filin, a new Russian ground-launched cruise missile that Moscow began firing at Ukraine in late summer 2026.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261022-ukraine-faces-a-new-russian-cruise-missile-called-"
+    },
+    {
+      "tag": "Capital: VC, M&A & IPOs",
+      "h": "Ukraine to be able to buy military supplies via NATO agency: report",
+      "what": "The deal comes amid worsening U.S.-Ukraine relations since U.S. President Trump announced a diesel export deal with Russia this month to lower U.S. prices.",
+      "you": "Where investors put money shows which parts of the industry they expect to win next.",
+      "ref": "u-20261022-ukraine-to-be-able-to-buy-military-supplies-via-na"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "HHS Plans Sole-Source Anthropic Claude Contract Ahead of Enterprise AI BPA",
+      "what": "The interim award would preserve authorized access until HHS selects vendors through a planned multiple-award BPA. The post HHS Plans Sole-Source Anthropic Claude Contract Ahead of Enterprise AI BPA first appeared on Executive Gov .",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261021-hhs-plans-sole-source-anthropic-claude-contract-ah"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Synthetic data and test & evaluation for autonomy",
+    "why": "Simulation and synthetic sensor data to train and certify autonomy when GPS is denied and radios are jammed. New autonomy policy (the June 2026 memo, CSIS definitions) means systems need verification evidence, and the new command gets test powers."
+  },
+  "auto": true
+}

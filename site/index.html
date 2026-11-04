@@ -1,0 +1,658 @@
+<title>ANU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#E9EDEA; --surface:#F6F8F6; --surface-2:#DFE5E0; --line:#C3CCC5; --line-soft:#D5DCD6;
+  --ink:#16201B; --ink-2:#3E4C44; --muted:#66756C;
+  --accent:#C2410C; --accent-ink:#FFFFFF; --accent-soft:#F6DCCD;
+  --topo:#4E6B57; --topo-soft:#D3DFD5;
+  --t-primary:#1D6B43; --t-news:#2B5C8A; --t-research:#7A4E9A; --t-agg:#9A6A10;
+  --banner:#1D6B43; --banner-ink:#F3FFF7;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:6px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#101512; --surface:#171E1A; --surface-2:#1F2822; --line:#33403A; --line-soft:#26302A;
+    --ink:#E3EAE5; --ink-2:#B6C3BB; --muted:#86958C;
+    --accent:#F0793A; --accent-ink:#1A0D05; --accent-soft:#3A2116;
+    --topo:#8FB39A; --topo-soft:#22322A;
+    --t-primary:#5CC28C; --t-news:#79AEE0; --t-research:#C39BE3; --t-agg:#E0B35A;
+    --banner:#1F4A33; --banner-ink:#D6F5E2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#101512; --surface:#171E1A; --surface-2:#1F2822; --line:#33403A; --line-soft:#26302A;
+  --ink:#E3EAE5; --ink-2:#B6C3BB; --muted:#86958C;
+  --accent:#F0793A; --accent-ink:#1A0D05; --accent-soft:#3A2116;
+  --topo:#8FB39A; --topo-soft:#22322A;
+  --t-primary:#5CC28C; --t-news:#79AEE0; --t-research:#C39BE3; --t-agg:#E0B35A;
+  --banner:#1F4A33; --banner-ink:#D6F5E2;
+}
+*{box-sizing:border-box}
+/* The hidden attribute must win over display rules (e.g. section.panel{display:grid}), or every tab shows at once. */
+[hidden]{display:none!important}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit}
+.banner{background:var(--banner);color:var(--banner-ink);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-align:center;padding:5px 16px;text-transform:uppercase}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:20px}
+header.top{padding-block:26px 0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,68px);line-height:.92;margin:.18em 0 .2em;text-transform:uppercase;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lede{max-width:72ch;color:var(--ink-2);font-size:16.5px;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.meta-row b{color:var(--ink);font-weight:500}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);border-bottom:1px solid var(--line);margin-top:20px}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs button{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.04em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:12px 12px 9px;cursor:pointer;white-space:nowrap}
+nav.tabs button:hover{color:var(--ink)}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{padding-block:26px 64px}
+section.panel{display:grid;gap:26px}
+h2{font-family:var(--display);font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em;margin:0;text-wrap:balance}
+p{margin:0}
+.sub{color:var(--ink-2);max-width:76ch}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g4{grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.box{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:18px}
+.lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.status{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.head-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.thesis{border-left:3px solid var(--accent);padding:4px 0 4px 18px;max-width:84ch}
+.thesis p{font-size:19px;line-height:1.45;font-weight:500}
+.force{display:grid;gap:8px;align-content:start}
+.force h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.3}
+.force p{font-size:14px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:2px 7px;border-radius:3px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface);white-space:nowrap;text-decoration:none;cursor:default}
+a.chip,button.chip{cursor:pointer}
+a.chip:hover,button.chip:hover{border-color:var(--ink-2);color:var(--ink)}
+.tier::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.tier.primary{color:var(--t-primary)} .tier.news{color:var(--t-news)} .tier.research{color:var(--t-research)} .tier.aggregator{color:var(--t-agg)}
+.chip.type{background:var(--surface-2);border-color:transparent}
+.new-pill{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12.5px;color:var(--muted);align-items:center}
+/* heat map */
+.heat{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}
+.tile{all:unset;box-sizing:border-box;display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:12px 12px 11px;cursor:pointer}
+.tile:hover{border-color:var(--ink-2)}
+.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tile .nm{font-family:var(--display);font-weight:600;font-size:17.5px;line-height:1.05;text-transform:uppercase}
+.tile .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pips{display:inline-flex;gap:3px}
+.pip{width:12px;height:6px;border-radius:2px;background:var(--line)}
+.pip.on{background:var(--accent)}
+.tile .cnt{font-family:var(--mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tile .cnt b{color:var(--ink);font-weight:500}
+/* feed */
+.feed{display:grid;border-top:1px solid var(--line)}
+.month{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:18px 0 6px;border-bottom:1px solid var(--line)}
+.item{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:15px 0;border-bottom:1px solid var(--line-soft)}
+.dtg{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.4;font-variant-numeric:tabular-nums}
+.dtg b{display:block;color:var(--ink);font-size:14px;font-weight:500}
+.item h4{font-size:15.5px;font-weight:600;margin:0 0 4px;line-height:1.35}
+.item .body{font-size:14.5px}
+.item .why{margin-top:8px;font-size:14px;color:var(--ink-2);padding-left:10px;border-left:2px solid var(--topo)}
+.item .why b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--topo);font-weight:500;margin-right:6px}
+.item .chips{margin-top:9px}
+@media (max-width:560px){.item{grid-template-columns:1fr;gap:4px}.dtg b{display:inline;margin-right:8px}}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fbtn{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+input[type="search"],input[type="text"],input[type="url"],input[type="date"],select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;width:100%}
+textarea{resize:vertical;min-height:84px}
+.btn{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);border:0;border-radius:var(--r);padding:9px 16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.split{display:grid;gap:24px;grid-template-columns:minmax(0,1fr) minmax(0,340px)}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+.toolbar{display:grid;gap:10px;grid-template-columns:minmax(0,1fr) minmax(0,220px)}
+@media (max-width:560px){.toolbar{grid-template-columns:1fr}}
+/* sectors */
+.sec-layout{display:grid;gap:22px;grid-template-columns:260px minmax(0,1fr)}
+@media (max-width:900px){.sec-layout{grid-template-columns:1fr}.sec-nav{display:none}.sec-select{display:block!important}}
+.sec-nav{display:grid;gap:2px;align-content:start;position:sticky;top:64px}
+.sec-nav button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:4px;cursor:pointer;font-size:14px;color:var(--ink-2)}
+.sec-nav button:hover{background:var(--surface-2);color:var(--ink)}
+.sec-nav button[aria-current="true"]{background:var(--ink);color:var(--ground)}
+.sec-nav button:focus-visible{outline:2px solid var(--accent)}
+.sec-select{display:none}
+.sec-detail{display:grid;gap:18px;align-content:start}
+.facts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+/* companies */
+.scroll-x{overflow-x:auto}
+table.co{width:100%;border-collapse:collapse;font-size:13.5px;min-width:900px}
+table.co th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;padding:8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--ground)}
+table.co td{padding:10px 8px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+table.co td.n{font-weight:600;font-size:14.5px;white-space:nowrap}
+table.co td.s{font-family:var(--mono);font-size:12px;white-space:nowrap}
+/* calendar */
+.cal{display:grid;border-top:1px solid var(--line)}
+.cal-row{display:grid;grid-template-columns:120px 92px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+.cal-row .cd{font-family:var(--display);font-weight:700;font-size:26px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.cal-row .cd small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.cal-row h4{margin:0 0 3px;font-size:15.5px;font-weight:600}
+@media (max-width:560px){.cal-row{grid-template-columns:1fr 1fr}.cal-row>div:last-child{grid-column:1/-1}}
+/* research */
+.ref{display:grid;gap:5px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.ref a.t{font-weight:600;text-decoration:none}
+.ref a.t:hover{text-decoration:underline}
+/* ideas */
+.idea{display:grid;gap:10px;align-content:start}
+.scores{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scores b{color:var(--ink);font-weight:500}
+/* chat */
+.log{display:grid;gap:14px;max-height:62vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:80ch;white-space:pre-wrap;font-size:15px}
+.msg.user{justify-self:end;background:var(--ink);color:var(--ground);padding:10px 14px;border-radius:12px 12px 2px 12px}
+.msg.bot{background:var(--surface);border:1px solid var(--line-soft);padding:12px 14px;border-radius:2px 12px 12px 12px}
+.msg.note{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.suggest{display:flex;flex-wrap:wrap;gap:8px}
+.suggest button{font-size:13px;text-align:left;background:var(--surface);border:1px dashed var(--line);color:var(--ink-2);border-radius:var(--r);padding:7px 10px;cursor:pointer}
+.suggest button:hover{border-style:solid;color:var(--ink)}
+.composer{display:flex;gap:8px;align-items:flex-end}
+.composer textarea{min-height:52px}
+.form-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr))}
+.form-grid .full{grid-column:1/-1}
+label.f{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.note-row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--surface-2);border-radius:4px;font-size:14px;white-space:pre-wrap}
+.note-row button{background:none;border:0;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:11px}
+.notice{padding:18px;border:1px dashed var(--line);border-radius:var(--r);color:var(--ink-2)}
+/* morning brief */
+.brief{max-width:660px;margin:0 auto;width:100%;display:grid;gap:30px;padding-block:8px 20px}
+.b-date{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+.b-hello{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,46px);line-height:1;text-transform:uppercase;margin:8px 0 0;text-wrap:balance}
+.b-big{font-size:20px;line-height:1.5;color:var(--ink);margin-top:14px;text-wrap:pretty}
+.b-sec{display:grid;gap:0}
+.b-sec>h3{font-size:16px;letter-spacing:.14em;color:var(--muted);padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:4px}
+.story{padding:20px 0;border-bottom:1px solid var(--line-soft);display:grid;gap:8px}
+.story:last-child{border-bottom:0}
+.story .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.story h4{margin:0;font-size:21px;line-height:1.3;font-weight:600;text-wrap:balance}
+.story p{font-size:17px;line-height:1.6;color:var(--ink-2)}
+.story .you{font-size:17px;line-height:1.55;color:var(--ink);background:var(--surface);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 4px 4px 0}
+.story .you b{font-weight:600}
+.story .more{justify-self:start;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
+.story .more:hover{color:var(--ink);text-decoration:underline}
+.b-card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:20px 22px;display:grid;gap:8px}
+.b-card .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.b-card h4{margin:0;font-size:19px;line-height:1.35;font-weight:600}
+.b-card p{font-size:16.5px;line-height:1.55;color:var(--ink-2)}
+.b-foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.b-loading{font-size:17px;color:var(--muted)}
+.archive{display:flex;gap:6px;flex-wrap:wrap}
+details.ud summary{list-style:none;cursor:pointer}
+details.ud summary::-webkit-details-marker{display:none}
+details.ud summary .why{margin-top:6px}
+details.ud .open-hint{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px;display:inline-block}
+details.ud[open] .open-hint{display:none}
+footer{border-top:1px solid var(--line);padding-block:20px 40px;font-size:12.5px;color:var(--muted)}
+.linkish{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;font-family:var(--mono);font-size:12px}
+@media (prefers-reduced-motion:no-preference){section.panel{animation:rise .22s ease-out}}
+@keyframes rise{from{transform:translateY(4px)}to{transform:none}}
+nav.desks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+nav.desks a{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:6px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface)}
+nav.desks a:hover{border-color:var(--ink-2);color:var(--ink)}
+nav.desks a[aria-current="page"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+nav.desks a.ask{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+</style>
+
+<div class="banner">ANU // Your defense-tech helper // <span id="asof">Loading</span></div>
+
+<header class="top wrap">
+  <div class="eyebrow">Your personal guide to learning and following defense tech</div>
+  <h1>AN<span>U</span></h1>
+  <nav class="desks" id="desks" aria-label="ANU desks"><a href="./" aria-current="page">Defense</a><a href="housing.html">Housing</a><a href="videos.html">Watch</a><a href="docs.html">Docs</a><a class="ask" href="app/">Ask ANU →</a></nav>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" data-tab="today" aria-selected="true">Today</button>
+    <button role="tab" data-tab="pulse" aria-selected="false">Big picture</button>
+    <button role="tab" data-tab="updates" aria-selected="false">All updates</button>
+    <button role="tab" data-tab="sectors" aria-selected="false">Sectors</button>
+    <button role="tab" data-tab="calendar" aria-selected="false">Coming up</button>
+    <button role="tab" data-tab="build" aria-selected="false">Ideas</button>
+    <button role="tab" data-tab="ask" aria-selected="false">Ask</button>
+    <button role="tab" data-tab="companies" aria-selected="false">Companies</button>
+    <button role="tab" data-tab="research" aria-selected="false">Research</button>
+  </div>
+</nav>
+
+<main class="wrap">
+<div id="offline" class="notice" hidden></div>
+
+<!-- TODAY -->
+<section class="panel" data-panel="today">
+  <article class="brief" id="brief"><p class="b-loading">Loading today's brief…</p></article>
+</section>
+
+<!-- PULSE -->
+<section class="panel" data-panel="pulse" hidden>
+  <div class="meta-row" id="meta-row" style="margin-top:0"><span>Loading…</span></div>
+  <div class="thesis"><p id="headline">Loading…</p></div>
+  <div>
+    <div class="head-row" style="margin-bottom:12px"><h3>Forces moving the industry</h3><span class="status">Tap a sector chip to open its brief</span></div>
+    <div class="grid g4" id="forces"></div>
+  </div>
+  <div>
+    <div class="head-row" style="margin-bottom:12px"><h3>Sector heat map</h3><span class="legend"><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span> momentum (analyst call) · count = updates in last 60 days</span></div>
+    <div class="heat" id="heat"></div>
+  </div>
+  <div class="grid g2">
+    <div class="box"><div class="head-row" style="margin-bottom:6px"><h3>Latest</h3><button class="linkish" data-goto="updates">All updates →</button></div><div class="feed" id="pulse-latest" style="border-top:0"></div></div>
+    <div class="box"><div class="head-row" style="margin-bottom:6px"><h3>Coming up</h3><button class="linkish" data-goto="calendar">Full calendar →</button></div><div class="cal" id="pulse-next" style="border-top:0"></div></div>
+  </div>
+</section>
+
+<!-- UPDATES -->
+<section class="panel" data-panel="updates" hidden>
+  <div class="split">
+    <div style="display:grid;gap:14px;align-content:start">
+      <div style="display:grid;gap:6px"><h2>Updates</h2><p class="sub">Contracts, funding, policy, technology milestones, deals, earnings and conflict lessons, newest first.</p></div>
+      <div class="toolbar">
+        <input type="search" id="u-q" placeholder="Search (e.g. laser, Golden Dome, Taiwan, rare earth)" aria-label="Search updates">
+        <select id="u-sector" aria-label="Filter by sector"></select>
+      </div>
+      <div class="filters" id="u-types"></div>
+      <div class="status" id="u-count"></div>
+      <div class="feed" id="u-list"></div>
+    </div>
+    <aside style="display:grid;gap:16px;align-content:start">
+      <div class="box">
+        <h3 style="margin-bottom:6px">How this stays current</h3>
+        <p style="font-size:14px;color:var(--ink-2)">Updates are stored records, so ANU grows without being rebuilt. New items come from your own entries below and from Claude's research runs. <span id="refresh-note"></span></p>
+      </div>
+      <div class="box">
+        <h3 style="margin-bottom:8px">Log an update</h3>
+        <form id="add-form" class="form-grid">
+          <label class="f full">Headline<input type="text" id="add-title" required></label>
+          <label class="f">Date<input type="date" id="add-date" required></label>
+          <label class="f">Type<select id="add-type"></select></label>
+          <label class="f full">Sector<select id="add-sector"></select></label>
+          <label class="f full">What happened<textarea id="add-body" required></textarea></label>
+          <label class="f full">Why it matters<textarea id="add-why"></textarea></label>
+          <label class="f full">Source URL<input type="url" id="add-url" placeholder="https://"></label>
+          <label class="f">Source name<input type="text" id="add-src"></label>
+          <label class="f">Source tier<select id="add-tier"><option value="primary">Primary</option><option value="news" selected>News</option><option value="research">Research</option><option value="aggregator">Aggregator</option></select></label>
+          <div class="full" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn" type="submit">Save update</button><span class="status" id="add-status"></span></div>
+        </form>
+      </div>
+      <div class="box"><div class="lbl">Source tiers</div><div style="display:grid;gap:6px;font-size:12.5px;color:var(--muted)" id="tiers"></div></div>
+    </aside>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="panel" data-panel="sectors" hidden>
+  <div style="display:grid;gap:6px"><h2>Sector briefs</h2><p class="sub">The current state of each part of the industry: where the money is, who leads, what to watch, and the updates and research behind it.</p></div>
+  <select class="sec-select" id="sec-select" aria-label="Choose a sector"></select>
+  <div class="sec-layout">
+    <nav class="sec-nav" id="sec-nav" aria-label="Sectors"></nav>
+    <div class="sec-detail" id="sec-detail"></div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section class="panel" data-panel="companies" hidden>
+  <div style="display:grid;gap:6px"><h2>Company directory</h2><p class="sub">New entrants, primes, labs and foreign players across every sector. The list is meant to grow.</p></div>
+  <div class="toolbar">
+    <input type="search" id="c-q" placeholder="Search companies, edges, programs" aria-label="Search companies">
+    <select id="c-sector" aria-label="Filter by sector"></select>
+  </div>
+  <div class="filters" id="c-types"></div>
+  <div class="scroll-x"><table class="co"><thead><tr><th>Company</th><th>Sectors</th><th>Type · HQ</th><th>Status</th><th>Edge</th><th>Latest</th><th>Source</th></tr></thead><tbody id="c-body"></tbody></table></div>
+</section>
+
+<!-- CALENDAR -->
+<section class="panel" data-panel="calendar" hidden>
+  <div style="display:grid;gap:6px"><h2>What's next</h2><p class="sub">Deadlines, decisions and milestones that will move the industry. Dates marked ≈ are estimates.</p></div>
+  <div class="cal" id="cal"></div>
+</section>
+
+<!-- BUILD -->
+<section class="panel" data-panel="build" hidden>
+  <div style="display:grid;gap:6px"><h2>Gaps you could build into</h2><p class="sub">Openings that come out of the evidence in ANU, scored on capital needed, time to first revenue, and how directly they collide with entrenched players.</p></div>
+  <div class="grid g3" id="ideas"></div>
+  <div class="split">
+    <div class="box" style="display:grid;gap:12px">
+      <h3>Pressure-test your own idea</h3>
+      <p class="sub" style="font-size:14px">Describe what you want to build. ANU checks it against everything it has collected: incumbents, buyer, budget line, why now, the fastest path to a contract, and what would kill it.</p>
+      <textarea id="pt-in" placeholder="e.g. Software that maps every part in a drone to its country of origin and flags anything that breaks the 2027 magnet ban."></textarea>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn" id="pt-go">Pressure-test</button><button class="btn ghost" id="pt-stop" hidden>Stop</button><span class="status" id="pt-status"></span></div>
+      <div class="msg bot" id="pt-out" hidden></div>
+    </div>
+    <div class="box">
+      <h3 style="margin-bottom:6px">My notebook</h3>
+      <p class="status" style="margin-bottom:10px">Private to you</p>
+      <form id="note-form" style="display:grid;gap:8px"><textarea id="note-in" placeholder="An idea, an angle, a company to watch…"></textarea><button class="btn" type="submit">Save note</button></form>
+      <div style="display:grid;gap:8px;margin-top:10px" id="notes"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="panel" data-panel="research" hidden>
+  <div style="display:grid;gap:6px"><h2>Research library</h2><p class="sub">Filings, budget documents, think-tank reports and data behind ANU. Start with primary sources; use aggregators to find leads, then confirm them.</p></div>
+  <div class="toolbar"><input type="search" id="r-q" placeholder="Search research" aria-label="Search research"><select id="r-sector" aria-label="Filter by sector"></select></div>
+  <div id="r-list"></div>
+</section>
+
+<!-- ASK -->
+<section class="panel" data-panel="ask" hidden>
+  <div style="display:grid;gap:6px"><h2>Ask ANU</h2><p class="sub">ANU answers from everything it has collected and names the source behind each claim. Anything from outside that is labelled as possibly out of date. The first question asks you to allow Claude on this page.</p></div>
+  <div class="box" style="display:grid;gap:14px">
+    <div class="suggest" id="suggest"></div>
+    <div class="log" id="log" aria-live="polite"></div>
+    <div class="composer"><textarea id="q" placeholder="Ask about any sector, company, program or trend…" aria-label="Your question"></textarea><button class="btn" id="send">Ask</button><button class="btn ghost" id="stop" hidden>Stop</button></div>
+    <div class="status" id="ask-status"></div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">ANU is my personal helper for learning and keeping up with defense tech. It compiles open sources; items tagged “aggregator” are unconfirmed. This is for learning, not investment advice.</footer>
+
+<script>
+const TIERS={primary:{name:"Primary",desc:"Filings, company and government releases"},news:{name:"News",desc:"Reported journalism and trade press"},research:{name:"Research",desc:"Think tanks, CRS, data providers"},aggregator:{name:"Aggregator",desc:"Secondary compilations; confirm before relying on them"}};
+const TYPES=["Contract","Funding","Policy & budget","Tech milestone","M&A & IPO","Earnings","Conflict & allies","Research"];
+const S={meta:null,briefs:[],sectors:[],updates:[],companies:[],catalysts:[],research:[],ideas:[]};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"";
+const MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const MONTH=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const ls={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
+const today=()=>{const d=new Date();return new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));};
+const toDate=s=>{const [y,m,d]=String(s).split("-").map(Number);return new Date(Date.UTC(y,(m||1)-1,d||1));};
+const daysUntil=s=>Math.round((toDate(s)-today())/864e5);
+function dtg(d,approx){const [y,m,dd]=String(d).split("-");if(!m)return esc(d);return `<b>${approx?"≈":""}${dd} ${MON[+m-1]} ${y.slice(2)}</b>${y}`;}
+const secName=id=>S.sectors.find(s=>s.id===id)?.name||id;
+const secChip=id=>`<button class="chip" data-sector="${esc(id)}">${esc(secName(id))}</button>`;
+const srcChip=s=>{if(!s)return"";const u=safeUrl(s.u);return u?`<a class="chip tier ${esc(s.q)}" href="${esc(u)}" target="_blank" rel="noopener" title="${esc(TIERS[s.q]?.name||"")}">${esc(s.t)} ↗</a>`:`<span class="chip tier ${esc(s.q)}">${esc(s.t)}</span>`;};
+const byDateDesc=(a,b)=>String(b.d).localeCompare(String(a.d));
+
+/* ---------- tabs & routing ---------- */
+let currentSector=ls.get("kcl-sector")||"ai";
+function show(tab){
+  document.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==tab);
+  document.querySelectorAll("[data-tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab?"true":"false"));
+  ls.set("kcl-tab",tab);
+}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>show(b.dataset.tab));
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-goto]"); if(g){show(g.dataset.goto);window.scrollTo({top:0});return;}
+  const s=e.target.closest("[data-sector]"); if(s){openSector(s.dataset.sector);return;}
+  const c=e.target.closest("[data-company]"); if(c){show("companies");$("#c-q").value=c.dataset.company;renderCompanies();window.scrollTo({top:0});return;}
+});
+function openSector(id){currentSector=id;ls.set("kcl-sector",id);renderSectors();show("sectors");window.scrollTo({top:0});}
+const initTab=(location.hash||"").slice(1)||"today";
+if(document.querySelector(`[data-panel="${initTab}"]`))show(initTab);
+
+/* ---------- render: today's brief ---------- */
+let briefPick=null;
+function fmtLong(d){const t=toDate(d);return t.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",timeZone:"UTC"});}
+function renderToday(){
+  const el=$("#brief"); const list=[...S.briefs].sort((a,b)=>String(b.date).localeCompare(a.date));
+  if(!list.length){el.innerHTML=`<p class="b-loading">No brief yet today. Check <button class="linkish" data-goto="updates">all updates</button> for the latest.</p>`;return;}
+  const b=list.find(x=>x.id===briefPick)||list[0];
+  const words=JSON.stringify(b).split(/\s+/).length, mins=Math.max(2,Math.round(words/230));
+  el.innerHTML=`
+    <header>
+      <div class="b-date"><span>${esc(fmtLong(b.date))}</span><span>${mins} min read</span></div>
+      <h2 class="b-hello">${esc(b.title||"Today in defense tech")}</h2>
+      ${b.big?`<p class="b-big">${esc(b.big)}</p>`:""}
+    </header>
+    <section class="b-sec"><h3>What happened</h3>
+      ${(b.stories||[]).map(s=>`<div class="story">
+        ${s.tag?`<div class="tag">${esc(s.tag)}</div>`:""}
+        <h4>${esc(s.h)}</h4>
+        <p>${esc(s.what)}</p>
+        <div class="you"><b>Why it matters to you:</b> ${esc(s.you)}</div>
+        ${s.ref?`<button class="more" data-open-update="${esc(s.ref)}">Details and source →</button>`:""}
+      </div>`).join("")}
+    </section>
+    ${b.watch?`<div class="b-card"><div class="k">Keep an eye on</div><h4>${esc(b.watch.h)}</h4><p>${esc(b.watch.why)}</p></div>`:""}
+    ${b.idea?`<div class="b-card"><div class="k">Idea to steal</div><h4>${esc(b.idea.h)}</h4><p>${esc(b.idea.why)}</p><button class="btn ghost" style="justify-self:start;margin-top:6px" data-pt="${esc(b.idea.h+": "+b.idea.why)}">Pressure-test it →</button></div>`:""}
+    <div class="b-foot"><span>Want more? <button class="linkish" data-goto="updates">All updates</button> · <button class="linkish" data-goto="ask">Ask a question</button></span>
+      ${list.length>1?`<span class="archive">Past briefs: ${list.slice(0,7).map(x=>`<button class="fbtn" aria-pressed="${x.id===b.id}" data-brief="${esc(x.id)}">${esc(String(x.date).slice(5))}</button>`).join("")}</span>`:""}</div>`;
+}
+document.addEventListener("click",e=>{
+  const br=e.target.closest("[data-brief]"); if(br){briefPick=br.dataset.brief;renderToday();window.scrollTo({top:0});return;}
+  const ou=e.target.closest("[data-open-update]"); if(ou){show("updates");$("#u-q").value="";$("#u-sector").value="all";uType="all";renderUpdates();const it=document.getElementById("item-"+ou.dataset.openUpdate);if(it){it.querySelector("details").open=true;it.scrollIntoView({block:"center"});}return;}
+  const pt=e.target.closest("[data-pt]"); if(pt){show("build");$("#pt-in").value=pt.dataset.pt;$("#pt-in").scrollIntoView({block:"center"});}
+});
+
+/* ---------- render: pulse ---------- */
+function recentCount(secId,days=60){const cut=new Date(today()-days*864e5);return S.updates.filter(u=>(u.sectors||[]).includes(secId)&&toDate(u.d)>=cut).length;}
+function renderPulse(){
+  const m=S.meta||{};
+  $("#headline").textContent=m.headline||"";
+  $("#forces").innerHTML=(m.forces||[]).map(f=>`<div class="box force"><h4>${esc(f.t)}</h4><p>${esc(f.b)}</p><div class="chips">${(f.s||[]).map(secChip).join("")}</div></div>`).join("");
+  $("#heat").innerHTML=S.sectors.map(s=>{const n=recentCount(s.id);return `<button class="tile" data-sector="${esc(s.id)}"><span class="nm">${esc(s.name)}</span><span class="row"><span class="pips" title="Momentum ${s.heat}/5">${[1,2,3,4,5].map(i=>`<span class="pip ${i<=s.heat?"on":""}"></span>`).join("")}</span><span class="cnt"><b>${n}</b> recent</span></span></button>`;}).join("");
+  $("#pulse-latest").innerHTML=[...S.updates].sort(byDateDesc).slice(0,6).map(u=>itemHTML(u,true)).join("")||`<p class="status">No updates yet.</p>`;
+  const up=S.catalysts.filter(c=>daysUntil(c.d)>=0).sort((a,b)=>String(a.d).localeCompare(b.d)).slice(0,6);
+  $("#pulse-next").innerHTML=up.map(calRow).join("")||`<p class="status">Nothing scheduled.</p>`;
+}
+
+/* ---------- render: updates ---------- */
+let uType="all";
+function itemHTML(u,compact){
+  return `<div class="item" id="item-${esc(u.id)}"><div class="dtg">${dtg(u.d,u.dApprox)}</div><details class="ud"><summary>
+    <h4>${u.isNew?`<span class="chip new-pill" style="margin-right:6px">NEW</span>`:""}${esc(u.title)}</h4>
+    ${u.why?`<div class="why">${esc(u.why)}</div>`:""}<span class="open-hint">Details and source ▸</span></summary>
+    <p class="body" style="margin-top:8px">${esc(u.body)}</p>
+    <div class="chips">${u.type?`<span class="chip type">${esc(u.type)}</span>`:""}${(u.sectors||[]).map(secChip).join("")}${(u.companies||[]).map(c=>`<button class="chip" data-company="${esc(c)}">${esc(c)}</button>`).join("")}${srcChip(u.src)}</div>
+  </details></div>`;
+}
+function renderUpdates(){
+  const q=($("#u-q").value||"").toLowerCase(), sec=$("#u-sector").value;
+  $("#u-types").innerHTML=["all",...TYPES].map(t=>`<button class="fbtn" aria-pressed="${t===uType}" data-t="${esc(t)}">${t==="all"?"All types":esc(t)}</button>`).join("");
+  $("#u-types").querySelectorAll("button").forEach(b=>b.onclick=()=>{uType=b.dataset.t;renderUpdates();});
+  const list=[...S.updates].sort(byDateDesc).filter(u=>(uType==="all"||u.type===uType)&&(sec==="all"||(u.sectors||[]).includes(sec))&&(!q||JSON.stringify(u).toLowerCase().includes(q)));
+  $("#u-count").textContent=`${list.length} of ${S.updates.length} updates`;
+  let html="",last="";
+  for(const u of list){const [y,m]=String(u.d).split("-");const key=y+"-"+m;if(key!==last){html+=`<div class="month">${MONTH[+m-1]||""} ${y}</div>`;last=key;}html+=itemHTML(u);}
+  $("#u-list").innerHTML=html||`<p class="status" style="padding:16px 0">Nothing matches. Clear a filter or search more broadly.</p>`;
+}
+$("#u-q").addEventListener("input",renderUpdates);
+$("#u-sector").addEventListener("change",renderUpdates);
+
+/* ---------- render: sectors ---------- */
+function renderSectors(){
+  if(!S.sectors.length){$("#sec-detail").innerHTML="";return;}
+  if(!S.sectors.find(s=>s.id===currentSector))currentSector=S.sectors[0].id;
+  $("#sec-nav").innerHTML=S.sectors.map(s=>`<button data-sec="${esc(s.id)}" aria-current="${s.id===currentSector}"><span>${esc(s.name)}</span><span class="status" style="color:inherit;opacity:.7">${recentCount(s.id)}</span></button>`).join("");
+  $("#sec-nav").querySelectorAll("button").forEach(b=>b.onclick=()=>openSector(b.dataset.sec));
+  $("#sec-select").innerHTML=S.sectors.map(s=>`<option value="${esc(s.id)}" ${s.id===currentSector?"selected":""}>${esc(s.name)}</option>`).join("");
+  const s=S.sectors.find(x=>x.id===currentSector);
+  const ups=S.updates.filter(u=>(u.sectors||[]).includes(s.id)).sort(byDateDesc);
+  const cos=S.companies.filter(c=>(c.sectors||[]).includes(s.id));
+  const cats=S.catalysts.filter(c=>(c.sectors||[]).includes(s.id)&&daysUntil(c.d)>=0).sort((a,b)=>String(a.d).localeCompare(b.d));
+  const refs=S.research.filter(r=>(r.sectors||[]).includes(s.id));
+  $("#sec-detail").innerHTML=`
+    <div class="head-row"><h2>${esc(s.name)}</h2><span class="pips" title="Momentum ${s.heat}/5">${[1,2,3,4,5].map(i=>`<span class="pip ${i<=s.heat?"on":""}"></span>`).join("")}<span class="status" style="margin-left:6px">momentum ${s.heat}/5</span></span></div>
+    <p style="font-size:16px;max-width:80ch">${esc(s.state)}</p>
+    <div class="facts">
+      <div class="box"><div class="lbl">Where the money is</div><p style="font-size:14px">${esc(s.money)}</p></div>
+      <div class="box"><div class="lbl">Watch next</div><p style="font-size:14px">${esc(s.watch)}</p></div>
+    </div>
+    <div><div class="lbl">Key players</div><div class="chips">${cos.map(c=>`<button class="chip" data-company="${esc(c.name)}">${esc(c.name)}</button>`).join("")||`<span class="status">No companies listed yet.</span>`}</div></div>
+    ${cats.length?`<div><div class="lbl">Coming up</div><div class="cal">${cats.map(calRow).join("")}</div></div>`:""}
+    <div><div class="head-row"><div class="lbl">Updates (${ups.length})</div><button class="linkish" data-ask-sector="${esc(s.id)}">Ask ANU about this sector →</button></div><div class="feed">${ups.map(u=>itemHTML(u)).join("")||`<p class="status" style="padding:12px 0">No updates yet.</p>`}</div></div>
+    ${refs.length?`<div><div class="lbl">Research</div>${refs.map(refHTML).join("")}</div>`:""}`;
+}
+$("#sec-select").addEventListener("change",e=>openSector(e.target.value));
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ask-sector]");if(b){show("ask");$("#q").value=`Brief me on ${secName(b.dataset.askSector)}: where it stands, who's winning and why, what changes in the next 12 months, and where a new company could get in.`;$("#q").focus();}});
+
+/* ---------- render: companies ---------- */
+let cType="all";
+function renderCompanies(){
+  const q=($("#c-q").value||"").toLowerCase(), sec=$("#c-sector").value;
+  const types=[...new Set(S.companies.map(c=>c.type).filter(Boolean))].sort();
+  $("#c-types").innerHTML=["all",...types].map(t=>`<button class="fbtn" aria-pressed="${t===cType}" data-t="${esc(t)}">${t==="all"?"All types":esc(t)}</button>`).join("");
+  $("#c-types").querySelectorAll("button").forEach(b=>b.onclick=()=>{cType=b.dataset.t;renderCompanies();});
+  const list=S.companies.filter(c=>(cType==="all"||c.type===cType)&&(sec==="all"||(c.sectors||[]).includes(sec))&&(!q||JSON.stringify(c).toLowerCase().includes(q))).sort((a,b)=>a.name.localeCompare(b.name));
+  $("#c-body").innerHTML=list.map(c=>`<tr><td class="n">${esc(c.name)}</td><td><div class="chips">${(c.sectors||[]).map(secChip).join("")}</div></td><td>${esc(c.type)}<br><span class="status">${esc(c.hq)}</span></td><td class="s">${esc(c.status)}</td><td>${esc(c.edge)}</td><td>${esc(c.latest)}</td><td>${safeUrl(c.src)?`<a class="chip" href="${esc(c.src)}" target="_blank" rel="noopener">Source ↗</a>`:""}</td></tr>`).join("")||`<tr><td colspan="7" class="status">No companies match.</td></tr>`;
+}
+$("#c-q").addEventListener("input",renderCompanies);
+$("#c-sector").addEventListener("change",renderCompanies);
+
+/* ---------- render: calendar ---------- */
+function calRow(c){const n=daysUntil(c.d);const when=n===0?"Today":n>0?`${c.approx?"≈":""}${n}`:"Passed";
+  return `<div class="cal-row"><div class="cd">${when}<small>${n>0?"days":""}</small></div><div class="dtg">${dtg(c.d,c.approx)}</div><div><h4>${esc(c.title)}</h4><p style="font-size:14px;color:var(--ink-2)">${esc(c.why)}</p><div class="chips" style="margin-top:6px">${(c.sectors||[]).map(secChip).join("")}</div></div></div>`;}
+function renderCalendar(){const list=[...S.catalysts].sort((a,b)=>String(a.d).localeCompare(b.d));const up=list.filter(c=>daysUntil(c.d)>=0),past=list.filter(c=>daysUntil(c.d)<0).reverse();
+  $("#cal").innerHTML=(up.map(calRow).join("")||`<p class="status" style="padding:12px 0">Nothing upcoming.</p>`)+(past.length?`<div class="month">Passed</div>`+past.map(calRow).join(""):"");}
+
+/* ---------- render: research, ideas ---------- */
+function refHTML(r){return `<div class="ref"><div class="chips"><span class="chip tier ${esc(r.q)}">${esc(TIERS[r.q]?.name||r.q)}</span><span class="status">${esc(r.who)}</span></div><a class="t" href="${esc(safeUrl(r.u))}" target="_blank" rel="noopener">${esc(r.t)} ↗</a><p style="font-size:14px;color:var(--ink-2)">${esc(r.why)}</p></div>`;}
+function renderResearch(){const q=($("#r-q").value||"").toLowerCase(),sec=$("#r-sector").value;
+  const list=S.research.filter(r=>(sec==="all"||(r.sectors||[]).includes(sec))&&(!q||JSON.stringify(r).toLowerCase().includes(q)));
+  $("#r-list").innerHTML=list.map(refHTML).join("")||`<p class="status">No research matches.</p>`;}
+$("#r-q").addEventListener("input",renderResearch);$("#r-sector").addEventListener("change",renderResearch);
+function renderIdeas(){$("#ideas").innerHTML=[...S.ideas].sort((a,b)=>(a.order||99)-(b.order||99)).map(x=>`<article class="box idea">
+  <h3>${esc(x.t)}</h3><div class="scores"><span>Capital <b>${esc(x.cap)}</b></span><span>To revenue <b>${esc(x.time)}</b></span><span>Clash <b>${esc(x.clash)}</b></span></div>
+  <p style="font-size:14.5px">${esc(x.what)}</p>
+  <div><div class="lbl">Why now</div><p style="font-size:14px;color:var(--ink-2)">${esc(x.why)}</p></div>
+  <div><div class="lbl">Wedge</div><p style="font-size:14px;color:var(--ink-2)">${esc(x.wedge)}</p></div>
+  <div class="chips">${(x.sectors||[]).map(secChip).join("")}</div>
+  <button class="btn ghost" style="justify-self:start" data-idea="${esc(x.id)}">Pressure-test this →</button></article>`).join("");}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-idea]");if(b){const x=S.ideas.find(i=>i.id===b.dataset.idea);if(x){$("#pt-in").value=`${x.t}: ${x.what} Wedge: ${x.wedge}`;$("#pt-in").scrollIntoView({behavior:"smooth",block:"center"});}}});
+
+/* ---------- shared selects, meta ---------- */
+function fillSelects(){
+  const opts=`<option value="all">All sectors</option>`+S.sectors.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("");
+  for(const id of ["#u-sector","#c-sector","#r-sector"]){const el=$(id),v=el.value||"all";el.innerHTML=opts;el.value=[...el.options].some(o=>o.value===v)?v:"all";}
+  const a=$("#add-sector"),av=a.value;a.innerHTML=S.sectors.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("");if(av)a.value=av;
+}
+$("#add-type").innerHTML=TYPES.map(t=>`<option>${esc(t)}</option>`).join("");
+$("#tiers").innerHTML=Object.entries(TIERS).map(([k,v])=>`<div><span class="chip tier ${k}">${v.name}</span> ${esc(v.desc)}</div>`).join("");
+$("#add-date").value=new Date().toISOString().slice(0,10);
+function renderMeta(){
+  const last=[...S.updates].sort(byDateDesc)[0]?.d||"—";
+  $("#meta-row").innerHTML=`<span><b>${S.updates.length}</b> updates</span><span><b>${S.sectors.length}</b> sectors</span><span><b>${S.companies.length}</b> companies</span><span><b>${S.catalysts.filter(c=>daysUntil(c.d)>=0).length}</b> upcoming events</span><span>Latest event <b>${esc(last)}</b></span>`;
+  const asof=S.meta?.asOf;$("#asof").textContent=asof?`Updated ${asof}`:"Open sources";
+  $("#refresh-note").textContent=asof?`Last full review: ${asof}.`:"";
+}
+let raf=0;function renderAll(){cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{fillSelects();renderMeta();renderToday();renderPulse();renderUpdates();renderSectors();renderCompanies();renderCalendar();renderResearch();renderIdeas();});}
+
+/* ---------- knowledge base for Claude ---------- */
+function kb(){
+  return JSON.stringify({
+    asOf:S.meta?.asOf, headline:S.meta?.headline, forces:(S.meta?.forces||[]).map(f=>({t:f.t,b:f.b})),
+    sectors:S.sectors.map(s=>({id:s.id,name:s.name,momentum:s.heat,state:s.state,money:s.money,watch:s.watch})),
+    updates:[...S.updates].sort(byDateDesc).slice(0,250).map(u=>({date:u.d,sectors:u.sectors,type:u.type,title:u.title,body:u.body,why:u.why,source:u.src?`${u.src.t} [${u.src.q}]`:""})),
+    companies:S.companies.map(c=>({name:c.name,sectors:c.sectors,type:c.type,hq:c.hq,status:c.status,edge:c.edge,latest:c.latest})),
+    upcoming:S.catalysts.map(c=>({date:c.d,approx:!!c.approx,title:c.title,why:c.why})),
+    research:S.research.map(r=>`${r.t} (${r.who}) [${r.q}]`),
+    buildIdeas:S.ideas.map(i=>({idea:i.t,what:i.what,why:i.why,wedge:i.wedge}))
+  });
+}
+const RULES=()=>`You are ANU, a personal helper for learning about and keeping up with the whole defense-technology industry: AI and software, drones and autonomy (air, sea, ground), space, missile defense, missiles and munitions, counter-drone and directed energy, EW, cyber, sensing and quantum, manufacturing, critical minerals, energy, biotech, budget and policy, capital markets, primes, allies, and adversaries. Today is ${new Date().toISOString().slice(0,10)}. The reader is a founder who is learning this industry: explain it so they understand it, help them keep up, see where the industry is going, and find something to build that competes.
+
+Rules:
+- Use the KNOWLEDGE BASE below as your main evidence. After each factual claim, name the source in brackets, e.g. [SEC 8-K]. Sources tagged [aggregator] are unconfirmed; say so when you lean on one.
+- If you go beyond the knowledge base, label it "(general knowledge, may be outdated)".
+- Connect across sectors when relevant (e.g. minerals affect drones; budget deadlines affect space).
+- Be concrete and skimmable: short paragraphs or bullets, real numbers, named programs and budget lines. Say when evidence is thin.
+- For opportunities, name the buyer, the budget line, the incumbents and a first-contract path.
+- Teach as you go: explain acronyms, programs and jargon in plain words the first time they appear, and give the background a newcomer needs to follow the story.
+- Plain text only, no markdown tables.
+
+KNOWLEDGE BASE (JSON):
+${kb()}`;
+
+/* ---------- runtime: sample ---------- */
+let sample=null;const turns=[];let ctl=null,ptCtl=null;
+const SUGGEST=["What were the five most important developments in the last 30 days, across all sectors?","Which sectors are underbuilt compared with where the money is going?","How does the 11 Dec funding deadline ripple through the industry?","Where are the primes most exposed to new entrants?","What does China's magnet squeeze mean for drone and munitions startups?","If I had $1M and 12 months, what should I build?"];
+$("#suggest").innerHTML=SUGGEST.map(s=>`<button>${esc(s)}</button>`).join("");
+$("#suggest").querySelectorAll("button").forEach(b=>b.onclick=()=>{$("#q").value=b.textContent;ask();});
+const ERR={not_granted:"Claude isn't allowed on this page for you, so this feature is off.",sampling_disabled:"Claude isn't available on this account.",rate_limited:"Too many questions at once. Wait a minute, then ask again.",session_expired:"Your session expired. Sign in again, then ask.",refused:"Claude declined that question. Try rephrasing it.",prompt_too_large:"ANU has grown too large to send whole. Ask about one sector at a time."};
+const errText=e=>ERR[e?.code]||"Something interrupted the answer. Ask again.";
+const HIDE=["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"];
+function addMsg(cls,text){const d=document.createElement("div");d.className="msg "+cls;d.textContent=text;$("#log").appendChild(d);$("#log").scrollTop=$("#log").scrollHeight;return d;}
+function setAsk(on){$("#send").disabled=!on;$("#pt-go").disabled=!on;}
+setAsk(false);$("#ask-status").textContent="Connecting to Claude…";
+async function ask(){
+  const q=$("#q").value.trim();if(!q||!sample)return;
+  $("#q").value="";addMsg("user",q);turns.push({role:"user",content:q});
+  const out=addMsg("bot","Thinking…");ctl=new AbortController();$("#send").hidden=true;$("#stop").hidden=false;
+  try{const {text}=await sample([{role:"user",content:RULES()},...turns.slice(-10)],{cache:false,signal:ctl.signal,onText:({text})=>{out.textContent=text;$("#log").scrollTop=$("#log").scrollHeight;}});turns.push({role:"assistant",content:text});}
+  catch(e){if(e?.text)out.textContent=e.text;else out.remove();turns.pop();if(e?.code!=="cancelled")addMsg("note",errText(e));if(HIDE.includes(e?.code))setAsk(false);}
+  finally{$("#send").hidden=false;$("#stop").hidden=true;}
+}
+$("#send").onclick=ask;$("#stop").onclick=()=>ctl?.abort();
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();ask();}});
+$("#pt-go").onclick=async()=>{
+  const idea=$("#pt-in").value.trim();if(!idea||!sample)return;
+  const out=$("#pt-out");out.hidden=false;out.textContent="Thinking…";$("#pt-status").textContent="";
+  ptCtl=new AbortController();$("#pt-go").disabled=true;$("#pt-stop").hidden=false;
+  try{await sample(RULES()+`\n\nTASK: Pressure-test this startup idea against the knowledge base. Use these headings, each with 2–4 bullets: 1) Verdict (one line, with a 1–10 score), 2) Who already does this, 3) Buyer and budget line, 4) Why now / why not, 5) Fastest path to a first contract (vehicle, unit, 90-day plan), 6) What would kill it, 7) A sharper version.\n\nIDEA:\n${idea}`,{cache:false,signal:ptCtl.signal,onText:({text})=>{out.textContent=text;}});}
+  catch(e){out.textContent=e?.text||"";if(!e?.text)out.hidden=true;if(e?.code!=="cancelled")$("#pt-status").textContent=errText(e);if(HIDE.includes(e?.code))setAsk(false);}
+  finally{$("#pt-go").disabled=!sample;$("#pt-stop").hidden=true;}
+};
+$("#pt-stop").onclick=()=>ptCtl?.abort();
+
+/* ---------- runtime: db ---------- */
+let db=null,uid=null;
+function setForm(sel,on,msg,statusSel){document.querySelectorAll(sel+" input,"+sel+" select,"+sel+" textarea,"+sel+" button").forEach(x=>x.disabled=!on);if(statusSel)$(statusSel).textContent=msg||"";}
+setForm("#add-form",false,"Connecting…","#add-status");setForm("#note-form",false);
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)||"item";
+$("#add-form").addEventListener("submit",async e=>{
+  e.preventDefault();if(!db)return;
+  const d=$("#add-date").value,title=$("#add-title").value.trim(),body=$("#add-body").value.trim();if(!d||!title||!body)return;
+  const rec={d,title,body,why:$("#add-why").value.trim(),sectors:[$("#add-sector").value],type:$("#add-type").value,companies:[],
+    src:safeUrl($("#add-url").value.trim())?{t:$("#add-src").value.trim()||"Source",u:$("#add-url").value.trim(),q:$("#add-tier").value}:null,addedBy:"viewer",addedAt:new Date().toISOString()};
+  $("#add-status").textContent="Saving…";
+  try{await db.collection("updates").doc("u-"+d.replace(/-/g,"")+"-"+slug(title)).set(rec);$("#add-form").reset();$("#add-date").value=new Date().toISOString().slice(0,10);fillSelects();$("#add-status").textContent="Saved to ANU.";}
+  catch(err){if(err?.code==="invalid_argument")setForm("#add-form",false,"You can read ANU but not add to it.","#add-status");else if(err?.code==="quota_exceeded")$("#add-status").textContent="ANU is full. Remove old entries to add more.";else $("#add-status").textContent="Couldn't save. Try again.";}
+});
+function renderNotes(docs){$("#notes").innerHTML=docs.length?docs.map(d=>{const n=d.data();return `<div class="note-row"><span>${esc(n.text)}<br><span class="status">${esc((n.at||"").slice(0,10))}</span></span><button data-del="${esc(d.id)}" aria-label="Delete note">Delete</button></div>`;}).join(""):`<p class="status">No notes yet. Ideas you save here are visible only to you.</p>`;}
+$("#notes").addEventListener("click",async e=>{const b=e.target.closest("[data-del]");if(!b||!db||!uid)return;b.disabled=true;try{await db.collection("data/users/"+uid).doc(b.dataset.del).delete();}catch{b.disabled=false;}});
+$("#note-form").addEventListener("submit",async e=>{e.preventDefault();const t=$("#note-in").value.trim();if(!t||!db||!uid)return;try{await db.collection("data/users/"+uid).add({text:t,at:new Date().toISOString()});$("#note-in").value="";}catch{setForm("#note-form",false);$("#notes").innerHTML=`<p class="status">Notes can't be saved for you on this page.</p>`;}});
+
+/* Outside Claude (e.g. GitHub Pages) the page reads the static JSON API published next to this page. */
+async function loadFromApi(){
+  let data;
+  try{const r=await fetch("api/v1/all.json",{cache:"no-cache"});if(!r.ok)throw new Error(r.status);data=await r.json();}
+  catch{offline("ANU's data couldn't load. Refresh the page to try again.");return;}
+  Object.assign(S,{meta:data.meta,briefs:(data.briefs||[]).map(b=>({id:b.date,...b})),sectors:(data.sectors||[]).sort((a,b)=>(a.order||99)-(b.order||99)),updates:data.updates||[],companies:data.companies||[],catalysts:data.catalysts||[],research:data.research||[],ideas:data.ideas||[]});
+  renderAll();
+  const ro="Read-only here. Saving and Ask work in the Claude-hosted version.";
+  setForm("#add-form",false,ro,"#add-status");setForm("#note-form",false);$("#notes").innerHTML=`<p class="status">${esc(ro)}</p>`;
+  setAsk(false);$("#ask-status").textContent=ro;
+}
+/* Tabs come from config/anu.yaml (api/v1/config.json); the links above are the fallback. */
+fetch("api/v1/config.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>{if(!c?.desks)return;
+  $("#desks").innerHTML=c.desks.filter(d=>d.enabled!==false).map(d=>`<a href="${esc(d.page)}"${d.id==="defense"?' aria-current="page"':""}>${esc(d.label)}</a>`).join("")+'<a class="ask" href="app/">Ask ANU →</a>';}).catch(()=>{});
+function offline(msg){const o=$("#offline");o.hidden=false;o.textContent=msg;$("#meta-row").innerHTML=`<span>${esc(msg)}</span>`;$("#headline").textContent="";}
+(async()=>{
+  if(!window.claude?.use){await loadFromApi();return;}
+  claude.use("sample").then(s=>{sample=s;if(s){setAsk(true);$("#ask-status").textContent="";}else $("#ask-status").textContent="Asking Claude isn't available in this view.";});
+  const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);db=d;
+  if(!db){offline("ANU's data couldn't load in this view. Open it in Claude while signed in.");setForm("#add-form",false,"Unavailable here.","#add-status");return;}
+  const sub=(col,fn)=>db.collection(col).limit(1000).onSnapshot(snap=>{fn(snap.docs.map(x=>({id:x.id,...x.data()})));renderAll();},()=>{});
+  const seen=new Set();let firstUpdates=true;
+  sub("sectors",r=>S.sectors=r.sort((a,b)=>(a.order||99)-(b.order||99)));
+  sub("updates",r=>{const lastVisit=ls.get("kcl-visit");S.updates=r.map(x=>({...x,isNew:!!(lastVisit&&x.addedAt&&x.addedAt>lastVisit)}));if(firstUpdates){firstUpdates=false;setTimeout(()=>ls.set("kcl-visit",new Date().toISOString()),4000);}});
+  sub("companies",r=>S.companies=r);sub("catalysts",r=>S.catalysts=r);sub("research",r=>S.research=r);sub("ideas",r=>S.ideas=r);sub("briefs",r=>S.briefs=r);
+  db.doc("meta/brief").onSnapshot(s=>{S.meta=s.exists?s.data():null;renderAll();},()=>{});
+  const canWrite=u?await u.can("data.write"):null;
+  if(canWrite===false)setForm("#add-form",false,"View only: you can read the desk but not add to it.","#add-status");else setForm("#add-form",true,"","#add-status");
+  uid=u?await u.id():null;
+  if(!uid){$("#notes").innerHTML=`<p class="status">Sign in to keep a private notebook.</p>`;return;}
+  setForm("#note-form",true);
+  db.collection("data/users/"+uid).orderBy("at","desc").limit(200).onSnapshot(s=>renderNotes(s.docs),()=>{});
+})();
+</script>

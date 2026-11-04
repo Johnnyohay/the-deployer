@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-01",
+  "title": "Today's top defense-tech headlines",
+  "big": "7 new stories since the last brief. The busiest areas: drones & air autonomy and maritime & undersea autonomy.",
+  "stories": [
+    {
+      "tag": "Drones & air autonomy",
+      "h": "UK flies Protector drone on first home operation against Russian frigate",
+      "what": "An RAF Protector RG1 remotely piloted aircraft has flown its first operational missions in UK airspace, giving the Royal Navy more than 10 hours of surveillance over the English Channel while warships tracked the Russian frigate Neustrashimy, the UK Ministry…",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261101-uk-flies-protector-drone-on-first-home-operation-a"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "Greece receives second FDI frigate HS Nearchos",
+      "what": "Naval Group handed over HS Nearchos, the second of Greece’s new French-built defense and intervention frigates, to the Hellenic Navy at its shipyard in Lorient, France, on Oct. 30, ten months after Greece received the first ship of the class.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261101-greece-receives-second-fdi-frigate-hs-nearchos"
+    },
+    {
+      "tag": "Allies & theaters",
+      "h": "NATO turns 5G towers into sensors in Baltic battlefield experiment",
+      "what": "NATO linked a Maven targeting system to a national military system in a matter of hours using agentic artificial intelligence and ran a cross-border counter-drone engagement during a two-week experiment in Latvia, the alliance’s top transformation commander…",
+      "you": "Allies' wars and budgets are the testing ground and a big second market for new defense tech.",
+      "ref": "u-20261101-nato-turns-5g-towers-into-sensors-in-baltic-battle"
+    },
+    {
+      "tag": "Adversaries: China, Russia, Iran",
+      "h": "North Korea tests cluster-bomb warhead for ballistic missiles",
+      "what": "North Korea tested a cluster-bomb warhead for its tactical ballistic missiles on Oct. 31 and said it will let its military units choose from four types of cluster warheads by the end of the year, state news agency KCNA reported on Nov. 1.",
+      "you": "What China, Russia and Iran field sets the requirements the Pentagon buys against.",
+      "ref": "u-20261101-north-korea-tests-cluster-bomb-warhead-for-ballist"
+    },
+    {
+      "tag": "Electronic warfare & spectrum",
+      "h": "U.S. Army’s HADES spy plane prototype makes first flight",
+      "what": "The U.S. Army’s first HADES prototype, a Bombardier Global 6500 business jet modified by Sierra Nevada Corporation for long-range signals intelligence and deep sensing, made its first flight on Sept. 11, the service announced on Oct.",
+      "you": "Jamming and spectrum fights decide whether drones and radios work at all, so this quiet area keeps getting funded.",
+      "ref": "u-20261101-u-s-army-s-hades-spy-plane-prototype-makes-first-f"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Counter-drone detection for critical infrastructure",
+    "why": "Sensor fusion and attribution software (RF, radar, acoustic, camera) for bases, data centers, stadiums, prisons and utilities. $14.4B FY27 counter-UAS line plus the base-defense pilot. Commercial sites legally can only detect and report drones, so software is what they buy."
+  },
+  "auto": true
+}

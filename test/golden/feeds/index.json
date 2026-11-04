@@ -1,0 +1,15 @@
+{
+  "https://breakingdefense.com/feed/": "00.xml",
+  "https://defensescoop.com/feed/": "01.xml",
+  "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml": "02.xml",
+  "https://www.twz.com/feed": "03.xml",
+  "https://www.airandspaceforces.com/feed/": "04.xml",
+  "https://news.usni.org/feed": "05.xml",
+  "https://spacenews.com/feed/": "06.xml",
+  "https://www.c4isrnet.com/arc/outboundfeeds/rss/?outputType=xml": "07.xml",
+  "https://www.defenseone.com/rss/all/": "09.xml",
+  "https://www.defense.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=945&max=10": "10.xml",
+  "https://www.csis.org/rss.xml": "11.xml",
+  "https://defence-blog.com/feed/": "12.xml",
+  "https://www.executivegov.com/feed/": "13.xml"
+}

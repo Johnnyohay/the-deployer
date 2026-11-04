@@ -1,0 +1,73 @@
+{
+  "asOf": "2026-10-11",
+  "headline": "Defense is being re-platformed around autonomy, software and industrial capacity, and the money has already moved.",
+  "forces": [
+    {
+      "t": "Autonomy gets its own budget and command",
+      "b": "The FY27 request moves the Defense Autonomous Warfare Group from $225M to $54.6B and Drone Dominance to $53.6B. Hegseth ordered a four-star Autonomous Warfare Command to stand up by Oct 2027. Unmanned systems are becoming a budget category of their own, not an add-on.",
+      "s": [
+        "policy",
+        "air",
+        "cuas"
+      ]
+    },
+    {
+      "t": "Software and AI take control of the kill chain",
+      "b": "Maven is becoming the DoD standard; Scale AI's CDAO deal is now $500M; frontier labs (Anthropic, OpenAI, Google, xAI) run on classified networks. Value moves to the layer that fuses data and chooses targets.",
+      "s": [
+        "ai"
+      ]
+    },
+    {
+      "t": "Cost-exchange decides what gets bought",
+      "b": "$2–5k attack drones, lasers firing for under $5 a shot, and a CCA under $20M, set against interceptors costing millions. Buyers now judge every system by what each engagement costs.",
+      "s": [
+        "cuas",
+        "air",
+        "strike"
+      ]
+    },
+    {
+      "t": "Rebuilding the industrial base is the new moat",
+      "b": "New factories (Anduril's Arsenal-1 and Arsenal-2, Hadrian at $7.9B, Castelion's Project Ranger), rare-earth independence (MP Materials, the Jan 2027 magnet ban) and on-base nuclear power (Janus, $2.2B). Whoever can produce at volume wins.",
+      "s": [
+        "mfg",
+        "minerals",
+        "energy"
+      ]
+    },
+    {
+      "t": "Space becomes the backbone",
+      "b": "Golden Dome ($185B official estimate; $1.2T per CBO), SpaceX's $6.45B in space-layer awards, SDA constellations, and GEO surveillance (GHOST-R). Most new sensing and communications architecture now runs through orbit.",
+      "s": [
+        "space",
+        "missiledef"
+      ]
+    },
+    {
+      "t": "Allies' wars are the test range",
+      "b": "Ukraine expects about 4.5M FPV drones in 2026 and fields 25,000 ground robots; Israel used lasers in the 2026 Iran war; Taiwan passed a $7.6B drone industry act; Europe is spending €454B. Combat-proven products sell first.",
+      "s": [
+        "global",
+        "adversary"
+      ]
+    },
+    {
+      "t": "Capital is plentiful, but exits are the test",
+      "b": "$40.8B of VC in H1 2026, IPOs (York Space, an Ursa Major SPAC), and the primes at record backlogs (Lockheed $230B, RTX $289B). Incumbents are not dying; they are buying and teaming.",
+      "s": [
+        "capital",
+        "primes"
+      ]
+    },
+    {
+      "t": "Political and funding risk is real",
+      "b": "FY27 opened on a stopgap that runs to 11 Dec. Golden Dome's lead warns of funding jeopardy. Access is concentrated in a few politically connected firms. Treat budget lines as unconfirmed until appropriated.",
+      "s": [
+        "policy",
+        "missiledef"
+      ]
+    }
+  ],
+  "collectedAt": "2026-11-04T12:34:21.515Z"
+}

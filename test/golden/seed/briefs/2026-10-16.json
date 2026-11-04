@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-16",
+  "title": "Today's top defense-tech headlines",
+  "big": "50 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "AI, software & command and control",
+      "h": "Shield AI software lets Taiwan drone boats shadow intruder",
+      "what": "Shield AI has released new details on how its Hivemind autonomy software steered two Taiwanese uncrewed boats through a joint patrol off southern Taiwan, fusing radar and ship-tracking data into a single picture and switching the pair from patrol to escort…",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261016-shield-ai-software-lets-taiwan-drone-boats-shadow-"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "Japan Wants to Sell Air Defense, Maritime Surveillance Systems to Philippine Forces",
+      "what": "MANILA, Philippines — Japan wants to sell air defense, maritime surveillance and counter-drone systems to the Philippines amid its push to bolster forces in the South China Sea and Luzon Strait.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261015-japan-wants-to-sell-air-defense-maritime-surveilla"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Taiwan buys three years of support for MQ-9B drones",
+      "what": "Taiwan is paying General Atomics Aeronautical Systems $38.8 million to keep its new MQ-9B SkyGuardian drones flying, under a contractor logistics support deal that runs through August 2029, the U.S. Department of War said. The award, announced on Oct.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261016-taiwan-buys-three-years-of-support-for-mq-9b-drone"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Lockheed invests $300M in Texas plant to feed missile surge",
+      "what": "Lockheed is investing $300 million to expand its Grand Prairie, Texas, plant, which supports all programs within its Missiles and Fire Control business.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261016-lockheed-invests-300m-in-texas-plant-to-feed-missi"
+    },
+    {
+      "tag": "Budget, policy & acquisition reform",
+      "h": "UK scraps three planned Boxer variants after budget cut",
+      "what": "The British Army has dropped plans for armored mortar, repair and recovery, and anti-tank overwatch versions of its Boxer wheeled armored vehicle, and has ruled out using Boxer in the armored cavalry role, Defence Minister Luke Pollard told Parliament.",
+      "you": "Budget and policy moves decide which programs get real money and when; they're the earliest signal of demand.",
+      "ref": "u-20261015-uk-scraps-three-planned-boxer-variants-after-budge"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Low-cost interceptor drone",
+    "why": "An autonomous interceptor under $5k for Shahed-class and FPV drones. Ukraine proved the concept, and Japan, the Gulf and US bases are buying. The cost-exchange crisis is acute."
+  },
+  "auto": true
+}

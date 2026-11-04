@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-11",
+  "title": "The money is moving to cheap, smart and made-at-home",
+  "big": "The Pentagon is shifting from a few expensive weapons to many cheap drones, the software that runs them, and the factories that build them. The next two months decide how much of that money actually arrives.",
+  "stories": [
+    {
+      "tag": "Factories",
+      "h": "Anduril is building a shipyard for Navy submarine parts",
+      "what": "The defense startup announced a giant new yard in Maryland to make submarine parts, an area the old defense giants have owned for decades.",
+      "you": "Startups aren't only writing software anymore; they're building heavy industry. Making things at scale is now a real way into defense.",
+      "ref": "u-20261006-arsenal2"
+    },
+    {
+      "tag": "Drones & robots",
+      "h": "The Pentagon wants a dedicated command for drones and robots",
+      "what": "Defense Secretary Hegseth ordered a new top-level military command just for autonomous systems, with its own budget. Congress still has to approve it.",
+      "you": "Anyone building drones, robots or autonomy software would get one big, dedicated customer. Watch whether Congress backs it.",
+      "ref": "u-20260930-awc"
+    },
+    {
+      "tag": "Counter-drone",
+      "h": "Lasers that shoot down drones are going into mass production",
+      "what": "The Army signed its first-ever production deal for a laser weapon. Each shot costs a few dollars, compared with missiles that cost a fortune.",
+      "you": "Stopping cheap drones cheaply is the industry's hottest problem. Anything that makes it cheaper, faster or easier to deploy has buyers.",
+      "ref": "u-20260902-laser"
+    },
+    {
+      "tag": "Supply chain",
+      "h": "China is squeezing the magnets every drone needs",
+      "what": "China is tightening exports of rare-earth magnets just as the Pentagon prepares to ban Chinese magnets from its supply chain in January.",
+      "you": "Supply chains are now a weapon. Tools or parts that help companies source compliant components will be needed fast.",
+      "ref": "u-20261002-magnets"
+    },
+    {
+      "tag": "Policy",
+      "h": "Musk and Palmer Luckey are helping plan the future of war",
+      "what": "The Pentagon asked Elon Musk and Anduril's founder to lead a four-month study of what the military should build next. Their report lands in late January.",
+      "you": "That report is a preview of where defense spending goes next. Read it the day it comes out.",
+      "ref": "u-20261001-meridian"
+    }
+  ],
+  "watch": {
+    "h": "Congress has until December 11 to fund the Pentagon",
+    "why": "The military is running on a temporary budget. Until Congress passes the real one, the big new drone and missile-defense money is only a promise."
+  },
+  "idea": {
+    "h": "A parts-sourcing checker for drone makers",
+    "why": "Software that tells a drone company which of its parts break the new magnet rules, and where to buy compliant replacements. Hundreds of hardware startups need it before January."
+  }
+}

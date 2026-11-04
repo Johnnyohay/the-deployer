@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-29",
+  "title": "Today's top defense-tech headlines",
+  "big": "53 new stories since the last brief. The busiest areas: allies & theaters and drones & air autonomy.",
+  "stories": [
+    {
+      "tag": "Space",
+      "h": "U.S. Intel Warns China’s Space-Based Directed Energy Weapons Could Soon Threaten Satellites",
+      "what": "Battlefield space is heating up as the DIA warns that China could use orbital directed energy weapons to take down satellites by the end of the decade. The post U.S.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261028-u-s-intel-warns-china-s-space-based-directed-energ"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Ukraine’s Linza bomber drone clears path for UGV in German exercise",
+      "what": "Ukrainian drone maker Frontline Robotics flew its Linza bomber drone alongside German, Ukrainian and other unmanned air, ground and sea systems during Forward Edge 26, a two-week exercise in Germany hosted by Quantum Systems, the company said on social media.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261029-ukraine-s-linza-bomber-drone-clears-path-for-ugv-i"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "ICAM, Cloud and AI: Five Insights Into the VA’s $10.7B FY27 IT Systems Budget",
+      "what": "Discover the essential technologies the VA seeks with its fiscal year 2027 healthcare IT systems and EHR budget request. The post ICAM, Cloud and AI: Five Insights Into the VA’s $10.7B FY27 IT Systems Budget first appeared on Executive Gov .",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261028-icam-cloud-and-ai-five-insights-into-the-va-s-10-7"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "AUKUS partners test autonomous systems as Europe weighs maritime surveillance needs",
+      "what": "The UK headed up the anti-submarine warfare component of Maritime Big Play exercise, which took place off the coast of San Diego in October.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261028-aukus-partners-test-autonomous-systems-as-europe-w"
+    },
+    {
+      "tag": "Missile defense & Golden Dome",
+      "h": "US, Japan ink agreements for AMRAAM assembly, SM-3 production boost: Japanese MoD",
+      "what": "The “groundbreaking agreement” on AMRAAM production “will not only ensure the acquisition of equipment needed by both Japan and the United States, but will also strengthen Japan’s defense industry base,” said Japanese Defense Minister Shinjiro Koizumi.",
+      "you": "Missile defense is one of the biggest budget lines this decade, and its software and sensors are open to newcomers.",
+      "ref": "u-20261029-us-japan-ink-agreements-for-amraam-assembly-sm-3-p"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Ukraine-to-NATO technology licensing bridge",
+    "why": "Licenses combat-proven Ukrainian designs (ground robots, interceptors, software) and handles compliance and US or EU production. About 300 Ukrainian ground-drone firms and 500 FPV makers are looking for export routes; Brave1 is certifying exports."
+  },
+  "auto": true
+}

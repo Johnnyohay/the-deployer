@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-21",
+  "title": "Today's top defense-tech headlines",
+  "big": "57 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Space",
+      "h": "Space Nuclear Power Corporation Awarded DARPA Agreement for Ground Test of Autonomous Nuclear Reactor Controller",
+      "what": "LOS ALAMOS, N.M. — October 21, 2026 — Space Nuclear Power Corporation (SpaceNukes) announced today that the Defense Advanced Research Projects Agency (DARPA) has awarded the company an Other Transaction [ ] The post Space Nuclear Power Corporation Awarded…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261021-space-nuclear-power-corporation-awarded-darpa-agre"
+    },
+    {
+      "tag": "Budget, policy & acquisition reform",
+      "h": "Hegseth discusses Iran with Netanyahu in unannounced visit to Israel, officials say",
+      "what": "Netanyahu and Hegseth discussed “the threats in the region” and the U.S.-Israel partnership in dealing both offensively and defensively with those threats.",
+      "you": "Budget and policy moves decide which programs get real money and when; they're the earliest signal of demand.",
+      "ref": "u-20261020-hegseth-discusses-iran-with-netanyahu-in-unannounc"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "US Navy, Gecko Robotics surge AI maintenance contract to $300M",
+      "what": "Gecko Robotics uses drones, wall-climbing robots and fixed sensors to gather data on components, decks, welds and hulls.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261020-us-navy-gecko-robotics-surge-ai-maintenance-contra"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Australia marks missile, cyber ‘firsts’ in exercise with Indonesia",
+      "what": "The Keris Woomera exercise comes during a busy month for Australia’s military, as forces participate in drills from Singapore to Japan.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261021-australia-marks-missile-cyber-firsts-in-exercise-w"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Britain’s cargo drone becomes a low-cost drone interceptor",
+      "what": "A heavy-lift cargo drone built by BAE Systems subsidiary Malloy Aeronautics has shot down several one-way attack drones with laser-guided rockets during a Pentagon experiment in Florida, firing one rocket after another without having to land and reload.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261021-britain-s-cargo-drone-becomes-a-low-cost-drone-int"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Counter-drone detection for critical infrastructure",
+    "why": "Sensor fusion and attribution software (RF, radar, acoustic, camera) for bases, data centers, stadiums, prisons and utilities. $14.4B FY27 counter-UAS line plus the base-defense pilot. Commercial sites legally can only detect and report drones, so software is what they buy."
+  },
+  "auto": true
+}

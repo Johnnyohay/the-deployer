@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-30",
+  "title": "Today's top defense-tech headlines",
+  "big": "46 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Lockheed Martin Receives $694M Air Force Contract for Hypersonic Missile Production",
+      "what": "Lockheed Martin has a $694 million Department of War contract for the ARRW hypersonic missile, the Air Force said. The post Lockheed Martin Receives $694M Air Force Contract for Hypersonic Missile Production first appeared on Executive Gov .",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261029-lockheed-martin-receives-694m-air-force-contract-f"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Northrop Grumman gets $56M to upgrade one MQ-4C Triton drone",
+      "what": "The U.S. Navy has ordered a $56 million retrofit for a single MQ-4C Triton, paying Northrop Grumman to install the B7 retrofit material kit on one of its high-altitude maritime surveillance drones.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261030-northrop-grumman-gets-56m-to-upgrade-one-mq-4c-tri"
+    },
+    {
+      "tag": "Missile defense & Golden Dome",
+      "h": "Army selects Lockheed Martin for billion-dollar Future Interceptor program",
+      "what": "Under a cost-sharing arrangement, Lockheed is expected to kick in $423 million for the project while Uncle Sam provides about $660 million. The post Army selects Lockheed Martin for billion-dollar Future Interceptor program appeared first on DefenseScoop .",
+      "you": "Missile defense is one of the biggest budget lines this decade, and its software and sensors are open to newcomers.",
+      "ref": "u-20261029-army-selects-lockheed-martin-for-billion-dollar-fu"
+    },
+    {
+      "tag": "Space",
+      "h": "From tanks to space, Norway and Germany forge ahead with ‘Hansa’ defense pact",
+      "what": "German tank maker KNDS and Norway’s Ritek have begun producing Leopard 2A8 tanks in Norway, adding a land-based industrial foothold to a security partnership spanning submarines, missiles and military operations in Europe’s north.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261030-from-tanks-to-space-norway-and-germany-forge-ahead"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "PNNL-Led Consortium Applies AI to Battery Manufacturing Scale-Up",
+      "what": "PNNL took the helm of the DOE-backed BattMan Accelerator, uniting three other national labs and five universities on battery scale-up. The post PNNL-Led Consortium Applies AI to Battery Manufacturing Scale-Up first appeared on Executive Gov .",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261029-pnnl-led-consortium-applies-ai-to-battery-manufact"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Resilient mesh datalinks for swarms",
+    "why": "Low-probability-of-intercept mesh radios that keep swarms coordinated under jamming. Autonomy at scale needs links that survive. Fiber works for one drone, not a swarm."
+  },
+  "auto": true
+}

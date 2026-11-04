@@ -13,6 +13,18 @@ Example: "Trends in retail, supply chain and geopolitics" → a site with sector
 
 ---
 
+## Phase 0 result (2026-11-04)
+
+Done. The engine is ANU's code with every domain-specific piece moved into `packs/anu-defense-housing`: 14 feeds, 20 sector rules and "why it matters" lines, 8 story types and weights, the noise filter, the brief title, the Ask persona, rules and 7 modes, the Claude research instructions and the tool examples. The sector and story-type lists are no longer constants; they are built from the pack.
+
+- **Golden test** (`npm test`): recorded feeds from 2026-11-04 plus a snapshot of ANU's data, run through ANU's own code and through the engine. All 11 output files match (64 new stories, the same 5-story brief). The test fails if a rule changes.
+- **Same API**: on ANU's full data, every file in `/api/v1/` matches what ANU publishes, except a new `pack` block in `all.json` (what Ask needs, so the browser app and GitHub issues read the same modes).
+- **What changed from the plan**: one package, not a monorepo (`src/` engine, `site/` pages, `app/` Ask app, `packs/`). The pack splits into `topic.yaml` (what it follows) and `site.yaml` (how it looks). Sectors and story types take a raw regex `pattern` as well as `keywords`, so ANU's rules move over unchanged.
+- **Still ANU-flavored, by plan**: the front-end pages (`site/index.html`, `app/src/App.tsx`) still have defense wording (phase 1), and the housing desk is a built-in preset (phase 3).
+- **Found along the way**: GovConWire's feed returns HTTP 403, so ANU has probably been missing it. The source-health check (section 5, step 10) would flag this.
+
+---
+
 ## 1. What ANU is today, and what has to change
 
 ANU has three kinds of desks, and **about 80% of what makes it about defense is hardcoded in TypeScript, not YAML**:

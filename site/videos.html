@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANU Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="desk.css">
+<style>
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.grid-s{display:grid;gap:16px 12px;grid-template-columns:repeat(auto-fill,minmax(min(46%,170px),1fr))}
+.grid-v{display:grid;gap:18px 14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+.reel{position:fixed;inset:0;z-index:20;background:#000;overflow-y:scroll;scroll-snap-type:y mandatory;overscroll-behavior:contain}
+.reel[hidden]{display:none}
+.slide{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:grid;place-items:center;position:relative}
+.slide .frame{position:relative;height:min(100dvh,calc(100vw*16/9));aspect-ratio:9/16;max-width:100vw;background:#111}
+.slide.wide .frame{height:auto;width:min(100vw,960px);aspect-ratio:16/9}
+.slide img,.slide iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.slide .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 16px 22px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;pointer-events:none}
+.slide .cap b{display:block;font-size:16px;line-height:1.3}
+.slide .cap span{font-family:var(--mono);font-size:12px;opacity:.8}
+.slide .cap a{pointer-events:auto;color:#fff;font-family:var(--mono);font-size:12px}
+.reel-close{position:fixed;top:12px;right:12px;z-index:21;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 14px;font-family:var(--mono);font-size:12px;cursor:pointer}
+.reel-hint{position:fixed;top:14px;left:14px;z-index:21;color:#fff;font-family:var(--mono);font-size:11px;opacity:.7}
+</style>
+</head>
+<body>
+<div class="banner">ANU // Watch // <span id="asof">Loading</span></div>
+<header class="top wrap">
+  <div class="eyebrow">Learn in short videos</div>
+  <h1>AN<span>U</span> Watch</h1>
+  <p class="lede">New Shorts and videos from channels ANU follows on defense tech and housing, collected every day from YouTube's public feeds. They play here; the channels are listed in config/videos.yaml.</p>
+  <nav class="desks" id="desks" aria-label="ANU desks"><a href="./">Defense</a><a href="housing.html">Housing</a><a href="videos.html" aria-current="page">Watch</a><a href="docs.html">Docs</a><a class="ask" href="app/">Ask ANU →</a></nav>
+</header>
+
+<main class="wrap">
+<div id="offline" class="notice" hidden></div>
+<section style="display:grid;gap:16px">
+  <div class="bar">
+    <div class="filters" id="topics" aria-label="Topic"></div>
+    <div class="filters" id="formats" aria-label="Format"></div>
+  </div>
+  <div class="bar">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex:1">
+      <input type="search" id="q" placeholder="Search titles and channels (e.g. drones, Florida, rates)" aria-label="Search videos" style="max-width:420px">
+      <select id="sort" aria-label="Sort" style="width:auto"><option value="new">Newest</option><option value="views">Most viewed</option></select>
+    </div>
+    <button class="btn" id="reel-btn">▶ Reel mode</button>
+  </div>
+  <div class="status" id="count"></div>
+  <div id="list"></div>
+</section>
+</main>
+
+<div class="reel" id="reel" hidden tabindex="-1" role="dialog" aria-label="Reel mode"></div>
+<button class="reel-close" id="reel-close" hidden>Close ✕</button>
+<span class="reel-hint" id="reel-hint" hidden>Swipe or ↑ ↓ · Esc to close</span>
+
+<footer class="wrap">Videos are played from YouTube and belong to their channels. ANU only links and embeds them.</footer>
+
+<script src="desk.js"></script>
+<script>
+const $=s=>document.querySelector(s), esc=ANU.esc;
+const ls={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
+let CFG={flags:{}}, V=[], topic=(location.hash.slice(1)||ls.get("anu-v-topic")||"all"), format=ls.get("anu-v-format")||"shorts";
+const views=n=>n==null?"":n>=1e6?(n/1e6).toFixed(1)+"M views":n>=1e3?Math.round(n/1e3)+"K views":n+" views";
+const ago=d=>{const days=Math.floor((Date.now()-Date.parse(d))/864e5);return days<1?"today":days===1?"yesterday":days<30?days+" days ago":Math.floor(days/30)+" mo ago";};
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+const thumb=id=>`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`;
+const embed=(id,auto,mute)=>`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?playsinline=1&rel=0${auto?"&autoplay=1":""}${mute?"&mute=1":""}&loop=1&playlist=${encodeURIComponent(id)}`;
+
+function list(){
+  const q=$("#q").value.trim().toLowerCase();
+  const out=V.filter(v=>(topic==="all"||v.topic===topic)&&(format==="all"||(format==="shorts")===v.short)&&(!q||`${v.title} ${v.channel} ${v.desc}`.toLowerCase().includes(q)));
+  return $("#sort").value==="views"?out.sort((a,b)=>(b.views??-1)-(a.views??-1)):out.sort((a,b)=>b.d.localeCompare(a.d));
+}
+function render(){
+  const topics=["all",...(CFG.videos?.topics||[...new Set(V.map(v=>v.topic))])];
+  if(!topics.includes(topic))topic="all";
+  $("#topics").innerHTML=topics.map(t=>`<button class="fbtn" aria-pressed="${t===topic}" data-topic="${esc(t)}">${t==="all"?"All topics":esc(cap(t))}</button>`).join("");
+  $("#formats").innerHTML=[["shorts","Shorts"],["videos","Full videos"],["all","Both"]].map(([k,l])=>`<button class="fbtn" aria-pressed="${k===format}" data-format="${k}">${l}</button>`).join("");
+  const items=list();
+  $("#count").textContent=`${items.length} ${format==="shorts"?"Shorts":format==="videos"?"videos":"videos and Shorts"}`;
+  $("#list").className=format==="shorts"?"grid-s":"grid-v";
+  $("#list").innerHTML=items.map(v=>`<button class="vcard${v.short?" short":""}" data-play="${esc(v.id)}" aria-label="Play ${esc(v.title)}"><div class="vthumb"><img loading="lazy" alt="" src="${thumb(v.id)}"><span class="play">▶ ${v.short?"Short":"Video"}</span></div><span class="vt">${esc(v.title)}</span><span class="vm">${esc(v.channel)} · ${esc(ago(v.d))}${v.views!=null?" · "+views(v.views):""}</span></button>`).join("")||`<p class="status">Nothing matches. Try another topic or search.</p>`;
+  $("#reel-btn").hidden=!ANU.flag(CFG,"videos.reels")||!items.length;
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-topic]");if(t){topic=t.dataset.topic;ls.set("anu-v-topic",topic);history.replaceState(null,"",topic==="all"?location.pathname:"#"+topic);render();return;}
+  const f=e.target.closest("[data-format]");if(f){format=f.dataset.format;ls.set("anu-v-format",format);render();return;}
+  const p=e.target.closest("[data-play]");if(!p)return;const box=p.querySelector(".vthumb");if(box.querySelector("iframe"))return;
+  document.querySelectorAll(".vthumb iframe").forEach(x=>x.remove());
+  const fr=document.createElement("iframe");fr.src=embed(p.dataset.play,true,false);fr.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";fr.allowFullscreen=true;fr.title=p.getAttribute("aria-label");box.appendChild(fr);
+});
+$("#q").addEventListener("input",render);$("#sort").addEventListener("change",render);
+
+/* ---------- reel mode: one video per screen, swipe to the next ---------- */
+let io=null;
+function openReel(){
+  const items=list();if(!items.length)return;
+  const reel=$("#reel"),auto=ANU.flag(CFG,"videos.autoplay");
+  reel.innerHTML=items.map((v,i)=>`<div class="slide${v.short?"":" wide"}" data-i="${i}" data-id="${esc(v.id)}"><div class="frame"><img alt="" loading="lazy" src="${thumb(v.id)}"></div>
+    <div class="cap"><b>${esc(v.title)}</b><span>${esc(v.channel)} · ${esc(ago(v.d))}${v.views!=null?" · "+views(v.views):""}</span> · <a href="https://www.youtube.com/${v.short?"shorts/":"watch?v="}${encodeURIComponent(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></div></div>`).join("");
+  reel.hidden=false;$("#reel-close").hidden=false;$("#reel-hint").hidden=false;document.body.style.overflow="hidden";reel.scrollTop=0;reel.focus();
+  // Only the slide on screen holds a player, so the page stays light and one video plays at a time.
+  io=new IntersectionObserver(entries=>{for(const en of entries){const fr=en.target.querySelector(".frame");const ifr=fr.querySelector("iframe");
+    if(en.isIntersecting&&en.intersectionRatio>.6){if(!ifr){const f=document.createElement("iframe");f.src=embed(en.target.dataset.id,auto,auto);f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.title="Video";fr.appendChild(f);}}
+    else if(ifr)ifr.remove();}},{root:reel,threshold:[0,.6,1]});
+  reel.querySelectorAll(".slide").forEach(s=>io.observe(s));
+}
+function closeReel(){io?.disconnect();const reel=$("#reel");reel.hidden=true;reel.innerHTML="";$("#reel-close").hidden=true;$("#reel-hint").hidden=true;document.body.style.overflow="";}
+$("#reel-btn").onclick=openReel;$("#reel-close").onclick=closeReel;
+document.addEventListener("keydown",e=>{const reel=$("#reel");if(reel.hidden)return;if(e.key==="Escape")closeReel();
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();reel.scrollBy({top:(e.key==="ArrowDown"?1:-1)*innerHeight,behavior:"smooth"});}});
+
+(async()=>{
+  const [cfg,vids]=await Promise.all([ANU.config(),fetch("api/v1/videos.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)]);
+  CFG=cfg;ANU.renderDesks($("#desks"),cfg,"videos");
+  if(!vids){const o=$("#offline");o.hidden=false;o.textContent="Videos couldn't load. Refresh the page to try again.";$("#asof").textContent="Offline";return;}
+  V=vids;$("#asof").textContent=`${V.length} videos · newest ${V[0]?ago(V[0].d):"—"}`;
+  render();
+})();
+</script>
+</body>
+</html>

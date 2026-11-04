@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-19",
+  "title": "Today's top defense-tech headlines",
+  "big": "23 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "US Army showing interest in G/ATOR missile-killing radar, Northrop says",
+      "what": "Northrop Grumman’s new multi-mission radar system has earned high marks from Marine Corps leadership. The U.S. Army has taken notice.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261019-us-army-showing-interest-in-g-ator-missile-killing"
+    },
+    {
+      "tag": "Space",
+      "h": "Mystery European buyer signs $235M Israeli rocket deal",
+      "what": "Israel’s Elbit Systems has won a contract worth about $235 million to supply PULS rocket artillery launchers and EXTRA-MR precision-guided rockets to an unnamed European country, along with additional rocket artillery platforms and integrated logistics…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261019-mystery-european-buyer-signs-235m-israeli-rocket-d"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Shield AI software cuts autonomous flight development to six weeks",
+      "what": "Shield AI said this week that its Hivemind software helped Honeywell Aerospace achieve autonomous flight after six weeks, down from 54 weeks.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261019-shield-ai-software-cuts-autonomous-flight-developm"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Second Chinese Submarine Drone Mothership Emerges",
+      "what": "It is a scaled-down version of the first and was built by Guangzhou Shipyard International, which is well-known for pumping out special use vessels. The post Second Chinese Submarine Drone Mothership Emerges appeared first on TWZ .",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261018-second-chinese-submarine-drone-mothership-emerges"
+    },
+    {
+      "tag": "Capital: VC, M&A & IPOs",
+      "h": "NATO plans to buy jammers that black out GPS for 11 km",
+      "what": "NATO plans to buy six portable kits that can jam satellite navigation signals and the radio links drones use for control and video, so its trainers can expose ships, aircrews and drone operators to realistic interference during exercises.",
+      "you": "Where investors put money shows which parts of the industry they expect to win next.",
+      "ref": "u-20261019-nato-plans-to-buy-jammers-that-black-out-gps-for-1"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Resilient mesh datalinks for swarms",
+    "why": "Low-probability-of-intercept mesh radios that keep swarms coordinated under jamming. Autonomy at scale needs links that survive. Fiber works for one drone, not a swarm."
+  },
+  "auto": true
+}

@@ -1,0 +1,114 @@
+/* Shared look for ANU's desk pages (housing.html, videos.html). Same tokens as index.html. */
+:root{
+  --ground:#E9EDEA; --surface:#F6F8F6; --surface-2:#DFE5E0; --line:#C3CCC5; --line-soft:#D5DCD6;
+  --ink:#16201B; --ink-2:#3E4C44; --muted:#66756C;
+  --accent:#C2410C; --accent-ink:#FFFFFF; --accent-soft:#F6DCCD;
+  --topo:#4E6B57; --topo-soft:#D3DFD5;
+  --t-primary:#1D6B43; --t-news:#2B5C8A; --t-research:#7A4E9A; --t-agg:#9A6A10;
+  --banner:#1D6B43; --banner-ink:#F3FFF7;
+  /* chart colors: sequential blue (magnitude), diverging blue ↔ gray ↔ red (change) */
+  --seq-lo:#cde2fb; --seq-hi:#0d366b; --div-neg:#256abf; --div-mid:#f0efec; --div-pos:#e34948;
+  --land:#D9E0DA; --land-line:#F6F8F6; --series-1:#256abf; --series-2:#C2410C;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:6px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#101512; --surface:#171E1A; --surface-2:#1F2822; --line:#33403A; --line-soft:#26302A;
+    --ink:#E3EAE5; --ink-2:#B6C3BB; --muted:#86958C;
+    --accent:#F0793A; --accent-ink:#1A0D05; --accent-soft:#3A2116;
+    --topo:#8FB39A; --topo-soft:#22322A;
+    --t-primary:#5CC28C; --t-news:#79AEE0; --t-research:#C39BE3; --t-agg:#E0B35A;
+    --banner:#1F4A33; --banner-ink:#D6F5E2;
+    --seq-lo:#184f95; --seq-hi:#cde2fb; --div-neg:#3987e5; --div-mid:#383835; --div-pos:#e66767;
+    --land:#26302A; --land-line:#101512; --series-1:#6da7ec; --series-2:#F0793A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#101512; --surface:#171E1A; --surface-2:#1F2822; --line:#33403A; --line-soft:#26302A;
+  --ink:#E3EAE5; --ink-2:#B6C3BB; --muted:#86958C;
+  --accent:#F0793A; --accent-ink:#1A0D05; --accent-soft:#3A2116;
+  --topo:#8FB39A; --topo-soft:#22322A;
+  --t-primary:#5CC28C; --t-news:#79AEE0; --t-research:#C39BE3; --t-agg:#E0B35A;
+  --banner:#1F4A33; --banner-ink:#D6F5E2;
+  --seq-lo:#184f95; --seq-hi:#cde2fb; --div-neg:#3987e5; --div-mid:#383835; --div-pos:#e66767;
+  --land:#26302A; --land-line:#101512; --series-1:#6da7ec; --series-2:#F0793A;
+}
+*{box-sizing:border-box}
+/* The hidden attribute must win over display rules, or hidden sections still show. */
+[hidden]{display:none!important}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit}
+p{margin:0}
+.banner{background:var(--banner);color:var(--banner-ink);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-align:center;padding:5px 16px;text-transform:uppercase}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:20px}
+@media (max-width:560px){.wrap{padding-inline:16px}}
+header.top{padding-block:26px 0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,68px);line-height:.92;margin:.18em 0 .2em;text-transform:uppercase;text-wrap:balance}
+h1 span{color:var(--accent)}
+h2{font-family:var(--display);font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em;margin:0;text-wrap:balance}
+.sub{color:var(--ink-2);max-width:76ch}
+.lede{max-width:72ch;color:var(--ink-2);font-size:16.5px;margin:0}
+/* desk switcher, shared by every ANU page */
+nav.desks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+nav.desks a{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:6px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface)}
+nav.desks a:hover{border-color:var(--ink-2);color:var(--ink)}
+nav.desks a[aria-current="page"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+nav.desks a.ask{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+main{padding-block:26px 64px;display:grid;gap:34px}
+.box{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:18px}
+.lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.status{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.head-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:2px 7px;border-radius:3px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface);white-space:nowrap;text-decoration:none}
+a.chip:hover{border-color:var(--ink-2);color:var(--ink)}
+.tier::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.tier.primary{color:var(--t-primary)} .tier.news{color:var(--t-news)} .tier.research{color:var(--t-research)} .tier.aggregator{color:var(--t-agg)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fbtn{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+input[type="search"],input[type="text"],input[type="number"],select{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;width:100%}
+label.f{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.btn{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);border:0;border-radius:var(--r);padding:9px 16px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.linkish{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;font-family:var(--mono);font-size:12px;text-decoration:none}
+.notice{padding:18px;border:1px dashed var(--line);border-radius:var(--r);color:var(--ink-2)}
+footer{border-top:1px solid var(--line);padding-block:20px 40px;font-size:12.5px;color:var(--muted)}
+/* stat tiles */
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.tile{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:14px 16px;display:grid;gap:2px;align-content:start}
+.tile .v{font-family:var(--display);font-weight:700;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.tile .d{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+/* news feed */
+.feed{display:grid;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line-soft)}
+.item h4{font-size:15.5px;font-weight:600;margin:0 0 4px;line-height:1.35}
+.item h4 a{text-decoration:none}.item h4 a:hover{text-decoration:underline}
+.item p{font-size:14px;color:var(--ink-2)}
+.item .chips{margin-top:8px}
+.dtg{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.4;font-variant-numeric:tabular-nums}
+.dtg b{display:block;color:var(--ink);font-size:14px;font-weight:500}
+@media (max-width:560px){.item{grid-template-columns:1fr;gap:4px}.dtg b{display:inline;margin-right:8px}}
+/* video cards (shared by the housing strip and the videos page) */
+.vcard{all:unset;box-sizing:border-box;display:grid;gap:6px;align-content:start;cursor:pointer}
+.vthumb{position:relative;border-radius:10px;overflow:hidden;background:#000;aspect-ratio:16/9}
+.vcard.short .vthumb{aspect-ratio:9/16}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vthumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vthumb .play{position:absolute;inset:auto auto 8px 8px;font-family:var(--mono);font-size:11px;background:rgba(0,0,0,.72);color:#fff;padding:2px 7px;border-radius:3px}
+.vcard .vt{font-size:13.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vcard .vm{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.vcard:focus-visible .vthumb{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){main>section{animation:rise .22s ease-out}}
+@keyframes rise{from{transform:translateY(4px)}to{transform:none}}
+/* grid children may shrink, so wide tables and strips scroll inside their box instead of widening the page */
+main>*,section>*,.map-layout>*,.two>*,.doc>*,.body>*{min-width:0}

@@ -1,0 +1,157 @@
+# What this desk follows: its sectors, how stories are sorted and scored, the morning brief
+# and how Ask talks. Sources are in sources.yaml; tabs and looks in site.yaml.
+#
+# A sector or story type matches by `keywords` (whole words, any case) and/or a `pattern`
+# (a regular expression, case-insensitive). The first story type that matches wins;
+# stories matching no sector are skipped. Check your changes with `npm run build:api`.
+
+domain: defense tech and US housing
+audience: a founder who is learning the defense-tech industry, wants to stay ahead of it and find something worth building
+sectors:
+  - id: ai
+    name: AI, software & command and control
+    pattern: \b(AI|artificial intelligence|machine learning|LLM|Palantir|Maven|software|algorithm|CDAO|Scale AI|data platform|command and control|C2|JADC2|CJADC2)\b
+    soWhat: Software that decides what to look at and what to hit is where the most value is moving.
+  - id: air
+    name: Drones & air autonomy
+    pattern: \b(drones?|UAS|UAV|unmanned aircraft|loitering munition|CCA|collaborative combat aircraft|Fury|Shield AI|FPV|Drone Dominance|Replicator|fighter|aircraft|F-35|F-47|B-21)\b
+    soWhat: Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.
+  - id: sea
+    name: Maritime & undersea autonomy
+    pattern: \b(Navy|ship(s|building|yard)?|submarine|USV|UUV|unmanned surface|undersea|maritime|Saronic|frigate|destroyer|carrier)\b
+    soWhat: The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.
+  - id: ground
+    name: Ground robotics
+    pattern: \b(ground robot|UGV|unmanned ground|robotic combat vehicle|tank|Abrams|armored|infantry|Army Transformation)\b
+    soWhat: Ground robots are moving from demos to real orders, starting with logistics and dangerous jobs.
+  - id: space
+    name: Space
+    pattern: \b(space|satellite|orbit|launch|Space Force|SDA|Starshield|SpaceX|constellation|rocket)\b
+    soWhat: More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.
+  - id: missiledef
+    name: Missile defense & Golden Dome
+    pattern: \b(missile defen[cs]e|Golden Dome|interceptor|THAAD|Patriot|SM-3|SM-6|air defen[cs]e|Iron Dome)\b
+    soWhat: Missile defense is one of the biggest budget lines this decade, and its software and sensors are open to newcomers.
+  - id: strike
+    name: Missiles, hypersonics & munitions
+    pattern: \b(hypersonic|munitions?|missile|rocket motor|artillery|shell production|PrSM|JASSM|LRASM|Tomahawk|strike weapon)\b
+    soWhat: Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.
+  - id: cuas
+    name: Counter-drone & directed energy
+    pattern: \b(counter-?drone|counter-?UAS|C-UAS|directed energy|laser weapon|high-power microwave|HPM|Epirus|interceptor drone)\b
+    soWhat: Stopping cheap drones cheaply is the industry's most urgent problem and one of its fastest-growing markets.
+  - id: ew
+    name: Electronic warfare & spectrum
+    pattern: \b(electronic warfare|EW|jamm(ing|er)|spectrum|signals intelligence|SIGINT|GPS-denied)\b
+    soWhat: Jamming and spectrum fights decide whether drones and radios work at all, so this quiet area keeps getting funded.
+  - id: cyber
+    name: Cyber & information
+    pattern: \b(cyber|hack(ers|ed|ing)?|ransomware|Salt Typhoon|Volt Typhoon|zero trust|CYBERCOM|malware)\b
+    soWhat: State hackers are still inside critical networks, which keeps defensive and offensive cyber in demand.
+  - id: sensing
+    name: Sensing, ISR & quantum
+    pattern: \b(sensor|radar|ISR|surveillance|reconnaissance|quantum|intelligence collection)\b
+    soWhat: Better sensors and navigation that works without GPS are prerequisites for everything autonomous.
+  - id: mfg
+    name: Manufacturing & industrial base
+    pattern: \b(factory|manufactur(ing|er)|production line|industrial base|supply chain|Arsenal-\d|Hadrian|shipyard capacity|DPA Title III)\b
+    soWhat: Being able to produce at scale has become a competitive edge in its own right; factories are now a venture category.
+  - id: minerals
+    name: Critical minerals & supply chain
+    pattern: \b(rare earth|critical minerals?|magnets?|lithium|gallium|germanium|antimony|MP Materials|export control)\b
+    soWhat: Whoever controls materials such as rare-earth magnets controls what can be built; supply-chain tools and substitutes are in demand.
+  - id: energy
+    name: Energy & nuclear power
+    pattern: \b(microreactor|nuclear power|reactor|energy|battery|batteries|power grid|Janus|Project Pele)\b
+    soWhat: Bases need their own power for AI, sensors and lasers, which creates a defense market for new energy tech.
+  - id: bio
+    name: Biotech & biomanufacturing
+    pattern: \b(biotech|bioindustrial|biomanufacturing|biodefen[cs]e|pathogen|biological)\b
+    soWhat: Biomanufacturing could replace parts of supply chains that depend on adversaries.
+  - id: policy
+    name: Budget, policy & acquisition reform
+    pattern: \b(budget|NDAA|Congress|appropriations|continuing resolution|Pentagon policy|Hegseth|acquisition reform|executive order|Senate|House Armed Services|lawmakers)\b
+    soWhat: Budget and policy moves decide which programs get real money and when; they're the earliest signal of demand.
+  - id: capital
+    name: "Capital: VC, M&A & IPOs"
+    pattern: \b(funding round|raises? \$|raised \$|Series [A-H]\b|valuation|venture capital|IPO|SPAC|acquires|to (buy|acquire)|acquisition of|merger)
+    soWhat: Where investors put money shows which parts of the industry they expect to win next.
+  - id: primes
+    name: Incumbent primes
+    pattern: \b(Lockheed|Raytheon|RTX|Northrop|General Dynamics|L3Harris|Boeing Defense|BAE Systems|Huntington Ingalls|Leidos|SAIC)\b
+    soWhat: The big incumbents are growing too. Watch where they partner with or buy startups rather than compete.
+  - id: global
+    name: Allies & theaters
+    pattern: \b(Ukraine|NATO|Israel|Taiwan|Japan|Australia|AUKUS|Europe(an)?|Germany|Poland|UK|Britain|South Korea|India|Philippines)\b
+    soWhat: Allies' wars and budgets are the testing ground and a big second market for new defense tech.
+  - id: adversary
+    name: "Adversaries: China, Russia, Iran"
+    pattern: \b(China|Chinese|PLA|Russia(n)?|Iran(ian)?|North Korea|Beijing|Moscow|Kremlin|Houthi)\b
+    soWhat: What China, Russia and Iran field sets the requirements the Pentagon buys against.
+storyTypes:
+  - name: Funding
+    weight: 3
+    pattern: \b(raises? \$|raised \$|Series [A-H]\b|funding round|valuation)
+  - name: M&A & IPO
+    weight: 3
+    pattern: \b(acquires?|acquisition of|merger|IPO|SPAC|to buy|goes public)\b
+  - name: Earnings
+    weight: 2
+    pattern: \b(earnings|quarterly results|Q[1-4] (results|revenue)|backlog|guidance)\b
+  - name: Contract
+    weight: 3
+    pattern: \b(awards?|awarded|contracts?|IDIQ|OTA|task order|orders?|selects?|selected|wins|won|taps)\b
+  - name: Policy & budget
+    weight: 3
+    pattern: \b(budget|NDAA|Congress|appropriations|policy|executive order|Hegseth|lawmakers|bill)\b
+  - name: Research
+    weight: 1
+    pattern: \b(report|study|analysis|CSIS|RAND|CNAS|think tank)\b
+  - name: Conflict & allies
+    weight: 2
+    pattern: \b(Ukraine|Israel|Taiwan|NATO|Russia|China|Iran|strike on|attack)\b
+defaultType:
+  name: Tech milestone
+  weight: 2
+noise:
+  pattern: \b(names?|appoints?|appointed|hires|joins as|promoted|to lead|steps down|retires|VP|vice president|chief (executive|operating|financial|technology) officer|webinar|podcast|week in review|newsletter|photos?:)\b
+collect:
+  lookbackDays: 3
+brief:
+  title: Today's top defense-tech headlines
+  stories: 5
+ask:
+  intro: "You are ANU, Johnny's personal helper for learning and keeping up with several areas: the defense-technology industry and the US housing market. On defense, Johnny is a founder who is learning the industry, wants to understand where it is going, and wants to find something worth building."
+  rules:
+    - "Teach as you go: explain acronyms, programs, budget terms and how buying works in plain words the first time they come up. Connect developments across sectors when it helps."
+    - "When Johnny asks for advice (what to build, where to focus, who the buyer is), be direct: give a recommendation, the buyer and budget line, the incumbents, why now, the risks and a first step. Say plainly when the evidence is thin."
+  examples:
+    cite: "[Breaking Defense] or [SEC 8-K]"
+    query: "'hypersonic test' or 'Golden Dome'"
+    company: "'Anduril'"
+    paper: "'drone swarm coordination' or 'synthetic aperture radar target detection'"
+  modes:
+    - id: learn
+      label: Teach me
+      instruction: "Teach me this from the ground up: the basics, key terms and acronyms, the main players, how the money flows, and what to read next."
+    - id: news
+      label: What's new
+      instruction: Summarize the most important recent developments and explain why each one matters.
+    - id: advise
+      label: Advise me
+      instruction: "Advise me as a founder: what is worth building or focusing on here? Give a direct recommendation with buyer, budget line, incumbents, why now, risks and a first step."
+    - id: company
+      label: Company deep dive
+      instruction: "Deep dive on the company: what they sell, who buys it, their edge, recent news, competitors and where they are vulnerable."
+    - id: compare
+      label: Compare
+      instruction: Compare the options side by side in bullets and say which is stronger and why.
+    - id: invest
+      label: "Housing: where to buy"
+      instruction: "Advise me as someone buying a US home to rent out: which metros fit, with price, rent, gross yield, cash flow at today's mortgage rate, rent and price trends, and the forecast; then the risks (taxes, insurance, oversupply, falling prices) and what to check locally before buying."
+    - id: watch
+      label: Something to watch
+      instruction: Recommend a few recent videos or Shorts to watch on this, with one line each on what I'll learn, and link them.
+research:
+  scope: "Find the significant developments across the whole defense-tech industry published since {{since}}. Cover every sector below, not only the famous companies: contracts and awards, funding rounds, policy and budget moves, technology milestones, deals and IPOs, earnings, lessons from conflicts, allies' and adversaries' moves, and notable research reports."
+  preferredSources: Prefer primary sources (company, government and filing releases) and established outlets (Breaking Defense, DefenseScoop, Defense News, Reuters, Bloomberg, Air & Space Forces, USNI News, SpaceNews, think tanks). Use aggregator sites only when nothing better exists, and say so.

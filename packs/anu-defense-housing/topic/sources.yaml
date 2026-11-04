@@ -1,0 +1,45 @@
+# News feeds (RSS or Atom) the daily collector reads. tier: primary | news | research | aggregator
+
+feeds:
+  - name: Breaking Defense
+    url: https://breakingdefense.com/feed/
+    tier: news
+  - name: DefenseScoop
+    url: https://defensescoop.com/feed/
+    tier: news
+  - name: Defense News
+    url: https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml
+    tier: news
+  - name: The War Zone
+    url: https://www.twz.com/feed
+    tier: news
+  - name: Air & Space Forces
+    url: https://www.airandspaceforces.com/feed/
+    tier: news
+  - name: USNI News
+    url: https://news.usni.org/feed
+    tier: news
+  - name: SpaceNews
+    url: https://spacenews.com/feed/
+    tier: news
+  - name: C4ISRNET
+    url: https://www.c4isrnet.com/arc/outboundfeeds/rss/?outputType=xml
+    tier: news
+  - name: GovConWire
+    url: https://www.govconwire.com/feed/
+    tier: news
+  - name: Defense One
+    url: https://www.defenseone.com/rss/all/
+    tier: news
+  - name: U.S. Department of War
+    url: https://www.defense.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=945&max=10
+    tier: primary
+  - name: CSIS
+    url: https://www.csis.org/rss.xml
+    tier: research
+  - name: Defence Blog
+    url: https://defence-blog.com/feed/
+    tier: news
+  - name: ExecutiveGov
+    url: https://www.executivegov.com/feed/
+    tier: news

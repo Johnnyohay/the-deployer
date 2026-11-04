@@ -1,0 +1,27 @@
+# Feature requests: your wishlist for ANU, shown on the Docs tab.
+#
+# Add an item, then ask Claude Code in this repo, for example:
+#   "Build the planned requests in config/requests.yaml"
+# and set status to done when it ships.
+#
+#   status   idea | planned | building | done
+#   area     defense | housing | videos | docs | ask | data | other
+#   flag     optional: the flag in config/anu.yaml that will switch it on or off
+
+requests:
+  - title: Neighborhood (ZIP code) level prices and rents
+    area: housing
+    status: idea
+    notes: Zillow publishes ZIP-level ZHVI and ZORI. Would let the map zoom from metro into neighborhoods.
+  - title: Property tax and insurance by state in the cash-flow math
+    area: housing
+    status: idea
+    notes: Replace the flat 45% cost share with state averages so cash flow is closer to reality.
+  - title: Watch list of metros with alerts when yield or price crosses a threshold
+    area: housing
+    status: idea
+    flag: housing.watchlist
+  - title: Defense Shorts in the morning brief
+    area: videos
+    status: idea
+    notes: Attach one or two videos to each brief story.

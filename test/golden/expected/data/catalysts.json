@@ -1,0 +1,153 @@
+[
+  {
+    "id": "c-pltr-q3",
+    "d": "2026-11-03",
+    "approx": true,
+    "title": "Palantir Q3 2026 earnings",
+    "sectors": [
+      "ai",
+      "capital"
+    ],
+    "why": "Whether US commercial growth keeps outpacing government revenue."
+  },
+  {
+    "id": "c-china-magnets",
+    "d": "2026-11-10",
+    "title": "China's rare-earth magnet export deadline",
+    "sectors": [
+      "minerals",
+      "adversary"
+    ],
+    "why": "Could squeeze drone, motor and munitions supply weeks before the DoD ban."
+  },
+  {
+    "id": "c-cr",
+    "d": "2026-12-11",
+    "title": "Stopgap funding expires: FY27 appropriations or another CR",
+    "sectors": [
+      "policy",
+      "missiledef",
+      "air"
+    ],
+    "why": "Decides whether DAWG's $54.6B and Golden Dome's growth become real money."
+  },
+  {
+    "id": "c-ndaa",
+    "d": "2026-12-15",
+    "approx": true,
+    "title": "FY27 NDAA conference: robotics and autonomous systems combatant command",
+    "sectors": [
+      "policy"
+    ],
+    "why": "Gives the Autonomous Warfare Command legal footing."
+  },
+  {
+    "id": "c-magnet-ban",
+    "d": "2027-01-01",
+    "title": "DoD ban on Chinese, Russian, Iranian and North Korean rare-earth magnets takes effect",
+    "sectors": [
+      "minerals",
+      "mfg"
+    ],
+    "why": "Suppliers without compliant magnets fall out of programs."
+  },
+  {
+    "id": "c-meridian",
+    "d": "2027-01-31",
+    "approx": true,
+    "title": "Project Meridian report due",
+    "sectors": [
+      "policy",
+      "space",
+      "air"
+    ],
+    "why": "A preview of the Pentagon's next technology bets, written by Musk, Luckey and Gingrich."
+  },
+  {
+    "id": "c-cca2",
+    "d": "2027-04-30",
+    "approx": true,
+    "title": "CCA Increment 2 downselect (about six vendors)",
+    "sectors": [
+      "air"
+    ],
+    "why": "The next round of the largest autonomous aircraft program."
+  },
+  {
+    "id": "c-awc",
+    "d": "2027-10-01",
+    "approx": true,
+    "title": "Autonomous Warfare Command target stand-up",
+    "sectors": [
+      "policy",
+      "air",
+      "ground",
+      "sea"
+    ],
+    "why": "A single buyer for drones and robots."
+  },
+  {
+    "id": "c-dd-2027",
+    "d": "2027-12-31",
+    "approx": true,
+    "title": "Drone Dominance target: 200,000+ small attack drones fielded",
+    "sectors": [
+      "air",
+      "mfg"
+    ],
+    "why": "Proves whether US industry can produce at wartime scale."
+  },
+  {
+    "id": "c-sdn",
+    "d": "2027-12-31",
+    "approx": true,
+    "title": "SpaceX Space Data Network backbone prototype due",
+    "sectors": [
+      "space"
+    ],
+    "why": "The military's LEO communications backbone goes live."
+  },
+  {
+    "id": "c-sbi",
+    "d": "2028-06-30",
+    "approx": true,
+    "title": "Golden Dome space-based interceptor demonstration",
+    "sectors": [
+      "missiledef",
+      "space"
+    ],
+    "why": "A test of whether space interceptors are feasible, and of the program's political survival."
+  },
+  {
+    "id": "c-janus",
+    "d": "2028-06-30",
+    "approx": true,
+    "title": "First Janus microreactors operating on Army bases",
+    "sectors": [
+      "energy"
+    ],
+    "why": "Opens a defense market for small nuclear reactors."
+  },
+  {
+    "id": "c-neros",
+    "d": "2028-12-31",
+    "approx": true,
+    "title": "Neros targets 1M drones a year",
+    "sectors": [
+      "air",
+      "mfg"
+    ],
+    "why": "The benchmark for scale in drone manufacturing."
+  },
+  {
+    "id": "c-arsenal2",
+    "d": "2030-01-01",
+    "approx": true,
+    "title": "Arsenal-2 shipyard begins operations",
+    "sectors": [
+      "mfg",
+      "sea"
+    ],
+    "why": "A venture-backed company in submarine production."
+  }
+]

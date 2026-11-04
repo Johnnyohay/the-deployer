@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-27",
+  "title": "Today's top defense-tech headlines",
+  "big": "45 new stories since the last brief. The busiest areas: allies & theaters and drones & air autonomy.",
+  "stories": [
+    {
+      "tag": "Drones & air autonomy",
+      "h": "U.S., UK and Australia test Saronic drone boats together",
+      "what": "Saronic Technologies’ Corsair drone boats, the same type the U.S. military used to strike an Iranian naval base in July, have operated alongside forces from the United States, the United Kingdom and Australia at Maritime Big Play Pacific, the AUKUS partners’…",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261027-u-s-uk-and-australia-test-saronic-drone-boats-toge"
+    },
+    {
+      "tag": "Space",
+      "h": "Flexell Space Establishes French Subsidiary to Strengthen European Presence",
+      "what": "– Paris-based FLEXELL SPACE FRANCE SAS creates a local business hub in Europe– New entity to support ongoing contract and volume-production discussions with European customers, from technical reviews to supply [ ] The post Flexell Space Establishes French…",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261026-flexell-space-establishes-french-subsidiary-to-str"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Upgraded Russian cruise missile crashes in Ukraine",
+      "what": "Photos have emerged of Russia’s newest version of the Geran-5 light cruise missile, known as the Geran-5 K5-K and often described in the media as a jet-powered drone, lying in a field somewhere in Ukraine’s Odesa region after it came down during an attack,…",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261027-upgraded-russian-cruise-missile-crashes-in-ukraine"
+    },
+    {
+      "tag": "Cyber & information",
+      "h": "How the Pentagon wants to buy cyber outcomes, not equipment",
+      "what": "The Pentagon has been exploring a new paradigm dubbed Cyber Effects-as-a-Service, aiming to purchase specific outcomes as opposed to bespoke capabilities.",
+      "you": "State hackers are still inside critical networks, which keeps defensive and offensive cyber in demand.",
+      "ref": "u-20261027-how-the-pentagon-wants-to-buy-cyber-outcomes-not-e"
+    },
+    {
+      "tag": "Capital: VC, M&A & IPOs",
+      "h": "Cyprus to acquire new offshore patrol vessel with ‘advanced’ naval systems from Israel",
+      "what": "The new patrol vessel will be built by Israel Shipyards and “support expanded patrol, surveillance, and search-and-rescue missions,” according to Israel’s Ministry of Defense.",
+      "you": "Where investors put money shows which parts of the industry they expect to win next.",
+      "ref": "u-20261026-cyprus-to-acquire-new-offshore-patrol-vessel-with-"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Low-cost interceptor drone",
+    "why": "An autonomous interceptor under $5k for Shahed-class and FPV drones. Ukraine proved the concept, and Japan, the Gulf and US bases are buying. The cost-exchange crisis is acute."
+  },
+  "auto": true
+}

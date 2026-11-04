@@ -1,0 +1,8 @@
+node_modules/
+.env
+.DS_Store
+app-dist/
+.hf-cache/
+public/app/
+packs/*/public/
+packs/*/.hf-cache/

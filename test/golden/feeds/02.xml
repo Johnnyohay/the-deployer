@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet media="screen" type="text/xsl" href="/wp-content/themes/smg/assets/xslt/rss-xslt.xml"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	xmlns:media="http://search.yahoo.com/mrss/"
+xmlns:news="http://www.pugpig.com/news"
+>
+
+<channel>
+	<title>Defense News</title>
+	<atom:link href="https://www.defensenews.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.defensenews.com/</link>
+	<description>Covering the politics, business and technology of defense &#124; Defense News</description>
+	<lastBuildDate>Wed, 04 Nov 2026 10:26:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=7.1.4</generator>
+
+<image>
+	<url>https://one.sightlinemg.com/wp-content/uploads/2026/06/favicon-def.png?w=32</url>
+	<title>Defense News</title>
+	<link>https://www.defensenews.com/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">255331545</site><atom:link rel="next" type="application/rss+xml" href="https://www.defensenews.com/feed/?paged=2" />
+	<item>
+		<title>Babcock launches digital platform to link warship construction and fleet support</title>
+		<link>https://www.defensenews.com/global/europe/2026/11/04/babcock-launches-digital-platform-to-link-warship-construction-and-fleet-support/</link>
+		
+		<dc:creator><![CDATA[Linus Hoeller]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2026 10:26:16 +0000</pubDate>
+				<category><![CDATA[Euronaval Coverage]]></category>
+		<category><![CDATA[Europe]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Industry]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Special Multimedia Reports]]></category>
+		<category><![CDATA[Babcock]]></category>
+		<category><![CDATA[Britain]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[Euronaval]]></category>
+		<category><![CDATA[logistics]]></category>
+		<category><![CDATA[maintenance]]></category>
+		<category><![CDATA[Royal Navy]]></category>
+		<category><![CDATA[shipbuilding]]></category>
+		<category><![CDATA[UK]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87543</guid>
+
+					<description><![CDATA[U.K-based Babcock International has launched Pelorus, a digital platform intended to connect warship construction, operations and maintenance data.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87543</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/Pelorus-.jpg" width="5595" height="3730" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/Pelorus-.jpg" width="5595" height="3730" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">VIENNA — U.K-based Babcock International has launched Pelorus, a digital platform intended to connect warship construction, operations and maintenance data.</p>
+
+
+
+<p class="wp-block-paragraph">The British defense and engineering company announced the launch Nov. 3 at the Euronaval defense trade show in Paris, saying the platform already operates in selected Babcock-managed maritime construction and support environments. Babcock did not identify the deployments or customers involved, or provide figures showing how the platform has affected fleet availability or maintenance costs.</p>
+
+
+
+<p class="wp-block-paragraph">According to the company, Pelorus combines information from multiple systems to track shipbuilding progress, commissioning and trials, fleet availability, maintenance and logistics.</p>
+
+
+
+<p class="wp-block-paragraph">“The future of maritime capability depends on the ability to connect design, production, operational and support data into a single digital environment,” said Nick Hine, Babcock’s chief growth officer and marine chief executive, in the announcement.</p>
+
+
+
+<p class="wp-block-paragraph">The company positioned the platform as supporting both existing fleets and future combinations of crewed and autonomous vessels, linking it to its ARMOR Force concept − short for Autonomous and Remote, Maritime Operational Response Force. Babcock said Pelorus could also be adapted for other defense and critical infrastructure applications.</p>
+
+
+
+<p class="wp-block-paragraph">Babcock’s naval business spans shipbuilding and long-term fleet support. The company is building five Type 31 frigates for Britain’s Royal Navy at its Rosyth yard in Scotland. It also maintains and upgrades British nuclear-powered submarines at Devonport and Clyde, according to its <a href="https://www.babcockinternational.com/careers/engineering-careers/what-youll-be-working-on/">website</a>.</p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>France tasks Naval Group to develop large oceangoing underwater drone</title>
+		<link>https://www.defensenews.com/global/europe/2026/11/04/france-tasks-naval-group-to-develop-large-oceangoing-underwater-drone/</link>
+		
+		<dc:creator><![CDATA[Rudy Ruitenberg]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2026 09:51:15 +0000</pubDate>
+				<category><![CDATA[Euronaval Coverage]]></category>
+		<category><![CDATA[Europe]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Naval]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Special Multimedia Reports]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[drones]]></category>
+		<category><![CDATA[Euronaval]]></category>
+		<category><![CDATA[france]]></category>
+		<category><![CDATA[Naval Group]]></category>
+		<category><![CDATA[UCUV]]></category>
+		<category><![CDATA[underwater drones]]></category>
+		<category><![CDATA[unmanned]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87535</guid>
+
+					<description><![CDATA[France signed a contract with shipbuilder Naval Group to develop an operational demonstrator of a large-sized oceangoing underwater drone, with sea trials to start in 2028.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87535</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2208951806.jpg" width="8256" height="5504" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2208951806.jpg" width="8256" height="5504" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">PARIS — France signed a contract with shipbuilder Naval Group to develop an operational demonstrator of a large-sized oceangoing underwater drone, with sea trials to start in 2028.</p>
+
+
+
+<p class="wp-block-paragraph">The demonstrator of the uncrewed combat underwater vehicle, or UCUV, will have to show both endurance and autonomous decision-making capability, the French Armed Forces ministry said late Tuesday. The vehicle will be capable of carrying out missions ranging from intelligence gathering, surveillance and reconnaissance to “more offensive neutralization actions,” the ministry said.</p>
+
+
+
+<p class="wp-block-paragraph">For the French Navy, a plus-sized oceangoing autonomous underwater vehicle could offer a way to extend its presence across the country’s vast maritime space. France has the world’s second-largest exclusive economic zone behind the United States, with about 11 million square kilometers spread across the Atlantic, Pacific and Indian oceans.</p>
+
+
+
+<p class="wp-block-paragraph">“In the face of intensifying competition for underwater domains and threats weighing on critical infrastructure, the start of development of the UCUV demonstrator is a strong marker of the French Navy’s determination to establish its technological and tactical superiority,” the ministry said.</p>
+
+
+	<aside class="smg-interstitial-link wp-block-smg-interstitial-link">
+		<a href="https://www.defensenews.com/global/europe/2026/11/03/french-defense-minister-kicks-off-pact-with-industry-in-rush-to-field-naval-drones/" class="smg-interstitial-link__inner">
+							<div class="smg-interstitial-link__media">
+					<img decoding="async" width="300" height="200" src="https://one.sightlinemg.com/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-03-at-14.33.12.jpeg?w=300" class="smg-interstitial-link__image wp-post-image" alt="" />				</div>
+						<div class="smg-interstitial-link__content">
+				<span class="smg-interstitial-link__kicker">Related</span>
+				<h3 class="smg-interstitial-link__title">French defense minister kicks off ‘pact’ with industry in rush to field naval drones</h3>
+									<p class="smg-interstitial-link__excerpt">The French government is kicking off a new “pact” with the defense industry aimed at fostering a national ecosystem of drone makers that can quickly make new equipment tailored to its navy’s requirements.</p>
+							</div>
+		</a>
+	</aside>
+	
+
+
+<p class="wp-block-paragraph">“France thus joins the very select group of nations engaged in the definition and development of a large-sized unmanned underwater vehicle capability.”</p>
+
+
+
+<p class="wp-block-paragraph">The U.S. Navy has been working with Boeing to develop the Orca uncrewed underwater vehicle, while the United Kingdom last month said it <a href="https://www.royalnavy.mod.uk/news/2026/september/30/20260930-historic-first-as-royal-navy-launches-torpedo-from-uncrewed-submarine?utm_source=chatgpt.com">fired a heavy torpedo</a> from an extra-large uncrewed underwater vessel for the first time. Australia in September said it was buying a fleet of <a href="https://www.defensenews.com/global/asia-pacific/2025/09/10/australia-orders-fleet-of-large-unmanned-submarines-from-anduril/?query-11-page=2&amp;utm_source=chatgpt.com">Ghost Shark</a> extra-large uncrewed underwater vehicles from Anduril for A$1.7 billion (US$1.2 billion).</p>
+
+
+
+<p class="wp-block-paragraph">The agreement between France’s Defense Innovation Agency and Naval Group follows an initial market study started in 2023 with the Directorate General for Armament, the ministry said. The demonstrator must be air transportable, and able to be deployed from a pier or a surface vehicle, it said.</p>
+
+
+
+<p class="wp-block-paragraph">Naval Group has previously developed a 10-ton ocean-going drone demonstrator using its own money, and the yard’s self-funded work allowed for rapid evaluation of the technology required for the UCUV project, the ministry said. France in January 2024 said it <a href="https://www.defensenews.com/naval/2024/01/30/france-orders-unmanned-submarine-demonstrator-from-naval-group/?utm_source=chatgpt.com">ordered a technological demonstrator</a> based on the prototype to test energy autonomy, sensor integration and autonomous operation.</p>
+
+
+
+<p class="wp-block-paragraph">The future ocean-going demonstrator will be equipped with a “controlled autonomous decision-making system” that will allow the underwater drone to adapt to tactical situations, the environment and potential breakdowns, either by itself or in collaboration with other systems, the ministry said.</p>
+
+
+
+<p class="wp-block-paragraph">France’s 2026 <a href="https://www.assemblee-nationale.fr/dyn/17/rapports/cion_def/l17b2048-tii_rapport-avis.pdf">defense budget</a> allocated €30 million in commitment authorizations and €17 million in payment appropriations for an ocean-going underwater drone demonstrator. The country’s 2024-2030 defense programming law including €5 billion for drones and robots over the seven-year period, including underwater drones.</p>
+
+
+
+<p class="wp-block-paragraph">The sea trials will validate the technological choices for the demonstrator as well as provide a better understanding of the operational response to new forms of naval combat, the ministry said.</p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>MBDA’s high-speed strike missile to have range ‘far’ exceeding Exocet</title>
+		<link>https://www.defensenews.com/global/europe/2026/11/04/mbda-high-speed-strike-missile-to-have-range-far-exceeding-exocet/</link>
+		
+		<dc:creator><![CDATA[Rudy Ruitenberg]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2026 06:30:53 +0000</pubDate>
+				<category><![CDATA[Euronaval Coverage]]></category>
+		<category><![CDATA[Europe]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Industry]]></category>
+		<category><![CDATA[Naval]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Special Multimedia Reports]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[Euronaval]]></category>
+		<category><![CDATA[Exocet]]></category>
+		<category><![CDATA[france]]></category>
+		<category><![CDATA[MBDA]]></category>
+		<category><![CDATA[ramjet]]></category>
+		<category><![CDATA[strike missile]]></category>
+		<category><![CDATA[supersonic]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87518</guid>
+
+					<description><![CDATA[Stratus RS, for rapid strike, is being developed for France and the United Kingdom, and MBDA is awaiting a development contract from France’s Directorate General for Armament.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87518</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2302907437.jpg" width="8101" height="5401" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2302907437.jpg" width="8101" height="5401" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">PARIS — MBDA targets a range for its future high-speed strike missile Status RS that will be “far, far, far” more than of the Exocet anti-ship missile with its more than 200-kilometer range, said Olivier Gauffin, the company’s deputy director for sales and business development, at a briefing at the Euronaval maritime-defense exhibition on Tuesday.</p>
+
+
+
+<p class="wp-block-paragraph">The high supersonic missile will cover four missions, including deep strike and anti-ship strike, suppression and destruction of enemy air defenses, as well as strikes against large aircraft including airborne warning systems and tankers, Gauffin said.</p>
+
+
+
+<p class="wp-block-paragraph">Stratus RS, for rapid strike, is being developed for France and the United Kingdom, and MBDA is awaiting a development contract from France’s Directorate General for Armament on behalf of the two partners. The company is simultaneously working on a stealthy subsonic cruise missile with a larger warhead called Stratus LO, for low observable, on behalf of France, the U.K. and Italy.</p>
+
+
+
+<p class="wp-block-paragraph">“The goal is very clear, it’s to face the threat of the decades to come, and we have two options to do it, which are complementary,” Gauffin said. “One is more a Ferrari, and the other is more a truck, a stealth truck.”</p>
+
+
+	<aside class="smg-interstitial-link wp-block-smg-interstitial-link">
+		<a href="https://www.defensenews.com/global/europe/2026/11/03/french-defense-minister-kicks-off-pact-with-industry-in-rush-to-field-naval-drones/" class="smg-interstitial-link__inner">
+							<div class="smg-interstitial-link__media">
+					<img decoding="async" width="300" height="200" src="https://one.sightlinemg.com/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-03-at-14.33.12.jpeg?w=300" class="smg-interstitial-link__image wp-post-image" alt="" />				</div>
+						<div class="smg-interstitial-link__content">
+				<span class="smg-interstitial-link__kicker">Related</span>
+				<h3 class="smg-interstitial-link__title">French defense minister kicks off ‘pact’ with industry in rush to field naval drones</h3>
+									<p class="smg-interstitial-link__excerpt">The French government is kicking off a new “pact” with the defense industry aimed at fostering a national ecosystem of drone makers that can quickly make new equipment tailored to its navy’s requirements.</p>
+							</div>
+		</a>
+	</aside>
+	
+
+
+<p class="wp-block-paragraph">NATO has called on allies in Europe to rebuild offensive capabilities, as the alliance faces an aggressive Russia on its eastern flank. Stratus RS in particular would fill a gap in the inventory of European militaries, which mostly lack weapons able to&nbsp;<a href="https://www.defensenews.com/global/europe/2025/03/17/europes-very-own-missile-for-piercing-air-defenses-is-years-away/">destroy enemy air defenses</a>.</p>
+
+
+
+<p class="wp-block-paragraph">The high-speed missile will be able to combine very low or very high trajectories to defeat hard-to-destroy targets such as frigates and destroyers or ground-based air defense systems, according to Gauffin. The missile will have a liquid ramjet engine that can be throttled, and will be highly maneuverable, the MBDA executive said.</p>
+
+
+
+<p class="wp-block-paragraph">Stratus RS will have a radio-frequency seeker combined with synthetic aperture radar, which provides the missile with a land-attack and a top-attack capability, according to Gauffin, who said Thales is providing the seeker technology. The idea for the slower, stealthy missile is to have only passive radio-frequency and infrared sensors, and no radar.</p>
+
+
+
+<p class="wp-block-paragraph">While the equipment in the Stratus RS missile will be new, it will be based on technology MBDA uses in other missiles, the executive said. The company has already done “a lot of trials” around the critical components, including propulsion, seeker, warhead and data management, and full development of the missile is expected to start “very soon,” Gauffin said.</p>
+
+
+
+<p class="wp-block-paragraph">MBDA uses ramjet technology in its Meteor air-to-air missile.</p>
+
+
+
+<p class="wp-block-paragraph">Both Stratus missiles will be able to be air-launched from platforms including Dassault Aviation’s Rafale jet, the Eurofighter Typhoon as well as the future aircraft being developed as part of the British-Italian-Japanese Global Combat Air Programme, with a size and mass “very close” to the Storm Shadow cruise missile. The missiles will use a booster for launch from ships or land.</p>
+
+
+
+<p class="wp-block-paragraph">MBDA expects flight testing of both Stratus missiles to start before the end of the decade, with the missiles to enter in service at the beginning of the 2030s.</p>
+
+
+
+<p class="wp-block-paragraph">The size of the Stratus RS means it’s not compatible with NATO-standard size torpedo tubes, meaning the missile is not envisaged as being submarine launched, according to Gauffin. For vertical launch, the missile would require a new, wider version of Naval Group’s Sylver vertical launch system, though Gauffin said there would be no change to the shipborne space occupied by the VLS.</p>
+
+
+
+<p class="wp-block-paragraph">The company also presented details on a new version of its Naval Cruise Missile, with production to start in early 2030. The updated version will be more resistant to satellite-navigation jamming, with increased survivability and new sensors, and keep the same size but with increased range and lethality, said Sophie Bourdais, vice-president for strike at MBDA.</p>
+
+
+
+<p class="wp-block-paragraph">Bourdais declined to provide specifics on the range of the Naval Cruise Missile in either its current or future iteration, other than to say it is more than 1,000 km.</p>
+
+
+
+<p class="wp-block-paragraph">The updated missile will also benefit from new mission-preparation software called Fastrike that cuts target planning down to minutes from hours, according to Bourdais. MBDA plans to integrate the capability in the Storm Shadow/Scalp EG cruise missile and the current version of the Naval Cruise Missile before 2030, the executive said.</p>
+
+
+
+<p class="wp-block-paragraph">The Naval Cruise Missile was presented as part of the European Long-range Strike Approach, and there is interest from a number of countries in the land-based variant MBDA has developed.</p>
+
+
+
+<p class="wp-block-paragraph">MBDA is still waiting for a development contract from the DGA for the updated Naval Cruise Missile. The production line for the missile in France is inactive but remains in place, and can be restarted to produce the updated version, according to Bourdais.</p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>US Air Force asks industry for new cruise missile for Ukraine</title>
+		<link>https://www.defensenews.com/industry/2026/11/03/us-air-force-asks-industry-for-new-cruise-missile-for-ukraine/</link>
+		
+		<dc:creator><![CDATA[Michael Peck]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 20:14:25 +0000</pubDate>
+				<category><![CDATA[Daily News Roundup]]></category>
+		<category><![CDATA[Europe]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Industry]]></category>
+		<category><![CDATA[Newsletters]]></category>
+		<category><![CDATA[Pentagon]]></category>
+		<category><![CDATA[Air Force]]></category>
+		<category><![CDATA[defense contractors]]></category>
+		<category><![CDATA[defense industry]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[extended range attack munition]]></category>
+		<category><![CDATA[missile]]></category>
+		<category><![CDATA[request for information]]></category>
+		<category><![CDATA[ukraine]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/news/2026/11/03/us-air-force-asks-industry-for-new-cruise-missile-for-ukraine/</guid>
+
+					<description><![CDATA[The U.S. Air Force is looking for contractors to mass produce the Extended Range Attack Munition for Ukraine.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87515</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/08/ERAM-test.jpg.jpg" width="2100" height="1161" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/08/ERAM-test.jpg.jpg" width="2100" height="1161" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">The U.S. Air Force is asking the defense industry whether it can deliver a new cruise missile intended for Ukraine.</p>
+
+
+
+<p class="wp-block-paragraph">Potential contractors are asked to detail their capabilities to provide the <a href="https://www.defensenews.com/air/2026/02/04/us-air-force-tests-new-rapidly-developed-cruise-missile/">Extended Range Attack Munition</a>, a small, air-launched standoff missile intended for mass production.</p>
+
+
+
+<p class="wp-block-paragraph">The Air Force’s new <a href="https://sam.gov/workspace/contract/opp/89a44ad28b964193a3ab6f7c2bd84c7f/view">Request For Information</a>, which has a deadline of Nov. 19, offers some technical specifications for ERAM. It should be a 500-pound class weapon with a range of greater than 250 nautical miles and a speed of more than Mach 0.6. Terminal accuracy should be within 10 meters of the target even amid jamming, such as degraded GPS. In addition to blast and fragmentation effects, the weapon should also be capable of limited penetration on impact.</p>
+
+
+
+<p class="wp-block-paragraph">The Air Force describes ERAM as a next-generation cruise missile “designed to provide affordable mass to the fight,” and which “delivers a precision-guided, stand-off capability against high-value fixed targets.”</p>
+
+
+
+<p class="wp-block-paragraph">ERAM is part of the Pentagon’s push for cheaper weapons developed more quickly. In 2024, the Air Force awarded a contract to two small defense companies — Zone 5 Technologies and CoAspire — to develop ERAM prototypes. In January 2026 — less than a year and a half later, the Air Force conducted a <a href="https://www.eglin.af.mil/News/Article-Display/Article/4394143/air-force-advances-standoff-cruise-missile-program-with-live-fire-test/">live warhead test</a> at Eglin Air Force Base, Florida.</p>
+
+
+
+<p class="wp-block-paragraph">Similar haste can be seen in the RFI, which states that companies should begin delivering the first of more than 1,000 ERAMs no later than three months after the contract is awarded. Deliveries should be complete within 15 months.</p>
+
+
+
+<p class="wp-block-paragraph">One question is whether Ukraine is already using ERAM on its American-made F-16 fighters. In August 2025, the Trump administration announced an $825 million <a href="https://www.cnn.com/2025/08/28/politics/trump-missile-sale-ukraine">sale</a> of 3,350 ERAMs to Ukraine. In June 2026, Ukrainian media suggested that Ukraine has used the <a href="https://en.defence-ua.com/weapon_and_tech/ukraine_may_already_have_930_km_eram_cruise_missiles_in_service_what_is_known_so_far-18752.html">AGM-188A Rusty Dagger</a> — an ERAM version — against the <a href="https://www.facebook.com/kyivindependent/videos/a-large-electronics-factory-producing-parts-for-advanced-russian-missile-systems/2112911949256565/">Voronezh Semiconductor Plant</a>, which makes components for Russian missiles.</p>
+
+
+
+<p class="wp-block-paragraph">Another question is to what extent the U.S. military will make use of ERAM. The Air Force published the original RFI in January 2024, nearly two years into the Ukraine War — and nearly two years before the Iran war depleted U.S. inventories of expensive missiles.</p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>Rise of the defense industry innovators &#124; Defense News Weekly Full Episode 11.3.26</title>
+		<link>https://www.defensenews.com/video/2026/11/03/rise-of-the-defense-industry-innovators-defense-news-weekly-full-episode-11-3-26/</link>
+		
+		<dc:creator><![CDATA[Angela Caguimbal]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 20:00:49 +0000</pubDate>
+				<category><![CDATA[Defense News Weekly]]></category>
+		<category><![CDATA[Defense News Weekly Episodes]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Video]]></category>
+		<category><![CDATA[AUSA]]></category>
+		<category><![CDATA[defense dollars]]></category>
+		<category><![CDATA[defense news weekly]]></category>
+		<category><![CDATA[drones]]></category>
+		<category><![CDATA[kbr]]></category>
+		<category><![CDATA[lockcheed martin]]></category>
+		<category><![CDATA[long form]]></category>
+		<category><![CDATA[material]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<category><![CDATA[rev-en]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87337</guid>
+
+					<description><![CDATA[As the American military seeks new capabilities and advanced systems amid rapid change, defense companies of all sizes showcased their solutions at a major defense conference.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87337</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DNW-844-THUMB.png" width="1920" height="1080" type="image/png" />
+<enclosure url="https://cdn.jwplayer.com/videos/ZrPLhMuX-5ZsksG4j.mp4" length="0" type="video/mp4" />
+<media:content url="https://cdn.jwplayer.com/videos/ZrPLhMuX-5ZsksG4j.mp4" type="video/mp4" medium="video" width="1920" height="1080" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><video controls preload="none"><source src="https://cdn.jwplayer.com/manifests/ZrPLhMuX.m3u8" type="application/vnd.apple.mpegurl"/><source src="https://cdn.jwplayer.com/videos/ZrPLhMuX-5ZsksG4j.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/ZrPLhMuX-Y2ywrFC2.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/ZrPLhMuX-SsomXLLO.mp4" type="video/mp4"/></video><figcaption class="wp-element-caption">As the American military seeks new capabilities and advanced systems amid rapid change, defense companies of all sizes showcased their solutions at a major defense conference.</figcaption></figure>
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>Defense contractors to demo cargo drones for US Marine Corps</title>
+		<link>https://www.defensenews.com/industry/techwatch/2026/11/03/defense-contractors-to-demo-cargo-drones-for-us-marine-corps/</link>
+		
+		<dc:creator><![CDATA[Michael Peck]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 17:56:13 +0000</pubDate>
+				<category><![CDATA[Daily News Roundup]]></category>
+		<category><![CDATA[Industry]]></category>
+		<category><![CDATA[MilTech]]></category>
+		<category><![CDATA[Newsletters]]></category>
+		<category><![CDATA[Alabama]]></category>
+		<category><![CDATA[cargo drone]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[Marine Corps]]></category>
+		<category><![CDATA[Navy]]></category>
+		<category><![CDATA[Pentagon]]></category>
+		<category><![CDATA[Tactical Resupply Unmanned Aircraft System]]></category>
+		<category><![CDATA[TRUAS]]></category>
+		<category><![CDATA[ukraine]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/news/2026/11/03/defense-contractors-to-demo-cargo-drones-for-us-marine-corps/</guid>
+
+					<description><![CDATA[An event early next year in Huntsville, Alabama, will allow contractors to display their solutions for a Marine battlefield cargo drone.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87511</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/8296222.jpg" width="4960" height="3307" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/8296222.jpg" width="4960" height="3307" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">The U.S. Marine Corps and Navy will be conducting a technology demonstration for a Marine battlefield <a href="https://www.defensenews.com/video/2026/08/17/darpa-explores-novel-designs-for-high-payload-drones-defense-news-weekly-full-episode-81826/">cargo drone</a> early next year.</p>
+
+
+
+<p class="wp-block-paragraph">The event, from Jan. 25 to Feb. 5, 2027, in <a href="https://www.militarytimes.com/news/your-military/2026/02/19/us-army-lets-soldiers-flaunt-their-drone-skills-in-first-ever-competition/">Huntsville, Alabama</a>, will allow contractors to display their drones for the Increment II the Marine Corps’ Tactical Resupply Unmanned Aircraft System, or <a href="https://www.marines.mil/News/News-Display/Article/3358199/tactical-resupply-unmanned-aircraft-system-demonstration/">TRUAS</a>, program.</p>
+
+
+
+<p class="wp-block-paragraph">TRUAS Increment II aims to “provide an organic aerial distribution capability for small-unit logistics support across the last tactical mile in expeditionary advanced base operations and distributed operations,” according to the Monday <a href="https://sam.gov/workspace/contract/opp/b1098c5b170b46238b91606b50e3955f/view">announcement</a> by the Navy’s Air Warfare Program Management Office, which is sponsoring the demonstration.</p>
+
+
+
+<p class="wp-block-paragraph">Contractors will perform up to five flights, as well as demonstrate ground setup and flight preparation.</p>
+
+
+
+<p class="wp-block-paragraph">The first flight calls for a drone to transport a 100-pound payload up to 40 nautical miles under no-wind conditions, drop off the cargo either automatically or under manual control, and then return to the launch site without refueling. The second flight involves carrying and depositing a payload of 150 pounds or more out to 10 nautical miles.</p>
+
+
+
+<p class="wp-block-paragraph">The UAV must have a speed of at least 50 knots per hour and fly no higher than 1,000 feet during the flights. The UAS must be capable of launch and recovery without mechanical equipment such as a catapult, arresting net or cable.</p>
+
+
+
+<p class="wp-block-paragraph">“Following the two required flights, participants may be given the opportunity to perform up to three additional flights to demonstrate unique features and/or capabilities,” the Navy said.</p>
+
+
+
+<p class="wp-block-paragraph">The announcement lists a variety of technical specifications. They include flying at an altitude of up to 4,500 feet and, eventually, 8,000 feet. Speed should be a minimum of 50 knots per hour, with an eventual goal of 150 knots per hour, in crosswinds of 20 to 30 knots.</p>
+
+
+
+<p class="wp-block-paragraph">The Marine Corps is looking for an unmanned aircraft that can function autonomously, such as assessing the landing zone “before and during landing, day and night, and detect and avoid personnel, equipment, structures, excessive slope, and other terrain hazards.”</p>
+
+
+
+<p class="wp-block-paragraph">With skies becoming saturated by drones, TRUAS craft should have safeguards against collisions, including an “organic airborne sense-and-avoid capability for manned and unmanned aircraft at cruise speed, with performance comparable to a human pilot operating under Visual Flight Rules and sufficient reaction time for collision avoidance.”</p>
+
+
+
+<p class="wp-block-paragraph">The service also anticipates that its cargo drones will be forced to land under enemy fire. </p>
+
+
+
+<p class="wp-block-paragraph">“TRUAS shall minimize the time required to descend from cruise altitude to the LZ [landing zone] to enhance survivability by reducing the window for hostile detection,” the announcement noted.</p>
+
+
+
+<p class="wp-block-paragraph">The announcement did not specify what kind of cargo TRUAS will carry. </p>
+
+
+
+<p class="wp-block-paragraph">Last month, Ukraine claimed to have performed the world’s first drone <a href="https://armyinform.com.ua/en/2026/10/19/ukraine-carries-out-worlds-first-drone-evacuation-of-a-wounded-soldier-from-the-front-line/">medevac</a> of a casualty from a frontline position. Ukraine’s 92nd Separate Assault Brigade posted a dramatic <a href="https://www.youtube.com/watch?v=hEfcKl4TTmY">video</a> of a wounded soldier being hoisted on a sling attached to the underside of a large hexacopter.</p>
+
+
+
+<p class="wp-block-paragraph">“Heavy Russian drone activity and mined terrain made evacuation by an unmanned ground vehicle impossible,” said Ukrainian media. “Working with the manufacturer, the troops developed a technical solution that allowed the heavy drone to carry the wounded soldier while remaining stable in flight, preventing it from tipping over or swaying excessively.&#8221;</p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>On American destroyers, avoid a self-inflicted wound in Spain</title>
+		<link>https://www.defensenews.com/opinion/2026/11/03/on-american-destroyers-avoid-a-self-inflicted-wound-in-spain/</link>
+		
+		<dc:creator><![CDATA[Mark Montgomery and Bradley Bowman]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 16:24:08 +0000</pubDate>
+				<category><![CDATA[Daily News Roundup]]></category>
+		<category><![CDATA[Euronaval Coverage]]></category>
+		<category><![CDATA[Naval]]></category>
+		<category><![CDATA[Newsletters]]></category>
+		<category><![CDATA[Opinion]]></category>
+		<category><![CDATA[Special Multimedia Reports]]></category>
+		<category><![CDATA[commentary]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[European Command]]></category>
+		<category><![CDATA[Middle East]]></category>
+		<category><![CDATA[op-ed]]></category>
+		<category><![CDATA[opinion]]></category>
+		<category><![CDATA[Pentagon]]></category>
+		<category><![CDATA[Rota]]></category>
+		<category><![CDATA[spain]]></category>
+		<category><![CDATA[U.S. Navy]]></category>
+		<category><![CDATA[US posture review]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87502</guid>
+
+					<description><![CDATA["The Trump administration should keep six destroyers stationed at Rota. Any other action would be a gift to America’s adversaries."]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87502</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2300337615.jpg" width="2400" height="1600" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2300337615.jpg" width="2400" height="1600" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">Sometimes friends behave badly. When that happens, it is not smart to hurt yourself in retaliation for the friend’s bad behavior. That is true in one’s personal life — and also when it comes to defense strategy.</p>
+
+
+
+<p class="wp-block-paragraph">Consider the case of the Trump administration’s ongoing <a href="https://www.defensenews.com/global/europe/2026/07/29/pentagon-has-kicked-off-review-of-us-force-posture-in-europe/">review</a> of U.S. force posture in Europe and whether Washington will maintain a handful of American naval destroyers forward-stationed in Rota, Spain. Stationing destroyers at Rota helps secure vital American interests in Europe, North Africa, and the Middle East and allows the ships to spend more time conducting missions than traversing back and forth across the Atlantic.</p>
+
+
+
+<p class="wp-block-paragraph">To be clear, the government in Spain has certainly not been working overtime to win favor in Washington. Madrid has stubbornly refused to honor its NATO defense spending commitments, spending a paltry 2% of the country&#8217;s gross domestic product on defense. &#8220;2.1%, no more, no less,&#8221; President Pedro Sanchez <a href="https://www.reuters.com/world/europe/spain-agrees-with-nato-skip-5-defence-spending-target-2025-06-22/">said in June</a>. “We fully respect the legitimate desire of other countries to increase their defense investment, but we are not going to do it,&#8221; he said.</p>
+
+
+
+<p class="wp-block-paragraph">To make matters worse, earlier this year, Madrid also restricted the U.S. <a href="https://english.elpais.com/international/2026-03-30/spain-closes-airspace-to-aircraft-involved-in-iran-war-but-us-bases-are-being-used-in-other-ways.html">use of Spanish airspace</a> or military bases for operations against Iran.</p>
+
+
+
+<p class="wp-block-paragraph">With the administration openly weighing significant troop reductions across the continent, Spain’s actions may have put it near the top of the candidate list for cuts. But a careful examination makes clear that removing the destroyers based at Rota or closing the base there would be a big mistake.</p>
+
+
+
+<p class="wp-block-paragraph">The base hosts six Arleigh Burke-class guided-missile destroyers, up from four under a 2023 agreement. These vessels, which pack a powerful punch, can conduct anti-air, anti-submarine, and anti-surface warfare missions. The ships’ Aegis Ballistic Missile Defense upgrade enables them to defend against ballistic missiles, cruise missiles, and drones. There is no other platform that combines mobile, multi-mission air and missile defense with the endurance to stay on station for months at a time.</p>
+
+
+
+<p class="wp-block-paragraph">Those capabilities have proved pivotal in recent conflicts in the Middle East. Over the past two years, Rota-based destroyers have rotated continuously into the Eastern Mediterranean. As many as four have been on station in those waters, simultaneously defending American interests and supporting the defense of Israel against Iranian ballistic missile attacks. That has saved the lives of Americans and Israelis.</p>
+
+
+
+<p class="wp-block-paragraph">The same ships also provide NATO’s sea-based missile shield against threats from the Middle East. That shield is important to protecting American bases in Europe and their ability to project power into the Middle East and North Africa. The destroyers also serve as the Navy’s forward presence for countering Russian submarine and surface activity in the Mediterranean and increasingly assertive Chinese naval activity off the African coast.</p>
+
+
+
+<p class="wp-block-paragraph">Some might ask whether these vessels can be replaced with European vessels. The answer is no, at least in the short term.</p>
+
+
+
+<p class="wp-block-paragraph">Years of under-resourcing have left European navies a mess. Spain’s own Álvaro de Bazán-class frigates are the most capable European warships, but Europe’s collective sea-based ballistic missile defense capacity remains thin to non-existent, and no European navy can surge Aegis BMD-equivalent coverage into the Eastern Mediterranean the way U.S. destroyers from Rota can.</p>
+
+
+
+<p class="wp-block-paragraph">If Washington brings the American destroyers home to the continental United States, the gap in missile defense coverage for NATO’s southern flank, Israel, and shipping lanes vital to the American economy would not be filled by European navies anytime soon and could potentially create a dangerous security gap for years or even decades.</p>
+
+
+
+<p class="wp-block-paragraph">Plus, a destroyer homeported in Spain, as part of Forward Deployed Naval Force-Europe, spends dramatically more time on station and far less time in transit than a U.S.-based ship that must cross the Atlantic to reach the same waters. That multiplies the combat power each hull generates over its service life.</p>
+
+
+
+<p class="wp-block-paragraph">If anyone in Washington doubts these arguments, consider the current actions of the Pentagon. It has increased the number of destroyers at Rota from four to six, with the final ship arriving only this year. In a recent interview, U.S. 6th Fleet Commander Vice Adm. Jeffrey Anderson suggested the sixth destroyer could not arrive soon enough. Clearly, senior U.S. military leaders believe we need more naval capacity stationed at Rota — not less.</p>
+
+
+
+<p class="wp-block-paragraph">Rota’s submarine support infrastructure, logistics hub, naval special operations support, and air operations also make it one of the most versatile forward installations the U.S. maintains anywhere, facilitating operations across Europe, the High North, Africa, and the Middle East simultaneously from a single location.</p>
+
+
+
+<p class="wp-block-paragraph">None of this means the diplomatic friction with Madrid should be ignored. Washington has every right to press Spain on burden-sharing, defense spending, and foreign policy differences. Washington may need to impose some consequences for Madrid’s decisions, but those should not include self-inflicted wounds that hurt U.S. military readiness and power projection capabilities, making Americans less safe.</p>
+
+
+
+<p class="wp-block-paragraph">The Trump administration should keep six destroyers stationed at Rota. Any other action would be a gift to America’s adversaries.</p>
+
+
+
+<p class="wp-block-paragraph"><em>Rear Adm. (Ret.) Mark Montgomery and Bradley Bowman are senior directors at the Foundation for Defense of Democracies. Montgomery served 32 years in the U.S. Navy, including as deputy director for plans, policy, and strategy (J5) at U.S. European Command. Bowman served in the U.S. Army as a Black Hawk pilot, taught at West Point, and advised members of the Senate Armed Services and Foreign Relations committees.</em></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>French defense minister kicks off ‘pact’ with industry in rush to field naval drones</title>
+		<link>https://www.defensenews.com/global/europe/2026/11/03/french-defense-minister-kicks-off-pact-with-industry-in-rush-to-field-naval-drones/</link>
+		
+		<dc:creator><![CDATA[Sebastian Sprenger]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 15:14:13 +0000</pubDate>
+				<category><![CDATA[Daily News Roundup]]></category>
+		<category><![CDATA[Euronaval Coverage]]></category>
+		<category><![CDATA[Europe]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Naval]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Newsletters]]></category>
+		<category><![CDATA[Special Multimedia Reports]]></category>
+		<category><![CDATA[defense industry]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[Euronaval]]></category>
+		<category><![CDATA[Exail]]></category>
+		<category><![CDATA[france]]></category>
+		<category><![CDATA[MBDA]]></category>
+		<category><![CDATA[Naval Group]]></category>
+		<category><![CDATA[unmanned]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87485</guid>
+
+					<description><![CDATA[The French government is kicking off a new “pact” with the defense industry aimed at fostering a national ecosystem of drone makers that can quickly make new equipment tailored to its navy’s requirements.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87485</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-03-at-14.33.12.jpeg" width="1599" height="1066" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-03-at-14.33.12.jpeg" width="1599" height="1066" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">PARIS — The French government is kicking off a new “pact” with the defense industry aimed at fostering a national ecosystem of drone makers that can quickly make new equipment tailored to its navy’s requirements.</p>
+
+
+
+<p class="wp-block-paragraph">Minister of the Armed Forces Catherine Vautrin announced the initiative on Nov. 3, the first day of the Euronaval defense trade show, describing it as a novel mechanism for “converging” the needs of the armed forces.</p>
+
+
+
+<p class="wp-block-paragraph">The plan is akin to what French officials have been doing in the race to field new aerial drones, a technology that has become a fixture so central to modern combat that militaries worldwide are reorganizing to incorporate unmanned platforms.</p>
+
+
+
+<p class="wp-block-paragraph">In a statement, the French defense ministry highlighted some of the technology areas that could benefit from the new government-industry framework aimed at naval drones. For example, unmanned platforms will play a role in removing sea mines, collecting hydrographic and oceanographic data and exploring the ocean floor at great depths.</p>
+
+
+
+<p class="wp-block-paragraph">“Mastering” the seabed, as the original French wording goes, has been a fixture in the country’s naval-technology strategy for some years. The makeup of much of the seabed worldwide remains a blind spot for governments, just as critical infrastructure installed there — data cables and pipelines — has become a target for sabotage and outright warfare in the extreme underwater domain.</p>
+
+
+
+<p class="wp-block-paragraph">To that end, one agenda item announced at the trade show by French defense officials related to the naval drone framework is the purchase of a second ROV Deep Sea drone from LD Travocean, which, weighing 3,600 kilograms, can dive to 6,000 meters. The first ROV, ordered in 2024, completed qualification trials for its intended depth last week.</p>
+
+
+
+<p class="wp-block-paragraph">Related announcements include the planned acquisition of eight A18 countermine robots from Exail, a multi-sensor underwater drone for finding and characterizing sea mines before their eventual removal.</p>
+
+
+
+<p class="wp-block-paragraph">The French Navy will also buy a second unmanned combat underwater vehicle from Naval Group — this one a “bit longer” than the first test vehicle, coming in at over 10 meters in length and weighing in at more than 10,000 kilograms, a ministry spokesman told Defense News. The massive drone is meant to stay in the water for weeks at a time.</p>
+
+
+
+<p class="wp-block-paragraph">Defense officials also signed a deal with Naval Group and MBDA here to equip France’s FDI frigates with more Aster interceptor missiles. That entails retrofitting the onboard firing capability from 16 missiles to 32 on existing frigates, and ensuring new ones are built with the 32-launch-cell magazine baked in.</p>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>On ‘NATO’s lake,’ Nordic allies worry about escalation with Russia</title>
+		<link>https://www.defensenews.com/global/2026/11/03/on-natos-lake-nordic-allies-worry-about-escalation-with-russia/</link>
+		
+		<dc:creator><![CDATA[Christopher Woody]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 14:55:34 +0000</pubDate>
+				<category><![CDATA[AUSA]]></category>
+		<category><![CDATA[Daily News Roundup]]></category>
+		<category><![CDATA[Digital Show Dailies]]></category>
+		<category><![CDATA[Europe]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Naval]]></category>
+		<category><![CDATA[Newsletters]]></category>
+		<category><![CDATA[ausa-2026]]></category>
+		<category><![CDATA[Baltic Sea]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[drone incursions]]></category>
+		<category><![CDATA[finland]]></category>
+		<category><![CDATA[hybrid warfare]]></category>
+		<category><![CDATA[NATO's lake]]></category>
+		<category><![CDATA[Nord stream pipeline]]></category>
+		<category><![CDATA[russia]]></category>
+		<category><![CDATA[sweden]]></category>
+		<guid isPermaLink="false">https://www.defensenews.com/news/2026/11/03/on-natos-lake-nordic-allies-worry-about-escalation-with-russia/</guid>
+
+					<description><![CDATA[Sweden, Finland, and their allies now face a challenge in countering Russian behavior without stoking tensions further.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87494</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/09/GettyImages-2219704908.jpg.jpg" width="5616" height="3744" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/09/GettyImages-2219704908.jpg.jpg" width="5616" height="3744" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">When Sweden and Finland applied to join NATO in May 2022, it was hailed as the Baltic Sea’s transformation into “<a href="https://www.defensenews.com/special-reports/2024/12/09/the-shallow-baltic-sea-holds-deep-secrets-about-a-hybrid-war-on-nato/">a NATO lak</a>e.” Since then, however, the sea has been less than placid, as confrontations with Russia and interference with undersea infrastructure have raised tensions to new heights.</p>
+
+
+
+<p class="wp-block-paragraph">Sweden, Finland, and their allies now face a challenge in countering Russian behavior without stoking tensions further. </p>
+
+
+
+<p class="wp-block-paragraph">“It&#8217;s a very difficult question, because you don&#8217;t want to escalate,” Maj. Gen. Peter Boysen, chief of the Danish army, said at the Association of the U.S. Army annual conference in Washington, D.C., in mid-October.</p>
+
+
+
+<p class="wp-block-paragraph">The Baltic has long been a site for <a href="https://www.congress.gov/crs-product/R49134">hybrid warfare</a> — a broad term for malign activity below the threshold of war that is often hard to attribute, like disinformation, sabotage, cyberattacks and territorial violations — but the scale of that activity has increased since Russia invaded Ukraine in 2022, creating what Dutch military intelligence earlier this year <a href="https://www.defensenews.com/global/europe/2026/04/22/russia-could-be-ready-for-nato-conflict-year-after-ukraine-dutch-warn/">called</a> “a real risk of unintended and therefore difficult-to-control escalation.”</p>
+
+
+
+<p class="wp-block-paragraph">One of the highest-profile cases was the Nord Stream pipeline attack in September 2022. Since then, other pipelines and cables <a href="https://www.defensenews.com/global/europe/2025/01/28/11-baltic-cables-damaged-in-15-months-pushing-nato-to-boost-security/">in the Baltic</a> have been damaged in what Western officials often label acts of sabotage. Alongside frequent <a href="https://www.defensenews.com/global/europe/2025/07/02/researchers-home-in-on-origins-of-russias-baltic-gps-jamming/">GPS jamming</a>, NATO allies are also seeing more airspace violations by Russian aircraft and more <a href="https://www.defensenews.com/global/europe/2026/10/21/europe-weighs-giving-utilities-infrastructure-companies-more-powers-to-bring-down-drones/">drone incursions</a> at sensitive sites, like military bases and airports.</p>
+
+
+
+<p class="wp-block-paragraph">Russia consistently denies responsibility for those acts, but NATO leaders <a href="https://www.themoscowtimes.com/2025/09/30/finnish-defense-minister-says-no-drones-can-rattle-country-a90675">link</a> them to Moscow’s efforts to undermine its neighbors, partly in retaliation for their support of Ukraine, and they have been more vocal in calling those efforts out. </p>
+
+
+
+<p class="wp-block-paragraph">In an <a href="https://www.fe-ddis.dk/globalassets/fe/dokumenter/2026/trusselsvurderinger/-assessment-of-the-threat-from-russia-.pdf">assessment</a> published in September, Denmark’s Defense Intelligence Service said “Russia has intensified its use of sabotage, destructive cyber attacks and is attacking targets in Europe with drones.” It added: “The hybrid war is escalating.”</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" src="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-2261754311.jpg?w=1024" alt="" class="wp-image-122387" /><figcaption class="wp-element-caption">Combat swimmers go ashore at the military training area on the Baltic Sea coast during the NATO maneuver Steadfast Dart, February 2026. (Marcus Brandt/Picture Alliance via Getty Images)</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">Russia has also been more actively protecting “<a href="https://www.defensenews.com/global/europe/2025/01/14/sweden-joins-nato-push-to-boost-baltic-sea-naval-presence/">shadow fleet</a>” vessels it uses to skirt sanctions, including by sending warships to escort them through the Baltic. That has led to <a href="https://www.defensenews.com/global/europe/2025/05/20/estonia-russia-ship-standoff-portends-a-harsher-tone-on-the-baltic-sea/">confrontations</a> with NATO. </p>
+
+
+
+<p class="wp-block-paragraph">“Russian forces are increasingly acting aggressively towards NATO military units in the Baltic Sea region,” the assessment said.</p>
+
+
+
+<p class="wp-block-paragraph">“The most recent and most serious example,&#8221; the assessment cites, was an <a href="https://www.defensenews.com/global/europe/2026/09/15/russian-frigate-fires-flares-towards-danish-military-helicopter/">incident</a> on Sept. 14 in which a Russian frigate near Denmark’s coast fired flares at a Danish military helicopter.</p>
+
+
+
+<p class="wp-block-paragraph">That incident epitomized the challenge of deterring such behavior, Boysen said during a panel event at the conference. “How should your response be to that? It would, for us, be to de-escalate, but we&#8217;ve also seen that when the pattern of our adversary&#8217;s operations change when they pass through the Baltic Sea, how do you respond to that in a balanced way so you&#8217;re not increasing [tensions] but you actually say, ‘We know this is not the right way to do it. We want to decrease it back to normal’?”</p>
+
+
+
+<p class="wp-block-paragraph">“What we don&#8217;t want to do is to move ‘normal’ to a new intensity level,” Boysen added. “Normal needs to be decreased, and that&#8217;s a very, very difficult question.”</p>
+
+
+
+<p class="wp-block-paragraph">Russia’s wartime footing and wariness of Ukraine’s long-range strikes also make “escalation control” difficult, Lt. Gen. Kari Nisula, the Finnish Defense Forces’ deputy chief of staff for operations, said during the panel. </p>
+
+
+
+<p class="wp-block-paragraph">When Russian forces operate in the Baltic, “they try to defend themselves [with] air-defense measures, force-protection measures, and I think they are kind of afraid that a missile will hit their ships and that kind of thing, which is quite normal,” Nisula said. “It&#8217;s a very difficult environment from an escalation-de-escalation perspective.”</p>
+
+
+
+<p class="wp-block-paragraph">While tensions around the Baltic Sea are not new, growing concern about hybrid threats has led NATO to increase its vigilance and cooperation there.</p>
+
+
+
+<p class="wp-block-paragraph">In October 2024, Germany <a href="https://mc.nato.int/media-centre/news/2024/Commander-Task-Force-Baltic-Established">set up</a> Commander Task Force Baltic, a multinational command to coordinate naval activity and provide up-to-date maritime situational awareness to allies. Around that time, NATO’s Allied Command Transformation <a href="https://www.act.nato.int/activities/tfx-b/">set up</a> Task Force X-Baltic to accelerate employment of uncrewed systems and AI integration to better protect undersea infrastructure. In January 2025, NATO <a href="https://shape.nato.int/news-releases/baltic-sentry-to-enhance-natos-presence-in-the-baltic-sea">began</a> Baltic Sentry, an open-ended operation to enhance the alliance’s presence and responsiveness in the region.</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1280" height="853" src="https://one.sightlinemg.com/wp-content/uploads/2026/09/GettyImages-2290459535.jpg.jpg?w=1024" alt="" class="wp-image-121468" /><figcaption class="wp-element-caption">The Russian Northern Fleet&#8217;s guided-missile frigate Admiral Kasatonov in the Baltic Sea, Aug. 17, 2026. (Navy of Russia/Handout/Anadolu via Getty Images)</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">Nordic countries, Sweden and Finland in particular, are also collaborating to better monitor and defend their territory. This summer, in response to a spate of drone incursions in Finland and other NATO states, Stockholm authorized its military to help Helsinki maintain “territorial surveillance and territorial integrity,” Maj. Gen. Johan Pekkari, commander of the Swedish army, said during the panel.</p>
+
+
+
+<p class="wp-block-paragraph">“To use the air force as an example, we leave air assets to the air operational command of Finland, and they lead their sorties and [take] care of those drones,” Pekkari said. Sweden could eventually lend counter-drone systems to that effort as well, Pekkari said. “That is one example of how we cooperate when it comes to that kind of challenge.”</p>
+
+
+
+<p class="wp-block-paragraph">Boysen said that alongside “being able to project power,” the ability to detect and identify malign activity is necessary to counter Russian activity without sparking escalation. </p>
+
+
+
+<p class="wp-block-paragraph">“Being able to put light on the adversary, to tell the adversary we know what you are doing — I think that is the way to de-escalate it,” Boysen said. “If you don&#8217;t do anything and if you are not able to detect, I think you put yourself in a very bad situation, and that would change ‘normal’ and make it a new normal, which is in effect an increase, I think, in the threat to you.”</p>
+
+
+
+<p class="wp-block-paragraph">Some in NATO argue that highlighting the threat from Russia may only boost the Kremlin’s efforts to sow fear within the alliance and erode support for Ukraine. Others in the alliance say that transparency is necessary to keep their publics engaged and to maintain support for efforts to counter Moscow. Despite that <a href="https://www.defensenews.com/global/europe/2026/10/30/pentagon-tells-europeans-to-cool-their-rhetoric-on-russia-sources-say/">debate</a>, few NATO officials, especially those from frontline countries, expect Russia to change course.</p>
+
+
+
+<p class="wp-block-paragraph">“When it comes to Putin and his plans, there were hybrid attacks between 2014 to 2022. There were an increasing number of hybrid attacks after 2022, and I do think that I&#8217;m echoing how my colleagues are talking in Finland when I say that we might have to expect even more hybrid attacks in the near future,” Leena-Kaisa Mikkola, Finland’s ambassador to the U.S., said at an event hosted by the Atlantic Council and the Norwegian Embassy in Washington, D.C., in September. “I quote what our defense minister said a couple of days ago: the situation in the Baltic Sea is ‘quite lively.’”</p>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>India orders next-gen corvettes for $5.7b under broad naval modernization push</title>
+		<link>https://www.defensenews.com/global/asia-pacific/2026/11/03/india-orders-next-gen-corvettes-for-5-7b-under-broad-naval-modernization-push/</link>
+		
+		<dc:creator><![CDATA[Anjana Pasricha]]></dc:creator>
+		<pubDate>Tue, 03 Nov 2026 12:56:27 +0000</pubDate>
+				<category><![CDATA[Asia Pacific]]></category>
+		<category><![CDATA[Euronaval Coverage]]></category>
+		<category><![CDATA[Global]]></category>
+		<category><![CDATA[Naval]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Special Multimedia Reports]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[Euronaval 2026]]></category>
+		<category><![CDATA[Garden Reach Shipbuilders and Engineers]]></category>
+		<category><![CDATA[Goa Shipyard]]></category>
+		<category><![CDATA[india]]></category>
+		<category><![CDATA[naval warfare]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/defensenews/?p=87475</guid>
+
+					<description><![CDATA[New Delhi is spending big money on new corvettes from domestic shipbuilders, carrier-capable fighters from France and submarines from Germany.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">87475</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-1248032936.jpg" width="6048" height="3956" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/11/GettyImages-1248032936.jpg" width="6048" height="3956" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">NEW DELHI — In a major push to <a href="https://www.defensenews.com/global/asia-pacific/2026/06/23/indias-three-new-naval-ships-boost-maritime-firepower/">strengthen its naval capabilities</a>, India signed a $5.7 billion contract with domestic companies Monday to build eight next-generation, corvettes that will undertake anti-submarine, anti-surface and coastal defense operations.</p>
+
+
+
+<p class="wp-block-paragraph">The new ships will gradually replace a fleet of aging single-role corvettes.</p>
+
+
+
+<p class="wp-block-paragraph">India’s efforts to upgrade its maritime strength include plans to acquire six advanced submarines through a partnership with Germany and base 26 French Rafale Marine aircraft aboard its aircraft carriers.</p>
+
+
+
+<p class="wp-block-paragraph">The Defense Ministry said the corvettes will be equipped with state-of-the-art capabilities, including advanced missiles, weapons and sensor suites enabling them to undertake missions across the air, surface and sub-surface domains.</p>
+
+
+
+<p class="wp-block-paragraph">The ministry said the project marks a “significant milestone in India&#8217;s indigenous warship design and construction capabilities” because it is the first project in which the ships will be designed by the Indian Navy and built in domestic, state-owned shipyards.</p>
+
+
+
+<p class="wp-block-paragraph">Designed as high-speed, stealth combatants, five of the corvettes will be built by Garden Reach Shipbuilders and Engineers (GRSE) and three by Goa Shipyard. The vessels would have a length of 127 meters, a beam of 17.6 meters, a deadweight tonnage of 4,950 and a maximum speed of 26 knots, according to GRSE.</p>
+
+
+
+<p class="wp-block-paragraph">The corvettes will carry medium-range anti-ship, medium-range surface-to-air missiles and 324 mm torpedo tubes.</p>
+
+
+
+<p class="wp-block-paragraph">The induction of these ships will enhance the Indian Navy’s operational capabilities in safeguarding maritime trade routes, conducting anti-surface and anti-submarine warfare operations, strengthening coastal defense, and undertaking littoral combat operations according to the Defense Ministry.</p>
+
+
+
+<p class="wp-block-paragraph">With about 90% of India’s trade moving through maritime routes and a coastline stretching more than 11,000 km, protecting sea lanes and coastal waters is an important security priority for the country.</p>
+
+
+
+<p class="wp-block-paragraph">The corvettes are part of a wider push by India to bolster its naval strength amid China’s expanding presence in the Indo-Pacific and Pakistan’s deepening military cooperation with Beijing.</p>
+
+
+
+<p class="wp-block-paragraph">Chief of the Naval Staff, Admiral Dinesh Tripathi, said in February that India aims to become a navy with 200-plus ships by 2035. The navy currently has 145 ships and submarines.</p>
+
+
+
+<p class="wp-block-paragraph">That expansion includes plans to acquire six advanced submarines under an approximately $8 billion deal with Germany.</p>
+
+
+
+<p class="wp-block-paragraph">The German ambassador to New Delhi, Jasper Wieck, said in September that the proposed deal to build six next-generation conventional submarines has been set on the German side. “In terms of the documents, it has already been finalized and the German side has agreed to it. It is now up to the Indian side to complete and conclude its internal processes,”&nbsp; Wieck told reporters.</p>
+
+
+
+<p class="wp-block-paragraph">The proposed program involves German shipyard TKMS collaborating with Indian state-owned Mazagon Dock Shipbuilders Ltd. to build the vessels in India. The submarines will be equipped with air-independent propulsion (AIP) technology, allowing them to remain underwater for longer periods than conventional diesel-electric submarines and making them particularly suited to patrols in the strategic waters of the Indo-Pacific.</p>
+
+
+
+<p class="wp-block-paragraph">Meanwhile, on Oct. 29, a Rafale Marine fighter jet also landed for the first time on India&#8217;s newest aircraft carrier INS Vikrant, marking a successful carrier compatibility trial.</p>
+
+
+
+<p class="wp-block-paragraph">The trial comes 18 months after India signed an approximately $7.5 billion contract with France to acquire 26 Rafale Marine aircraft, comprising 22 fighters and four trainer aircraft.</p>
+
+
+
+<p class="wp-block-paragraph">“The ongoing trials mark the first steps towards operationalization of the aircraft in the Indian Navy,” the Indian Navy said.</p>
+
+
+
+<p class="wp-block-paragraph">The Rafales already operate from French aircraft carriers, but their compatibility with the Indian ship’s different launch and recovery arrangements needs to be tested.</p>
+
+
+
+<p class="wp-block-paragraph">The French Rafales will join the Navy’s existing Russian MiG-29Ks and bring modern multirole strike capability to both of its carriers.</p>
+]]></content:encoded>
+	</item>
+	</channel>
+</rss>

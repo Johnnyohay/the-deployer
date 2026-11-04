@@ -1,0 +1,32 @@
+# YouTube channels ANU follows for the Watch tab (`npm run videos` reads their free public feeds).
+#
+# Add a channel: open its page on YouTube, View page source, search for "externalId" (starts with UC),
+# and add it below. topic is defense, housing, or mixed (general business news: only videos about
+# defense or housing are kept). Any new topic name you use becomes a filter on the Watch tab.
+
+keepDays: 90        # how long videos stay
+maxVideos: 800
+
+channels:
+  - { name: "The War Zone", id: UCIUg-gNzeWPEvt-GXQwPBdg, topic: defense }
+  - { name: "CSIS", id: UCr5jq6MC_VCe1c5ciIZtk_w, topic: defense }
+  - { name: "Perun", id: UCC3ehuUksTyQ7bbjGntmx3Q, topic: defense }
+  - { name: "Task & Purpose", id: UCSq3p5NKEtyp5Rjd4ctiEbg, topic: defense }
+  - { name: "Anduril", id: UC2vBJ4InzgqlrLEpfZFMXaA, topic: defense }
+  - { name: "DefenseScoop", id: UChXJlThGhEf_Xc81yN48GwA, topic: defense }
+  - { name: "Reventure Consulting", id: UCVTQunGrE3p7Oq8Owao5y_Q, topic: housing }
+  - { name: "BiggerPockets", id: UCVWDbXqQ8cupuVpotWNt2eg, topic: housing }
+  - { name: "Redfin", id: UCMIuo1QSGcmWnevT9jdC_Ow, topic: housing }
+  - { name: "Zillow", id: UCzY5ButfegucMnsF2JeyGGQ, topic: housing }
+  - { name: "HousingWire", id: UCXDD_3y3LvU60vac7eki-6Q, topic: housing }
+  - { name: "Realtor.com", id: UCEE9_wfKveO9lKSEcrdQDpA, topic: housing }
+  - { name: "Coach Carson", id: UCekfr0vOmS49HAx2AjNlDQw, topic: housing }
+  - { name: "Ryan Pineda", id: UCZc5ImWILZmnxxA-RNgTY-Q, topic: housing }
+  - { name: "National Association of Realtors", id: UCHkeJOyp0Pb3dJSt4iXjPQA, topic: housing }
+  - { name: "CNBC Television", id: UCrp_UI8XtuYfpiqluWLD7Lw, topic: mixed }
+  - { name: "Yahoo Finance", id: UCEAZeUIeJs0IjQiqTCdVSIg, topic: mixed }
+
+# Keywords that decide which videos from a mixed channel are kept, per topic (regular expressions).
+match:
+  housing: '\b(housing|home ?(prices?|buyers?|sales|values?|builders?)|mortgages?|rents?|rental|landlords?|real estate|realtors?|apartments?)\b'
+  defense: '\b(defen[cs]e|Pentagon|military|missiles?|drones?|Anduril|Palantir|Lockheed|Raytheon|RTX|Northrop|NATO|Army|Navy|Air Force|Space Force|weapons?)\b'

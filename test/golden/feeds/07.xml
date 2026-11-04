@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet media="screen" type="text/xsl" href="/wp-content/themes/smg/assets/xslt/rss-xslt.xml"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	xmlns:media="http://search.yahoo.com/mrss/"
+xmlns:news="http://www.pugpig.com/news"
+>
+
+<channel>
+	<title>C4ISRNet</title>
+	<atom:link href="https://www.c4isrnet.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.c4isrnet.com/</link>
+	<description>Media for the Intelligence-Age Military &#124; C4ISRNET</description>
+	<lastBuildDate>Mon, 02 Nov 2026 14:59:26 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=7.1.4</generator>
+
+<image>
+	<url>https://one.sightlinemg.com/wp-content/uploads/2026/06/favicon-c4i.png?w=32</url>
+	<title>C4ISRNet</title>
+	<link>https://www.c4isrnet.com/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">255331819</site><atom:link rel="next" type="application/rss+xml" href="https://www.c4isrnet.com/feed/?paged=2" />
+	<item>
+		<title>Big deals in European defense and American fighters &#124; Defense Dollars</title>
+		<link>https://www.c4isrnet.com/videos/2026/11/02/big-deals-in-european-defense-and-american-fighters-defense-dollars/</link>
+		
+		<dc:creator><![CDATA[Angela Caguimbal]]></dc:creator>
+		<pubDate>Mon, 02 Nov 2026 14:59:26 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[defense dollars]]></category>
+		<category><![CDATA[defense news weekly]]></category>
+		<category><![CDATA[Helsing]]></category>
+		<category><![CDATA[leonardo]]></category>
+		<category><![CDATA[Lockheed Martin]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<category><![CDATA[rev-en]]></category>
+		<category><![CDATA[rheinmetall]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/news/2026/11/02/big-deals-in-european-defense-and-american-fighters-defense-dollars/</guid>
+
+					<description><![CDATA[International weapons makers step forward with new interceptors and deals for armored vehicles, while an American company secures a fighter contract.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46778</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DNW-844-D-BLOCK-THUMB.jpg" width="1920" height="1080" type="image/jpeg" />
+<enclosure url="https://cdn.jwplayer.com/videos/EblQz0Z2-5ZsksG4j.mp4" length="0" type="video/mp4" />
+<media:content url="https://cdn.jwplayer.com/videos/EblQz0Z2-5ZsksG4j.mp4" type="video/mp4" medium="video" width="1920" height="1080" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><video controls preload="none"><source src="https://cdn.jwplayer.com/manifests/EblQz0Z2.m3u8" type="application/vnd.apple.mpegurl"/><source src="https://cdn.jwplayer.com/videos/EblQz0Z2-5ZsksG4j.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/EblQz0Z2-Y2ywrFC2.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/EblQz0Z2-SsomXLLO.mp4" type="video/mp4"/></video><figcaption class="wp-element-caption">International weapons makers step forward with new interceptors and deals for armored vehicles, while an American company secures a fighter contract.</figcaption></figure>
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>From No Credit to Good Credit — Start Here &#124; Money Minute</title>
+		<link>https://www.c4isrnet.com/videos/2026/11/02/from-no-credit-to-good-credit-start-here-money-minute/</link>
+		
+		<dc:creator><![CDATA[Angela Caguimbal]]></dc:creator>
+		<pubDate>Mon, 02 Nov 2026 14:56:16 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[defense news weekly]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<category><![CDATA[money minute]]></category>
+		<category><![CDATA[rev-en]]></category>
+		<category><![CDATA[sponsored]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/news/2026/11/02/from-no-credit-to-good-credit-start-here-money-minute/</guid>
+
+					<description><![CDATA[Building good credit is often easier than you think — follow these tips for getting back on track.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46776</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/Monet-Minute-Jeanette-thumbnail.jpg" width="1920" height="1080" type="image/jpeg" />
+<enclosure url="https://cdn.jwplayer.com/videos/IlQPi0Ng-5ZsksG4j.mp4" length="0" type="video/mp4" />
+<media:content url="https://cdn.jwplayer.com/videos/IlQPi0Ng-5ZsksG4j.mp4" type="video/mp4" medium="video" width="1920" height="1080" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><video controls preload="none"><source src="https://cdn.jwplayer.com/manifests/IlQPi0Ng.m3u8" type="application/vnd.apple.mpegurl"/><source src="https://cdn.jwplayer.com/videos/IlQPi0Ng-5ZsksG4j.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/IlQPi0Ng-Y2ywrFC2.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/IlQPi0Ng-SsomXLLO.mp4" type="video/mp4"/></video><figcaption class="wp-element-caption">Building good credit is often easier than you think — follow these tips for getting back on track.</figcaption></figure>
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>What could the Humvee of the future look like?</title>
+		<link>https://www.c4isrnet.com/videos/2026/11/02/what-could-the-humvee-of-the-future-look-like/</link>
+		
+		<dc:creator><![CDATA[Angela Caguimbal]]></dc:creator>
+		<pubDate>Mon, 02 Nov 2026 14:50:22 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[am general]]></category>
+		<category><![CDATA[ara]]></category>
+		<category><![CDATA[AUSA]]></category>
+		<category><![CDATA[Chrischaos]]></category>
+		<category><![CDATA[cuattro]]></category>
+		<category><![CDATA[defense news weekly]]></category>
+		<category><![CDATA[marathon targets]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<category><![CDATA[mydefence]]></category>
+		<category><![CDATA[orkid]]></category>
+		<category><![CDATA[rev-en]]></category>
+		<category><![CDATA[twenty six defense]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/news/2026/11/02/what-could-the-humvee-of-the-future-look-like/</guid>
+
+					<description><![CDATA[From vehicles to wearable drone detection, new soldier systems were on display at AUSA 2026. Check out a roundup of our social coverage.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46775</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DNW-844-B-BLOCK-THUMB.png" width="1920" height="1080" type="image/png" />
+<enclosure url="https://cdn.jwplayer.com/videos/GiRF0Vlu-5ZsksG4j.mp4" length="0" type="video/mp4" />
+<media:content url="https://cdn.jwplayer.com/videos/GiRF0Vlu-5ZsksG4j.mp4" type="video/mp4" medium="video" width="1920" height="1080" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><video controls preload="none"><source src="https://cdn.jwplayer.com/manifests/GiRF0Vlu.m3u8" type="application/vnd.apple.mpegurl"/><source src="https://cdn.jwplayer.com/videos/GiRF0Vlu-5ZsksG4j.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/GiRF0Vlu-Y2ywrFC2.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/GiRF0Vlu-SsomXLLO.mp4" type="video/mp4"/></video><figcaption class="wp-element-caption">From vehicles to wearable drone detection, new soldier systems were on display at AUSA 2026. Check out a roundup of our social coverage.</figcaption></figure>]]></content:encoded>
+	</item>
+		<item>
+		<title>High-energy lasers, drones and power: Innovations in defense tech &#124; Business of Defense – Part 1</title>
+		<link>https://www.c4isrnet.com/videos/2026/11/02/high-energy-lasers-drones-and-power-innovations-in-defense-tech-business-of-defense-part-1/</link>
+		
+		<dc:creator><![CDATA[Angela Caguimbal]]></dc:creator>
+		<pubDate>Mon, 02 Nov 2026 14:44:38 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[AUSA]]></category>
+		<category><![CDATA[business of defense]]></category>
+		<category><![CDATA[defense news weekly]]></category>
+		<category><![CDATA[drones]]></category>
+		<category><![CDATA[kbr]]></category>
+		<category><![CDATA[laser]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<category><![CDATA[rev-en]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/news/2026/11/02/high-energy-lasers-drones-and-power-innovations-in-defense-tech-business-of-defense-part-1/</guid>
+
+					<description><![CDATA[From industry stalwarts to small startups, defense tech creators are looking to provide solutions as conflict morphs on a monthly basis. See some of what they had to offer at AUSA 2026.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46774</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DNW-844-A-BLOCK-THUMB.jpg" width="1920" height="1080" type="image/jpeg" />
+<enclosure url="https://cdn.jwplayer.com/videos/FRRKt9yp-5ZsksG4j.mp4" length="0" type="video/mp4" />
+<media:content url="https://cdn.jwplayer.com/videos/FRRKt9yp-5ZsksG4j.mp4" type="video/mp4" medium="video" width="1920" height="1080" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><video controls preload="none"><source src="https://cdn.jwplayer.com/manifests/FRRKt9yp.m3u8" type="application/vnd.apple.mpegurl"/><source src="https://cdn.jwplayer.com/videos/FRRKt9yp-5ZsksG4j.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/FRRKt9yp-Y2ywrFC2.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/FRRKt9yp-SsomXLLO.mp4" type="video/mp4"/></video><figcaption class="wp-element-caption">From industry stalwarts to small startups, defense tech creators are looking to provide solutions as conflict morphs on a monthly basis. See some of what they had to offer at AUSA 2026.</figcaption></figure>]]></content:encoded>
+	</item>
+		<item>
+		<title>Rise of the defense industry innovators &#124; Defense News Weekly Full Episode 11.3.26</title>
+		<link>https://www.c4isrnet.com/videos/2026/11/02/rise-of-the-defense-industry-innovators-defense-news-weekly-full-episode-11-3-26/</link>
+		
+		<dc:creator><![CDATA[Angela Caguimbal]]></dc:creator>
+		<pubDate>Mon, 02 Nov 2026 14:42:30 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[AUSA]]></category>
+		<category><![CDATA[defense dollars]]></category>
+		<category><![CDATA[defense news weekly]]></category>
+		<category><![CDATA[drones]]></category>
+		<category><![CDATA[kbr]]></category>
+		<category><![CDATA[lockcheed martin]]></category>
+		<category><![CDATA[long form]]></category>
+		<category><![CDATA[material]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<category><![CDATA[rev-en]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/news/2026/11/02/rise-of-the-defense-industry-innovators-defense-news-weekly-full-episode-11-3-26/</guid>
+
+					<description><![CDATA[As the American military seeks new capabilities and advanced systems amid rapid change, defense companies of all sizes showcased their solutions at a major defense conference.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46773</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DNW-844-THUMB.png" width="1920" height="1080" type="image/png" />
+<enclosure url="https://cdn.jwplayer.com/videos/ZrPLhMuX-5ZsksG4j.mp4" length="0" type="video/mp4" />
+<media:content url="https://cdn.jwplayer.com/videos/ZrPLhMuX-5ZsksG4j.mp4" type="video/mp4" medium="video" width="1920" height="1080" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><video controls preload="none"><source src="https://cdn.jwplayer.com/manifests/ZrPLhMuX.m3u8" type="application/vnd.apple.mpegurl"/><source src="https://cdn.jwplayer.com/videos/ZrPLhMuX-5ZsksG4j.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/ZrPLhMuX-Y2ywrFC2.mp4" type="video/mp4"/><source src="https://cdn.jwplayer.com/videos/ZrPLhMuX-SsomXLLO.mp4" type="video/mp4"/></video><figcaption class="wp-element-caption">As the American military seeks new capabilities and advanced systems amid rapid change, defense companies of all sizes showcased their solutions at a major defense conference.</figcaption></figure>
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>‘Open the hives’ — Why France is turning tank gunners into FPV pilots</title>
+		<link>https://www.c4isrnet.com/unmanned/2026/10/30/open-the-hives-why-france-is-turning-tank-gunners-into-fpv-pilots/</link>
+		
+		<dc:creator><![CDATA[Rudy Ruitenberg]]></dc:creator>
+		<pubDate>Fri, 30 Oct 2026 17:57:49 +0000</pubDate>
+				<category><![CDATA[Home]]></category>
+		<category><![CDATA[Unmanned]]></category>
+		<category><![CDATA[ausa 2026]]></category>
+		<category><![CDATA[dn dnr]]></category>
+		<category><![CDATA[drones]]></category>
+		<category><![CDATA[first-person view drones]]></category>
+		<category><![CDATA[france]]></category>
+		<category><![CDATA[French Army]]></category>
+		<category><![CDATA[ISR]]></category>
+		<category><![CDATA[maneuver]]></category>
+		<category><![CDATA[military doctrine]]></category>
+		<category><![CDATA[unmanned]]></category>
+		<guid isPermaLink="false">https://www.c4isrnet.com/news/2026/10/30/open-the-hives-why-france-is-turning-tank-gunners-into-fpv-pilots/</guid>
+
+					<description><![CDATA[Cpl. Igor started a new job this year, swapping the sights of a 105 mm gun on the French Army's AMX 10 RC reconnaissance vehicle for first-person view goggles and a handheld controller.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46765</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DSCF3298.jpg" width="5329" height="4000" type="image/jpeg" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/10/DSCF3298.jpg" width="5329" height="4000" type="image/jpeg" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[
+<p class="wp-block-paragraph">MAILLY-LE-CAMP, France — Corporal Igor started a new job this year, swapping the sights of a 105 mm gun on the French Army&#8217;s AMX 10 RC reconnaissance vehicle for first-person view goggles and a handheld controller.</p>
+
+
+
+<p class="wp-block-paragraph">The 21-year-old is now a strike pilot in France&#8217;s first dedicated drone-combat squadron, crouching in nettles and tall grass as he guided an FPV drone down a forest path at the Mailly-le-Camp training area east of Paris during a June exercise of the 1st Marine Infantry Regiment, or 1er RIMa.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;We&#8217;re switching specialties, we&#8217;re keeping up with the times,&#8221; said the corporal, who last year still manned the gunner seat in the AMX 10 RC armored car.</p>
+
+
+
+<p class="wp-block-paragraph">Inspired by the war in Ukraine, the 1er RIMa converted one of its three light cavalry squadrons into an experimental all-drone unit, with results so convincing that the Army is rushing more drone formations into service. The aim is for around 15 drone-combat units by summer 2027 and more by the end of next year, Army Chief of Staff Gen. Jacques de Montgros said this month.</p>
+
+
+
+<p class="wp-block-paragraph">France deployed a drone-combat unit to Romania for the first time in recent weeks as part of Mission Aigle, the French-led mission to strengthen NATO’s eastern flank, and will deploy a second unit to Poland for an exercise next month, de Montgros told lawmakers in an Oct. 14 hearing. “So we’re really at a point of scaling up our efforts in these areas.”</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" src="https://one.sightlinemg.com/wp-content/uploads/2026/10/V5A2069.jpg?w=1024" alt="" class="wp-image-122333" /><figcaption class="wp-element-caption">Cpl. Igor of the French Army&#8217;s 1st Marine Infantry Regiment operates an FPV drone during a training exercise at Mailly-le-Camp on June 11, 2026. (Rudy Ruitenberg/staff)</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">The 1er RIMa’s experimental squadron has provided a blueprint to create more tactical drone formations, while offering the French Army a lesson in the vulnerability of NATO-style combined-arms tactics to drone threats. During exercises this year, the regiment’s pilots hunted armored vehicles and command posts of the opposing force, disrupting maneuver and force buildup.</p>
+
+
+
+<p class="wp-block-paragraph">Mixing surveillance drones, FPV one-way attack drones and loitering munitions, the 1er Escadron de Drones de Chasse, which roughly translates as 1st Hunter-Drone Squadron, has also been a test bed for the Army, partnering with French firms to work on swarming technology, autonomous terminal guidance and launch canisters.</p>
+
+
+
+<p class="wp-block-paragraph">France’s first drone squadron grew from an idea within the 1er RIMa’s training and operations office in late 2023, to develop a way of fighting with drones that went beyond just adding them to existing units. The concept built on a proposal by Capt. Guillaume, an open-source intelligence specialist who had been studying the war in Ukraine.</p>
+
+
+
+<p class="wp-block-paragraph">When the office tested an experimental drone unit in a tactical exercise, the drones created “a crazy amount of disruption,” said Col. Aymeric Caussin, commander of the 1er RIMa, who headed the office at the time. “So we said, right, let&#8217;s go for it.&#8221;</p>
+
+
+
+<h3 id="h-cavalry-heritage" class="wp-block-heading">Cavalry heritage</h3>
+
+
+
+<p class="wp-block-paragraph">Drawing on the regiment’s light cavalry heritage, the squadron was designed as a mobile force with drones as its weapons system, said Lt. Col Remi, who worked to implement the idea during a two-year stint in the 1er RIMa. Light cavalry principles still applied: gather intelligence, then fix, outflank and ultimately destroy the enemy, with a focus on mobility, dispersion and stealth.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;We needed a squadron that evoked the light cavalry: ‘drone’ because that&#8217;s its primary weapon system, and ‘hunter’ because that&#8217;s what we actually do in the field.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">The regiment tested the concept during Exercise Hedgehog in Estonia in May 2025, sending some 10 drone pilots as part of a French combined-arms tactical group. The U.S. 5th squadron, 7th Cavalry Regiment served as the designated opposing force during the exercise, with dismounted soldiers and M2A4 Bradley Fighting Vehicles.</p>
+
+
+
+<p class="wp-block-paragraph">The Wall Street Journal previously reported how Ukrainian operators taking part in the exercise <a href="https://www.wsj.com/opinion/nato-has-seen-the-future-and-is-unprepared-887eaf0f">exposed the vulnerability</a> of NATO troops to drone warfare. The French team equally showed the impact of drones on an opponent unprepared for the threat.</p>
+
+
+
+<p class="wp-block-paragraph">The French pilots, who made up around 5% of the tactical group’s active strength, accounted for 20% of the attrition inflicted on the opposing force of American troops with Bradleys in a single day of combat, said Maj. Sylvain, head of operations at the 1er RIMa, who attended the exercise.</p>
+
+
+
+<p class="wp-block-paragraph">The virtual devastation convinced French Army leaders to scale up the experiment. Within two months, the drone squadron was made official, and in early April 2026 the Army staff declared it “<a href="https://x.com/CEMAT_FR/status/2040095103499276343">fully operational</a>.”</p>
+
+
+
+<p class="wp-block-paragraph">“It was the proof of concept,” Maj. Sylvain said. &#8220;Everything falls into place, everyone is supportive of the project, and the regiment decides to transform the first squadron into a hunter-drone squadron.”</p>
+
+
+
+<p class="wp-block-paragraph">The drone team also brought several startups to Estonia for Hedgehog 25, including Alta Ares and Icarus Swarms, while Naval Group joined at its own expense. The 1er RIMa works with Alta Ares on AI-enabled detection and reconnaissance, Icarus Swarms on autonomous navigation and computer-assisted piloting, and Naval Group on drone-launch canisters.</p>
+
+
+
+<p class="wp-block-paragraph">The drone squadron has continue to rack up the virtual kills since Hedgehog. During France’s large-scale exercise Orion 2026, the 1er RIMa’s drone pilots tallied four regimental command posts, a number of logistics convoys and anti-drone and air-defense units, according to Caussin.</p>
+
+
+
+<h3 id="h-quite-a-bit-of-damage" class="wp-block-heading">&#8216;Quite a bit of damage&#8217;</h3>
+
+
+
+<p class="wp-block-paragraph">What made the drone-combat unit stand out was its responsiveness, with FPV drones able to quickly close gaps in the lines and attack the main axis of enemy efforts, and its ability to disrupt the enemy command structures, particularly by directly targeting command posts, Caussin said.</p>
+
+
+
+<p class="wp-block-paragraph">“Through the drone, we&#8217;ll seek to disrupt the enemy&#8217;s chain of command. We&#8217;re influencing decision-making.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">Orion 2026 showed that distance no longer protects. The squadron’s intelligence, surveillance and reconnaissance drones detected tactical command posts several kilometers from the front line, then called in artillery or directed FPV drones to attack, said Staff Sgt. Tristan, who leads a platoon of FPV pilots after about 12 years on the AMX 10 RC.</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" src="https://one.sightlinemg.com/wp-content/uploads/2026/10/DSCF3386.jpg?w=1024" alt="" class="wp-image-122335" /><figcaption class="wp-element-caption">Troops of the French Army&#8217;s 1st Marine Infantry Regiment launch an FPV drone from a canister during an exercise at the Mailly-le-Camp training grounds on June 11, 2026. (Rudy Ruitenberg/staff)</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">The regiment inflicted “quite a bit of damage” with drones and artillery, “but had it been the other way around, it would have been the same,” Staff Sgt. Tristan said. “If we&#8217;d been facing a unit like ours and we would have stayed in the AMX 10 RC, well, we would&#8217;ve been wiped out a lot too, right? So you have to put things in perspective.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">During an exercise in March at Mailly-le-Camp, the 1er RIMa acted as the opposing force during the combat preparation of another French light-cavalry regiment. The drone squadron’s pilots attacked and virtually destroyed enemy armor, or would track vehicles to command posts or troop concentrations before striking, paralyzing enemy movement.</p>
+
+
+
+<p class="wp-block-paragraph">The result was “severe,” said FPV pilot Igor, who participated in the exercise. The opposing force was neutralized, at least virtually.</p>
+
+
+
+<p class="wp-block-paragraph">For the Army, the takeaway was that it wanted to equip five more regiments with an all-drone squadron, to be operational in 2027. With the Army accelerating its drone effort, the six combat-drone units will be operational by the year, said Gen. Bruno Baratz, head of Future Combat Command, at an innovation day organized by France’s 6th Armored Brigade in September.</p>
+
+
+
+<p class="wp-block-paragraph">The brigade, which was assigned to set up two of the five drone squadrons, decided to create a third drone-combat unit using its own resources, 6th Armored Brigade commander Gen. Maxime do Tran said at the innovation day. One of the brigade’s infantry regiments is now deployed to Romania with a drone-combat unit.</p>
+
+
+
+<p class="wp-block-paragraph">“The trial conducted by the 1st Marine Infantry Regiment demonstrated the value of this capability,” Do Tran said. “We didn’t wait.”</p>
+
+
+
+<p class="wp-block-paragraph">With the drone-combat squadron of the 1er RIMa “more of a cavalry, reconnaissance” unit, Do Tran says the 6th Armored Brigade has taken a slightly different approach for its infantry regiments, ensuring that drone pilots previously trained on the Akeron antitank missile or 81-millimeter mortars retain those skills through dual training.</p>
+
+
+
+<p class="wp-block-paragraph">He said the brigade staff realized that whenever the weather was unfavorable for drone operations, those dual capabilities were needed to retain lethality. Creating drone units also created a problem of mass, according to Do Tran.</p>
+
+
+
+<p class="wp-block-paragraph">During the brigade’s first combat-preparation exercises with combat-drones, commanders found that even if their drone pilots achieved initial saturation, a numerically strong enemy would still break through lines that lacked ground troops to stop a large force.</p>
+
+
+
+<p class="wp-block-paragraph">“We quickly get overwhelmed if we don’t also have men behind them with rifles or other weapons,” Do Tran said. “We need to maintain a certain balance between human mass and drone pilots.”</p>
+
+
+
+<p class="wp-block-paragraph">Combat-drone units will have different uses based on the regiment they’re part of, according to the general.</p>
+
+
+
+<p class="wp-block-paragraph">He said that for a light cavalry regiment such as the 1st RIMa, drones contribute to reconnaissance and intelligence gathering, while for an infantry regiment, the primary role will be delivering lethal firepower. For a regiment of Leclerc main battle tanks, the combat drone unit’s primary role is to protect the armored column, Do Tran said.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>“</strong>It’s an entirely new set of rules to learn, an entirely new combination of capabilities to reinvent,” said Baratz. “The Army’s task today is to reinvent itself to be effective in this modern combat.&#8221;</p>
+
+
+
+<h3 id="h-drone-vulnerabilities" class="wp-block-heading">Drone vulnerabilities</h3>
+
+
+
+<p class="wp-block-paragraph"><strong>“</strong>We shouldn’t think that drones will make the old systems obsolete. Drones do have vulnerabilities: weather conditions, electronic jamming, other counter-drone systems being put in place. We still need our older systems for deep-strike operations, close-contact maneuvers and direct engagement.”</p>
+
+
+
+<p class="wp-block-paragraph">Officers of the 1er RIMa cautioned against over-interpreting the March exercise, with Maj. Sylvain saying the opposing regiment lacked adequate anti-drone capabilities and had few drones of its own, making an effective response difficult. Caussin likewise noted that during Orion, the exercise in free terrain limited realistic use of jamming by the opposing force.</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" src="https://one.sightlinemg.com/wp-content/uploads/2026/10/DSCF3252.jpg?w=1024" alt="" class="wp-image-122336" /><figcaption class="wp-element-caption">Equipment used by the French Army&#8217;s 1st Marine Infantry Regiment is on display during an exercise at the Mailly-le-Camp training grounds on June 11, 2026. (Rudy Ruitenberg/staff)</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">&#8220;If we&#8217;re back in a tank tomorrow and opposite of us we have another drone unit, it&#8217;s going to be tough for us as well,&#8221; Staff Sgt. Tristan said. &#8220;So we need all this feedback to figure out how to fight back against that.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">For its own combat preparation in June, the 1er RIMa asked the Centac combined-arms training center that runs the exercises at Mailly-le-Camp to step up the challenge, particularly by creating a contested electronic warfare environment.</p>
+
+
+
+<p class="wp-block-paragraph">The training center also added 12-gauge shotguns to the infantry kit and emphasized camouflage. Soldiers unfolded camouflaged umbrellas bought at sporting goods store Decathlon whenever they were on the move, seeking to obscure their visual signature.</p>
+
+
+
+<p class="wp-block-paragraph">The umbrellas slowed the 1er RIMa’s drone operators, forcing them to spend more time identifying targets to avoid confusion with the numerous deer or boars at Mailly-le-Camp, said Lt. Col. Guillaume, head of training at the 1st Light Infantry Battalion that staffs the center.</p>
+
+
+
+<p class="wp-block-paragraph">The opposing force also remained more dispersed, avoided grouped movement and kept vehicles farther back, bringing them forward only when the situation was considered sufficiently safe. The transparency provided by drones clearly changed how the exercise unfolded and affected the conduct of operations, Lt. Col. Guillaume said.</p>
+
+
+
+<p class="wp-block-paragraph">While the drone advantage was less pronounced in June than in March, the 1er RIMa’s drone squadron obtained the best score of the roughly 30 Army units that passed through the Mailly-le-Camp training center over a 12-month period, Lt. Col. Guillaume said. The June exercise provided a better assessment of how the drone squadron fares against a more capable adversary, according to Caussin.</p>
+
+
+
+<p class="wp-block-paragraph">The regiment explored what might happen if the tactical deadlock observed in Ukraine were broken and maneuver is restored, with Caussin saying the drone squadron’s mobility would allow it to move rapidly between different parts of the battlefield, using drones to understand the tactical situation and fill gaps.</p>
+
+
+
+<p class="wp-block-paragraph">But the exercise also showed the battlefield overview provided by drones, while necessary to win an engagement, is not enough by itself. The speed at which intelligence can be converted into action is as important as the number of drones in the air, and traditional infantry elements remained necessary to provide direct kinetic action, Lt. Col. Guillaume said.</p>
+
+
+
+<h3 id="h-jam-detection" class="wp-block-heading">Jam detection</h3>
+
+
+
+<p class="wp-block-paragraph">Electronic warfare reduced drone effectiveness on several occasions, allowing the opposing force to bring in armor to create a temporary advantage and secure objectives, said Lt. Col. Guillaume, describing a constant “game of cat and mouse.”</p>
+
+
+
+<p class="wp-block-paragraph">Because of the energy requirements of electronic warfare, jamming is not necessarily continuous. The regiment learned it needed to become better at determining when it was actually being jammed by the adversary, and when a failed maneuver was due to its own poor execution, according to Caussin.</p>
+
+
+
+<p class="wp-block-paragraph">For the regimental commander, the exercise confirmed the drone squadron complements rather than replaces armored formations, an additional layer to combined-arms warfare than a revolution. With the opponent better prepared for the drone threat, the June exercise forced the 1er RIMa to change how it employed drones, picking priority targets rather than observing and striking at will.</p>
+
+
+
+<p class="wp-block-paragraph">In a drone-saturated environment, advantage will come more from controlling the pace of events rather than simply holding ground, by combining drones and highly mobile forces to observe, adapt, and act faster than the adversary, according to Caussin.</p>
+
+
+
+<p class="wp-block-paragraph">He called the stand-out quality of the drone-combat unit its ability “manipulate the enemy&#8217;s decision-making time, really to overwhelm them” and allow the regiment to seize the initiative.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;Will the drone&#8217;s enemy be another drone?&#8221; Caussin said. &#8220;We&#8217;re starting to implement this to some extend in small-scale exercises, particularly at the regimental level.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;It&#8217;s always difficult to talk about game-changers. What’s certain today is that this is the reality of the battlefield and it enables us to achieve tactical effects that have a decisive impact on the enemy.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">In the 1er RIMa, FVP pilots are teamed with a driver, a vehicle commander and optionally a fourth crew member operating a drone by Paris-based vendor Parrot, or other ISR system to designate targets. Cpl. Igor said he often works with one crew member as a spotter. The teams still carry Heckler &amp; Koch rifles, a heavy machine gun to defend against enemy infantry, and an AT4 shoulder-fired antitank weapon.</p>
+
+
+
+<h3 id="h-farther-reach" class="wp-block-heading">Farther reach</h3>
+
+
+
+<p class="wp-block-paragraph">With the 105 mm gun of the AMX 10 RC, “we had reach, but we were much more visible,” Staff Sgt. Tristan said. Now, “we hole up in a corner with our vehicle and launch our drones from hiding, so the enemy can&#8217;t see us. With an AMX 10 RC, we can&#8217;t do that.”</p>
+
+
+
+<p class="wp-block-paragraph">The regiment’s drone squadron retained the structure of an armored reconnaissance unit, with a command and logistics platoon and four combat platoons: an ISR unit, two FPV drone units and one platoon operating longer-range loitering munitions.</p>
+
+
+
+<p class="wp-block-paragraph">With around 100 drone pilots in a unit of 120 personnel, the squadron can provide intelligence and strike across an area typically covered by a formation several times larger, with an operational reach approaching that of a full combined-arms tactical group, according to Lt. Col. Remi.</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" src="https://one.sightlinemg.com/wp-content/uploads/2026/10/DSCF3360.jpg?w=1024" alt="" class="wp-image-122337" /><figcaption class="wp-element-caption">A team from the French Army&#8217;s 1st Marine Infantry Regiment operates an FPV drone during an exercise at the Mailly-le-Camp training grounds on June 11, 2026. (Rudy Ruitenberg/staff)</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">The large number of drone operators changes logistics. Supply vehicles carry drones rather than ammunition, and the unit needs battlefield energy generation to keep batteries topped up. FPV pilot Igor said that during a day of exercise and simulated strikes, he might go through 10 or 20 drones.</p>
+
+
+
+<p class="wp-block-paragraph">Both Caussin and Maj. Sylvain emphasized drones alone will not decide a battle. The squadron is designed to operate alongside conventional units and slot into larger formations, with interoperability with French Army units and NATO allies built in from the start, said Maj. Sylvain.</p>
+
+
+
+<p class="wp-block-paragraph">In addition to developing doctrine, the regiment’s mandate is to work with industrial partners on technologies to make the drone squadron more effective. Once concept, described by officers and pilots as &#8220;queen and workers,&#8221; involves an operator controlling a mother drone, or queen, which in turn steers multiple worker drones launched from a “hive,” or canister.</p>
+
+
+
+<p class="wp-block-paragraph">The goal is essentially fire-and-forget autonomous engagement, according to Maj. Sylvain. An operator assigns a mission, the queen autonomously seeks and identifies the designated target, then directs worker drones to destroy it without further operator intervention.</p>
+
+
+
+<p class="wp-block-paragraph">With the squadron conceived as a mobile force rather than one dug in like Ukrainian operators, the idea is to have four hives at the back of a vehicle, with a stock of drones ready to deploy, Staff Sgt. Tristan said.</p>
+
+
+
+<p class="wp-block-paragraph">“Just open the hives, send out four drones on autopilot, and let them carry out their mission.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">While &#8220;not everything works perfect,&#8221; the squadron and its industry partners have figured out queen-worker communications and terminal guidance, Maj. Sylvain said.</p>
+
+
+
+<p class="wp-block-paragraph">FPV drone hit rates might be 5% to 10% for a novice pilot and 30% for an experienced one, compared with a more than 90% chance to land a shot with the AMX 10 RC cannon, according to Staff Sgt. Tristan. The regiment is counting on autonomous terminal guidance to increase drone hit rates to around 80% to 90%.</p>
+
+
+
+<p class="wp-block-paragraph">The squadron’s doctrinal goals include FPV strikes at a distance of 10 kilometers, and communication range is the main practical obstacle, Maj. Sylvain said. The ISR platoon uses several drone models from Parrot and is starting to achieve the ranges of up to 20 kilometers called for in the doctrine.</p>
+
+
+
+<p class="wp-block-paragraph">Officers in the 1er RIMa shied away from comparisons with Ukrainian drone units, which Maj. Sylvain said are battle-hardened after several years of war.</p>
+
+
+
+<h3 id="h-we-re-not-naive" class="wp-block-heading">&#8216;We&#8217;re not naive&#8217;</h3>
+
+
+
+<p class="wp-block-paragraph">&#8220;It&#8217;s obvious that we&#8217;d learn a lot from an exercise against them,” he said. “We&#8217;re not naive. We&#8217;re fully aware of our current level of capability, and we know we still have a lot of work to do to be ready to deploy the drone-combat squadron in a high-intensity conflict.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">The June exercise was also an opportunity to work on defense against enemy UAVs.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;Camouflage ourselves, take cover, and make sure there&#8217;s always someone listening out for drones, either to destroy them with certain weapons or simply to hide,&#8221; Staff Sgt. Tristan said. &#8220;In the heat of battle, chasing down a vehicle, also staying alert for anti-drone is difficult.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">The constant drone threat changes daily life for soldiers on exercise. Rather than having fixed meal times, “you have to snack throughout the day,” said Staff Sgt. Tristan. Sleep also becomes fragmented, with drone surveillance continuing through the night.</p>
+
+
+
+<p class="wp-block-paragraph">The 1er RIMa itself has adapted its command structure to the drone presence, dividing up command posts and deploying in the same armored vehicles as combat units to avoid detection.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;We question ourselves, we wonder how we can protect ourselves from this too,&#8221; said Cpl. Igor, the FPV pilot. &#8220;If we&#8217;re capable of doing it, we&#8217;re not the only ones who know how. So we&#8217;re going to try to find ways to protect ourselves from drones, because they&#8217;re really effective.&#8221;</p>
+]]></content:encoded>
+	</item>
+		<item>
+		<title>Defense leaders weigh in on expanding production &#124; Defense News Weekly Full Episode 10.27.26</title>
+		<link>https://www.c4isrnet.com/video/2026/10/26/defense-leaders-weigh-in-on-expanding-production-defense-news-weekly-full-episode-102726/</link>
+		
+		<dc:creator><![CDATA[Staff]]></dc:creator>
+		<pubDate>Mon, 26 Oct 2026 13:29:39 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/uncategorized/2026/10/26/defense-leaders-weigh-in-on-expanding-production-defense-news-weekly-full-episode-102726/</guid>
+
+					<description><![CDATA[Top leaders from the defense industry share their ideas on how to scale up production and integrate AI in remarks from the show floor at AUSA 2026.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46732</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-2a1757af-01e8-416a-a12a-db520b334901.png" width="1920" height="1080" type="image/png" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-2a1757af-01e8-416a-a12a-db520b334901.png" width="1920" height="1080" type="image/png" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><atype-video-jwplayer nostick="true" playlisturl="https://cdn.jwplayer.com/v2/playlists/fCzRqMW8?tags=2a1757af-01e8-416a-a12a-db520b334901" poster="/wp-content/uploads/2026/10/video-poster-2a1757af-01e8-416a-a12a-db520b334901.png" aspectratio="16 / 9" mute autostart="viewable"></atype-video-jwplayer><figcaption class="wp-element-caption" style="display:none">Top leaders from the defense industry share their ideas on how to scale up production and integrate AI in remarks from the show floor at AUSA 2026.</figcaption></figure>]]></content:encoded>
+	</item>
+		<item>
+		<title>Defense industry leaders weigh in: How to increase production and integrate AI</title>
+		<link>https://www.c4isrnet.com/video/2026/10/26/defense-industry-leaders-weigh-in-how-to-increase-production-and-integrate-ai/</link>
+		
+		<dc:creator><![CDATA[Staff]]></dc:creator>
+		<pubDate>Mon, 26 Oct 2026 13:26:26 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/uncategorized/2026/10/26/defense-industry-leaders-weigh-in-how-to-increase-production-and-integrate-ai/</guid>
+
+					<description><![CDATA[As military leaders clamor for increased weapons and systems productions, top defense company leaders chart ways they can meet the demand.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46730</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-1ace1072-986b-4713-874e-ba40b9ee150e.png" width="1280" height="720" type="image/png" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-1ace1072-986b-4713-874e-ba40b9ee150e.png" width="1280" height="720" type="image/png" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><atype-video-jwplayer nostick="true" playlisturl="https://cdn.jwplayer.com/v2/playlists/fCzRqMW8?tags=1ace1072-986b-4713-874e-ba40b9ee150e" poster="/wp-content/uploads/2026/10/video-poster-1ace1072-986b-4713-874e-ba40b9ee150e.png" aspectratio="16 / 9" mute autostart="viewable"></atype-video-jwplayer><figcaption class="wp-element-caption" style="display:none">As military leaders clamor for increased weapons and systems productions, top defense company leaders chart ways they can meet the demand.</figcaption></figure>]]></content:encoded>
+	</item>
+		<item>
+		<title>How to Fund College Without Hurting Retirement &#124; Money Minute</title>
+		<link>https://www.c4isrnet.com/video/2026/10/26/how-to-fund-college-without-hurting-retirement-money-minute/</link>
+		
+		<dc:creator><![CDATA[Staff]]></dc:creator>
+		<pubDate>Mon, 26 Oct 2026 13:25:43 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/uncategorized/2026/10/26/how-to-fund-college-without-hurting-retirement-money-minute/</guid>
+
+					<description><![CDATA[Can you save for your child’s college without undermining your retirement planning? These tips can help guide you to success.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46731</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-1dbe178a-e96f-4691-b07c-edd7a22d4755.png" width="1920" height="1080" type="image/png" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-1dbe178a-e96f-4691-b07c-edd7a22d4755.png" width="1920" height="1080" type="image/png" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><atype-video-jwplayer nostick="true" playlisturl="https://cdn.jwplayer.com/v2/playlists/fCzRqMW8?tags=1dbe178a-e96f-4691-b07c-edd7a22d4755" poster="/wp-content/uploads/2026/10/video-poster-1dbe178a-e96f-4691-b07c-edd7a22d4755.png" aspectratio="16 / 9" mute autostart="viewable"></atype-video-jwplayer><figcaption class="wp-element-caption" style="display:none">Can you save for your child’s college without undermining your retirement planning? These tips can help guide you to success.</figcaption></figure>]]></content:encoded>
+	</item>
+		<item>
+		<title>Semiautomatic grenade launcher and aim-assist for shooting down drones &#124; Highlights from AUSA 2026</title>
+		<link>https://www.c4isrnet.com/video/2026/10/26/semiautomatic-grenade-launcher-and-aim-assist-for-shooting-down-drones-highlights-from-ausa-2026/</link>
+		
+		<dc:creator><![CDATA[Staff]]></dc:creator>
+		<pubDate>Mon, 26 Oct 2026 13:22:47 +0000</pubDate>
+				<category><![CDATA[Videos]]></category>
+		<category><![CDATA[Military Featured]]></category>
+		<guid isPermaLink="false">https://one.sightlinemg.com/c4isrnet/uncategorized/2026/10/26/semiautomatic-grenade-launcher-and-aim-assist-for-shooting-down-drones-highlights-from-ausa-2026/</guid>
+
+					<description><![CDATA[Advances in weapons, new drones and personal drone protection were on display at the Army’s premier annual defense conference in Washington, D.C.]]></description>
+		
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">46729</post-id><media:thumbnail url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-ac53cca1-fe1c-44f6-b1ef-7f1a04633f6a.png" width="1920" height="1080" type="image/png" />
+<media:content medium="image" url="https://one.sightlinemg.com/wp-content/uploads/2026/10/video-poster-ac53cca1-fe1c-44f6-b1ef-7f1a04633f6a.png" width="1920" height="1080" type="image/png" />
+<news:push>0</news:push>
+<content:encoded><![CDATA[<figure class="wp-block-smg-jwplayer-video"><atype-video-jwplayer nostick="true" playlisturl="https://cdn.jwplayer.com/v2/playlists/fCzRqMW8?tags=ac53cca1-fe1c-44f6-b1ef-7f1a04633f6a" poster="/wp-content/uploads/2026/10/video-poster-ac53cca1-fe1c-44f6-b1ef-7f1a04633f6a.png" aspectratio="16 / 9" mute autostart="viewable"></atype-video-jwplayer><figcaption class="wp-element-caption" style="display:none">Advances in weapons, new drones and personal drone protection were on display at the Army’s premier annual defense conference in Washington, D.C.</figcaption></figure>]]></content:encoded>
+	</item>
+	</channel>
+</rss>

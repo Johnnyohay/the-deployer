@@ -1,0 +1,94 @@
+# ANU site settings.
+#
+# Edit this file, then apply it:
+#   npm run build:api      # checks the file and writes public/api/v1/config.json
+#   npx serve public       # look at the result locally
+# Pushing to main applies it on the live site (the GitHub Action rebuilds the API).
+# A mistake here stops the build with a message naming the bad line, so the site never
+# gets a broken config. See the Docs tab (docs.html) for every option.
+
+site:
+  name: ANU
+  owner: Johnny
+  tagline: Your personal helper for defense tech and US housing
+
+# The tabs in the top switcher, in this order. enabled: false hides a tab.
+desks:
+  - { id: defense, label: Defense, page: "./", enabled: true }
+  - { id: housing, label: Housing, page: housing.html, enabled: true }
+  - { id: videos, label: Watch, page: videos.html, enabled: true }
+  - { id: docs, label: Docs, page: docs.html, enabled: true }
+
+# Feature flags: true shows a feature, false hides it.
+flags:
+  housing.tiles: true            # the four headline numbers at the top
+  housing.calculator: true       # rental calculator in the metro panel
+  housing.stateShading: true     # shade states behind the metro dots
+  housing.rankings: true         # the sortable table
+  housing.rateChart: true        # 30-year mortgage rate chart
+  housing.news: true             # latest housing news
+  housing.videos: true           # housing Shorts strip and videos in the metro panel
+  videos.reels: true             # full-screen, swipe-through reel mode on the Watch tab
+  videos.autoplay: true          # in reel mode, start each video (muted) when it scrolls into view
+
+housing:
+  # What the page shows on first open.
+  defaults:
+    metric: score                # any metric id below or a custom attribute id
+    size: 200                    # 50, 100, 200, 400 or 9999 (all)
+    budget: 0                    # 0 = any price
+  budgets: [200000, 250000, 300000, 400000, 500000, 750000]
+
+  # Rental math defaults (the calculator can change them per visit).
+  # The collector uses these too, so cash flow and cap rate in the data match.
+  rental:
+    downPct: 25
+    opexPct: 45                  # % of rent for property tax, insurance, repairs, vacancy, management
+    years: 30
+
+  # How the ANU score (0–100) weighs each signal. Weights are relative; they needn't sum to 100.
+  # Applied by `npm run housing`.
+  score:
+    grossYield: 40
+    rentYoY: 20
+    forecast12m: 20
+    priceYoY: 10
+    inventoryDrop: 10
+
+  # Custom attributes: new metrics computed for every metro from the fields below, shown as a
+  # map color option, a ranking column, and in each metro's panel; ANU can read them too.
+  #
+  #   formula    arithmetic over metro fields: + - * / ( ), numbers, and min() max() abs() round()
+  #              fields: price rent priceMoM priceYoY price5y fromPeak rentYoY grossYield capRate
+  #                      cashFlow forecast12m inventory inventoryYoY score rank, and rate30 (mortgage)
+  #   format     money | kmoney | signedMoney | percent | percent2 | signedPercent | number
+  #   color      seq (low → high, one hue) | div (negative ↔ positive, two hues)
+  #   aggregate  how metros roll up to a state for shading: median | mean | min | max | sum | count
+  #   column     true adds it to the rankings table
+  #   higherIsBetter  sets the default sort direction
+  # A metro missing any field in the formula gets no value (gray on the map).
+  attributes:
+    - id: onePercent
+      label: Monthly rent as % of price (the 1% rule)
+      formula: rent / price * 100
+      format: percent2
+      color: seq
+      aggregate: median
+      column: true
+      higherIsBetter: true
+    - id: realRentGrowth
+      label: Rent growth minus price growth
+      formula: rentYoY - priceYoY
+      format: signedPercent
+      color: div
+      aggregate: median
+      column: false
+      higherIsBetter: true
+    - id: yearsToPayOff
+      label: Years of rent to equal the price
+      formula: price / (rent * 12)
+      format: number
+      color: seq
+      aggregate: median
+      column: false
+      higherIsBetter: false

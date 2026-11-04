@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-17",
+  "title": "Today's top defense-tech headlines",
+  "big": "36 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Germany changes course on plans to buy MQ-28 drone wingman: Boeing official",
+      "what": "Germany has set a target of 2029 to field a CCA, which would make it the first European country to reach such a milestone, but that timeline now looks to be in doubt.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261016-germany-changes-course-on-plans-to-buy-mq-28-drone"
+    },
+    {
+      "tag": "Space",
+      "h": "Order to limit Starshield for Ukraine came from inside White House, sources say",
+      "what": "The order to limit a satellite system used by Ukraine for battlefield communications and drone operations came from inside the White House.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261016-order-to-limit-starshield-for-ukraine-came-from-in"
+    },
+    {
+      "tag": "Allies & theaters",
+      "h": "Canada’s Calian wins $33M deal to script NATO war games",
+      "what": "Canadian defense contractor Calian Group has won a five-year contract worth about CA$47 million ($33.2 million) to keep writing the scenarios behind NATO’s major command exercises at the alliance’s Joint Warfare Centre in Stavanger, Norway.",
+      "you": "Allies' wars and budgets are the testing ground and a big second market for new defense tech.",
+      "ref": "u-20261017-canada-s-calian-wins-33m-deal-to-script-nato-war-g"
+    },
+    {
+      "tag": "Ground robotics",
+      "h": "Britain’s new Challenger 3 tank passes 2,000 km in trials",
+      "what": "The British Army’s new Challenger 3 tank has now driven 2,000 km (1,240 miles) and fired more than 200 main gun rounds in testing, and it is set to start a tougher phase of trials in November, according to its builder, Rheinmetall BAE Systems Land.",
+      "you": "Ground robots are moving from demos to real orders, starting with logistics and dangerous jobs.",
+      "ref": "u-20261017-britain-s-new-challenger-3-tank-passes-2-000-km-in"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Q A: No Longer a Software Factory, What’s Next for Air Force’s Kessel Run?",
+      "what": "Almost a decade ago, the Air Force created Kessel Run in 2017 as a military-commercial partnership and Airmen-led “software factory” in response to the service’s troubled rollout of the Air Operations Center 10.2. New leader Col.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261016-q-a-no-longer-a-software-factory-what-s-next-for-a"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Tactical power and thermal systems for directed energy",
+    "why": "Batteries, power conditioning and cooling packs that let lasers and microwave weapons fire continuously on vehicles. Laser production has started (AeroVironment E-HEL) but fielding is slow (Iron Beam); power and cooling are the constraint."
+  },
+  "auto": true
+}

@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-02",
+  "title": "Today's top defense-tech headlines",
+  "big": "33 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Missile defense & Golden Dome",
+      "h": "US approves $2.1 billion Patriot missile sale to Ukraine",
+      "what": "The missiles — which are yet to be manufactured — are not expected to be delivered until a couple of years into the 2030s.",
+      "you": "Missile defense is one of the biggest budget lines this decade, and its software and sensors are open to newcomers.",
+      "ref": "u-20261102-us-approves-2-1-billion-patriot-missile-sale-to-uk"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Neros gets $450M Pentagon loan to cut reliance on Chinese drone parts",
+      "what": "The Pentagon’s Office of Strategic Capital has agreed to lend up to $450 million to Neros, the California maker of the Archer attack drone, to build drones and their key parts in the United States, the Department of War announced on Nov. 2.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261102-neros-gets-450m-pentagon-loan-to-cut-reliance-on-c"
+    },
+    {
+      "tag": "Space",
+      "h": "Russia halts chemical exports after Ukraine hits its rocket fuel plants",
+      "what": "Russia has banned exports of benzene, toluene, xylenes and phenol for three months, saying it needs to keep its own factories supplied with the industrial chemicals, the government announced on Nov. 2.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261102-russia-halts-chemical-exports-after-ukraine-hits-i"
+    },
+    {
+      "tag": "Energy & nuclear power",
+      "h": "Leonardo DRS tapped to support Army’s high-energy laser program",
+      "what": "The company will be helping prime contractor AeroVironment under the E-HEL program. The post Leonardo DRS tapped to support Army’s high-energy laser program appeared first on DefenseScoop .",
+      "you": "Bases need their own power for AI, sensors and lasers, which creates a defense market for new energy tech.",
+      "ref": "u-20261102-leonardo-drs-tapped-to-support-army-s-high-energy-"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "U.S. Navy chief gets first look at Blackbeard hypersonic missile",
+      "what": "The U.S. Navy’s top officer, Chief of Naval Operations Adm. Daryl Caudle, got a close look at Blackbeard, the new air-launched hypersonic strike missile that the Navy is preparing to arm its F/A-18E/F Super Hornets with, during a visit to Naval Air Station…",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261102-u-s-navy-chief-gets-first-look-at-blackbeard-hyper"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Synthetic data and test & evaluation for autonomy",
+    "why": "Simulation and synthetic sensor data to train and certify autonomy when GPS is denied and radios are jammed. New autonomy policy (the June 2026 memo, CSIS definitions) means systems need verification evidence, and the new command gets test powers."
+  },
+  "auto": true
+}

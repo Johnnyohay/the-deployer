@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-13",
+  "title": "Today's top defense-tech headlines",
+  "big": "50 new stories since the last brief. The busiest areas: drones & air autonomy and allies & theaters.",
+  "stories": [
+    {
+      "tag": "Cyber & information",
+      "h": "IonQ to Buy Zero Trust Firm Elisity in Deal Worth Up to $1.3B",
+      "what": "The Elisity purchase will pair microsegmentation with IonQ’s post-quantum cryptography as federal PQC migration deadlines approach.",
+      "you": "State hackers are still inside critical networks, which keeps defensive and offensive cyber in demand.",
+      "ref": "u-20261013-ionq-to-buy-zero-trust-firm-elisity-in-deal-worth-"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "General Atomics Receives $248M Coast Guard Order for MQ-9B Aircraft",
+      "what": "The MQ-9B SkyGuardian will support maritime surveillance, search and rescue, border protection, and other operational missions.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261013-general-atomics-receives-248m-coast-guard-order-fo"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Air Books $200M DOW Contract for Army NGC2 Software Delivery",
+      "what": "Air has secured a potential five-year, $200 million DOW contract to support Army NGC2 with its AI-native readiness software.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261013-air-books-200m-dow-contract-for-army-ngc2-software"
+    },
+    {
+      "tag": "Space",
+      "h": "NASA Issues Final RFP for Commercial Space Stations in LEO After ISS Retirement",
+      "what": "NASA expects to award commercial LEO destination contracts on April 15, 2027, with proposals due Dec. 8.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261013-nasa-issues-final-rfp-for-commercial-space-station"
+    },
+    {
+      "tag": "Ground robotics",
+      "h": "North Korea unveils copy of Canadian armored vehicle",
+      "what": "North Korean leader Kim Jong Un has opened a new national defense museum packed with the country’s missiles, rocket launchers and drones, and among the exhibits is a previously unseen 4 4 armored vehicle that closely resembles the Canadian-made Roshel Senator…",
+      "you": "Ground robots are moving from demos to real orders, starting with logistics and dangerous jobs.",
+      "ref": "u-20261013-north-korea-unveils-copy-of-canadian-armored-vehic"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "GPS-denied navigation module ('Intel Inside' for drones)",
+    "why": "A small vision, inertial and terminal-guidance board any airframe maker can integrate; later, quantum-ready. Jamming is everywhere; most vendors can't build autonomy in-house. As airframes become commodities, the margin sits in components like this."
+  },
+  "auto": true
+}

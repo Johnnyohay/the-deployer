@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-23",
+  "title": "Today's top defense-tech headlines",
+  "big": "45 new stories since the last brief. The busiest areas: drones & air autonomy and maritime & undersea autonomy.",
+  "stories": [
+    {
+      "tag": "AI, software & command and control",
+      "h": "Navy awards Applied Intuition $25M to deploy AI sensor fusion at sea",
+      "what": "The Intelligent Perception System will help sailors understand a flood of sensor feeds while collecting data to train improved AI models, the company said.",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261022-navy-awards-applied-intuition-25m-to-deploy-ai-sen"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Denmark to buy cheap U.S. cruise missile built in Germany",
+      "what": "Denmark will buy Anthem ground-launched cruise missiles from U.S. defense company Covenant Industries, giving the Danish military its first land-based option for striking targets deep inside enemy territory, the Danish Ministry of Defense announced on Oct.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261023-denmark-to-buy-cheap-u-s-cruise-missile-built-in-g"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "U.S., Australia, U.K. Launch Maritime Demonstration to Enhance Interoperability",
+      "what": "The Maritime Big Play Pacific demonstration is underway off the coast of Southern California to advance interoperability among the U.S., Australia and the U.K., as part of the AUKUS trilateral partnership.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261022-u-s-australia-u-k-launch-maritime-demonstration-to"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "China’s first aircraft carrier forms ‘evolving pattern’ of voyages in disputed Asian seas",
+      "what": "The carrier group’s passages not far from Taiwan, Japan and the Philippines have raised alerts.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261023-china-s-first-aircraft-carrier-forms-evolving-patt"
+    },
+    {
+      "tag": "Sensing, ISR & quantum",
+      "h": "Four KJ-3000 Radar Jets At Chinese Factory Point To Serial Production",
+      "what": "The KJ-3000 is the most capable of China’s rapidly expanding airborne early warning and control aircraft fleet. The post Four KJ-3000 Radar Jets At Chinese Factory Point To Serial Production appeared first on TWZ .",
+      "you": "Better sensors and navigation that works without GPS are prerequisites for everything autonomous.",
+      "ref": "u-20261022-four-kj-3000-radar-jets-at-chinese-factory-point-t"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Bill-of-materials compliance and magnet sourcing",
+    "why": "Maps every part to its country of origin, flags NDAA, Blue UAS and the 2027 magnet ban, and finds compliant suppliers. The 1 Jan 2027 magnet ban and China's 10 Nov deadline hit hundreds of hardware vendors at once."
+  },
+  "auto": true
+}

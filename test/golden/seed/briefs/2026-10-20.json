@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-20",
+  "title": "Today's top defense-tech headlines",
+  "big": "39 new stories since the last brief. The busiest areas: drones & air autonomy and maritime & undersea autonomy.",
+  "stories": [
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "Lockheed Martin Delivers C-130J-30 Super Hercules to Navy",
+      "what": "Northrop Grumman will integrate mission systems into the E-130J aircraft, while Collins Aerospace will supply low-frequency systems The post Lockheed Martin Delivers C-130J-30 Super Hercules to Navy first appeared on Executive Gov .",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261019-lockheed-martin-delivers-c-130j-30-super-hercules-"
+    },
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Ghost Shark with teeth: Australia unveils underwater drone payloads",
+      "what": "The modular payloads will be integrated onto Anduril’s Ghost Shark and C2 Robotics’ Speartooth unmanned underwater vehicles as well as Ocius’s Bluebottle unmanned surface vessel (USV), the Australian DoD said in an announcement.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261020-ghost-shark-with-teeth-australia-unveils-underwate"
+    },
+    {
+      "tag": "Space",
+      "h": "Russian satellite stalked ICEYE spacecraft in potentially dangerous on-orbit maneuvers",
+      "what": "The Cosmos 2612 came within 500 meters (about a third of a mile) to US-flagged ICEYE-X36 believed to be supporting Ukraine, according to LeoLabs.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261019-russian-satellite-stalked-iceye-spacecraft-in-pote"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Navy expands contract ceiling for AI-enabled repair robots",
+      "what": "Gecko Robotics Co-founder and President Troy Demmer shared new details about the Navy's approach to fleet maintenance. The post Navy expands contract ceiling for AI-enabled repair robots appeared first on DefenseScoop .",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261020-navy-expands-contract-ceiling-for-ai-enabled-repai"
+    },
+    {
+      "tag": "Cyber & information",
+      "h": "U.S. Air Force pays $333M to help troops hunt hackers",
+      "what": "The U.S. Air Force has awarded a $332.8 million contract to help its cyber defenders collect, store and analyze network data where it is gathered, so the information can be shared across the military’s common cyber warfare system instead of sitting in…",
+      "you": "State hackers are still inside critical networks, which keeps defensive and offensive cyber in demand.",
+      "ref": "u-20261020-u-s-air-force-pays-333m-to-help-troops-hunt-hacker"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Cross-vendor drone fleet operations",
+    "why": "Tracks inventory, firmware, battery health, losses and operator training for thousands of drones from many vendors. Drone Dominance buys from 11+ vendors and nobody manages the mixed fleet. At 200k units, logistics is the bottleneck."
+  },
+  "auto": true
+}

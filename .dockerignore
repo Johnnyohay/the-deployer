@@ -1,0 +1,7 @@
+node_modules
+.hf-cache
+app-dist
+data
+public/api
+logs
+.git

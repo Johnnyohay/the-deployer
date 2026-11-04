@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-25",
+  "title": "Today's top defense-tech headlines",
+  "big": "9 new stories since the last brief. The busiest areas: drones & air autonomy and maritime & undersea autonomy.",
+  "stories": [
+    {
+      "tag": "Drones & air autonomy",
+      "h": "Royal Navy moves to buy U.S.-made Skydio X10D drones",
+      "what": "Britain’s Ministry of Defence has opened a tender to buy Skydio X10D small drones, the American-made reconnaissance quadcopter already ordered by the thousands by the U.S.",
+      "you": "Drones are becoming the military's default purchase, so volume, price and reliability decide who wins.",
+      "ref": "u-20261025-royal-navy-moves-to-buy-u-s-made-skydio-x10d-drone"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "U.S. Navy begins upgrading 22-year-old destroyer with new radar",
+      "what": "The U.S. Navy destroyer USS Pinckney (DDG 91) has entered General Dynamics NASSCO’s shipyard in San Diego for a second depot modernization period that will make it the first warship to receive the Raytheon AN/SPY-6(V)4 radar, the Navy’s Portfolio Acquisition…",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261025-u-s-navy-begins-upgrading-22-year-old-destroyer-wi"
+    },
+    {
+      "tag": "Allies & theaters",
+      "h": "Ukraine accuses Musk of false claims over Starlink",
+      "what": "Ukraine has rejected Elon Musk’s claim that its military broke Starlink’s terms of service by using the civilian satellite network for offensive drone strikes, with a presidential adviser saying that restrictions SpaceX placed on the service in February make…",
+      "you": "Allies' wars and budgets are the testing ground and a big second market for new defense tech.",
+      "ref": "u-20261025-ukraine-accuses-musk-of-false-claims-over-starlink"
+    },
+    {
+      "tag": "Budget, policy & acquisition reform",
+      "h": "Funding, force-structure issues could hinder Hegseth’s new autonomous command",
+      "what": "The money to start AUTOWARCOM is to come from a reconciliation bill whose passage is in doubt.",
+      "you": "Budget and policy moves decide which programs get real money and when; they're the earliest signal of demand.",
+      "ref": "u-20261025-funding-force-structure-issues-could-hinder-hegset"
+    },
+    {
+      "tag": "Adversaries: China, Russia, Iran",
+      "h": "Russia launches new stealth corvette Grozny",
+      "what": "Russia’s Amur Shipbuilding Plant has launched the multipurpose corvette Grozny, the fifth Project 20380 warship it has built for the Russian Navy’s Pacific Fleet, the fleet’s press service said. The ceremony took place on Oct.",
+      "you": "What China, Russia and Iran field sets the requirements the Pentagon buys against.",
+      "ref": "u-20261025-russia-launches-new-stealth-corvette-grozny"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "Contract intelligence and capture agent for small vendors",
+    "why": "An LLM agent that watches SAM.gov, DIU, OTA consortia, budget documents and portfolio acquisition executives, matches openings to a product, and drafts responses. Thousands of new vendors are navigating DAWG and the new acquisition rules; turning valuations into orders is the stated test."
+  },
+  "auto": true
+}

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-24",
+  "title": "Today's top defense-tech headlines",
+  "big": "31 new stories since the last brief. The busiest areas: allies & theaters and maritime & undersea autonomy.",
+  "stories": [
+    {
+      "tag": "Space",
+      "h": "‘The West can’t stop me’: Space wars heat up as Russia tails a Ukraine-linked US satellite",
+      "what": "Washington blamed Moscow for deliberately moving a Russian military satellite with an undisclosed mission close last week to a U.S.-registered satellite.",
+      "you": "More of the military's sensing and communications now runs through orbit, and new suppliers are getting in.",
+      "ref": "u-20261023-the-west-can-t-stop-me-space-wars-heat-up-as-russi"
+    },
+    {
+      "tag": "AI, software & command and control",
+      "h": "Japan weighs rewrite of its military AI policy",
+      "what": "Japanese Defense Minister Shinjiro Koizumi said on Oct. 19 that the basic policy governing how the Ministry of Defense and the Self-Defense Forces use artificial intelligence needs to be reviewed, telling lawmakers that AI development has moved faster than…",
+      "you": "Software that decides what to look at and what to hit is where the most value is moving.",
+      "ref": "u-20261024-japan-weighs-rewrite-of-its-military-ai-policy"
+    },
+    {
+      "tag": "Missiles, hypersonics & munitions",
+      "h": "Denmark To Buy Anthem Munitions, Joint Strike Missiles In Dual Long-Range Strike Push",
+      "what": "The ground- and air-launched weapons will give Denmark all-new options for striking deep behind enemy lines as NATO reinforces its Baltic flank.",
+      "you": "Weapons stockpiles are short, so anyone who can make missiles and rocket motors faster and cheaper has buyers.",
+      "ref": "u-20261023-denmark-to-buy-anthem-munitions-joint-strike-missi"
+    },
+    {
+      "tag": "Allies & theaters",
+      "h": "Russia and China step up spy flights near Japan",
+      "what": "China and Russia sent military intelligence aircraft toward Japan on four consecutive days this week, prompting the Japan Air Self-Defense Force to scramble fighters each day, as two Chinese Y-9 aircraft crossed the gap between Okinawa and Miyako-jima into…",
+      "you": "Allies' wars and budgets are the testing ground and a big second market for new defense tech.",
+      "ref": "u-20261024-russia-and-china-step-up-spy-flights-near-japan"
+    },
+    {
+      "tag": "Maritime & undersea autonomy",
+      "h": "China’s Liaoning carrier: 10 years from training ship to warship",
+      "what": "China’s Liaoning carrier group has carried out its second far-seas training deployment to the Western Pacific this year, a decade after the carrier’s first such voyage in 2016, Chinese state broadcaster CCTV reported on Oct.",
+      "you": "The Navy is short of ships and is turning to cheaper unmanned boats, which opens the door to new builders.",
+      "ref": "u-20261024-china-s-liaoning-carrier-10-years-from-training-sh"
+    }
+  ],
+  "watch": {
+    "h": "Palantir Q3 2026 earnings",
+    "why": "Around November 3. Whether US commercial growth keeps outpacing government revenue."
+  },
+  "idea": {
+    "h": "GPS-denied navigation module ('Intel Inside' for drones)",
+    "why": "A small vision, inertial and terminal-guidance board any airframe maker can integrate; later, quantum-ready. Jamming is everywhere; most vendors can't build autonomy in-house. As airframes become commodities, the margin sits in components like this."
+  },
+  "auto": true
+}
