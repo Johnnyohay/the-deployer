@@ -38,7 +38,7 @@ const op = <T extends string, S extends z.ZodRawShape>(name: T, shape: S, about:
 const Op = z.discriminatedUnion("op", [
   op("setSite", { newName: z.string().optional(), tagline: z.string().optional() }, "Rename the site or change its tagline"),
   op("setAudience", { audience: z.string() }, "Change who it is written for"),
-  op("setWord", { word: z.enum(["theme", "themes", "entity", "entities", "state", "money", "watch", "ideas"]), text: z.string().min(2).max(40) }, "Change one of the site's own words (its tabs and headings), e.g. call themes 'Markets'"),
+  op("setWord", { word: z.enum(["theme", "entity", "state", "money", "watch", "ideas"]), text: z.string().min(2).max(40) }, "Change one of the site's own words (its tabs and headings), e.g. word theme, text 'Markets'"),
   op("editScope", { addKeywords: Words, removeKeywords: Words }, "Scope = the subject's core terms; a story must contain one to be kept. To keep out another field, ADD this subject's own defining terms (never the unwanted field's words)"),
   op("addTheme", { name: z.string(), keywords: Words.min(6), soWhat: z.string() }, "A new theme with specific keywords"),
   op("removeTheme", { name: z.string() }, "Remove a theme by its current name"),
@@ -89,18 +89,30 @@ for (const o of plan.ops as (Op & Record<string, any>)[]) {
   const themes = topic.sectors as Doc[];
   const feeds = sources.feeds as Doc[];
   switch (o.op) {
-    case "setSite":
+    case "setSite": {
+      const was = `${site.site.name} — ${site.site.tagline}`;
       if (o.newName) site.site.name = o.newName;
       if (o.tagline) site.site.tagline = o.tagline;
-      done.push(`Site: ${site.site.name} — ${site.site.tagline}`);
+      const now = `${site.site.name} — ${site.site.tagline}`;
+      if (now !== was) done.push(`Site: ${now}`);
       break;
+    }
     case "setAudience":
       if (o.audience) (topic.audience = o.audience), done.push(`Audience: ${o.audience}`);
       break;
-    case "setWord":
-      topic.vocab = { ...topic.vocab, [o.word]: o.text };
-      done.push(`The site now says "${o.text}" for ${o.word}`);
+    case "setWord": {
+      // Theme and entity names come in pairs (a tab says "Markets", a card says "Market").
+      const text = o.text.trim();
+      if (o.word === "theme" || o.word === "entity") {
+        const [one, many] = /ies$/i.test(text) ? [text.replace(/ies$/i, "y"), text] : /[^s]s$/i.test(text) ? [text.slice(0, -1), text] : [text, /y$/i.test(text) ? text.replace(/y$/i, "ies") : `${text}s`];
+        topic.vocab = { ...topic.vocab, [o.word]: one, [o.word === "theme" ? "themes" : "entities"]: many };
+        done.push(`The site now says "${one}" / "${many}"`);
+      } else {
+        topic.vocab = { ...topic.vocab, [o.word]: text };
+        done.push(`The site now says "${text}" for ${o.word}`);
+      }
       break;
+    }
     case "editScope":
       topic.scope ??= { keywords: [] };
       // Drawing the scope from scratch is its own focused question; the plan only hints at it.
@@ -109,8 +121,17 @@ for (const o of plan.ops as (Op & Record<string, any>)[]) {
         o.addKeywords = await draftScope(topic.domain, themeNames, `The person asked: ${request.trim()}`).catch(() => o.addKeywords);
         o.removeKeywords = [];
       }
-      topic.scope.keywords = [...new Set([...(topic.scope.keywords ?? []).filter((k: string) => !o.removeKeywords.includes(k)), ...o.addKeywords])];
-      done.push(`Scope: +${o.addKeywords.join(", ") || "none"} −${o.removeKeywords.join(", ") || "none"}`);
+      {
+        // Report only what actually changed (a plan often "removes" terms that were never there).
+        const had: string[] = topic.scope.keywords ?? [];
+        const lower = (xs: string[]) => new Set(xs.map((x) => x.toLowerCase()));
+        const drop = lower(o.removeKeywords);
+        const removed = had.filter((k) => drop.has(k.toLowerCase()));
+        const kept = had.filter((k) => !drop.has(k.toLowerCase()));
+        const added = [...new Set(o.addKeywords as string[])].filter((k) => !lower(kept).has(k.toLowerCase()));
+        topic.scope.keywords = [...kept, ...added];
+        if (added.length || removed.length) done.push(`Scope: ${[added.length ? `added ${added.join(", ")}` : "", removed.length ? `removed ${removed.join(", ")}` : ""].filter(Boolean).join("; ")}`);
+      }
       break;
     case "addTheme": {
       if (!o.name || !o.keywords.length) { skipped.push(`addTheme without a name or keywords`); break; }
