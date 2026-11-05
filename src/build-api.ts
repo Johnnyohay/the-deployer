@@ -1,12 +1,28 @@
-import { cp, writeFile, mkdir } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { loadDesk, type Desk } from "./store.ts";
 import { FORMULA_FIELDS, loadRequests, loadSiteConfig, loadVideoConfig } from "./config.ts";
+import { feedUrl, loadSources, loadTopic, typeNames } from "./topic.ts";
 
 const API_DIR = path.join("public", "api", "v1");
 // The site's pages are part of the engine; each build copies them into the pack's public/.
+// A pack can replace any page with its own in site/ (ANU keeps its hand-made ones that way).
 const SITE_DIR = fileURLToPath(new URL("../site", import.meta.url));
+
+const escHtml = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+/** Copies the pages and fills in {{name}}, {{tagline}} and {{domain}} from the pack. */
+async function buildPages(words: Record<string, string>) {
+  await cp(SITE_DIR, "public", { recursive: true });
+  if (existsSync("site")) await cp("site", "public", { recursive: true });
+  for (const file of (await readdir("public")).filter((f) => f.endsWith(".html"))) {
+    const html = await readFile(path.join("public", file), "utf8");
+    const filled = html.replace(/\{\{(\w+)\}\}/g, (m, key: string) => (key in words ? escHtml(words[key]) : m));
+    if (filled !== html) await writeFile(path.join("public", file), filled);
+  }
+}
 
 async function put(file: string, value: unknown) {
   const full = path.join(API_DIR, file);
@@ -16,7 +32,6 @@ async function put(file: string, value: unknown) {
 
 /** Writes the site's pages and the static JSON API that GitHub Pages serves under /api/v1/. */
 export async function buildApi(desk: Desk): Promise<void> {
-  await cp(SITE_DIR, "public", { recursive: true });
   const briefs = [...desk.briefs].sort((a, b) => b.date.localeCompare(a.date));
   const updates = [...desk.updates].sort((a, b) => b.d.localeCompare(a.d));
   const generatedAt = new Date().toISOString();
@@ -41,13 +56,27 @@ export async function buildApi(desk: Desk): Promise<void> {
 
   // Settings from topic/*.yaml that the pages read (tabs, flags, defaults, custom attributes, requests).
   const site = await loadSiteConfig();
-  const video = await loadVideoConfig();
+  const video = existsSync("topic/videos.yaml") ? await loadVideoConfig() : { channels: [], match: {}, keepDays: 0 };
+  const topic = await loadTopic();
+  const feeds = (await loadSources()).feeds;
+  await buildPages({ name: site.site.name, tagline: site.site.tagline, domain: topic.domain });
   await put("config.json", {
     generatedAt,
     ...site,
     videos: { topics: [...new Set(video.channels.map((c) => c.topic).filter((t) => t !== "mixed").concat(Object.keys(video.match)))], channels: video.channels, keepDays: video.keepDays },
-    requests: await loadRequests(),
+    requests: existsSync("topic/requests.yaml") ? await loadRequests() : [],
     formulaFields: FORMULA_FIELDS,
+    // What the docs page shows: what the desk follows and where it comes from.
+    topic: {
+      domain: topic.domain,
+      audience: topic.audience,
+      vocab: topic.vocab,
+      entityKinds: topic.entityKinds,
+      types: typeNames(topic),
+      sectors: topic.sectors.map(({ id, name, keywords, pattern, soWhat }) => ({ id, name, keywords, pattern, soWhat })),
+    },
+    feeds: feeds.map((f) => ({ ...f, url: "url" in f ? f.url : undefined, feedUrl: feedUrl(f) })),
+    health: existsSync("data/health.json") ? JSON.parse(await readFile("data/health.json", "utf8")) : null,
   });
 }
 

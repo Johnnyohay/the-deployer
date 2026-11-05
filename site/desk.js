@@ -1,12 +1,10 @@
-/* Shared by ANU's pages: reads the site settings (config/*.yaml, published as
+/* Shared by the site's pages: reads the site settings (topic/*.yaml, published as
    api/v1/config.json) and draws the tab switcher. Pages work with built-in defaults
    when the settings can't load. */
-window.ANU = (() => {
+window.DESK = window.ANU = (() => {
   const FALLBACK = {
     desks: [
-      { id: "defense", label: "Defense", page: "./", enabled: true },
-      { id: "housing", label: "Housing", page: "housing.html", enabled: true },
-      { id: "videos", label: "Watch", page: "videos.html", enabled: true },
+      { id: "news", label: "Today", page: "./", enabled: true },
       { id: "docs", label: "Docs", page: "docs.html", enabled: true },
     ],
     flags: {},
@@ -26,7 +24,7 @@ window.ANU = (() => {
       (cfg.desks || FALLBACK.desks)
         .filter((d) => d.enabled !== false)
         .map((d) => `<a href="${esc(d.page)}"${d.id === current ? ' aria-current="page"' : ""}>${esc(d.label)}</a>`)
-        .join("") + '<a class="ask" href="app/">Ask ANU →</a>';
+        .join("") + `<a class="ask" href="app/">Ask ${esc(cfg.site?.name || "")} →</a>`;
   }
   return { config, flag, renderDesks, esc };
 })();

@@ -1,0 +1,26 @@
+name: Set me up
+description: Describe what you want to follow; your site is built from it.
+title: Set me up
+body:
+  - type: markdown
+    attributes:
+      value: Answer in your own words. Submit, and within a few minutes your site's settings are written and the first refresh starts. You'll get a reply on this issue with what was set up and your site's link.
+  - type: textarea
+    attributes:
+      label: What do you want to follow?
+      placeholder: e.g. trends in retail, supply chain and geopolitics
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Who is it for, and what do you want from it?
+      placeholder: e.g. I work in retail strategy and want to see supply shocks and tariff changes coming before competitors do.
+  - type: input
+    attributes:
+      label: A name for your site (optional)
+  - type: textarea
+    attributes:
+      label: Sources you already read or trust (optional)
+  - type: textarea
+    attributes:
+      label: YouTube channels you like on this (optional)

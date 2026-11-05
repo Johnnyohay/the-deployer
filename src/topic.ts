@@ -28,16 +28,53 @@ const Sector = z.object({
 
 const StoryType = z.object({ name: z.string(), weight: z.number().min(0).default(1), ...rule }).refine(hasRule, "give the story type some keywords or a pattern");
 
-const Mode = z.object({ id: z.string().regex(/^[a-z][a-zA-Z0-9]*$/), label: z.string(), instruction: z.string() });
+const Mode = z.object({
+  id: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
+  label: z.string(),
+  instruction: z.string(),
+  suggest: z.array(z.string()).default([]).describe("Suggested questions; {scope}, {when} and {entity} are filled in"),
+});
+
+// The words the site uses for this subject's building blocks: what a theme is called
+// ("Sector", "Market", "Region"…), what the tracked things are ("Company", "Brand", "Club"…).
+const VOCAB_DEFAULTS = {
+  theme: "Sector",
+  themes: "Sectors",
+  entity: "Company",
+  entities: "Companies",
+  state: "Where it stands",
+  money: "Where the money is",
+  watch: "What to watch",
+  ideas: "Ideas",
+  ideasIntro: "Openings that come out of the evidence collected here.",
+  updatesIntro: "Every sourced story, newest first.",
+  searchExample: "",
+};
+const Vocab = z.object(Object.fromEntries(Object.entries(VOCAB_DEFAULTS).map(([k, v]) => [k, z.string().default(v)])) as {
+  [K in keyof typeof VOCAB_DEFAULTS]: z.ZodDefault<z.ZodString>;
+}).prefault({});
+
+// The kinds of things the desk tracks (companies, countries, ports, people…). Entities in
+// data/companies.json carry one of these in `kind`; stories are tagged with the ones they mention.
+const EntityKind = z.object({
+  id: z.string().regex(/^[a-z][a-z0-9]*$/, "use lowercase letters and digits only"),
+  label: z.string(),
+  plural: z.string(),
+});
 
 const Topic = z.object({
   domain: z.string().describe("A short phrase for what this desk covers, e.g. 'defense tech and US housing'"),
   audience: z.string().describe("Who reads it and why; every 'why it matters' is written for them"),
+  vocab: Vocab,
+  entityKinds: z.array(EntityKind).default([{ id: "company", label: "Company", plural: "Companies" }]),
+  scope: z.object(rule).default({ keywords: [] })
+    .describe("The subject's core terms: when set, a story must contain at least one to be kept, so a theme keyword can't pull in news from another field"),
   sectors: z.array(Sector).min(1),
   storyTypes: z.array(StoryType).default([]),
   defaultType: z.object({ name: z.string(), weight: z.number().min(0).default(1) }).default({ name: "News", weight: 1 }),
   noise: z.object(rule).default({ keywords: [] }).describe("Headlines matching this are dropped (personnel moves, webinars…)"),
   collect: z.object({ lookbackDays: z.number().int().positive().default(3) }).default({ lookbackDays: 3 }),
+  curate: z.object({ ideas: z.boolean().default(false).describe("Let the curator suggest ideas from the news each week") }).prefault({}),
   brief: z.object({
     title: z.string(),
     stories: z.number().int().min(1).max(10).default(5),
@@ -61,9 +98,22 @@ const Topic = z.object({
   }).optional(),
 });
 
-const Sources = z.object({
-  feeds: z.array(z.object({ name: z.string(), url: z.url(), tier: z.enum(TIERS).default("news") })).min(1),
-});
+// A feed is an RSS/Atom URL, or a Google News search (`googleNews: "query"`), which works
+// for any subject and covers sites that publish no feed of their own.
+const Feed = z.union([
+  z.object({ name: z.string(), url: z.url(), tier: z.enum(TIERS).default("news") }),
+  z.object({ name: z.string(), googleNews: z.string().min(2), tier: z.enum(TIERS).default("news"), lang: z.string().default("en-US") }),
+]);
+
+const Sources = z.object({ feeds: z.array(Feed).min(1) });
+export type Feed = z.infer<typeof Feed>;
+
+/** The URL a feed is read from. */
+export function feedUrl(f: Feed): string {
+  if ("url" in f) return f.url;
+  const [hl, gl = "US"] = f.lang.split("-");
+  return `https://news.google.com/rss/search?q=${encodeURIComponent(`${f.googleNews} when:7d`)}&hl=${f.lang}&gl=${gl}&ceid=${gl}:${hl}`;
+}
 
 export type Topic = z.infer<typeof Topic>;
 export type Sources = z.infer<typeof Sources>;
@@ -107,6 +157,7 @@ export async function loadTopic(): Promise<Topic> {
   topic.sectors.forEach((s) => compileRule(s, `topic/topic.yaml sector "${s.id}"`));
   topic.storyTypes.forEach((t) => compileRule(t, `topic/topic.yaml story type "${t.name}"`));
   compileRule(topic.noise, "topic/topic.yaml noise");
+  compileRule(topic.scope, "topic/topic.yaml scope");
   return topic;
 }
 
@@ -121,16 +172,22 @@ export const typeWeights = (t: Topic): Record<string, number> =>
 export interface PackInfo {
   name: string;
   owner: string;
+  tagline: string;
   domain: string;
+  vocab: Topic["vocab"];
+  entityKinds: Topic["entityKinds"];
   audience: string;
   types: string[];
   ask: Topic["ask"];
 }
 
-export const packInfo = (topic: Topic, site: { name: string; owner: string }): PackInfo => ({
+export const packInfo = (topic: Topic, site: { name: string; owner: string; tagline: string }): PackInfo => ({
   name: site.name,
   owner: site.owner,
+  tagline: site.tagline,
   domain: topic.domain,
+  vocab: topic.vocab,
+  entityKinds: topic.entityKinds,
   audience: topic.audience,
   types: typeNames(topic),
   ask: topic.ask,

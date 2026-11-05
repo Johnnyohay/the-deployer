@@ -1,0 +1,10 @@
+name: Change my setup
+description: Add, drop or rename anything, in plain words.
+title: Change my setup
+body:
+  - type: textarea
+    attributes:
+      label: What should change?
+      placeholder: e.g. Also follow Mexico nearshoring. Drop the sustainability theme. I keep seeing sports stories, keep it to retail.
+    validations:
+      required: true

@@ -8,7 +8,8 @@ import { loadDesk, saveDaily, slug } from "./store.ts";
 import { buildApi } from "./build-api.ts";
 import { tagCompanies } from "./companies.ts";
 import type { Brief, Update } from "./schema.ts";
-import { compileRule, loadSources, loadTopic, typeWeights } from "./topic.ts";
+import { compileRule, feedUrl, loadSources, loadTopic, typeWeights } from "./topic.ts";
+import { mkdir, writeFile } from "node:fs/promises";
 
 const topic = await loadTopic();
 const FEEDS = (await loadSources()).feeds;
@@ -16,19 +17,28 @@ const SECTOR_RULES = Object.fromEntries(topic.sectors.map((s) => [s.id, compileR
 const TYPE_RULES = topic.storyTypes.map((t) => [t.name, compileRule(t, t.name)] as const);
 const SECTOR_SO_WHAT = Object.fromEntries(topic.sectors.map((s) => [s.id, s.soWhat]));
 const NOISE = compileRule(topic.noise, "noise");
+const SCOPE = topic.scope.keywords.length || topic.scope.pattern ? compileRule(topic.scope, "scope") : null;
 const TYPE_WEIGHT = typeWeights(topic);
 
 interface Article { title: string; link: string; date: string; summary: string; source: (typeof FEEDS)[number] }
 
+// Google News items are "Headline - Publisher" with a list of links for a summary; keep
+// the headline and credit the publisher, so a story reads the same as one from a direct feed.
 const fetchArticles = async (feed: (typeof FEEDS)[number]): Promise<Article[]> =>
-  (await fetchFeed(feed.name, feed.url)).map(({ title, link, date, summary }) => ({ title, link, date, summary, source: feed }));
+  (await fetchFeed(feed.name, feedUrl(feed))).map(({ title, link, date, summary, raw }) => {
+    if (!("googleNews" in feed)) return { title, link, date, summary, source: feed };
+    const publisher = String((raw.source as Record<string, unknown> | undefined)?.["#text"] ?? "").trim();
+    const headline = publisher && title.endsWith(` - ${publisher}`) ? title.slice(0, -publisher.length - 3) : title;
+    return { title: headline, link, date, summary: "", source: { ...feed, name: publisher || feed.name } };
+  });
 
 const today = process.env.DESK_DATE ?? new Date().toISOString().slice(0, 10);
 const lookbackDays = Number(process.env.LOOKBACK_DAYS ?? topic.collect.lookbackDays);
 const since = new Date(Date.parse(today) - lookbackDays * 864e5).toISOString().slice(0, 10);
 
 const desk = await loadDesk();
-const articles = (await Promise.all(FEEDS.map(fetchArticles))).flat().filter((a) => a.date >= since && a.date <= today);
+const perFeed = await Promise.all(FEEDS.map(fetchArticles));
+const articles = perFeed.flat().filter((a) => a.date >= since && a.date <= today);
 console.log(`Fetched ${articles.length} recent articles from ${FEEDS.length} feeds.`);
 
 const knownUrls = new Set(desk.updates.map((u) => u.src?.u));
@@ -40,15 +50,17 @@ for (const a of articles) {
   const text = `${a.title} ${a.summary}`;
   const sectors = Object.entries(SECTOR_RULES).filter(([, re]) => re.test(text)).map(([id]) => id);
   if (!sectors.length) continue; // not about anything this desk tracks
+  if (SCOPE && !SCOPE.test(text)) continue; // a theme keyword matched, but the story is about another field
   if (NOISE.test(a.title)) continue; // personnel moves, events listings, opinion roundups
   const id = `u-${a.date.replace(/-/g, "")}-${slug(a.title)}`;
   if (knownUrls.has(a.link) || knownIds.has(id)) continue;
   knownUrls.add(a.link);
   knownIds.add(id);
   const type = TYPE_RULES.find(([, re]) => re.test(text))?.[0] ?? topic.defaultType.name;
+  // An entity matches by its name (parts split by " · " or " / ") or any of its aliases.
   const companies = desk.companies
-    .map((c) => String(c.name))
-    .filter((name) => name.split(/ · | \/ /).some((n) => n.length > 2 && new RegExp(`\\b${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(text)));
+    .filter((c) => [...String(c.name).split(/ · | \/ /), ...((c.aliases as string[] | undefined) ?? [])].some((n) => n.length > 2 && new RegExp(`\\b${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(text)))
+    .map((c) => String(c.name));
   const titleSectors = sectors.filter((s) => SECTOR_RULES[s].test(a.title));
   const titleSector = titleSectors[0] ?? sectors[0];
   // Lead with the sectors the headline itself is about.
@@ -102,6 +114,11 @@ if (!desk.briefs.some((b) => b.date === today) && added.length) {
 }
 
 desk.meta = { ...desk.meta, collectedAt: addedAt };
+
+// Source health: what each feed returned today, so dead or silent feeds can be spotted and replaced.
+const health = FEEDS.map((f, i) => ({ name: f.name, url: feedUrl(f), items: perFeed[i].length, recent: perFeed[i].filter((a) => a.date >= since).length }));
+await mkdir("data", { recursive: true });
+await writeFile("data/health.json", JSON.stringify({ checkedAt: addedAt, feeds: health }, null, 1) + "\n");
 await saveDaily(desk, brief);
 await buildApi(desk);
 console.log(brief ? `Wrote the ${today} brief with ${brief.stories.length} stories.` : "Brief for today already exists or nothing new; kept it.");

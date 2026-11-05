@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ANU Watch</title>
+<title>{{name}}: Watch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -27,12 +27,12 @@
 </style>
 </head>
 <body>
-<div class="banner">ANU // Watch // <span id="asof">Loading</span></div>
+<div class="banner">{{name}} // Watch // <span id="asof">Loading</span></div>
 <header class="top wrap">
   <div class="eyebrow">Learn in short videos</div>
   <h1>AN<span>U</span> Watch</h1>
-  <p class="lede">New Shorts and videos from channels ANU follows on defense tech and housing, collected every day from YouTube's public feeds. They play here; the channels are listed in config/videos.yaml.</p>
-  <nav class="desks" id="desks" aria-label="ANU desks"><a href="./">Defense</a><a href="housing.html">Housing</a><a href="videos.html" aria-current="page">Watch</a><a href="docs.html">Docs</a><a class="ask" href="app/">Ask ANU →</a></nav>
+  <p class="lede">New Shorts and videos from the channels {{name}} follows, collected every day from YouTube's public feeds. They play here; the channels are listed in topic/videos.yaml.</p>
+  <nav class="desks" id="desks" aria-label="Desks"></nav>
 </header>
 
 <main class="wrap">
@@ -44,7 +44,7 @@
   </div>
   <div class="bar">
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex:1">
-      <input type="search" id="q" placeholder="Search titles and channels (e.g. drones, Florida, rates)" aria-label="Search videos" style="max-width:420px">
+      <input type="search" id="q" placeholder="Search titles and channels" aria-label="Search videos" style="max-width:420px">
       <select id="sort" aria-label="Sort" style="width:auto"><option value="new">Newest</option><option value="views">Most viewed</option></select>
     </div>
     <button class="btn" id="reel-btn">▶ Reel mode</button>
@@ -58,7 +58,7 @@
 <button class="reel-close" id="reel-close" hidden>Close ✕</button>
 <span class="reel-hint" id="reel-hint" hidden>Swipe or ↑ ↓ · Esc to close</span>
 
-<footer class="wrap">Videos are played from YouTube and belong to their channels. ANU only links and embeds them.</footer>
+<footer class="wrap">Videos are played from YouTube and belong to their channels. {{name}} only links and embeds them.</footer>
 
 <script src="desk.js"></script>
 <script>

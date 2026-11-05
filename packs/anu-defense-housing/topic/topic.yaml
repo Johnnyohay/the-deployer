@@ -7,6 +7,20 @@
 
 domain: defense tech and US housing
 audience: a founder who is learning the defense-tech industry, wants to stay ahead of it and find something worth building
+vocab:
+  ideas: Gaps you could build into
+  ideasIntro: Openings that come out of the evidence in ANU, scored on capital needed, time to first revenue, and how directly they collide with entrenched players.
+  updatesIntro: Contracts, funding, policy, technology milestones, deals, earnings and conflict lessons, newest first.
+  searchExample: laser, Golden Dome, Taiwan, rare earth
+entityKinds:
+  - id: company
+    suggest:
+      - Who is {entity} and how do they make money?
+      - Who competes with {entity}, and who is winning?
+      - Where is {entity} vulnerable to a startup?
+      - What's the latest on {entity}?
+    label: Company
+    plural: Companies
 sectors:
   - id: ai
     name: AI, software & command and control
@@ -132,18 +146,38 @@ ask:
     paper: "'drone swarm coordination' or 'synthetic aperture radar target detection'"
   modes:
     - id: learn
+      suggest:
+        - Explain {scope} to me like I'm new to it
+        - What acronyms and programs do I need to know in {scope}?
+        - How does the Pentagon buy in {scope}, and who decides?
+        - What should I read first to understand {scope}?
       label: Teach me
       instruction: "Teach me this from the ground up: the basics, key terms and acronyms, the main players, how the money flows, and what to read next."
     - id: news
+      suggest:
+        - What happened in {scope} {when}?
+        - Which development in {scope} matters most for a founder, and why?
+        - What's coming up next in {scope}?
+        - Give me the 60-second briefing on {scope}
       label: What's new
       instruction: Summarize the most important recent developments and explain why each one matters.
     - id: advise
+      suggest:
+        - What should I build in {scope}?
+        - Where are the incumbents in {scope} weakest?
+        - If I had $1M and 12 months in {scope}, what would you do?
+        - Who is the buyer and budget line for a startup in {scope}?
       label: Advise me
       instruction: "Advise me as a founder: what is worth building or focusing on here? Give a direct recommendation with buyer, budget line, incumbents, why now, risks and a first step."
     - id: company
       label: Company deep dive
       instruction: "Deep dive on the company: what they sell, who buys it, their edge, recent news, competitors and where they are vulnerable."
     - id: compare
+      suggest:
+        - Compare the top companies in {scope}
+        - Compare primes vs new entrants in {scope}
+        - "Compare the build ideas in {scope}: which is strongest?"
+        - Compare drones and counter-drone as places to build
       label: Compare
       instruction: Compare the options side by side in bullets and say which is stronger and why.
     - id: invest

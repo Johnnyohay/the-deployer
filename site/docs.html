@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ANU Docs</title>
+<title>{{name}}: how it works</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -43,215 +43,64 @@ table.t td:first-child{min-width:150px}
 </style>
 </head>
 <body>
-<div class="banner">ANU // Docs & architecture // <span id="asof">Loading</span></div>
-<header class="top wrap">
-  <div class="eyebrow">How ANU is built and what you can change</div>
-  <h1>AN<span>U</span> Docs</h1>
-  <p class="lede">Everything you can change after you clone the repo: the YAML settings that customize the site without code, how data flows from sources to pages, and where to add something new. The settings sections below are read live from the config the site is running.</p>
-  <nav class="desks" id="desks" aria-label="ANU desks"><a href="./">Defense</a><a href="housing.html">Housing</a><a href="videos.html">Watch</a><a href="docs.html" aria-current="page">Docs</a><a class="ask" href="app/">Ask ANU →</a></nav>
-</header>
-
-<main class="wrap">
-<div class="doc">
-<nav class="toc" aria-label="On this page">
-  <a href="#start">Get started locally</a><a href="#arch">Architecture</a><a href="#change">What you can change</a><a href="#desks-cfg">Tabs</a><a href="#flags">Feature flags</a><a href="#attrs">Custom attributes</a><a href="#housing-cfg">Housing defaults</a><a href="#videos-cfg">Video channels</a><a href="#requests">Feature requests</a><a href="#extend">Adding features in code</a><a href="#files">File map</a>
-</nav>
-<div class="body">
-
-<section id="start">
-  <h2>Get started locally</h2>
-  <pre><span class="c"># one time</span>
-git clone https://github.com/Johnnyohay/anu.git && cd anu
-npm ci
-
-<span class="c"># refresh the data (all free, no API keys)</span>
-npm run collect        <span class="c"># defense news + today's brief</span>
-npm run housing        <span class="c"># Zillow prices, rents, forecast, inventory; Freddie Mac rates; housing news</span>
-npm run videos         <span class="c"># new videos and Shorts from config/videos.yaml</span>
-
-<span class="c"># apply config/*.yaml and rebuild the JSON the pages read</span>
-npm run build:api
-
-<span class="c"># look at it</span>
-npx serve public       <span class="c"># open http://localhost:3000 (Docs tab: /docs.html)</span>
-npm run app            <span class="c"># Ask ANU with a free local model (see README)</span></pre>
-  <p>Push to <code>main</code> and the GitHub Action does the same every morning at 10:00 UTC and publishes the site. A push that only changes <code>config/</code> or <code>public/</code> redeploys within a few minutes.</p>
-</section>
-
-<section id="arch">
-  <h2>Architecture</h2>
-  <p>Collectors pull free public sources into <code>data/</code> (committed, so history builds up). <code>build-api</code> checks your YAML, adds your custom attributes, and writes static JSON to <code>public/api/v1/</code>. Every page and Ask ANU read only that JSON. There's no server or database, and nothing costs money.</p>
-  <div class="flow" role="img" aria-label="Sources flow into collectors, then data files and YAML config, then build-api, then the JSON API, then the pages and Ask ANU">
-    <div class="stage"><div class="lbl">1 · Sources</div>
-      <div class="node">14 defense news feeds<small>Breaking Defense, DoW, CSIS…</small></div>
-      <div class="node">Zillow Research<small>ZHVI, ZORI, ZHVF, inventory</small></div>
-      <div class="node">Freddie Mac PMMS<small>weekly mortgage rates</small></div>
-      <div class="node">Housing news feeds<small>HousingWire, Realtor.com, MND…</small></div>
-      <div class="node">YouTube channel feeds<small>public RSS, no key</small></div>
-    </div>
-    <div class="stage"><div class="lbl">2 · Collectors</div>
-      <div class="node">src/collect.ts<small>npm run collect</small></div>
-      <div class="node">src/housing.ts<small>npm run housing</small></div>
-      <div class="node">src/videos.ts<small>npm run videos</small></div>
-      <div class="node">src/rss.ts<small>shared feed reader</small></div>
-    </div>
-    <div class="stage"><div class="lbl">3 · Stored</div>
-      <div class="node">data/*.json<small>updates, sectors, companies, briefs…</small></div>
-      <div class="node">data/housing/<small>market.json, news.json, metro-coords.json</small></div>
-      <div class="node">data/videos.json</div>
-      <div class="node cfg">config/*.yaml<small>anu · videos · requests</small></div>
-    </div>
-    <div class="stage"><div class="lbl">4 · Build</div>
-      <div class="node">src/build-api.ts<small>npm run build:api</small></div>
-      <div class="node cfg">src/config.ts<small>validates YAML, evaluates formulas, rolls up states</small></div>
-      <div class="node">public/api/v1/*.json<small>all · housing · videos · config…</small></div>
-    </div>
-    <div class="stage"><div class="lbl">5 · Use</div>
-      <div class="node">index.html<small>defense desk</small></div>
-      <div class="node">housing.html<small>map, rankings, calculator</small></div>
-      <div class="node">videos.html<small>grid + reel mode</small></div>
-      <div class="node">docs.html<small>this page</small></div>
-      <div class="node">Ask ANU<small>src/anu.ts tools → app/</small></div>
-    </div>
-  </div>
-  <p>Orange-edged boxes are the parts you customize without code.</p>
-</section>
-
-<section id="change">
-  <h2>What you can change</h2>
-  <div class="scroll-x"><table class="t"><thead><tr><th>File</th><th>What it controls</th><th>Apply with</th></tr></thead><tbody>
-    <tr><td><code>config/anu.yaml</code></td><td>Tabs and their order, feature flags, the housing map's starting view, budget choices, rental-math defaults, ANU score weights, custom attributes</td><td><code>npm run build:api</code> (score weights and rental defaults: <code>npm run housing</code> first)</td></tr>
-    <tr><td><code>config/videos.yaml</code></td><td>The YouTube channels on the Watch tab, their topics, how long videos stay, keywords for mixed channels</td><td><code>npm run videos</code>, then <code>build:api</code></td></tr>
-    <tr><td><code>config/requests.yaml</code></td><td>Your feature wishlist, shown below with status</td><td><code>npm run build:api</code></td></tr>
-    <tr><td><code>data/sectors.json</code>, <code>companies.json</code>, <code>ideas.json</code>, <code>research.json</code>, <code>catalysts.json</code></td><td>The defense desk's hand-written knowledge: sector briefs, company directory, build ideas, reading list, upcoming events</td><td><code>npm run build:api</code></td></tr>
-    <tr><td><code>src/collect.ts</code> (FEEDS, SECTOR_RULES)</td><td>Defense news sources and how stories are sorted into sectors</td><td><code>npm run collect</code></td></tr>
-    <tr><td><code>src/housing.ts</code> (NEWS_FEEDS, TOPIC_RULES)</td><td>Housing news sources and topic tags</td><td><code>npm run housing</code></td></tr>
-    <tr><td><code>src/prompts.ts</code></td><td>How Ask ANU talks, and its modes (Teach me, Housing: where to buy, Something to watch…)</td><td>restart <code>npm run app</code></td></tr>
-    <tr><td><code>public/desk.css</code></td><td>Colors, fonts and spacing for the Housing, Watch and Docs tabs (light and dark)</td><td>reload the page</td></tr>
-  </tbody></table></div>
-  <p>Mistakes in a YAML file stop <code>build:api</code> with the file, the setting and what's wrong (for example <code>unknown field "prise"</code>), so a typo never reaches the live site.</p>
-</section>
-
-<section id="desks-cfg">
-  <h2>Tabs</h2>
-  <p><code>desks:</code> in <code>config/anu.yaml</code> sets the tab switcher at the top of every page. Reorder the list, rename a <code>label</code>, or set <code>enabled: false</code> to hide one. Current tabs:</p>
-  <div class="scroll-x"><table class="t"><thead><tr><th>id</th><th>Label</th><th>Page</th><th>Shown</th></tr></thead><tbody id="t-desks"></tbody></table></div>
-</section>
-
-<section id="flags">
-  <h2>Feature flags</h2>
-  <p>Each flag switches one feature on or off. A flag that isn't listed counts as on. To add a flag for a new feature, add a line under <code>flags:</code> and read it in the page with <code>ANU.flag(CFG, "your.flag")</code> (see <a href="#extend">Adding features in code</a>). Current values:</p>
-  <div class="scroll-x"><table class="t"><thead><tr><th>Flag</th><th>State</th><th>What it does</th></tr></thead><tbody id="t-flags"></tbody></table></div>
-</section>
-
-<section id="attrs">
-  <h2>Custom attributes</h2>
-  <p>A custom attribute is a new metric you define in YAML as a formula over the numbers ANU already has for every metro. You don't write any page code. Each one automatically:</p>
-  <ul>
-    <li>appears in the housing map's <b>Color by</b> menu, with its own legend;</li>
-    <li>is <b>aggregated to states</b> (median, mean, min, max, sum or count of the state's metros) to shade the map behind the dots;</li>
-    <li>becomes a <b>sortable column</b> in the rankings if <code>column: true</code>;</li>
-    <li>shows in each metro's panel, and reaches <b>Ask ANU</b> (in <code>get_metro</code> and <code>rank_metros</code> results as <code>custom</code>).</li>
-  </ul>
-  <pre><span class="c"># config/anu.yaml → housing.attributes</span>
-- id: rentBurden                     <span class="c"># letters and digits; used in URLs and the API</span>
-  label: Rent as % of a $90k income
-  formula: rent * 12 / 90000 * 100   <span class="c"># + - * / ( ), numbers, min() max() abs() round()</span>
-  format: percent                    <span class="c"># money kmoney signedMoney percent percent2 signedPercent number</span>
-  color: seq                         <span class="c"># seq = one hue low→high · div = two hues around zero</span>
-  aggregate: median                  <span class="c"># how metros roll up to a state</span>
-  column: true                       <span class="c"># add to the rankings table</span>
-  higherIsBetter: false              <span class="c"># default sort direction</span></pre>
-  <p>Fields a formula can use: <span id="fields"></span>. A metro missing any field in the formula gets no value and shows gray. Formulas are read by ANU's own small calculator (<code>src/config.ts</code>), never run as code.</p>
-  <div class="scroll-x"><table class="t"><thead><tr><th>id</th><th>Label</th><th>Formula</th><th>Format · color · states</th><th>Column</th></tr></thead><tbody id="t-attrs"></tbody></table></div>
-</section>
-
-<section id="housing-cfg">
-  <h2>Housing defaults</h2>
-  <div id="housing-defaults"></div>
-</section>
-
-<section id="videos-cfg">
-  <h2>Video channels</h2>
-  <p>The Watch tab and the housing Shorts strip come from <code>config/videos.yaml</code>. To add a channel, open it on YouTube, view the page source, search for <code>externalId</code> (starts with <code>UC</code>) and add a line. Any new <code>topic</code> name becomes a filter on the Watch tab. <span id="keep"></span></p>
-  <div class="scroll-x"><table class="t"><thead><tr><th>Channel</th><th>Topic</th><th>Channel id</th></tr></thead><tbody id="t-channels"></tbody></table></div>
-  <p>ANU embeds and links videos and never downloads them. TikTok and Instagram have no free public feeds and don't allow scraping, so they aren't collected.</p>
-</section>
-
-<section id="requests">
-  <h2>Feature requests</h2>
-  <p>Write what you want next in <code>config/requests.yaml</code> (title, area, status, notes and, if it should be switchable, the flag it will use). Then ask Claude Code in the repo: <i>“Build the planned requests in config/requests.yaml.”</i> Mark them <code>done</code> when they ship.</p>
-  <div class="scroll-x"><table class="t"><thead><tr><th>Request</th><th>Area</th><th>Status</th><th>Notes</th></tr></thead><tbody id="t-requests"></tbody></table></div>
-</section>
-
-<section id="extend">
-  <h2>Adding features in code</h2>
-  <ol>
-    <li><b>A switchable page feature:</b> add <code>my.feature: true</code> under <code>flags:</code>, then in the page: <code>if (ANU.flag(CFG, "my.feature")) renderMyFeature();</code>. Add a row to <code>FLAG_INFO</code> in <code>docs.html</code> so it's described here.</li>
-    <li><b>A new setting:</b> add it to the schema in <code>src/config.ts</code> (it's validated and published in <code>config.json</code> automatically), then read it from <code>CFG</code> in the page.</li>
-    <li><b>A new built-in metro metric</b> (from a new data source): compute it in <code>collectMarket()</code> in <code>src/housing.ts</code>, add it to the <code>Metro</code> type and <code>SORTS</code> in <code>src/housing-kb.ts</code>, to <code>FORMULA_FIELDS</code> in <code>src/config.ts</code>, and to <code>METRICS</code> in <code>housing.html</code>.</li>
-    <li><b>A new tab:</b> copy <code>videos.html</code> as a starting point (it loads <code>desk.css</code> and <code>desk.js</code>), add it under <code>desks:</code>, and publish its data from <code>src/build-api.ts</code>.</li>
-    <li><b>A new Ask ANU lookup:</b> add a query in <code>src/housing-kb.ts</code> or <code>src/kb.ts</code> and a tool in <code>src/tools.ts</code>; the local app, the CLI (<code>src/kb-cli.ts</code>) and the Claude Code agent (<code>.claude/agents/anu.md</code>) can all use it.</li>
-  </ol>
-</section>
-
-<section id="files">
-  <h2>File map</h2>
-  <div class="scroll-x"><table class="t"><tbody>
-    <tr><td><code>config/</code></td><td>YAML settings: <code>anu.yaml</code> (site), <code>videos.yaml</code> (channels), <code>requests.yaml</code> (wishlist)</td></tr>
-    <tr><td><code>src/config.ts</code></td><td>Loads and validates the YAML; the formula calculator and state roll-ups for custom attributes</td></tr>
-    <tr><td><code>src/collect.ts</code></td><td>Daily defense news collector and free morning brief</td></tr>
-    <tr><td><code>src/housing.ts</code></td><td>Housing collector: Zillow, Freddie Mac, housing news; rental math and ANU score</td></tr>
-    <tr><td><code>src/housing-coords.ts</code></td><td>One-time: places metros on the map from the Census gazetteer (<code>npm run housing:coords</code>)</td></tr>
-    <tr><td><code>src/housing-kb.ts</code></td><td>Housing data types and read-only queries (used by Ask ANU and the CLI)</td></tr>
-    <tr><td><code>src/videos.ts</code></td><td>Video collector from YouTube's public channel feeds</td></tr>
-    <tr><td><code>src/rss.ts</code></td><td>Shared RSS/Atom reader</td></tr>
-    <tr><td><code>src/build-api.ts</code></td><td>Writes <code>public/api/v1/</code>, including <code>config.json</code></td></tr>
-    <tr><td><code>src/kb.ts</code>, <code>tools.ts</code>, <code>prompts.ts</code>, <code>anu.ts</code>, <code>server.ts</code></td><td>Ask ANU: queries, tools, instructions, the agent loop and the local app server</td></tr>
-    <tr><td><code>public/</code></td><td>The site: <code>index.html</code>, <code>housing.html</code>, <code>videos.html</code>, <code>docs.html</code>, shared <code>desk.css</code> and <code>desk.js</code></td></tr>
-    <tr><td><code>.github/workflows/daily.yml</code></td><td>Runs every collector at 10:00 UTC, commits <code>data/</code>, deploys GitHub Pages</td></tr>
-  </tbody></table></div>
-</section>
-
-</div></div>
-</main>
-<footer class="wrap">ANU is a personal research helper. Data comes from open public sources; nothing here is investment advice.</footer>
-
 <script src="desk.js"></script>
+<div class="banner">{{name}} // How it works // <span id="asof"></span></div>
+<header class="top wrap">
+  <div class="eyebrow">What {{name}} follows, where it comes from, and how to change it</div>
+  <h1>Docs</h1>
+  <nav class="desks" id="desks" aria-label="Desks"></nav>
+</header>
+<main class="wrap doc">
+  <nav class="toc"><a href="#follows">What it follows</a><a href="#sources">Sources</a><a href="#daily">How it updates</a><a href="#change">Change it</a><a href="#api">Data API</a></nav>
+  <div class="body">
+    <section id="follows">
+      <h2>What it follows</h2>
+      <p id="audience"></p>
+      <div class="scroll-x"><table class="t"><thead><tr><th id="th-theme"></th><th>Matches stories that mention</th><th>Why it matters</th></tr></thead><tbody id="themes"></tbody></table></div>
+      <p><b>Story types</b> (the first that matches wins): <span id="types"></span></p>
+      <p><b>Tracked kinds</b>: <span id="kinds"></span></p>
+    </section>
+    <section id="sources">
+      <h2>Sources</h2>
+      <p>Every feed is read once a day. A search feed (Google News) covers sites that publish no feed of their own. The health column shows what each one returned on the last run.</p>
+      <div class="scroll-x"><table class="t"><thead><tr><th>Source</th><th>Tier</th><th>Last run</th></tr></thead><tbody id="feeds"></tbody></table></div>
+    </section>
+    <section id="daily">
+      <h2>How it updates</h2>
+      <ol>
+        <li><b>Every morning</b> a GitHub Action reads the sources, keeps stories from the last few days, drops duplicates and noise, tags each one with its themes, type and the names it mentions, and writes the brief.</li>
+        <li><b>Then the curator</b> (a free AI: Groq, or a small open model when no key is set) rewrites the briefs of themes with new stories, picks dated upcoming events out of the news, adds names that keep coming up, and scores each theme's momentum.</li>
+        <li><b>Finally</b> the site and its data API are rebuilt and published. Nothing here costs money.</li>
+      </ol>
+    </section>
+    <section id="change">
+      <h2>Change it</h2>
+      <p>No code needed. Either:</p>
+      <ul>
+        <li><b>Say it in plain words</b>: open an issue in this site's GitHub repo titled <code>Change my setup</code> and describe what to add, drop or rename ("follow Mexico nearshoring too", "drop sports retail"). It is applied within a few minutes and the issue gets a summary of what changed.</li>
+        <li><b>Edit the files</b> in <code>topic/</code> on GitHub: <code>topic.yaml</code> (themes, keywords, story types, the brief, how Ask talks), <code>sources.yaml</code> (feeds), <code>site.yaml</code> (name, tabs). A mistake stops the build with a message naming the line, so the site never breaks.</li>
+      </ul>
+    </section>
+    <section id="api">
+      <h2>Data API</h2>
+      <p>Everything is published as static JSON: <code>api/v1/all.json</code> (everything), <code>brief/latest.json</code>, <code>updates.json</code>, <code>sectors.json</code>, <code>companies.json</code>, <code>catalysts.json</code>, <code>config.json</code>.</p>
+    </section>
+  </div>
+</main>
+<footer class="wrap">{{name}} runs on The Deployer.</footer>
 <script>
-const $=s=>document.querySelector(s), esc=ANU.esc;
-const FLAG_INFO={
-  "housing.tiles":"The four headline numbers at the top of the Housing tab",
-  "housing.calculator":"Rental calculator in the metro panel (its inputs also recolor the map and table)",
-  "housing.stateShading":"Shade states behind the metro dots with the state-wide value",
-  "housing.rankings":"The sortable metro rankings table",
-  "housing.rateChart":"Weekly 30-year mortgage rate chart",
-  "housing.news":"Latest housing news, and related news in the metro panel",
-  "housing.videos":"Housing Shorts strip, and videos in the metro panel",
-  "videos.reels":"Full-screen, swipe-through reel mode on the Watch tab",
-  "videos.autoplay":"In reel mode, start each video (muted) when it scrolls into view",
-};
-const pill=(cls,t)=>`<span class="pill ${cls}">${esc(t)}</span>`;
+const esc=DESK.esc;
 (async()=>{
-  const c=await ANU.config();ANU.renderDesks($("#desks"),c,"docs");
-  $("#asof").textContent=c.generatedAt?`Config built ${c.generatedAt.slice(0,16).replace("T"," ")} UTC`:"Built-in defaults";
-  $("#t-desks").innerHTML=(c.desks||[]).map(d=>`<tr><td><code>${esc(d.id)}</code></td><td>${esc(d.label)}</td><td><code>${esc(d.page)}</code></td><td>${d.enabled===false?pill("off","hidden"):pill("on","shown")}</td></tr>`).join("");
-  const flags={...Object.fromEntries(Object.keys(FLAG_INFO).map(k=>[k,true])),...(c.flags||{})};
-  $("#t-flags").innerHTML=Object.entries(flags).map(([k,v])=>`<tr><td><code>${esc(k)}</code></td><td>${v?pill("on","on"):pill("off","off")}</td><td>${esc(FLAG_INFO[k]||"Custom flag (add a description to FLAG_INFO in docs.html)")}</td></tr>`).join("");
-  $("#fields").innerHTML=(c.formulaFields||[]).map(f=>`<code>${esc(f)}</code>`).join(" ");
-  const h=c.housing||{};
-  $("#t-attrs").innerHTML=(h.attributes||[]).map(a=>`<tr><td><code>${esc(a.id)}</code></td><td>${esc(a.label)}</td><td><code>${esc(a.formula)}</code></td><td>${esc(a.format)} · ${esc(a.color)} · ${esc(a.aggregate)}</td><td>${a.column?"yes":"no"}</td></tr>`).join("")||`<tr><td colspan="5">None yet. Add one under <code>housing.attributes</code>.</td></tr>`;
-  const r=h.rental||{},w=h.score||{},d=h.defaults||{};
-  $("#housing-defaults").innerHTML=`<div class="scroll-x"><table class="t"><tbody>
-    <tr><td><code>housing.defaults</code></td><td>Map opens colored by <b>${esc(d.metric)}</b>, showing the <b>${d.size>=9999?"all":"largest "+esc(d.size)}</b> metros, budget <b>${d.budget?"$"+Number(d.budget).toLocaleString():"any"}</b></td></tr>
-    <tr><td><code>housing.budgets</code></td><td>${(h.budgets||[]).map(b=>"$"+Number(b).toLocaleString()).join(", ")}</td></tr>
-    <tr><td><code>housing.rental</code></td><td>${esc(r.downPct)}% down · ${esc(r.years)}-year loan at the current Freddie Mac rate · ${esc(r.opexPct)}% of rent for costs</td></tr>
-    <tr><td><code>housing.score</code></td><td>${Object.entries(w).map(([k,v])=>`${esc(k)} ${esc(v)}`).join(" · ")} (relative weights; rerun <code>npm run housing</code>)</td></tr>
-  </tbody></table></div>`;
-  const v=c.videos||{};
-  $("#keep").textContent=v.keepDays?`Videos stay ${v.keepDays} days.`:"";
-  $("#t-channels").innerHTML=(v.channels||[]).map(ch=>`<tr><td><a href="https://www.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">${esc(ch.name)} ↗</a></td><td>${esc(ch.topic)}</td><td><code>${esc(ch.id)}</code></td></tr>`).join("");
-  $("#t-requests").innerHTML=(c.requests||[]).map(q=>`<tr><td><b style="color:var(--ink)">${esc(q.title)}</b>${q.flag?`<br><code>${esc(q.flag)}</code>`:""}</td><td>${esc(q.area)}</td><td>${pill(q.status,q.status)}</td><td>${esc(q.notes||"")}</td></tr>`).join("")||`<tr><td colspan="4">No requests yet.</td></tr>`;
+  const cfg=await DESK.config();DESK.renderDesks(document.querySelector("#desks"),cfg,"docs");
+  const t=cfg.topic||{},v=t.vocab||{};
+  document.querySelector("#audience").textContent=t.audience?`Written for ${t.audience}.`:"";
+  document.querySelector("#th-theme").textContent=v.theme||"Theme";
+  document.querySelector("#themes").innerHTML=(t.sectors||[]).map(s=>`<tr><td><b>${esc(s.name)}</b></td><td>${esc((s.keywords||[]).join(", ")||s.pattern||"")}</td><td>${esc(s.soWhat||"")}</td></tr>`).join("");
+  document.querySelector("#types").textContent=(t.types||[]).join(" · ");
+  document.querySelector("#kinds").textContent=(t.entityKinds||[]).map(k=>k.plural).join(" · ");
+  const health=new Map((cfg.health?.feeds||[]).map(f=>[f.name,f]));
+  document.querySelector("#feeds").innerHTML=(cfg.feeds||[]).map(f=>{const h=health.get(f.name);return `<tr><td>${f.url?`<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.name)}</a>`:esc(f.name)}${f.googleNews?` <span class="status">search: ${esc(f.googleNews)}</span>`:""}</td><td>${esc(f.tier)}</td><td>${h?`${h.recent} recent of ${h.items}`:"–"}</td></tr>`;}).join("");
+  if(cfg.health?.checkedAt)document.querySelector("#asof").textContent=`Checked ${new Date(cfg.health.checkedAt).toLocaleDateString("en-US",{month:"short",day:"numeric"})}`;
 })();
 </script>
 </body>

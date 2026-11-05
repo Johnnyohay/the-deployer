@@ -1,0 +1,86 @@
+name: Setup
+
+# Open an issue titled "Set me up" (to start) or "Change my setup" (any time after) and
+# describe what you want in plain words. This turns it into your site's settings, saves
+# them, starts the first refresh and answers on the issue.
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+  pages: write
+
+jobs:
+  setup:
+    if: >-
+      github.actor == github.repository_owner &&
+      (startsWith(github.event.issue.title, 'Set me up') || startsWith(github.event.issue.title, 'Change my setup'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Johnnyohay/the-deployer/.github/actions/setup@v0
+        with:
+          groq-key: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Read the request
+        env:
+          BODY: ${{ github.event.issue.body }}
+        run: printf '%s\n' "$BODY" > "$RUNNER_TEMP/request.md"
+
+      - name: Set up or change the site
+        id: run
+        env:
+          TITLE: ${{ github.event.issue.title }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          if [[ "$TITLE" == Set\ me\ up* ]]; then
+            deployer init --from-file "$RUNNER_TEMP/request.md" --owner "$OWNER" --no-run --force
+            mv setup-report.md "$RUNNER_TEMP/report.md"
+          else
+            deployer change --from-file "$RUNNER_TEMP/request.md" --no-build
+            mv change-report.md "$RUNNER_TEMP/report.md"
+          fi
+
+      - name: Save the settings
+        run: |
+          git config user.name "deployer bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add topic data
+          git diff --cached --quiet || git commit -m "${{ github.event.issue.title }} (#${{ github.event.issue.number }})"
+          git push
+
+      # GitHub Pages must be switched on once (source: GitHub Actions). Try it; the reply says if it needs a click.
+      - name: Turn on GitHub Pages
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1 \
+            || gh api -X POST "repos/${{ github.repository }}/pages" -f build_type=workflow >/dev/null 2>&1 \
+            && echo "on=yes" >> "$GITHUB_OUTPUT" || echo "on=no" >> "$GITHUB_OUTPUT"
+
+      - name: Start the first refresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run daily.yml --repo "${{ github.repository }}" -f lookback=7
+
+      - name: Reply on the issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ON: ${{ steps.pages.outputs.on }}
+        run: |
+          owner="${{ github.repository_owner }}"; repo="${{ github.event.repository.name }}"
+          url="https://${owner,,}.github.io/${repo}/"
+          {
+            if [ -f "$RUNNER_TEMP/report.md" ]; then cat "$RUNNER_TEMP/report.md"; else echo "Something went wrong; see the [run log](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."; fi
+            echo
+            echo "**Your site:** $url (the first refresh takes a few minutes; watch it under Actions → Daily refresh)."
+            if [ "$PAGES_ON" != "yes" ]; then echo; echo "**One click needed:** Settings → Pages → Source: **GitHub Actions**. Then run Actions → Daily refresh → Run workflow."; fi
+          } > "$RUNNER_TEMP/reply.md"
+          gh issue comment ${{ github.event.issue.number }} --repo "${{ github.repository }}" --body-file "$RUNNER_TEMP/reply.md"
+          [ -f "$RUNNER_TEMP/report.md" ] && gh issue close ${{ github.event.issue.number }} --repo "${{ github.repository }}" || true

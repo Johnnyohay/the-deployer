@@ -1,0 +1,44 @@
+name: Ask
+
+# Open an issue titled "Ask: <your question>" (or comment on one to follow up). The answer,
+# with its sources and a second-opinion fact check, arrives as a comment in a few minutes.
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: ask-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  answer:
+    if: >-
+      startsWith(github.event.issue.title, 'Ask') && contains(github.event.issue.title, ':') &&
+      github.actor == github.repository_owner &&
+      (github.event_name == 'issues' || !contains(github.event.comment.body, '<!-- ask-answer -->'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Johnnyohay/the-deployer/.github/actions/setup@v0
+        with:
+          groq-key: ${{ secrets.GROQ_API_KEY }}
+      - name: Collect the conversation so far
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" --paginate --jq '[.[] | {author: .user.login, body: .body}]' > "$RUNNER_TEMP/thread.json"
+      - name: Answer
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: THREAD="$(cat "$RUNNER_TEMP/thread.json")" deployer answer-issue
+      - name: Post the answer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue comment ${{ github.event.issue.number }} --repo "${{ github.repository }}" --body-file answer.md

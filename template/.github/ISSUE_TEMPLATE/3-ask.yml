@@ -1,0 +1,9 @@
+name: Ask
+description: Ask a question; the answer comes from everything your site has collected.
+title: "Ask: "
+body:
+  - type: textarea
+    attributes:
+      label: Your question (put it in the title too)
+    validations:
+      required: true

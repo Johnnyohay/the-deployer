@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ANU Housing</title>
+<title>{{name}}: Housing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -61,13 +61,13 @@ table.rank td.n{font-weight:600}
 </style>
 </head>
 <body>
-<div class="banner">ANU // Housing desk // <span id="asof">Loading</span></div>
+<div class="banner">{{name}} // Housing desk // <span id="asof">Loading</span></div>
 
 <header class="top wrap">
   <div class="eyebrow">Where to buy a US home to rent out</div>
   <h1>AN<span>U</span> Housing</h1>
   <p class="lede">Home values, rents, rental yield and cash flow at today's mortgage rate for about 900 US metros, with the trends, Zillow's forecast and the latest housing news. Refreshed every day from free public data.</p>
-  <nav class="desks" id="desks" aria-label="ANU desks"><a href="./">Defense</a><a href="housing.html" aria-current="page">Housing</a><a href="videos.html">Watch</a><a href="docs.html">Docs</a><a class="ask" href="app/">Ask ANU →</a></nav>
+  <nav class="desks" id="desks" aria-label="Desks"></nav>
 </header>
 
 <main class="wrap">
@@ -129,7 +129,7 @@ table.rank td.n{font-weight:600}
 </section>
 </main>
 
-<footer class="wrap">ANU compiles open data and news for learning and research. Data: Zillow Research, Freddie Mac, U.S. Census Bureau. Not investment advice.</footer>
+<footer class="wrap">{{name}} compiles open data and news for learning and research. Data: Zillow Research, Freddie Mac, U.S. Census Bureau. Not investment advice.</footer>
 
 <script src="desk.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
@@ -157,7 +157,7 @@ function monthsFrom(start,n){const [y,m]=start.split("-").map(Number);return Arr
 const H={market:null,news:[],videos:[]};
 const A={downPct:25,rate:7,opexPct:45,years:30};
 const METRICS={
-  score:{label:"ANU score (buy-to-rent)",kind:"seq",fmt:v=>Math.round(v)+"/100"},
+  score:{label:"{{name}} score (buy-to-rent)",kind:"seq",fmt:v=>Math.round(v)+"/100"},
   grossYield:{label:"Gross rent yield",kind:"seq",fmt:v=>pct(v,2),state:"medianYield"},
   cashFlow:{label:"Monthly cash flow",kind:"div",fmt:signedMoney},
   capRate:{label:"Cap rate (after costs)",kind:"seq",fmt:v=>pct(v,2)},
@@ -273,7 +273,7 @@ function renderDetail(){
   const vids=H.videos.filter(v=>v.topic==="housing"&&(new RegExp(`\\b${city.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\b`,"i").test(v.title+" "+v.desc)||v.title.includes(STATE_NAMES[m.state]||"~"))).slice(0,4);
   $("#detail").innerHTML=`
     <div><div class="lbl">#${m.rank} largest metro · ${esc(STATE_NAMES[m.state]||m.state)}</div><div class="name">${esc(m.name)}, ${esc(m.state)}</div>
-      ${m.score!=null?`<div class="score">ANU score <b>${m.score}</b>/100</div>`:`<div class="status">No rent data, so no score.</div>`}</div>
+      ${m.score!=null?`<div class="score">{{name}} score <b>${m.score}</b>/100</div>`:`<div class="status">No rent data, so no score.</div>`}</div>
     <div class="mini">
       <div class="tile"><div class="lbl">Typical home</div><div class="v">${kmoney(m.price)}</div><div class="d">${spct(m.priceYoY)} in a year</div></div>
       <div class="tile"><div class="lbl">Typical rent</div><div class="v">${money(m.rent)}</div><div class="d">${spct(m.rentYoY)} in a year</div></div>
@@ -297,7 +297,7 @@ function renderDetail(){
     </div>
     ${news.length&&on("housing.news")?`<div><div class="lbl">Related news</div>${news.map(n=>`<p style="font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--line-soft)"><a href="${esc(safeUrl(n.src.u))}" target="_blank" rel="noopener">${esc(n.title)}</a> <span class="status">${esc(n.src.t)} · ${esc(n.d)}</span></p>`).join("")}</div>`:""}
     ${vids.length&&on("housing.videos")?`<div><div class="lbl">Videos that mention it</div><div class="strip" style="grid-auto-columns:minmax(130px,150px)">${vids.map(videoCard).join("")}</div></div>`:""}
-    <a class="btn ghost" style="justify-self:start" href="app/" title="Opens Ask ANU">Ask ANU about ${esc(m.name)} →</a>`;
+    <a class="btn ghost" style="justify-self:start" href="app/" title="Opens Ask">Ask about ${esc(m.name)} →</a>`;
   const months=monthsFrom(H.market.seriesStart,(H.market.series?.[m.id]?.p||[]).length);
   const s=H.market.series?.[m.id];
   if(s){lineChart($("#c-price"),months,s.p,css("--series-1"),kmoney);if(m.rent)lineChart($("#c-rent"),months,s.r,css("--series-2"),money);}
@@ -403,7 +403,7 @@ $("#state").insertAdjacentHTML("beforeend",Object.entries(STATE_NAMES).map(([k,v
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>H.market&&renderAll());
 let rz=0;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(H.market){renderDetail();if(on("housing.rateChart"))renderRate();}},200);});
 const FMT={money,kmoney,signedMoney,percent:v=>pct(v,1),percent2:v=>pct(v,2),signedPercent:v=>spct(v,1),number:v=>Math.abs(v)>=100?Math.round(v).toLocaleString("en-US"):v.toFixed(1)};
-/* Applies config/anu.yaml: tabs, flags, defaults, budgets and custom attributes. */
+/* Applies topic/site.yaml: tabs, flags, defaults, budgets and custom attributes. */
 function applyConfig(cfg){
   CFG=cfg;ANU.renderDesks($("#desks"),cfg,"housing");
   const h=cfg.housing||{};
@@ -414,7 +414,7 @@ function applyConfig(cfg){
   if(h.defaults){if([...$("#size").options].some(o=>+o.value===h.defaults.size))$("#size").value=String(h.defaults.size);if([...$("#budget").options].some(o=>+o.value===h.defaults.budget))$("#budget").value=String(h.defaults.budget);}
   const hide={"housing.tiles":"#sec-tiles","housing.rankings":"#sec-rank","housing.rateChart":"#sec-rate","housing.news":"#sec-news","housing.videos":"#sec-vid"};
   for(const [f,sel] of Object.entries(hide))if(!on(f))$(sel).hidden=true;
-  const w=h.score;if(w){const t=Object.values(w).reduce((a,b)=>a+b,0)||1,p=k=>Math.round(w[k]*100/t)+"%";$("#score-note").innerHTML=`<b>ANU score</b> (0–100) ranks metros against each other for buying to rent: ${p("grossYield")} gross yield, ${p("rentYoY")} rent growth, ${p("forecast12m")} Zillow's 12-month forecast, ${p("priceYoY")} price momentum, ${p("inventoryDrop")} falling inventory. Weights are set in config/anu.yaml. It's a way to sort, not a verdict.`;}
+  const w=h.score;if(w){const t=Object.values(w).reduce((a,b)=>a+b,0)||1,p=k=>Math.round(w[k]*100/t)+"%";$("#score-note").innerHTML=`<b>{{name}} score</b> (0–100) ranks metros against each other for buying to rent: ${p("grossYield")} gross yield, ${p("rentYoY")} rent growth, ${p("forecast12m")} Zillow's 12-month forecast, ${p("priceYoY")} price momentum, ${p("inventoryDrop")} falling inventory. Weights are set in config/anu.yaml. It's a way to sort, not a verdict.`;}
 }
 
 (async()=>{

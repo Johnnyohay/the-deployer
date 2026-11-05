@@ -1,0 +1,47 @@
+name: Set up The Deployer
+description: Installs the Deployer engine (the same version as this action) and an AI for the wizard, curator and Ask.
+inputs:
+  groq-key:
+    description: A free Groq API key (console.groq.com). Without one, a small open model runs inside the job (slower).
+    required: false
+    default: ""
+  ollama-model:
+    description: The model to run inside the job when there is no key.
+    required: false
+    default: qwen3.5:4b
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Install the Deployer engine
+      shell: bash
+      run: |
+        ref="${{ github.action_ref }}"
+        npm install -g --no-fund --no-audit "github:Johnnyohay/the-deployer#${ref:-main}"
+        deployer >/dev/null
+
+    - name: Use Groq
+      if: inputs.groq-key != ''
+      shell: bash
+      run: echo "GROQ_API_KEY=${{ inputs.groq-key }}" >> "$GITHUB_ENV"
+
+    # No key: a free open model inside this job. Its weights are cached between runs.
+    - name: Cache the local model
+      if: inputs.groq-key == ''
+      uses: actions/cache@v4
+      with:
+        path: ~/.ollama/models
+        key: ollama-${{ inputs.ollama-model }}
+    - name: Start a local model (no Groq key set)
+      if: inputs.groq-key == ''
+      shell: bash
+      run: |
+        curl -fsSL https://ollama.com/install.sh | sh
+        sudo systemctl stop ollama 2>/dev/null || true   # run our own, with the cached model folder
+        (OLLAMA_MODELS=$HOME/.ollama/models ollama serve > /tmp/ollama.log 2>&1 &)
+        for i in $(seq 1 30); do curl -s localhost:11434/api/tags >/dev/null && break; sleep 1; done
+        OLLAMA_MODELS=$HOME/.ollama/models ollama pull "${{ inputs.ollama-model }}"
+        echo "OLLAMA_MODEL=${{ inputs.ollama-model }}" >> "$GITHUB_ENV"

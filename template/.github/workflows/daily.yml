@@ -1,0 +1,69 @@
+name: Daily refresh
+
+# Every morning: collect the news, write the brief, let the curator update the briefs and
+# directory, rebuild the site and publish it on GitHub Pages. Edits to topic/ publish right away.
+on:
+  schedule:
+    - cron: "0 11 * * *" # 11:00 UTC (6 or 7 in the morning, New York time)
+  workflow_dispatch:
+    inputs:
+      lookback:
+        description: Days of news to read (more on the first run)
+        default: "3"
+  push:
+    branches: [main]
+    paths: ["topic/**", "site/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check that setup is done
+        run: test -f topic/topic.yaml || { echo "Not set up yet. Open a 'Set me up' issue first."; exit 1; }
+
+      - uses: Johnnyohay/the-deployer/.github/actions/setup@v0
+        with:
+          groq-key: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Refresh (news, videos, curator, site)
+        if: github.event_name != 'push'
+        env:
+          LOOKBACK_DAYS: ${{ inputs.lookback || '3' }}
+        run: deployer daily
+
+      - name: Rebuild the site from the new settings
+        if: github.event_name == 'push'
+        run: deployer build-api
+
+      - name: Save the new data
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "deployer bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Daily refresh $(date -u +%F)"
+          git push
+
+      - run: deployer build-app
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4

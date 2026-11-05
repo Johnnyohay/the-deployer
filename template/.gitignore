@@ -1,0 +1,8 @@
+node_modules/
+public/
+.hf-cache/
+logs/
+*.report.md
+setup-report.md
+change-report.md
+answer.md

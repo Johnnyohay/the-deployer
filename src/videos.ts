@@ -48,4 +48,5 @@ await Promise.all(
 const videos = [...byId.values()].filter((v) => v.d >= since).sort((a, b) => b.d.localeCompare(a.d)).slice(0, MAX_VIDEOS);
 await writeFile("data/videos.json", JSON.stringify(videos, null, 1) + "\n");
 const count = (t: string) => videos.filter((v) => v.topic === t).length;
-console.log(`Added ${added} videos. Stored ${videos.length} (${videos.filter((v) => v.short).length} Shorts): ${count("defense")} defense, ${count("housing")} housing.`);
+const topics = [...new Set(videos.map((v) => v.topic))];
+console.log(`Added ${added} videos. Stored ${videos.length} (${videos.filter((v) => v.short).length} Shorts): ${topics.map((t) => `${count(t)} ${t}`).join(", ")}.`);

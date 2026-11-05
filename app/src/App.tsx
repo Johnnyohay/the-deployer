@@ -47,25 +47,24 @@ function toolLabel(name: string, input: Record<string, unknown>) {
   return `${TOOL_LABELS[name] ?? name}${detail ? ` · ${detail}` : ""}`;
 }
 
-function suggestions(mode: string, scope: string, companyName: string | undefined, days: number, papers: boolean): string[] {
-  const research = papers ? [`What does recent AI and robotics research say about ${scope}?`] : [];
+// Built-in suggestions for the usual modes; a pack can give its own per mode (topic.yaml ask.modes[].suggest).
+const DEFAULT_SUGGEST: Record<string, string[]> = {
+  learn: ["Explain {scope} to me like I'm new to it", "What terms do I need to know in {scope}?", "Who are the main players in {scope}, and how do they make money?", "What should I read first to understand {scope}?"],
+  news: ["What happened in {scope} {when}?", "Which development in {scope} matters most for me, and why?", "What's coming up next in {scope}?", "Give me the 60-second briefing on {scope}"],
+  advise: ["What should I do about {scope} right now?", "Where are the biggest opportunities in {scope}?", "What are the biggest risks in {scope} over the next year?", "What would you watch most closely in {scope}?"],
+  company: ["Who is {entity} and why do they matter?", "Who competes with {entity}, and who is winning?", "What's the latest on {entity}?", "Where is {entity} most exposed?"],
+  compare: ["Compare the top names in {scope}", "Compare the two fastest-moving parts of {scope}", "What separates the leaders from the rest in {scope}?"],
+};
+
+function suggestions(meta: Meta, mode: string, scope: string, entityName: string | undefined, days: number, papers: boolean): string[] {
+  const m = meta.modes.find((x) => x.id === mode);
   const when = days ? `the last ${days} days` : "recently";
-  switch (mode) {
-    case "learn":
-      return [`Explain ${scope} to me like I'm new to it`, `What acronyms and programs do I need to know in ${scope}?`, `How does the Pentagon buy in ${scope}, and who decides?`, `What should I read first to understand ${scope}?`, ...research];
-    case "news":
-      return [`What happened in ${scope} ${when}?`, `Which development in ${scope} matters most for a founder, and why?`, `What's coming up next in ${scope}?`, `Give me the 60-second briefing on ${scope}`];
-    case "advise":
-      return [`What should I build in ${scope}?`, `Where are the incumbents in ${scope} weakest?`, `If I had $1M and 12 months in ${scope}, what would you do?`, `Who is the buyer and budget line for a startup in ${scope}?`, ...(papers ? [`Which new research in ${scope} is close to being a product?`] : [])];
-    case "company":
-      return companyName
-        ? [`Who is ${companyName} and how do they make money?`, `Who competes with ${companyName}, and who is winning?`, `Where is ${companyName} vulnerable to a startup?`, `What's the latest on ${companyName}?`]
-        : ["Pick a company in the Focus panel to get tailored questions.", "Which companies matter most in defense tech right now?"];
-    case "compare":
-      return [`Compare the top companies in ${scope}`, `Compare primes vs new entrants in ${scope}`, `Compare the build ideas in ${scope}: which is strongest?`, "Compare drones and counter-drone as places to build"];
-    default:
-      return [];
-  }
+  const vocab = meta.pack.vocab;
+  if ((mode === "company" || m?.suggest.some((q) => q.includes("{entity}"))) && !entityName)
+    return [`Pick a ${vocab.entity.toLowerCase()} in the Focus panel to get tailored questions.`, `Which ${vocab.entities.toLowerCase()} matter most in ${meta.pack.domain} right now?`];
+  const list = m?.suggest.length ? m.suggest : (DEFAULT_SUGGEST[mode] ?? [`${m?.label ?? "Tell me about"}: {scope}`]);
+  const research = papers && mode === "learn" ? [`What does recent research say about ${scope}?`] : [];
+  return [...list.map((q) => q.replaceAll("{scope}", scope).replaceAll("{when}", when).replaceAll("{entity}", entityName ?? "")), ...research];
 }
 
 export function App() {
@@ -105,7 +104,7 @@ export function App() {
   const companies = useMemo(() => (meta?.companies ?? []).filter((c) => !sector || c.sectors.includes(sector)), [meta, sector]);
   const sectorName = meta?.sectors.find((s) => s.id === sector)?.name;
   const companyName = meta?.companies.find((c) => c.id === company)?.name;
-  const scope = companyName ?? sectorName ?? "defense tech";
+  const scope = companyName ?? sectorName ?? meta?.pack.domain ?? "";
   const busy = turns.at(-1)?.status === "streaming";
   const focusLabel = [meta?.modes.find((m) => m.id === mode)?.label, sectorName, companyName, RANGES.find((r) => r.days === days)?.label].filter(Boolean).join(" · ");
 
@@ -132,7 +131,7 @@ export function App() {
             return { ...t, evidence: [...t.evidence, ...ev.data.items.filter((e) => !seen.has(e.id))] };
           });
         else if (ev.event === "done") {
-          const note = ev.data.stopReason === "refusal" ? "ANU declined this question." : ev.data.stopReason === "max_tokens" ? "The answer hit the length limit." : undefined;
+          const note = ev.data.stopReason === "refusal" ? `${meta?.pack.name} declined this question.` : ev.data.stopReason === "max_tokens" ? "The answer hit the length limit." : undefined;
           patchLast((t) => ({ ...t, status: "done", note }));
         } else if (ev.event === "error") patchLast((t) => ({ ...t, status: "error", note: ev.data.message }));
       }
@@ -160,18 +159,18 @@ export function App() {
     setTurns([]);
   }
 
-  if (loadError) return <div className="fatal">Couldn't reach the ANU server ({loadError}). Start it with <code>npm run app</code>.</div>;
-  if (!meta) return <div className="fatal">Loading ANU…</div>;
+  if (loadError) return <div className="fatal">Couldn't reach the server ({loadError}). Start it with <code>npm run app</code>.</div>;
+  if (!meta) return <div className="fatal">Loading…</div>;
 
   return (
     <div className="shell">
       <header className="top">
         <div>
-          <div className="eyebrow">Your personal guide to learning and following defense tech</div>
-          <h1>AN<span>U</span></h1>
+          <div className="eyebrow">{meta.pack.tagline}</div>
+          <h1>{meta.pack.name}</h1>
         </div>
         <div className="stamp">
-          {meta.overview.counts.updates} updates · {meta.overview.counts.companies} companies · data to {meta.overview.updatesCover?.to}
+          {meta.overview.counts.updates} updates · {meta.overview.counts.companies} {meta.pack.vocab.entities.toLowerCase()} · data to {meta.overview.updatesCover?.to}
         </div>
       </header>
 
@@ -185,16 +184,16 @@ export function App() {
             </select>
           </label>
           <label>
-            Sector
+            {meta.pack.vocab.theme}
             <select value={sector} onChange={(e) => { setSector(e.target.value); setCompany(""); }}>
-              <option value="">All of defense tech</option>
+              <option value="">All of {meta.pack.domain}</option>
               {meta.sectors.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </label>
           <label>
-            Company
+            {meta.pack.vocab.entity}
             <select value={company} onChange={(e) => setCompany(e.target.value)}>
-              <option value="">Any company</option>
+              <option value="">Any {meta.pack.vocab.entity.toLowerCase()}</option>
               {companies.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </label>
@@ -217,7 +216,7 @@ export function App() {
             </select>
           </label>
           <p className="hint">
-            {meta.semantic ? "Semantic search on: ANU matches by meaning, not just keywords." : "Keyword search only (the local model didn't load)."}
+            {meta.semantic ? "Semantic search on: answers match by meaning, not just keywords." : "Keyword search only (the local model didn't load)."}
             {sources !== "data" && " AI papers come from Hugging Face."}
           </p>
           <p className="hint">Answering with: <strong>{meta.engine.label}</strong></p>
@@ -238,7 +237,7 @@ export function App() {
               <div className="empty">
                 <p className="lead">Ask anything about {scope}. Pick a starting point:</p>
                 <div className="chips">
-                  {suggestions(mode, scope, companyName, days, sources !== "data").map((s) => (
+                  {suggestions(meta, mode, scope, companyName, days, sources !== "data").map((s) => (
                     <button key={s} className="chip" onClick={() => void ask(s)}>{s}</button>
                   ))}
                 </div>
@@ -264,7 +263,7 @@ export function App() {
                   <p>{t.question}</p>
                 </div>
                 <div className="a">
-                  <div className="who">ANU</div>
+                  <div className="who">{meta.pack.name}</div>
                   {!!t.tools.length && (
                     <div className="tools">
                       {t.tools.map((tool, j) => <span key={j} className="tool">{toolLabel(tool.name, tool.input)}</span>)}
@@ -281,7 +280,7 @@ export function App() {
                   )}
                   {!!t.evidence.length && t.status !== "streaming" && (
                     <details className="evidence">
-                      <summary>Evidence ANU looked at ({t.evidence.length})</summary>
+                      <summary>Evidence looked at ({t.evidence.length})</summary>
                       <ul>
                         {t.evidence.map((e) => (
                           <li key={e.id}>
@@ -298,7 +297,7 @@ export function App() {
           </div>
           {!!turns.length && !busy && (
             <div className="chips follow">
-              {suggestions(mode, scope, companyName, days, sources !== "data").slice(0, 3).map((s) => (
+              {suggestions(meta, mode, scope, companyName, days, sources !== "data").slice(0, 3).map((s) => (
                 <button key={s} className="chip" onClick={() => void ask(s)}>{s}</button>
               ))}
             </div>
@@ -308,7 +307,7 @@ export function App() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void ask(question); } }}
-              placeholder={`Ask ANU about ${scope}…`}
+              placeholder={`Ask ${meta.pack.name} about ${scope}…`}
               aria-label="Your question"
               rows={2}
             />
@@ -321,7 +320,7 @@ export function App() {
         </main>
 
         <aside className="panel context" aria-label="Context">
-          {companyDetail ? <CompanyCard c={companyDetail} onAsk={ask} /> : sectorDetail ? <SectorCard s={sectorDetail} onAsk={ask} /> : <OverviewCard meta={meta} />}
+          {companyDetail ? <CompanyCard c={companyDetail} onAsk={ask} /> : sectorDetail ? <SectorCard s={sectorDetail} vocab={meta.pack.vocab} onAsk={ask} /> : <OverviewCard meta={meta} />}
         </aside>
       </div>
     </div>
@@ -330,7 +329,7 @@ export function App() {
 
 /**
  * The free Grok app has no API, so this copies a fact-check prompt (question, answer and
- * the evidence ANU used) and opens grok.com to paste it into.
+ * the evidence the answer used) and opens grok.com to paste it into.
  */
 function GrokButton({ conversationId }: { conversationId: string }) {
   const [state, setState] = useState<"idle" | "copied" | "blocked" | "error">("idle");
@@ -424,7 +423,7 @@ function OverviewCard({ meta }: { meta: Meta }) {
     <>
       <h2>Big picture</h2>
       <p className="thesis">{meta.overview.headline}</p>
-      <h3>Forces moving the industry</h3>
+      <h3>Forces at work</h3>
       <ul className="forces">
         {meta.overview.forces.slice(0, 4).map((f) => <li key={f.t}><strong>{f.t}.</strong> {f.b}</li>)}
       </ul>
@@ -434,19 +433,19 @@ function OverviewCard({ meta }: { meta: Meta }) {
   );
 }
 
-function SectorCard({ s, onAsk }: { s: SectorDetail; onAsk: (q: string) => void }) {
+function SectorCard({ s, vocab, onAsk }: { s: SectorDetail; vocab: Record<string, string>; onAsk: (q: string) => void }) {
   return (
     <>
       <h2>{s.name}</h2>
       <div className="row">Momentum <Heat n={s.heat} /></div>
       <p>{s.state}</p>
-      <h3>Where the money is</h3>
+      <h3>{vocab.money}</h3>
       <p>{s.money}</p>
-      <h3>What to watch</h3>
+      <h3>{vocab.watch}</h3>
       <p>{s.watch}</p>
       <h3>Coming up</h3>
       <Events items={s.upcoming} />
-      <h3>Companies</h3>
+      <h3>{vocab.entities}</h3>
       <div className="chips">
         {s.companies.slice(0, 10).map((c) => <button key={c.name} className="chip small" onClick={() => onAsk(`Who is ${c.name} and why do they matter in ${s.name}?`)}>{c.name}</button>)}
       </div>
@@ -475,7 +474,7 @@ function Papers({ query, onAsk }: { query: string; onAsk: (q: string) => void })
           {papers.map((p) => (
             <li key={p.id}>
               <span className="date">{p.published}</span> <a href={p.url} target="_blank" rel="noreferrer">{p.title}</a>{" "}
-              <button className="linkish" onClick={() => onAsk(`Explain this research paper in plain words and what it could mean for defense tech: "${p.title}" (${p.url})`)}>Explain</button>
+              <button className="linkish" onClick={() => onAsk(`Explain this research paper in plain words and what it could mean in practice: "${p.title}" (${p.url})`)}>Explain</button>
             </li>
           ))}
         </ul>

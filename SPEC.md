@@ -13,6 +13,14 @@ Example: "Trends in retail, supply chain and geopolitics" → a site with sector
 
 ---
 
+## Phases 1–2 result (2026-11-05): any topic, alive
+
+- **Ontology in the pack:** scope (core terms a story must contain), themes, story types, entity kinds, the site's vocabulary, per-mode suggested questions. The site, the Ask app and the docs page draw everything from it; ANU keeps its own pages as pack overrides and is unchanged (golden test, and byte-identical pages).
+- **Wizard** (`deployer init`) and **change** (`deployer change`) work end to end; tested on "retail, supply chain and geopolitics" and "women's football business" with a small local model (about 6.5 minutes per setup). Small models do best with narrow questions, so scope is drafted and then self-checked in two short calls.
+- **Curator** (`deployer curate`) keeps theme briefs, big picture, events, directory, momentum and ideas current.
+- **Template repo** with issue-driven setup, change and Ask, plus a daily workflow; a shared composite action installs the engine at the same version, so user repos never need editing.
+- **Change of plan:** GitHub Models was retired on 2026-07-30. AI is now Groq (free key, recommended), Gemini, any OpenAI-compatible service, or with no key Ollama inside the job. ANU's own GitHub Ask depended on GitHub Models and needs the same switch.
+
 ## Phase 0 result (2026-11-04)
 
 Done. The engine is ANU's code with every domain-specific piece moved into `packs/anu-defense-housing`: 14 feeds, 20 sector rules and "why it matters" lines, 8 story types and weights, the noise filter, the brief title, the Ask persona, rules and 7 modes, the Claude research instructions and the tool examples. The sector and story-type lists are no longer constants; they are built from the pack.

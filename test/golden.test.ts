@@ -37,6 +37,10 @@ test("ANU pack reproduces ANU's daily collect", async () => {
     ...["all.json", "briefs.json", "sectors.json", "updates.json", "config.json", "meta.json", "brief/latest.json"].map((f) => [`api/${f}`, `public/api/v1/${f}`]),
   ];
   for (const [expected, actual] of files) {
-    assert.deepEqual(await read(path.join(pack, actual)), await read(path.join(golden, "expected", expected)), `${actual} differs from ANU's`);
+    const want = await read(path.join(golden, "expected", expected));
+    let got = await read(path.join(pack, actual));
+    // config.json gained fields for the generic pages (topic, feeds, health); ANU's must be unchanged.
+    if (actual.endsWith("config.json")) got = Object.fromEntries(Object.keys(want as object).map((k) => [k, (got as Record<string, unknown>)[k]]));
+    assert.deepEqual(got, want, `${actual} differs from ANU's`);
   }
 });

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANU Housing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="desk.css">
+<style>
+.controls{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));align-items:end}
+.map-layout{display:grid;gap:18px;grid-template-columns:minmax(0,1fr) minmax(0,380px);align-items:start}
+@media (max-width:980px){.map-layout{grid-template-columns:1fr}}
+@media (min-width:981px){.detail{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto;overscroll-behavior:contain}}
+.map-box{position:relative;padding:10px}
+.map-box svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.state{fill:var(--land);stroke:var(--land-line);stroke-width:.8}
+.dot{stroke:var(--surface);stroke-width:.9}
+.dot.sel{stroke:var(--ink);stroke-width:2.4}
+.dot.dim{opacity:.18}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:6px;max-width:250px;z-index:3;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.tip b{font-weight:600}
+.tip .k{font-family:var(--mono);font-size:11px;opacity:.75}
+.legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:6px 6px 2px}
+.ramp{display:grid;gap:3px;min-width:200px}
+.ramp .bar{height:10px;border-radius:3px}
+.ramp .ends{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.detail{display:grid;gap:16px;align-content:start}
+.detail .name{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;text-transform:uppercase}
+.mini{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+.mini .tile .v{font-size:28px}
+.score{display:inline-flex;align-items:baseline;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.score b{font-family:var(--display);font-size:24px;color:var(--ink)}
+.chart{position:relative}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart .axis text{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+.chart .grid line{stroke:var(--line-soft)}
+.chart .tipline{stroke:var(--muted);stroke-width:1}
+.calc{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,100px),1fr))}
+.calc-out{display:grid;gap:0;margin-top:4px}
+.calc-out div{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.calc-out div b{font-variant-numeric:tabular-nums;font-weight:600}
+.calc-out .big{font-size:16px}
+.pos{color:var(--t-primary)} .neg{color:var(--accent)}
+.scroll-x{overflow-x:auto}
+table.rank{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
+table.rank th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;font-weight:500;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.rank th button{all:unset;cursor:pointer}
+table.rank th button:hover,table.rank th[aria-sort] button{color:var(--ink)}
+table.rank th:nth-child(-n+2),table.rank td:nth-child(-n+2){text-align:left}
+table.rank td{padding:9px 8px;border-bottom:1px solid var(--line-soft);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.rank tbody tr{cursor:pointer}
+table.rank tbody tr:hover{background:var(--surface-2)}
+table.rank tbody tr[aria-selected="true"]{background:var(--accent-soft)}
+table.rank td.n{font-weight:600}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,170px);gap:12px;overflow-x:auto;padding-bottom:6px}
+.two{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));align-items:start}
+.notes p{font-size:13.5px;color:var(--ink-2)}
+.notes p+p{margin-top:8px}
+</style>
+</head>
+<body>
+<div class="banner">ANU // Housing desk // <span id="asof">Loading</span></div>
+
+<header class="top wrap">
+  <div class="eyebrow">Where to buy a US home to rent out</div>
+  <h1>AN<span>U</span> Housing</h1>
+  <p class="lede">Home values, rents, rental yield and cash flow at today's mortgage rate for about 900 US metros, with the trends, Zillow's forecast and the latest housing news. Refreshed every day from free public data.</p>
+  <nav class="desks" id="desks" aria-label="ANU desks"><a href="./">Defense</a><a href="housing.html" aria-current="page">Housing</a><a href="videos.html">Watch</a><a href="docs.html">Docs</a><a class="ask" href="app/">Ask ANU →</a></nav>
+</header>
+
+<main class="wrap">
+<div id="offline" class="notice" hidden></div>
+
+<section id="sec-tiles" aria-label="Right now"><div class="tiles" id="tiles"></div></section>
+
+<section aria-labelledby="h-map" style="display:grid;gap:14px">
+  <div class="head-row"><h2 id="h-map">The map</h2><span class="status" id="map-note"></span></div>
+  <div class="controls">
+    <label class="f">Color by<select id="metric"></select></label>
+    <label class="f">Metros<select id="size"><option value="50">Largest 50</option><option value="100">Largest 100</option><option value="200" selected>Largest 200</option><option value="400">Largest 400</option><option value="9999">All</option></select></label>
+    <label class="f">Budget (typical home at most)<select id="budget"><option value="0">Any price</option></select></label>
+    <label class="f">State<select id="state"><option value="">All states</option></select></label>
+  </div>
+  <div class="map-layout">
+    <div style="display:grid;gap:8px">
+      <div class="box map-box" id="map-box">
+        <svg id="map" viewBox="0 0 975 610" role="img" aria-label="Map of US metros colored by the selected metric"></svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <aside class="box detail" id="detail" aria-live="polite"><p class="status">Tap a dot on the map or a row in the table to see a metro.</p></aside>
+  </div>
+</section>
+
+<section id="sec-rank" aria-labelledby="h-rank" style="display:grid;gap:12px">
+  <div class="head-row"><h2 id="h-rank">Rankings</h2><span class="status" id="rank-count"></span></div>
+  <p class="sub">Uses the same filters as the map. Tap a column to sort, a row to open the metro.</p>
+  <div class="scroll-x"><table class="rank"><thead id="rank-head"></thead><tbody id="rank-body"></tbody></table></div>
+  <div><button class="btn ghost" id="more" hidden>Show more</button></div>
+</section>
+
+<section class="two">
+  <div class="box" id="sec-rate" style="display:grid;gap:10px">
+    <div class="head-row"><h3>30-year mortgage rate</h3><span class="status">Freddie Mac, weekly</span></div>
+    <div class="chart" id="rate-chart"></div>
+  </div>
+  <div class="box notes" style="display:grid;gap:8px">
+    <h3>How to read this</h3>
+    <p><b>Gross yield</b> is a year of rent divided by the price. Above about 7% is high for the US; coastal metros sit near 4%.</p>
+    <p><b>Cash flow</b> is rent after operating costs minus the mortgage payment. The defaults are 25% down, today's 30-year rate and 45% of rent for property tax, insurance, repairs, vacancy and management. Change them in the calculator; the map and table follow.</p>
+    <p id="score-note"></p>
+    <p>Metro numbers are averages: neighborhoods, property taxes, insurance and landlord law vary a lot. Use this to choose where to look, then check locally. This is research support, not financial advice.</p>
+    <p class="status">Sources: Zillow Research (ZHVI home values, ZORI rents, ZHVF forecast, for-sale inventory), Freddie Mac PMMS, Census Bureau metro gazetteer.</p>
+  </div>
+</section>
+
+<section id="sec-news" aria-labelledby="h-news" style="display:grid;gap:12px">
+  <div class="head-row"><h2 id="h-news">Latest housing news</h2><span class="status" id="news-count"></span></div>
+  <div class="filters" id="news-topics"></div>
+  <div class="feed" id="news"></div>
+</section>
+
+<section id="sec-vid" aria-labelledby="h-vid" style="display:grid;gap:12px">
+  <div class="head-row"><h2 id="h-vid">Watch: housing Shorts</h2><a class="linkish" href="videos.html#housing">All housing videos →</a></div>
+  <div class="strip" id="strip"></div>
+</section>
+</main>
+
+<footer class="wrap">ANU compiles open data and news for learning and research. Data: Zillow Research, Freddie Mac, U.S. Census Bureau. Not investment advice.</footer>
+
+<script src="desk.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"";
+const ls={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
+const MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const MONTH=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const STATE_NAMES={AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",CO:"Colorado",CT:"Connecticut",DE:"Delaware",DC:"District of Columbia",FL:"Florida",GA:"Georgia",HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"};
+const CODE_BY_NAME=Object.fromEntries(Object.entries(STATE_NAMES).map(([k,v])=>[v,k]));
+
+/* ---------- formatting ---------- */
+const money=v=>v==null?"—":"$"+Math.round(v).toLocaleString("en-US");
+const kmoney=v=>v==null?"—":v>=1e6?"$"+(v/1e6).toFixed(2)+"M":"$"+Math.round(v/1000)+"k";
+const signedMoney=v=>v==null?"—":(v<0?"−$":"+$")+Math.abs(Math.round(v)).toLocaleString("en-US");
+const pct=(v,d=1)=>v==null?"—":v.toFixed(d)+"%";
+const spct=(v,d=1)=>v==null?"—":(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(d)+"%";
+const monthLabel=ym=>{const [y,m]=String(ym).split("-");return `${MONTH[+m-1]} ${y}`;};
+function monthsFrom(start,n){const [y,m]=start.split("-").map(Number);return Array.from({length:n},(_,i)=>new Date(Date.UTC(y,m-1+i,1)));}
+
+/* ---------- state ---------- */
+const H={market:null,news:[],videos:[]};
+const A={downPct:25,rate:7,opexPct:45,years:30};
+const METRICS={
+  score:{label:"ANU score (buy-to-rent)",kind:"seq",fmt:v=>Math.round(v)+"/100"},
+  grossYield:{label:"Gross rent yield",kind:"seq",fmt:v=>pct(v,2),state:"medianYield"},
+  cashFlow:{label:"Monthly cash flow",kind:"div",fmt:signedMoney},
+  capRate:{label:"Cap rate (after costs)",kind:"seq",fmt:v=>pct(v,2)},
+  priceYoY:{label:"Home price change, 1 year",kind:"div",fmt:spct,state:"priceYoY"},
+  rentYoY:{label:"Rent change, 1 year",kind:"div",fmt:spct},
+  forecast12m:{label:"Zillow forecast, next 12 months",kind:"div",fmt:spct},
+  price5y:{label:"Home price change, 5 years",kind:"div",fmt:spct,state:"price5y"},
+  fromPeak:{label:"Below 5-year peak",kind:"div",fmt:spct},
+  price:{label:"Typical home value",kind:"seq",fmt:kmoney,state:"price"},
+  rent:{label:"Typical rent",kind:"seq",fmt:money},
+  inventoryYoY:{label:"Homes for sale, change 1 year",kind:"div",fmt:spct},
+};
+let CFG={flags:{}},metric=ls.get("anu-h-metric");
+const on=name=>ANU.flag(CFG,name);
+let selected=null, sortKey="score", sortAsc=false, shown=25, newsTopic="all";
+
+/* Rental math, same formulas as src/housing-kb.ts */
+function payment(loan,rate,years){const r=rate/100/12,n=years*12;return r===0?loan/n:loan*r/(1-Math.pow(1+r,-n));}
+function rental(price,rent,a=A){const pay=payment(price*(1-a.downPct/100),a.rate,a.years),noi=rent*(1-a.opexPct/100),down=price*a.downPct/100;
+  return {down,pay,noi,cash:noi-pay,cap:noi*12*100/price,coc:down?(noi-pay)*12*100/down:null,breakEven:pay/(1-a.opexPct/100)};}
+/* Cash flow and cap rate follow the viewer's assumptions; everything else is as published. */
+function val(m,key){if(METRICS[key]?.custom)return m.custom?.[key]??null;if(key==="cashFlow")return m.rent?rental(m.price,m.rent).cash:null;if(key==="capRate")return m.rent?rental(m.price,m.rent).cap:null;const v=m[key];return typeof v==="number"?v:null;}
+
+function filtered(){
+  const size=+$("#size").value,budget=+$("#budget").value,st=$("#state").value;
+  return H.market.metros.filter(m=>m.rank<=size&&(!budget||m.price<=budget)&&(!st||m.state===st));
+}
+
+/* ---------- color ---------- */
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function colorScale(key,values){
+  const v=values.filter(x=>x!=null).sort((a,b)=>a-b);
+  if(!v.length)return ()=>css("--land");
+  const q=p=>d3.quantileSorted(v,p);
+  if(METRICS[key].kind==="div"){
+    const m=Math.max(Math.abs(q(.05)),Math.abs(q(.95)))||1;
+    const neg=d3.interpolateLab(css("--div-neg"),css("--div-mid")),pos=d3.interpolateLab(css("--div-mid"),css("--div-pos"));
+    const s=d3.scaleLinear().domain([-m,m]).range([0,1]).clamp(true);
+    const f=x=>{const t=s(x);return t<.5?neg(t*2):pos((t-.5)*2);};
+    f.domain=[-m,0,m];f.stops=[0,.25,.5,.75,1].map(t=>t<.5?neg(t*2):pos((t-.5)*2));return f;
+  }
+  const lo=q(.05),hi=q(.95)>lo?q(.95):lo+1;
+  const i=d3.interpolateLab(css("--seq-lo"),css("--seq-hi")),s=d3.scaleLinear().domain([lo,hi]).range([0,1]).clamp(true);
+  const f=x=>i(s(x));f.domain=[lo,hi];f.stops=[0,.25,.5,.75,1].map(i);return f;
+}
+
+/* ---------- map ---------- */
+const proj=d3.geoAlbersUsa().scale(1300).translate([487.5,305]);
+let topo=null, mapPts=[], delaunay=null;
+const radius=rank=>Math.max(2.2,13*Math.pow(rank,-.28));
+function renderMap(){
+  if(!H.market||!topo)return;
+  const svg=d3.select("#map");svg.selectAll("*").remove();
+  const list=filtered();
+  const values=list.map(m=>val(m,metric));
+  const color=colorScale(metric,values);
+  const stKey=on("housing.stateShading")?METRICS[metric].state:null;
+  const stateRows=Object.fromEntries(H.market.states.map(s=>[s.code,s]));
+  const states=topojson.feature(topo,topo.objects.states).features;
+  svg.append("g").selectAll("path").data(states).join("path").attr("class","state").attr("d",d3.geoPath())
+    .attr("fill",d=>{const s=stateRows[CODE_BY_NAME[d.properties.name]];const v=stKey&&s?(METRICS[metric].custom?s.custom?.[metric]:s[stKey]):null;return v==null?css("--land"):d3.color(color(v)).copy({opacity:.45}).formatRgb();});
+  mapPts=list.map(m=>{const p=m.lon!=null?proj([m.lon,m.lat]):null;return p?{m,x:p[0],y:p[1],v:val(m,metric)}:null;}).filter(Boolean).sort((a,b)=>a.m.rank-b.m.rank);
+  svg.append("g").selectAll("circle").data(mapPts).join("circle")
+    .attr("class",d=>"dot"+(selected&&d.m.id===selected?" sel":""))
+    .attr("cx",d=>d.x).attr("cy",d=>d.y).attr("r",d=>radius(d.m.rank))
+    .attr("fill",d=>d.v==null?css("--muted"):color(d.v)).attr("fill-opacity",d=>d.v==null?.35:.95);
+  // Selected metro on top so its ring is never hidden.
+  svg.select(".dot.sel").raise();
+  delaunay=d3.Delaunay.from(mapPts,d=>d.x,d=>d.y);
+  const missing=list.length-mapPts.length, noVal=mapPts.filter(d=>d.v==null).length;
+  $("#map-note").textContent=`${mapPts.length} metros shown${noVal?` · ${noVal} without ${METRICS[metric].label.toLowerCase()} data (gray)`:""}${missing?` · ${missing} not on the map`:""}`;
+  renderLegend(color,stKey);
+}
+function renderLegend(color,stKey){
+  const M=METRICS[metric],f=M.fmt;
+  const ends=M.kind==="div"?[f(color.domain[0]),"0",f(color.domain[2])]:[f(color.domain[0]),"",f(color.domain[1])];
+  $("#legend").innerHTML=`<div class="ramp"><div class="bar" style="background:linear-gradient(90deg,${color.stops.join(",")})"></div><div class="ends"><span>${esc(ends[0])}${M.kind==="seq"?" or less":""}</span><span>${esc(ends[1])}</span><span>${esc(ends[2])}${M.kind==="seq"?"+":""}</span></div></div>
+    <span>${esc(M.label)}. Dot size = metro size.${stKey?" States shaded by the state-wide value.":""}</span>`;
+}
+function nearest(evt){
+  if(!delaunay||!mapPts.length)return null;
+  const svg=$("#map"),pt=svg.createSVGPoint();pt.x=evt.clientX;pt.y=evt.clientY;
+  const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+  const i=delaunay.find(p.x,p.y),d=mapPts[i];
+  const scale=svg.getBoundingClientRect().width/975;
+  return Math.hypot(d.x-p.x,d.y-p.y)*scale<=Math.max(18,radius(d.m.rank)*scale+6)?d:null;
+}
+function tipHTML(m){const r=m.rent?rental(m.price,m.rent):null;
+  return `<b>${esc(m.name)}, ${esc(m.state)}</b><br><span class="k">${esc(METRICS[metric].label)}</span> ${esc(val(m,metric)==null?"no data":METRICS[metric].fmt(val(m,metric)))}<br><span class="k">Home</span> ${kmoney(m.price)} (${spct(m.priceYoY)}) · <span class="k">Rent</span> ${money(m.rent)}${r?`<br><span class="k">Yield</span> ${pct(m.grossYield,1)} · <span class="k">Cash flow</span> ${signedMoney(r.cash)}/mo`:""}`;}
+$("#map").addEventListener("pointermove",e=>{
+  const d=nearest(e),tip=$("#tip");
+  if(!d){tip.hidden=true;$("#map").style.cursor="default";return;}
+  $("#map").style.cursor="pointer";tip.hidden=false;tip.innerHTML=tipHTML(d.m);
+  const box=$("#map-box").getBoundingClientRect();let x=e.clientX-box.left+14,y=e.clientY-box.top+14;
+  if(x+260>box.width)x=Math.max(4,e.clientX-box.left-264);if(y+110>box.height)y=Math.max(4,e.clientY-box.top-110);
+  tip.style.left=x+"px";tip.style.top=y+"px";
+});
+$("#map").addEventListener("pointerleave",()=>{$("#tip").hidden=true;});
+$("#map").addEventListener("click",e=>{const d=nearest(e);if(d)select(d.m.id);});
+
+/* ---------- metro detail ---------- */
+function select(id,scroll){
+  selected=id;location.replace("#metro="+id);
+  renderMap();renderRank();renderDetail();
+  if(scroll)$("#detail").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function renderDetail(){
+  const m=H.market.metros.find(x=>x.id===selected);
+  if(!m){$("#detail").innerHTML=`<p class="status">Tap a dot on the map or a row in the table to see a metro.</p>`;return;}
+  const st=H.market.states.find(s=>s.code===m.state);
+  const city=m.name.split(/[-,/]/)[0];
+  const news=H.news.filter(n=>n.title.includes(city)||(n.states||[]).includes(m.state)).slice(0,5);
+  const vids=H.videos.filter(v=>v.topic==="housing"&&(new RegExp(`\\b${city.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\b`,"i").test(v.title+" "+v.desc)||v.title.includes(STATE_NAMES[m.state]||"~"))).slice(0,4);
+  $("#detail").innerHTML=`
+    <div><div class="lbl">#${m.rank} largest metro · ${esc(STATE_NAMES[m.state]||m.state)}</div><div class="name">${esc(m.name)}, ${esc(m.state)}</div>
+      ${m.score!=null?`<div class="score">ANU score <b>${m.score}</b>/100</div>`:`<div class="status">No rent data, so no score.</div>`}</div>
+    <div class="mini">
+      <div class="tile"><div class="lbl">Typical home</div><div class="v">${kmoney(m.price)}</div><div class="d">${spct(m.priceYoY)} in a year</div></div>
+      <div class="tile"><div class="lbl">Typical rent</div><div class="v">${money(m.rent)}</div><div class="d">${spct(m.rentYoY)} in a year</div></div>
+      <div class="tile"><div class="lbl">Gross yield</div><div class="v">${pct(m.grossYield,1)}</div><div class="d">US ${pct(H.market.national.rent*1200/H.market.national.price,1)}</div></div>
+      <div class="tile"><div class="lbl">Forecast, 12 mo</div><div class="v">${spct(m.forecast12m)}</div><div class="d">Zillow</div></div>
+    </div>
+    <div class="chips"><span class="chip">5 years ${spct(m.price5y)}</span><span class="chip">From 5-yr peak ${spct(m.fromPeak)}</span>${m.inventory?`<span class="chip">${m.inventory.toLocaleString()} for sale (${spct(m.inventoryYoY)})</span>`:""}${st?`<span class="chip">${esc(st.name)}: ${kmoney(st.price)}, ${spct(st.priceYoY)}</span>`:""}${customAttrs().map(([k,M])=>`<span class="chip" title="${esc(M.label)}">${esc(M.short)} ${esc(val(m,k)==null?"—":M.fmt(val(m,k)))}</span>`).join("")}</div>
+    <div><div class="lbl">Typical home value, 5 years</div><div class="chart" id="c-price"></div></div>
+    ${m.rent?`<div><div class="lbl">Typical rent, 5 years</div><div class="chart" id="c-rent"></div></div>`:""}
+    <div id="calc-box">
+      <h3 style="margin-bottom:8px">Rental calculator</h3>
+      <div class="calc">
+        <label class="f">Price<input type="number" id="k-price" value="${m.price}" step="5000" min="0"></label>
+        <label class="f">Rent / mo<input type="number" id="k-rent" value="${m.rent||""}" step="25" min="0"></label>
+        <label class="f">Down %<input type="number" id="k-down" value="${A.downPct}" step="5" min="0" max="100"></label>
+        <label class="f">Rate %<input type="number" id="k-rate" value="${A.rate}" step="0.05" min="0"></label>
+        <label class="f">Costs % of rent<input type="number" id="k-opex" value="${A.opexPct}" step="5" min="0" max="90"></label>
+      </div>
+      <div class="calc-out" id="k-out"></div>
+      <p class="status" style="margin-top:6px">Down %, rate and costs also recolor the map and table.</p>
+    </div>
+    ${news.length&&on("housing.news")?`<div><div class="lbl">Related news</div>${news.map(n=>`<p style="font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--line-soft)"><a href="${esc(safeUrl(n.src.u))}" target="_blank" rel="noopener">${esc(n.title)}</a> <span class="status">${esc(n.src.t)} · ${esc(n.d)}</span></p>`).join("")}</div>`:""}
+    ${vids.length&&on("housing.videos")?`<div><div class="lbl">Videos that mention it</div><div class="strip" style="grid-auto-columns:minmax(130px,150px)">${vids.map(videoCard).join("")}</div></div>`:""}
+    <a class="btn ghost" style="justify-self:start" href="app/" title="Opens Ask ANU">Ask ANU about ${esc(m.name)} →</a>`;
+  const months=monthsFrom(H.market.seriesStart,(H.market.series?.[m.id]?.p||[]).length);
+  const s=H.market.series?.[m.id];
+  if(s){lineChart($("#c-price"),months,s.p,css("--series-1"),kmoney);if(m.rent)lineChart($("#c-rent"),months,s.r,css("--series-2"),money);}
+  if(!on("housing.calculator")){$("#calc-box").remove();return;}
+  ["#k-price","#k-rent","#k-down","#k-rate","#k-opex"].forEach(k=>$(k).addEventListener("input",calc));
+  calc(true);
+}
+function calc(initial){
+  const n=k=>{const v=parseFloat($(k).value);return isFinite(v)?v:0;};
+  const price=n("#k-price"),rent=n("#k-rent");
+  const a={downPct:Math.min(100,n("#k-down")),rate:n("#k-rate"),opexPct:Math.min(90,n("#k-opex")),years:30};
+  if(initial!==true){const changed=a.downPct!==A.downPct||a.rate!==A.rate||a.opexPct!==A.opexPct;Object.assign(A,a);if(changed){renderMap();renderRank();}}
+  if(!price||!rent){$("#k-out").innerHTML=`<p class="status">Enter a price and rent.</p>`;return;}
+  const r=rental(price,rent,a),cls=v=>v>=0?"pos":"neg";
+  $("#k-out").innerHTML=`
+    <div><span>Down payment</span><b>${money(r.down)}</b></div>
+    <div><span>Mortgage payment (principal + interest)</span><b>${money(r.pay)}</b></div>
+    <div><span>Rent after costs</span><b>${money(r.noi)}</b></div>
+    <div class="big"><span>Monthly cash flow</span><b class="${cls(r.cash)}">${signedMoney(r.cash)}</b></div>
+    <div><span>Cap rate · cash-on-cash</span><b>${pct(r.cap,2)} · ${r.coc==null?"—":spct(r.coc,1)}</b></div>
+    <div><span>Rent needed to break even</span><b>${money(r.breakEven)}</b></div>`;
+}
+
+/* ---------- line chart with hover ---------- */
+function lineChart(el,dates,values,color,fmt){
+  const pts=dates.map((d,i)=>({d,v:values[i]})).filter(p=>p.v!=null);
+  if(pts.length<2){el.innerHTML=`<p class="status">Not enough history.</p>`;return;}
+  const w=Math.max(260,el.clientWidth||320),h=130,m={t:10,r:12,b:22,l:52};
+  const x=d3.scaleUtc().domain(d3.extent(pts,p=>p.d)).range([m.l,w-m.r]);
+  const [lo,hi]=d3.extent(pts,p=>p.v),pad=(hi-lo)*.1||hi*.05;
+  const y=d3.scaleLinear().domain([lo-pad,hi+pad]).nice(3).range([h-m.b,m.t]);
+  const svg=d3.select(el).html("").append("svg").attr("viewBox",`0 0 ${w} ${h}`).attr("role","img").attr("aria-label",`From ${fmt(pts[0].v)} to ${fmt(pts[pts.length-1].v)}`);
+  svg.append("g").attr("class","grid").selectAll("line").data(y.ticks(3)).join("line").attr("x1",m.l).attr("x2",w-m.r).attr("y1",y).attr("y2",y);
+  svg.append("g").attr("class","axis").selectAll("text").data(y.ticks(3)).join("text").attr("x",m.l-6).attr("y",d=>y(d)+3).attr("text-anchor","end").text(fmt);
+  svg.append("g").attr("class","axis").selectAll("text").data(x.ticks(d3.utcYear.every(1))).join("text").attr("x",x).attr("y",h-6).attr("text-anchor","middle").text(d3.utcFormat("%Y"));
+  svg.append("path").datum(pts).attr("fill","none").attr("stroke",color).attr("stroke-width",2).attr("stroke-linejoin","round").attr("stroke-linecap","round").attr("d",d3.line().x(p=>x(p.d)).y(p=>y(p.v)));
+  const last=pts[pts.length-1];
+  svg.append("circle").attr("cx",x(last.d)).attr("cy",y(last.v)).attr("r",4).attr("fill",color).attr("stroke",css("--surface")).attr("stroke-width",2);
+  const hover=svg.append("g").attr("display","none");
+  hover.append("line").attr("class","tipline").attr("y1",m.t).attr("y2",h-m.b);
+  hover.append("circle").attr("r",4.5).attr("fill",color).attr("stroke",css("--surface")).attr("stroke-width",2);
+  let tip=el.querySelector(".tip");if(!tip){tip=document.createElement("div");tip.className="tip";tip.hidden=true;el.appendChild(tip);}
+  const bis=d3.bisector(p=>p.d).center;
+  svg.append("rect").attr("x",m.l).attr("y",0).attr("width",w-m.l-m.r).attr("height",h).attr("fill","transparent")
+    .on("pointermove",e=>{const [px]=d3.pointer(e);const p=pts[bis(pts,x.invert(px))];hover.attr("display",null);hover.select("line").attr("x1",x(p.d)).attr("x2",x(p.d));hover.select("circle").attr("cx",x(p.d)).attr("cy",y(p.v));
+      tip.hidden=false;tip.innerHTML=`<span class="k">${d3.utcFormat(dates.length>100?"%b %-d, %Y":"%b %Y")(p.d)}</span><br><b>${esc(fmt(p.v))}</b>`;const rx=x(p.d)/w*el.clientWidth;tip.style.left=Math.min(el.clientWidth-120,Math.max(0,rx-50))+"px";tip.style.top="-46px";})
+    .on("pointerleave",()=>{hover.attr("display","none");tip.hidden=true;});
+}
+
+/* ---------- rankings ---------- */
+let COLS=[["rank","#"],["name","Metro"],["price","Home"],["priceYoY","1 yr"],["rent","Rent"],["rentYoY","1 yr"],["grossYield","Yield"],["cashFlow","Cash flow"],["forecast12m","Forecast"],["score","Score"]];
+const customAttrs=()=>Object.entries(METRICS).filter(([,M])=>M.custom);
+function renderRank(){
+  $("#rank-head").innerHTML=`<tr>${COLS.map(([k,l])=>`<th ${k===sortKey?`aria-sort="${sortAsc?"ascending":"descending"}"`:""}><button data-sort="${k}">${esc(l)}${k===sortKey?(sortAsc?" ▲":" ▼"):""}</button></th>`).join("")}</tr>`;
+  const list=filtered().map(m=>({m,v:sortKey==="name"?m.name:val(m,sortKey)})).filter(x=>x.v!=null)
+    .sort((a,b)=>(typeof a.v==="string"?a.v.localeCompare(b.v):a.v-b.v)*(sortAsc?1:-1));
+  $("#rank-count").textContent=`${list.length} metros`;
+  $("#rank-body").innerHTML=list.slice(0,shown).map(({m})=>{const cf=val(m,"cashFlow");return `<tr data-id="${esc(m.id)}" aria-selected="${m.id===selected}">
+    <td class="status">${m.rank}</td><td class="n">${esc(m.name)}, ${esc(m.state)}</td><td>${kmoney(m.price)}</td><td>${spct(m.priceYoY)}</td><td>${money(m.rent)}</td><td>${spct(m.rentYoY)}</td><td>${pct(m.grossYield,1)}</td><td class="${cf==null?"":cf>=0?"pos":"neg"}">${cf==null?"—":signedMoney(cf)}</td><td>${spct(m.forecast12m)}</td><td><b>${m.score??"—"}</b></td>${COLS.slice(10).map(([k])=>`<td>${esc(val(m,k)==null?"—":METRICS[k].fmt(val(m,k)))}</td>`).join("")}</tr>`;}).join("")||`<tr><td colspan="${COLS.length}" class="status">No metros match. Widen the filters.</td></tr>`;
+  $("#more").hidden=list.length<=shown;
+}
+$("#rank-head").addEventListener("click",e=>{const b=e.target.closest("[data-sort]");if(!b)return;const k=b.dataset.sort;if(k===sortKey)sortAsc=!sortAsc;else{sortKey=k;sortAsc=k==="rank"||k==="name"||k==="price"||METRICS[k]?.higherIsBetter===false;}renderRank();});
+$("#rank-body").addEventListener("click",e=>{const r=e.target.closest("[data-id]");if(r){select(r.dataset.id);$("#map-box").scrollIntoView({behavior:"smooth",block:"start"});}});
+$("#more").onclick=()=>{shown+=25;renderRank();};
+
+/* ---------- news & videos ---------- */
+const TOPICS=["rates","prices","rents","inventory","sales","construction","investing","policy"];
+function renderNews(){
+  $("#news-topics").innerHTML=["all",...TOPICS].map(t=>`<button class="fbtn" aria-pressed="${t===newsTopic}" data-topic="${t}">${t==="all"?"All topics":t[0].toUpperCase()+t.slice(1)}</button>`).join("");
+  const st=$("#state").value;
+  const list=H.news.filter(n=>(newsTopic==="all"||(n.topics||[]).includes(newsTopic))&&(!st||(n.states||[]).includes(st)));
+  $("#news-count").textContent=`${list.length} stories${st?" about "+STATE_NAMES[st]:""} in the last 120 days`;
+  $("#news").innerHTML=list.slice(0,24).map(n=>{const [y,m,d]=n.d.split("-");return `<div class="item"><div class="dtg"><b>${d} ${MON[+m-1]}</b>${y}</div><div>
+    <h4><a href="${esc(safeUrl(n.src.u))}" target="_blank" rel="noopener">${esc(n.title)}</a></h4>${n.body&&n.body!==n.title?`<p>${esc(n.body)}</p>`:""}
+    <div class="chips"><a class="chip tier ${esc(n.src.q)}" href="${esc(safeUrl(n.src.u))}" target="_blank" rel="noopener">${esc(n.src.t)} ↗</a>${(n.topics||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}${(n.states||[]).slice(0,4).map(s=>`<span class="chip">${esc(s)}</span>`).join("")}</div></div></div>`;}).join("")||`<p class="status" style="padding:14px 0">No stories match.</p>`;
+}
+$("#news-topics").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(b){newsTopic=b.dataset.topic;renderNews();}});
+function videoCard(v){return `<button class="vcard${v.short?" short":""}" data-play="${esc(v.id)}" aria-label="Play ${esc(v.title)}"><div class="vthumb"><img loading="lazy" alt="" src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/hqdefault.jpg"><span class="play">▶ ${v.short?"Short":"Video"}</span></div><span class="vt">${esc(v.title)}</span><span class="vm">${esc(v.channel)}${v.views!=null?" · "+d3.format(".2~s")(v.views)+" views":""}</span></button>`;}
+function renderStrip(){const list=H.videos.filter(v=>v.topic==="housing"&&v.short).slice(0,12);$("#strip").innerHTML=list.map(videoCard).join("")||`<p class="status">No housing Shorts yet.</p>`;}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-play]");if(!b)return;const t=b.querySelector(".vthumb");if(t.querySelector("iframe"))return;
+  document.querySelectorAll(".vthumb iframe").forEach(f=>f.remove());
+  const f=document.createElement("iframe");f.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.play)}?autoplay=1&playsinline=1&rel=0`;f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.title=b.getAttribute("aria-label");t.appendChild(f);});
+
+/* ---------- top tiles, rate chart ---------- */
+function renderTiles(){
+  const mk=H.market,n=mk.national,mo=mk.mortgage;
+  const big=mk.metros.filter(m=>m.rank<=100&&m.rent),pos=big.filter(m=>rental(m.price,m.rent).cash>0).length;
+  const yld=n.rent&&n.price?n.rent*1200/n.price:null;
+  $("#tiles").innerHTML=`
+    <div class="tile"><div class="lbl">30-year mortgage rate</div><div class="v">${pct(mo.rate30,2)}</div><div class="d">${mo.rate30YearAgo!=null?`${pct(mo.rate30YearAgo,2)} a year ago · `:""}week of ${esc(mo.week)}</div></div>
+    <div class="tile"><div class="lbl">Typical US home</div><div class="v">${kmoney(n.price)}</div><div class="d">${spct(n.priceYoY)} in a year · forecast ${spct(n.forecast12m)}</div></div>
+    <div class="tile"><div class="lbl">Typical US rent</div><div class="v">${money(n.rent)}</div><div class="d">${spct(n.rentYoY)} in a year · gross yield ${pct(yld,1)}</div></div>
+    <div class="tile"><div class="lbl">Big metros that cash-flow</div><div class="v">${pos} <span style="font-size:20px;color:var(--muted)">of ${big.length}</span></div><div class="d">largest 100, at ${A.downPct}% down and ${pct(A.rate,2)}</div></div>`;
+}
+function renderRate(){const h=H.market.mortgage.history||[];lineChart($("#rate-chart"),h.map(([d])=>new Date(d+"T00:00:00Z")),h.map(([,v])=>v),css("--series-1"),v=>v.toFixed(2)+"%");}
+
+/* ---------- wiring ---------- */
+function renderAll(){if(on("housing.tiles"))renderTiles();renderMap();if(on("housing.rankings"))renderRank();renderDetail();if(on("housing.rateChart"))renderRate();if(on("housing.news"))renderNews();if(on("housing.videos"))renderStrip();}
+$("#metric").addEventListener("change",e=>{metric=e.target.value;ls.set("anu-h-metric",metric);if(COLS.some(([k])=>k===metric)){sortKey=metric;sortAsc=metric==="fromPeak"||METRICS[metric]?.higherIsBetter===false;}renderMap();renderRank();});
+["#size","#budget"].forEach(s=>$(s).addEventListener("change",()=>{shown=25;renderMap();renderRank();}));
+$("#state").addEventListener("change",()=>{shown=25;renderMap();renderRank();renderNews();});
+$("#state").insertAdjacentHTML("beforeend",Object.entries(STATE_NAMES).map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join(""));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>H.market&&renderAll());
+let rz=0;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(H.market){renderDetail();if(on("housing.rateChart"))renderRate();}},200);});
+const FMT={money,kmoney,signedMoney,percent:v=>pct(v,1),percent2:v=>pct(v,2),signedPercent:v=>spct(v,1),number:v=>Math.abs(v)>=100?Math.round(v).toLocaleString("en-US"):v.toFixed(1)};
+/* Applies config/anu.yaml: tabs, flags, defaults, budgets and custom attributes. */
+function applyConfig(cfg){
+  CFG=cfg;ANU.renderDesks($("#desks"),cfg,"housing");
+  const h=cfg.housing||{};
+  for(const a of h.attributes||[]){METRICS[a.id]={label:a.label,short:a.label.split(/[(,]/)[0].trim(),kind:a.color,fmt:FMT[a.format]||FMT.number,state:a.aggregate?"custom":null,custom:true,higherIsBetter:a.higherIsBetter};if(a.column)COLS.push([a.id,a.label.split(/[(,]/)[0].trim()]);}
+  if(!metric||!METRICS[metric])metric=METRICS[h.defaults?.metric]?h.defaults.metric:"score";
+  $("#metric").innerHTML=Object.entries(METRICS).map(([k,m])=>`<option value="${k}" ${k===metric?"selected":""}>${esc(m.label)}</option>`).join("");
+  $("#budget").insertAdjacentHTML("beforeend",(h.budgets||[200000,300000,400000,500000]).map(b=>`<option value="${b}">${kmoney(b)}</option>`).join(""));
+  if(h.defaults){if([...$("#size").options].some(o=>+o.value===h.defaults.size))$("#size").value=String(h.defaults.size);if([...$("#budget").options].some(o=>+o.value===h.defaults.budget))$("#budget").value=String(h.defaults.budget);}
+  const hide={"housing.tiles":"#sec-tiles","housing.rankings":"#sec-rank","housing.rateChart":"#sec-rate","housing.news":"#sec-news","housing.videos":"#sec-vid"};
+  for(const [f,sel] of Object.entries(hide))if(!on(f))$(sel).hidden=true;
+  const w=h.score;if(w){const t=Object.values(w).reduce((a,b)=>a+b,0)||1,p=k=>Math.round(w[k]*100/t)+"%";$("#score-note").innerHTML=`<b>ANU score</b> (0–100) ranks metros against each other for buying to rent: ${p("grossYield")} gross yield, ${p("rentYoY")} rent growth, ${p("forecast12m")} Zillow's 12-month forecast, ${p("priceYoY")} price momentum, ${p("inventoryDrop")} falling inventory. Weights are set in config/anu.yaml. It's a way to sort, not a verdict.`;}
+}
+
+(async()=>{
+  try{
+    const get=async(u,opt)=>{const r=await fetch(u,{cache:"no-cache"});if(!r.ok){if(opt)return null;throw new Error(r.status);}return r.json();};
+    const [cfg,market,news,videos,us]=await Promise.all([ANU.config(),get("api/v1/housing.json"),get("api/v1/housing-news.json",true),get("api/v1/videos.json",true),get("https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-albers-10m.json")]);
+    Object.assign(H,{market,news:news||[],videos:videos||[]});topo=us;applyConfig(cfg);
+  }catch{const o=$("#offline");o.hidden=false;o.textContent="The housing data couldn't load. Refresh the page to try again.";$("#asof").textContent="Offline";return;}
+  A.rate=H.market.assumptions.rate;A.downPct=H.market.assumptions.downPct;A.opexPct=H.market.assumptions.opexPct;
+  $("#asof").textContent=`Prices & rents ${monthLabel(H.market.asOf.prices)} · rates ${H.market.asOf.mortgage}`;
+  const hash=(location.hash.match(/metro=(\d+)/)||[])[1];
+  selected=hash&&H.market.metros.some(m=>m.id===hash)?hash:H.market.metros.filter(m=>m.rank<=100&&m.score!=null).sort((a,b)=>b.score-a.score)[0]?.id;
+  renderAll();
+})();
+</script>
+</body>
+</html>
