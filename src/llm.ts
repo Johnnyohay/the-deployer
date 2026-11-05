@@ -39,7 +39,7 @@ export const PROVIDERS = {
   }),
   ollama: (model = env("OLLAMA_MODEL") ?? "qwen3.5:9b"): Provider => ({
     id: "ollama",
-    label: `${model} on this computer (free)`,
+    label: `${model} ${env("GITHUB_ACTIONS") ? "run inside the GitHub job" : "on this computer"} (free)`,
     baseUrl: `${env("OLLAMA_HOST") ?? "http://127.0.0.1:11434"}/v1`,
     model,
   }),
