@@ -32,7 +32,8 @@ jobs:
       - name: Collect the conversation so far
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" --paginate --jq '[.[] | {author: .user.login, body: .body}]' > "$RUNNER_TEMP/thread.json"
+        run: |
+          gh api "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" --paginate --jq '[.[] | {author: .user.login, body: .body}]' > "$RUNNER_TEMP/thread.json"
       - name: Answer
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}

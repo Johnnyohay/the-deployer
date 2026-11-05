@@ -15,6 +15,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Lint the workflows (the template's too, since users get them as-is)
+        run: |
+          bash <(curl -s https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
+          ./actionlint .github/workflows/*.yml template/.github/workflows/*.yml
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
