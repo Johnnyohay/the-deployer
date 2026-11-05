@@ -149,6 +149,22 @@ export function compileRule(r: { keywords: string[]; pattern?: string }, where: 
   }
 }
 
+/** Either number of a term: "tariffs" also finds "tariff", "port" also finds "ports". */
+const eitherNumber = (term: string) => {
+  const t = escape(term);
+  if (/ies$/i.test(term)) return `${t.slice(0, -3)}(?:y|ies)`;
+  if (/[^s]s$/i.test(term)) return `${t.slice(0, -1)}s?`;
+  if (/y$/i.test(term)) return `${t.slice(0, -1)}(?:y|ies)`;
+  return `${t}(?:s|es)?`;
+};
+
+/** The scope rule. Unlike theme keywords, scope terms match in either number, since a story
+ * dropped for "tariff" vs "tariffs" is lost for good. */
+export function scopeRule(scope: { keywords: string[]; pattern?: string }): RegExp | null {
+  if (!scope.keywords.length && !scope.pattern) return null;
+  return compileRule({ keywords: [], pattern: [scope.pattern, scope.keywords.length ? `\\b(?:${scope.keywords.map(eitherNumber).join("|")})\\b` : ""].filter(Boolean).map((p) => `(?:${p})`).join("|") }, "topic/topic.yaml scope");
+}
+
 export async function loadTopic(): Promise<Topic> {
   const topic = await loadYaml("topic/topic.yaml", Topic);
   const ids = topic.sectors.map((s) => s.id);
@@ -157,7 +173,7 @@ export async function loadTopic(): Promise<Topic> {
   topic.sectors.forEach((s) => compileRule(s, `topic/topic.yaml sector "${s.id}"`));
   topic.storyTypes.forEach((t) => compileRule(t, `topic/topic.yaml story type "${t.name}"`));
   compileRule(topic.noise, "topic/topic.yaml noise");
-  compileRule(topic.scope, "topic/topic.yaml scope");
+  scopeRule(topic.scope);
   return topic;
 }
 

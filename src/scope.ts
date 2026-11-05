@@ -6,6 +6,16 @@ import { askJson } from "./ai.ts";
  * get this wrong when it is one field among many. A story must contain one of these terms to be
  * kept, so they have to be both specific to the subject and broad enough to miss nothing in it.
  */
+// Words that fit news about almost anything. A story containing one of them proves nothing
+// about its subject, so they never count as scope terms, whatever the AI says.
+export const GENERIC = new Set(
+  ("market markets growth deal deals company companies business industry industries news strategy strategic challenge challenges demand " +
+    "partnership partnerships partner partners merger mergers acquisition acquisitions infrastructure regulation regulations policy policies " +
+    "route routes border borders price prices pricing cost costs investment investments innovation technology technologies ai risk risks " +
+    "economy economic development community launch launches report reports trend trends sales revenue earnings funding global international")
+    .split(" "),
+);
+
 export async function draftScope(domain: string, themes: string[], hint = ""): Promise<string[]> {
   const out = await askJson(
     z.object({ terms: z.array(z.string().min(2)).min(10).max(40) }),
@@ -23,7 +33,7 @@ export async function draftScope(domain: string, themes: string[], hint = ""): P
 Terms:
 ${terms.map((t) => `- ${t}`).join("\n")}`,
   }).catch(() => ({ generic: [] as string[] }));
-  const generic = new Set(check.generic.map((t) => t.toLowerCase()));
+  const generic = new Set([...GENERIC, ...check.generic.map((t) => t.toLowerCase())]);
   const kept = terms.filter((t) => !generic.has(t.toLowerCase()));
   return kept.length >= 5 ? kept : terms;
 }

@@ -11,9 +11,9 @@ import { z } from "zod/v4";
 import { askJson } from "./ai.ts";
 import { discoverFeed, siteUrl } from "./discover.ts";
 import { slug } from "./store.ts";
-import { compileRule, loadSources, loadTopic } from "./topic.ts";
+import { compileRule, loadSources, loadTopic, scopeRule } from "./topic.ts";
 import { runStep } from "./run-step.ts";
-import { draftScope } from "./scope.ts";
+import { draftScope, GENERIC } from "./scope.ts";
 
 const args = process.argv.slice(2);
 const opt = (name: string) => {
@@ -38,6 +38,7 @@ const op = <T extends string, S extends z.ZodRawShape>(name: T, shape: S, about:
 const Op = z.discriminatedUnion("op", [
   op("setSite", { newName: z.string().optional(), tagline: z.string().optional() }, "Rename the site or change its tagline"),
   op("setAudience", { audience: z.string() }, "Change who it is written for"),
+  op("setWord", { word: z.enum(["theme", "themes", "entity", "entities", "state", "money", "watch", "ideas"]), text: z.string().min(2).max(40) }, "Change one of the site's own words (its tabs and headings), e.g. call themes 'Markets'"),
   op("editScope", { addKeywords: Words, removeKeywords: Words }, "Scope = the subject's core terms; a story must contain one to be kept. To keep out another field, ADD this subject's own defining terms (never the unwanted field's words)"),
   op("addTheme", { name: z.string(), keywords: Words.min(6), soWhat: z.string() }, "A new theme with specific keywords"),
   op("removeTheme", { name: z.string() }, "Remove a theme by its current name"),
@@ -58,6 +59,7 @@ const Plan = z.object({
 const state = [
   `Site: ${site.site?.name} — ${site.site?.tagline}`,
   `Audience: ${topic.audience}`,
+  `Site words: ${Object.entries(topic.vocab ?? {}).filter(([k]) => !/Intro|Example/.test(k)).map(([k, v]) => `${k}="${v}"`).join(", ")}`,
   `Scope terms: ${(topic.scope?.keywords ?? []).join(", ")}`,
   `Themes:\n${(topic.sectors as Doc[]).map((s) => `- ${s.name}: ${(s.keywords ?? []).join(", ")}${s.pattern ? ` (pattern)` : ""}`).join("\n")}`,
   `Sources: ${(sources.feeds as Doc[]).map((f) => f.name).join("; ")}`,
@@ -94,6 +96,10 @@ for (const o of plan.ops as (Op & Record<string, any>)[]) {
       break;
     case "setAudience":
       if (o.audience) (topic.audience = o.audience), done.push(`Audience: ${o.audience}`);
+      break;
+    case "setWord":
+      topic.vocab = { ...topic.vocab, [o.word]: o.text };
+      done.push(`The site now says "${o.text}" for ${o.word}`);
       break;
     case "editScope":
       topic.scope ??= { keywords: [] };
@@ -180,6 +186,14 @@ for (const o of plan.ops as (Op & Record<string, any>)[]) {
   }
 }
 
+// Generic words in the scope let any story in (an AI drew them, or an older setup has them),
+// so every change also clears them out.
+const vague = ((topic.scope?.keywords ?? []) as string[]).filter((k) => GENERIC.has(k.toLowerCase()));
+if (vague.length && topic.scope.keywords.length - vague.length >= 5) {
+  topic.scope.keywords = topic.scope.keywords.filter((k: string) => !GENERIC.has(k.toLowerCase()));
+  done.push(`Scope: dropped words too general to mean this subject (${vague.join(", ")})`);
+}
+
 if (!done.length) {
   console.log(`Nothing to change.${skipped.length ? ` (${skipped.join("; ")})` : ""}`);
   await writeFile("change-report.md", `Nothing was changed: the request didn't map to anything I can edit.${skipped.length ? `\n\n${skipped.map((x) => `- ${x}`).join("\n")}` : ""}\n`);
@@ -203,9 +217,9 @@ await writeFile("data/companies.json", JSON.stringify(entities, null, 2) + "\n")
 
 // A narrower scope or new noise words apply to what is already stored, so the site shows the
 // change right away; stories written by hand (not auto-collected) are left alone.
-if (plan.ops.some((o) => o.op === "editScope" || o.op === "addNoise") && existsSync("data/updates.json")) {
+if ((vague.length || plan.ops.some((o) => o.op === "editScope" || o.op === "addNoise")) && existsSync("data/updates.json")) {
   const t = await loadTopic();
-  const scope = t.scope.keywords.length || t.scope.pattern ? compileRule(t.scope, "scope") : null;
+  const scope = scopeRule(t.scope);
   const noise = compileRule(t.noise, "noise");
   const all = JSON.parse(await readFile("data/updates.json", "utf8")) as Doc[];
   const keep = all.filter((u) => !u.auto || ((!scope || scope.test(`${u.title} ${u.body}`)) && !noise.test(u.title)));

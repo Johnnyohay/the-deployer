@@ -22,7 +22,7 @@ import { z } from "zod/v4";
 import { askJson } from "./ai.ts";
 import { discoverFeed, pool, resolveYouTube, siteUrl } from "./discover.ts";
 import { fetchFeed } from "./rss.ts";
-import { compileRule, feedUrl, loadTopic, loadSources, type Feed } from "./topic.ts";
+import { compileRule, feedUrl, loadTopic, loadSources, scopeRule, type Feed } from "./topic.ts";
 import { slug } from "./store.ts";
 import { runStep } from "./run-step.ts";
 import { draftScope } from "./scope.ts";
@@ -31,6 +31,8 @@ import { draftScope } from "./scope.ts";
 // ---- what the AI drafts (lenient; normalized into the pack schema below) ----
 
 const Phrases = z.array(z.string().min(2)).describe("Whole-word phrases matched case-insensitively in headlines and summaries");
+// A word the site uses as a tab or heading; small models sometimes put a whole list here.
+const Label = z.string().min(2).max(24).regex(/^[^,;/]+$/, "one short label, not a list");
 
 const OntologyDraft = z.object({
   name: z.string().describe("A short, memorable name for the site, 1-3 words"),
@@ -38,10 +40,10 @@ const OntologyDraft = z.object({
   domain: z.string().describe("A short noun phrase for the whole subject, e.g. 'retail, supply chains and geopolitics'"),
   audience: z.string().describe("Who reads it and what they want from it, one sentence starting lowercase, e.g. 'a retail strategy lead who wants to see supply shocks coming'"),
   vocab: z.object({
-    theme: z.string().describe("What one theme is called on the site, e.g. Sector, Market, Region, Topic"),
-    themes: z.string(),
-    entity: z.string().describe("What the tracked things are called, e.g. Company, Brand, Player, Organization"),
-    entities: z.string(),
+    theme: Label.describe("What one theme is called on the site, one or two words, e.g. Sector, Market, Region, Topic"),
+    themes: Label.describe("The plural of theme, e.g. Sectors"),
+    entity: Label.describe("What the tracked things are called, one or two words, e.g. Company, Brand, Player, Organization"),
+    entities: Label.describe("The plural of entity, e.g. Companies"),
     state: z.string().describe("Heading for a theme's current situation, e.g. 'Where it stands'"),
     money: z.string().describe("Heading for the second part of a theme brief that fits this subject, e.g. 'Where the money is', 'Who's winning', 'Key numbers'"),
     watch: z.string().describe("Heading for what to watch next"),
@@ -242,7 +244,7 @@ const gnQuery = (keywords: string[]) => keywords.slice(0, 5).map((k) => (k.inclu
 const themeFeeds = (list: typeof sectors): Feed[] => list.map((x) => ({ name: `Google News: ${x.name}`, googleNews: gnQuery(x.keywords), tier: "news" as const, lang }));
 const noiseRe = compileRule({ keywords: clean(o.noise) }, "noise");
 const scope = await draftScope(o.domain, sectors.map((x) => x.name)).catch(() => [] as string[]);
-const scopeRe = scope.length ? compileRule({ keywords: scope }, "scope") : /(?:)/;
+const scopeRe = scopeRule({ keywords: scope }) ?? /(?:)/;
 
 console.log("4/6 Testing the keywords on this week's news…");
 let cov = await coverage(sectors, [...feeds, ...siteFeeds, ...themeFeeds(sectors)], feedUrl, noiseRe, scopeRe);

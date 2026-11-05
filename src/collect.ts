@@ -8,7 +8,7 @@ import { loadDesk, saveDaily, slug } from "./store.ts";
 import { buildApi } from "./build-api.ts";
 import { tagCompanies } from "./companies.ts";
 import type { Brief, Update } from "./schema.ts";
-import { compileRule, feedUrl, loadSources, loadTopic, typeWeights } from "./topic.ts";
+import { compileRule, feedUrl, loadSources, loadTopic, scopeRule, typeWeights } from "./topic.ts";
 import { mkdir, writeFile } from "node:fs/promises";
 
 const topic = await loadTopic();
@@ -17,7 +17,7 @@ const SECTOR_RULES = Object.fromEntries(topic.sectors.map((s) => [s.id, compileR
 const TYPE_RULES = topic.storyTypes.map((t) => [t.name, compileRule(t, t.name)] as const);
 const SECTOR_SO_WHAT = Object.fromEntries(topic.sectors.map((s) => [s.id, s.soWhat]));
 const NOISE = compileRule(topic.noise, "noise");
-const SCOPE = topic.scope.keywords.length || topic.scope.pattern ? compileRule(topic.scope, "scope") : null;
+const SCOPE = scopeRule(topic.scope);
 const TYPE_WEIGHT = typeWeights(topic);
 
 interface Article { title: string; link: string; date: string; summary: string; source: (typeof FEEDS)[number] }
