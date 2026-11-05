@@ -13,6 +13,14 @@ Example: "Trends in retail, supply chain and geopolitics" → a site with sector
 
 ---
 
+## Proven on GitHub (2026-11-05)
+
+Demo: [Johnnyohay/deployer-demo](https://github.com/Johnnyohay/deployer-demo), made with "Use this template" plus one "Set me up" issue, with no AI key (qwen3.5:4b runs inside the job): setup took 9 minutes, a daily refresh 10–18, and two "Change my setup" issues took about 4 minutes each. Found and fixed along the way:
+- ask.yml had a YAML error, so Ask never ran. CI now runs actionlint on the template's workflows.
+- The issue title went straight into the shell command; it is now passed through an env variable.
+- The job token can't switch GitHub Pages on. The setup reply asks for the one click.
+- The small model put lists where labels belong, and generic words in the scope. Fixed with label validation, a generic-word filter that `change` also applies to old setups, and scope terms that match either singular or plural.
+
 ## Phases 1–2 result (2026-11-05): any topic, alive
 
 - **Ontology in the pack:** scope (core terms a story must contain), themes, story types, entity kinds, the site's vocabulary, per-mode suggested questions. The site, the Ask app and the docs page draw everything from it; ANU keeps its own pages as pack overrides and is unchanged (golden test, and byte-identical pages).
