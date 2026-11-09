@@ -1,474 +1,753 @@
 <!doctype html>
 <html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{name}}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Morning brief</title>
+<meta name="description" content="A personal morning brief and teacher for the topics you follow: the stories that matter, why they matter, the key terms and the numbers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Public+Sans:wght@400;500;600;700&display=swap">
 <style>
+/* The brief: a personal teacher for the topics this site follows (config topics).
+   A dark band greets you and says what moved in each topic; a lesson of the day; story cards
+   from every topic (each opens a detail panel); numbers per topic; what's coming up.
+   Beginner mode shows key terms and the lesson; Expert hides them. */
 :root{
-  --ground:#E9EDEA; --surface:#F6F8F6; --surface-2:#DFE5E0; --line:#C3CCC5; --line-soft:#D5DCD6;
-  --ink:#16201B; --ink-2:#3E4C44; --muted:#66756C;
-  --accent:#C2410C; --accent-ink:#FFFFFF; --accent-soft:#F6DCCD;
-  --topo:#4E6B57; --topo-soft:#D3DFD5;
-  --t-primary:#1D6B43; --t-news:#2B5C8A; --t-research:#7A4E9A; --t-agg:#9A6A10;
-  --banner:#1D6B43; --banner-ink:#F3FFF7;
-  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
-  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --r:6px;
+  --bg:#EEF0F3; --surface:#FFFFFF; --fg:#14171B; --muted:#5A626D; --line:#D6DAE0; --track:#E1E5EA;
+  --band:#0D1015; --band-fg:#E9EDF2; --band-dim:#A3ACB8; --band-line:#262D38; --band-chip:#171C24;
+  --hot:#E2722F; --good:#15803D; --bad:#B91C1C;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --ui:"Archivo",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --ground:#101512; --surface:#171E1A; --surface-2:#1F2822; --line:#33403A; --line-soft:#26302A;
-    --ink:#E3EAE5; --ink-2:#B6C3BB; --muted:#86958C;
-    --accent:#F0793A; --accent-ink:#1A0D05; --accent-soft:#3A2116;
-    --topo:#8FB39A; --topo-soft:#22322A;
-    --t-primary:#5CC28C; --t-news:#79AEE0; --t-research:#C39BE3; --t-agg:#E0B35A;
-    --banner:#1F4A33; --banner-ink:#D6F5E2;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --ground:#101512; --surface:#171E1A; --surface-2:#1F2822; --line:#33403A; --line-soft:#26302A;
-  --ink:#E3EAE5; --ink-2:#B6C3BB; --muted:#86958C;
-  --accent:#F0793A; --accent-ink:#1A0D05; --accent-soft:#3A2116;
-  --topo:#8FB39A; --topo-soft:#22322A;
-  --t-primary:#5CC28C; --t-news:#79AEE0; --t-research:#C39BE3; --t-agg:#E0B35A;
-  --banner:#1F4A33; --banner-ink:#D6F5E2;
-}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0F1216; --surface:#171B21; --fg:#E7EAEE; --muted:#9AA3AE; --line:#2A3038; --track:#262C34; --hot:#F08A4B; --good:#4ADE80; --bad:#F87171; color-scheme:dark}}
+
 *{box-sizing:border-box}
-/* The hidden attribute must win over display rules (e.g. section.panel{display:grid}), or every tab shows at once. */
 [hidden]{display:none!important}
-body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.55}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-button{font:inherit}
-.banner{background:var(--banner);color:var(--banner-ink);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-align:center;padding:5px 16px;text-transform:uppercase}
-.wrap{max-width:1240px;margin:0 auto;padding-inline:20px}
-header.top{padding-block:26px 0}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,68px);line-height:.92;margin:.18em 0 .2em;text-transform:uppercase;text-wrap:balance}
-h1 span{color:var(--accent)}
-.lede{max-width:72ch;color:var(--ink-2);font-size:16.5px;margin:0}
-.meta-row{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--muted)}
-.meta-row b{color:var(--ink);font-weight:500}
-nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);border-bottom:1px solid var(--line);margin-top:20px}
-nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
-nav.tabs button{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.04em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:12px 12px 9px;cursor:pointer;white-space:nowrap}
-nav.tabs button:hover{color:var(--ink)}
-nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-main{padding-block:26px 64px}
-section.panel{display:grid;gap:26px}
-h2{font-family:var(--display);font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;margin:0;text-wrap:balance}
-h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em;margin:0;text-wrap:balance}
-p{margin:0}
-.sub{color:var(--ink-2);max-width:76ch}
-.grid{display:grid;gap:14px}
-.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
-.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
-.g4{grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
-.box{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:18px}
-.lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.status{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.head-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
-.thesis{border-left:3px solid var(--accent);padding:4px 0 4px 18px;max-width:84ch}
-.thesis p{font-size:19px;line-height:1.45;font-weight:500}
-.force,.idea{display:grid;gap:8px;align-content:start}
-.idea h4{margin:0;font-size:15.5px;font-weight:600}
-.force h4{margin:0;font-size:15.5px;font-weight:600;line-height:1.3}
-.force p{font-size:14px;color:var(--ink-2)}
+:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto}
+
+/* ---- Summary band ---- */
+.band{background:var(--band);color:var(--band-fg);padding-block:max(14px,env(safe-area-inset-top,0px)) 26px}
+.navrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-bottom:12px;border-bottom:1px solid var(--band-line)}
+.brand{font-family:var(--ui);font-weight:800;font-stretch:118%;font-size:24px;text-decoration:none;display:flex;align-items:baseline;gap:10px}
+.brand b{font-weight:800}
+.brand b span{color:var(--hot)}
+.brand small{font-family:var(--body);font-weight:400;font-stretch:100%;font-size:13px;color:var(--band-dim)}
+.navrow nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;font-family:var(--ui);font-size:14.5px}
+.navrow nav a{color:var(--band-dim);text-decoration:none;padding-block:3px}
+.navrow nav a:hover{color:var(--band-fg)}
+.navrow nav a[aria-current="page"]{color:var(--band-fg);font-weight:600;box-shadow:inset 0 -2px 0 var(--hot)}
+.navrow nav a.ask{color:var(--band);background:var(--hot);font-weight:700;padding:5px 12px;border-radius:7px;margin-left:6px}
+.date{font-size:14px;color:var(--band-dim);margin:22px 0 4px}
+.band h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,44px);line-height:1.05;letter-spacing:-.025em;margin:0;text-wrap:balance}
+.summary{font-size:17px;color:var(--band-fg);max-width:70ch;margin:10px 0 18px;opacity:.92}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fact{background:var(--band-chip);border:1px solid var(--band-line);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.fact b{font-family:var(--ui);font-size:30px;font-weight:700;font-stretch:88%;line-height:1;font-variant-numeric:tabular-nums;flex:none}
+.fact span{font-size:13.5px;line-height:1.35;color:var(--band-dim)}
+.fact span strong{color:var(--band-fg);font-weight:600}
+.fact.soon b{color:var(--hot)}
+
+/* ---- Sections ---- */
+main{padding-block:26px 48px;display:grid;gap:34px}
+main>*{min-width:0;width:100%}
+.sec-head{display:grid;gap:2px;margin-bottom:14px}
+.sec-head h2{font-family:var(--ui);font-size:21px;font-weight:700;margin:0;letter-spacing:-.005em}
+.sec-head p{margin:0;color:var(--muted);font-size:14.5px;max-width:72ch}
+.notice{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+
+/* Story cards */
+.deck{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.card.big{grid-column:1/-1}
+.card[hidden]{display:none}
+.face{background:var(--c);color:var(--ci);padding:14px 18px 18px;display:flex;flex-direction:column;gap:12px;min-height:170px}
+.card.big .face{min-height:200px}
+.face .k{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--ui);font-size:12.5px;font-weight:600;letter-spacing:.03em}
+.pill{background:rgba(255,255,255,.18);padding:2px 9px;border-radius:999px}
+.lightbg .pill{background:rgba(0,0,0,.12)}
+.face h3{font-family:var(--display);font-weight:700;font-size:clamp(20px,2vw,24px);line-height:1.14;letter-spacing:-.01em;margin:auto 0 0;text-wrap:balance}
+.card.big .face h3{font-size:clamp(24px,2.8vw,34px)}
+.face h3 button{all:unset;cursor:pointer}
+.face h3 button:hover{text-decoration:underline;text-underline-offset:4px}
+.body{padding:14px 18px 16px;display:grid;gap:10px;flex:1;align-content:start}
+.body .lbl{font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 2px}
+.body p{margin:0;font-size:14.8px}
+.body .what{color:var(--muted)}
+.open{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:4px;font-family:var(--ui);font-size:14px;font-weight:700;color:var(--bg);background:var(--fg);border:0;border-radius:9px;padding:10px 14px;cursor:pointer}
+.open:hover{background:var(--hot)}
+.links{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px}
+.links a{text-decoration:none;font-weight:600}
+.links a:hover{text-decoration:underline}
+.links .src{color:var(--muted);font-weight:500}
+.links .ask{color:var(--hot)}
+.swipe{display:none;font-size:13px;color:var(--muted);margin-top:8px}
+
+/* This week in numbers */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:4px;align-content:start}
+.kpi .lbl{font-family:var(--ui);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.kpi .val{font-family:var(--ui);font-size:34px;font-weight:700;font-stretch:88%;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:13.5px;color:var(--muted)}
+.delta{font-family:var(--ui);font-size:13px;font-weight:700;white-space:nowrap}
+.up{color:var(--good)}.down{color:var(--bad)}.flat{color:var(--muted)}
+.kpi .spark{display:flex;gap:3px;align-items:flex-end;height:26px;margin-top:6px}
+.kpi .spark i{flex:1;background:var(--track);border-radius:2px;min-height:2px}
+.kpi .spark i.now{background:var(--fg)}
+.kpi .spark-l{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted)}
+.trio{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}
+.deals{list-style:none;margin:0;padding:0;display:grid}
+.deals li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:2px 14px;padding:11px 0;border-top:1px solid var(--line);align-items:baseline}
+.deals li:first-child{border-top:0;padding-top:0}
+.deals .amt{font-family:var(--ui);font-size:20px;font-weight:700;font-stretch:90%;font-variant-numeric:tabular-nums;grid-row:span 2}
+.deals a{font-weight:600;text-decoration:none;line-height:1.35}
+.deals a:hover{text-decoration:underline}
+.deals .m{font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px}
+.kind{font-family:var(--ui);font-weight:700;font-size:11px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:5px;padding:0 6px;color:var(--fg)}
+.cos{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.cos li a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;text-decoration:none;align-items:baseline}
+.cos li a:hover .nm{text-decoration:underline}
+.cos .nm{font-weight:600;font-size:14.5px}
+.cos .n{font-size:13px;color:var(--muted)}
+.cos .bar{grid-column:1/-1;height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.cos .bar i{display:block;height:100%;background:var(--fg);opacity:.75;border-radius:3px}
+.areas .d{font-family:var(--ui);font-weight:700;font-size:12px;margin-left:6px}
+.method{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+
+/* Coming up + busiest areas */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.panel .sec-head h2{font-size:18px}
+.event{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;padding:12px 0;border-top:1px solid var(--line)}
+.event:first-child{border-top:0;padding-top:0}
+.cal{width:56px;border:1px solid var(--line);border-radius:8px;overflow:hidden;text-align:center;font-family:var(--ui);align-self:start}
+.cal i{display:block;font-style:normal;background:var(--hot);color:#fff;font-size:11px;font-weight:700;padding:2px 0;letter-spacing:.06em}
+.cal b{display:block;font-size:22px;line-height:1.2;padding:2px 0}
+.event h4{margin:0;font-family:var(--ui);font-size:16px}
+.event .in{font-size:13px;color:var(--hot);font-weight:600}
+.event p{grid-column:2;margin:0;color:var(--muted);font-size:14.5px}
+.idea{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.idea h4{margin:2px 0 4px;font-family:var(--ui);font-size:16px}
+.idea p{margin:0;color:var(--muted);font-size:14.5px}
+.btn{display:inline-block;margin-top:10px;font-family:var(--ui);font-size:13.5px;font-weight:700;color:var(--bg);background:var(--fg);padding:8px 13px;border-radius:8px;text-decoration:none}
+.btn:hover{background:var(--hot)}
+.areas{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.areas li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 10px;align-items:baseline}
+.areas .nm{font-size:14.5px;font-weight:600;min-width:0}
+.areas .tagin{font-family:var(--ui);font-size:11px;font-weight:700;color:var(--hot);margin-left:6px;white-space:nowrap}
+.areas .n{font-size:13.5px;color:var(--muted);text-align:right;white-space:nowrap}
+.areas .n b{color:var(--fg)}
+.areas .bar{grid-column:1/-1;height:8px;border-radius:4px;background:var(--track);overflow:hidden}
+.areas .bar i{display:block;height:100%;border-radius:4px;background:var(--fill,#8A93A0)}
+.more{display:inline-block;margin-top:14px;font-size:14px;font-weight:600;color:var(--hot);text-decoration:none}
+.more:hover{text-decoration:underline}
+.archive{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:14px;color:var(--muted)}
+.archive a{text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:4px 10px;border-radius:8px}
+.archive a[aria-current="page"]{border-color:var(--fg);font-weight:600}
+footer{padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer a{color:var(--muted)}
+
+/* Detail panel: a side panel on wide screens, a sheet from the bottom on phones. */
+.scrim{position:fixed;inset:0;background:rgba(8,10,14,.55);z-index:40}
+.sheet{position:fixed;z-index:50;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(0,0,0,.25);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.sheet-top{background:var(--c);color:var(--ci);padding:16px max(18px,env(safe-area-inset-right,0px)) 18px 20px;display:grid;gap:10px}
+.sheet-top .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sheet-top .k{font-family:var(--ui);font-size:12.5px;font-weight:600;letter-spacing:.03em}
+.close{font-family:var(--ui);font-size:14px;font-weight:700;background:rgba(255,255,255,.18);color:inherit;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;flex:none}
+.lightbg .close{background:rgba(0,0,0,.12)}
+.sheet-top h2{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,28px);line-height:1.14;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.sheet-top .meta{font-size:13.5px;opacity:.88}
+.sheet-body{overflow-y:auto;padding:4px max(18px,env(safe-area-inset-right,0px)) 24px 20px}
+.blk{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:6px}
+.blk:last-child{border-bottom:0}
+.blk h4{margin:0;font-family:var(--ui);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.blk p{margin:0}
+.blk .dim{color:var(--muted);font-size:14.5px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:2px 7px;border-radius:3px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface);white-space:nowrap;text-decoration:none;cursor:default}
-a.chip,button.chip{cursor:pointer}
-a.chip:hover,button.chip:hover{border-color:var(--ink-2);color:var(--ink)}
-.tier::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
-.tier.primary{color:var(--t-primary)} .tier.news{color:var(--t-news)} .tier.research{color:var(--t-research)} .tier.aggregator{color:var(--t-agg)}
-.chip.type{background:var(--surface-2);border-color:transparent}
-.new-pill{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12.5px;color:var(--muted);align-items:center}
-/* heat map */
-.heat{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}
-.tile{all:unset;box-sizing:border-box;display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:12px 12px 11px;cursor:pointer}
-.tile:hover{border-color:var(--ink-2)}
-.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.tile .nm{font-family:var(--display);font-weight:600;font-size:17.5px;line-height:1.05;text-transform:uppercase}
-.tile .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.pips{display:inline-flex;gap:3px}
-.pip{width:12px;height:6px;border-radius:2px;background:var(--line)}
-.pip.on{background:var(--accent)}
-.tile .cnt{font-family:var(--mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
-.tile .cnt b{color:var(--ink);font-weight:500}
-/* feed */
-.feed{display:grid;border-top:1px solid var(--line)}
-.month{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:18px 0 6px;border-bottom:1px solid var(--line)}
-.item{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:15px 0;border-bottom:1px solid var(--line-soft)}
-.dtg{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.4;font-variant-numeric:tabular-nums}
-.dtg b{display:block;color:var(--ink);font-size:14px;font-weight:500}
-.item h4{font-size:15.5px;font-weight:600;margin:0 0 4px;line-height:1.35}
-.item .body{font-size:14.5px}
-.item .why{margin-top:8px;font-size:14px;color:var(--ink-2);padding-left:10px;border-left:2px solid var(--topo)}
-.item .why b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--topo);font-weight:500;margin-right:6px}
-.item .chips{margin-top:9px}
-@media (max-width:560px){.item{grid-template-columns:1fr;gap:4px}.dtg b{display:inline;margin-right:8px}}
-.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.fbtn{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
-.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
-input[type="search"],input[type="text"],input[type="url"],input[type="date"],select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;width:100%}
-textarea{resize:vertical;min-height:84px}
-.btn{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);border:0;border-radius:var(--r);padding:9px 16px;cursor:pointer}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn:disabled{opacity:.5;cursor:default}
-.split{display:grid;gap:24px;grid-template-columns:minmax(0,1fr) minmax(0,340px)}
-@media (max-width:900px){.split{grid-template-columns:1fr}}
-.toolbar{display:grid;gap:10px;grid-template-columns:minmax(0,1fr) minmax(0,220px)}
-@media (max-width:560px){.toolbar{grid-template-columns:1fr}}
-/* sectors */
-.sec-layout{display:grid;gap:22px;grid-template-columns:260px minmax(0,1fr)}
-@media (max-width:900px){.sec-layout{grid-template-columns:1fr}.sec-nav{display:none}.sec-select{display:block!important}}
-.sec-nav{display:grid;gap:2px;align-content:start;position:sticky;top:64px}
-.sec-nav button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:4px;cursor:pointer;font-size:14px;color:var(--ink-2)}
-.sec-nav button:hover{background:var(--surface-2);color:var(--ink)}
-.sec-nav button[aria-current="true"]{background:var(--ink);color:var(--ground)}
-.sec-nav button:focus-visible{outline:2px solid var(--accent)}
-.sec-select{display:none}
-.sec-detail{display:grid;gap:18px;align-content:start}
-.facts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-/* companies */
-.scroll-x{overflow-x:auto}
-table.co{width:100%;border-collapse:collapse;font-size:13.5px;min-width:900px}
-table.co th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;padding:8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--ground)}
-table.co td{padding:10px 8px;border-bottom:1px solid var(--line-soft);vertical-align:top}
-table.co td.n{font-weight:600;font-size:14.5px;white-space:nowrap}
-table.co td.s{font-family:var(--mono);font-size:12px;white-space:nowrap}
-/* calendar */
-.cal{display:grid;border-top:1px solid var(--line)}
-.cal-row{display:grid;grid-template-columns:120px 92px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft);align-items:start}
-.cal-row .cd{font-family:var(--display);font-weight:700;font-size:26px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
-.cal-row .cd small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
-.cal-row h4{margin:0 0 3px;font-size:15.5px;font-weight:600}
-@media (max-width:560px){.cal-row{grid-template-columns:1fr 1fr}.cal-row>div:last-child{grid-column:1/-1}}
-/* research */
-.ref{display:grid;gap:5px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
-.ref a.t{font-weight:600;text-decoration:none}
-.ref a.t:hover{text-decoration:underline}
-/* ideas */
-.idea{display:grid;gap:10px;align-content:start}
-.scores{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-.scores b{color:var(--ink);font-weight:500}
-/* chat */
-.log{display:grid;gap:14px;max-height:62vh;overflow-y:auto;padding:4px 2px}
-.msg{max-width:80ch;white-space:pre-wrap;font-size:15px}
-.msg.user{justify-self:end;background:var(--ink);color:var(--ground);padding:10px 14px;border-radius:12px 12px 2px 12px}
-.msg.bot{background:var(--surface);border:1px solid var(--line-soft);padding:12px 14px;border-radius:2px 12px 12px 12px}
-.msg.note{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.suggest{display:flex;flex-wrap:wrap;gap:8px}
-.suggest button{font-size:13px;text-align:left;background:var(--surface);border:1px dashed var(--line);color:var(--ink-2);border-radius:var(--r);padding:7px 10px;cursor:pointer}
-.suggest button:hover{border-style:solid;color:var(--ink)}
-.composer{display:flex;gap:8px;align-items:flex-end}
-.composer textarea{min-height:52px}
-.form-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr))}
-.form-grid .full{grid-column:1/-1}
-label.f{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
-.note-row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--surface-2);border-radius:4px;font-size:14px;white-space:pre-wrap}
-.note-row button{background:none;border:0;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:11px}
-.notice{padding:18px;border:1px dashed var(--line);border-radius:var(--r);color:var(--ink-2)}
-/* morning brief */
-.brief{max-width:660px;margin:0 auto;width:100%;display:grid;gap:30px;padding-block:8px 20px}
-.b-date{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
-.b-hello{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,46px);line-height:1;text-transform:uppercase;margin:8px 0 0;text-wrap:balance}
-.b-big{font-size:20px;line-height:1.5;color:var(--ink);margin-top:14px;text-wrap:pretty}
-.b-sec{display:grid;gap:0}
-.b-sec>h3{font-size:16px;letter-spacing:.14em;color:var(--muted);padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:4px}
-.story{padding:20px 0;border-bottom:1px solid var(--line-soft);display:grid;gap:8px}
-.story:last-child{border-bottom:0}
-.story .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.story h4{margin:0;font-size:21px;line-height:1.3;font-weight:600;text-wrap:balance}
-.story p{font-size:17px;line-height:1.6;color:var(--ink-2)}
-.story .you{font-size:17px;line-height:1.55;color:var(--ink);background:var(--surface);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 4px 4px 0}
-.story .you b{font-weight:600}
-.story .more{justify-self:start;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
-.story .more:hover{color:var(--ink);text-decoration:underline}
-.b-card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:20px 22px;display:grid;gap:8px}
-.b-card .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.b-card h4{margin:0;font-size:19px;line-height:1.35;font-weight:600}
-.b-card p{font-size:16.5px;line-height:1.55;color:var(--ink-2)}
-.b-foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
-.b-loading{font-size:17px;color:var(--muted)}
-.archive{display:flex;gap:6px;flex-wrap:wrap}
-details.ud summary{list-style:none;cursor:pointer}
-details.ud summary::-webkit-details-marker{display:none}
-details.ud summary .why{margin-top:6px}
-details.ud .open-hint{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px;display:inline-block}
-details.ud[open] .open-hint{display:none}
-footer{border-top:1px solid var(--line);padding-block:20px 40px;font-size:12.5px;color:var(--muted)}
-.linkish{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;font-family:var(--mono);font-size:12px}
-@media (prefers-reduced-motion:no-preference){section.panel{animation:rise .22s ease-out}}
-@keyframes rise{from{transform:translateY(4px)}to{transform:none}}
-nav.desks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-nav.desks a{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:6px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface)}
-nav.desks a:hover{border-color:var(--ink-2);color:var(--ink)}
-nav.desks a[aria-current="page"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
-nav.desks a.ask{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.chips span{font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px 10px}
+.ctx{margin:0}
+.ctx dt{font-family:var(--ui);font-weight:700;font-size:14px;margin-top:8px}
+.ctx dt:first-child{margin-top:0}
+.ctx dd{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+.rel{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rel a{display:grid;gap:1px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.rel a:hover{border-color:var(--fg)}
+.rel b{font-weight:600;font-size:14.5px;line-height:1.35}
+.rel span{font-size:12.5px;color:var(--muted)}
+.qs{display:grid;gap:6px}
+.qs a{display:block;text-decoration:none;font-size:14.5px;font-weight:600;color:var(--hot);border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 12px}
+.qs a:hover{border-color:var(--hot)}
+.srcbtn{display:inline-block;margin-top:4px;font-weight:600;font-size:14.5px;color:var(--fg)}
+
+@media (max-width:900px){.duo,.trio{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.deals li{grid-template-columns:78px minmax(0,1fr)}.deals .amt{font-size:17px}.kpi .val{font-size:28px}}
+@media (max-width:700px){
+  .deck{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+  .card,.card.big{flex:0 0 87%;scroll-snap-align:start}
+  .card.big .face h3{font-size:24px}
+  .swipe{display:block}
+  .navrow nav a.ask{margin-left:0}
+  .sheet{top:auto;left:0;width:100%;max-height:88vh;border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 -12px 40px rgba(0,0,0,.3);padding-top:0}
+  .sheet-top{padding-left:max(18px,env(safe-area-inset-left,0px))}
+  .sheet-body{padding-left:max(18px,env(safe-area-inset-left,0px))}
+}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:in .22s ease-out}@keyframes in{from{transform:translateX(24px);opacity:0}}}
+
+/* ---- Topics and level ---- */
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:14px 0 4px}
+.controls .lab{font-size:13.5px;color:var(--band-dim)}
+.tchips{display:flex;flex-wrap:wrap;gap:6px}
+.tchip{font-family:var(--ui);font-size:13.5px;font-weight:600;border:1px solid var(--band-line);background:var(--band-chip);color:var(--band-dim);border-radius:999px;padding:5px 12px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.tchip i{width:9px;height:9px;border-radius:50%;background:var(--tc)}
+.tchip[aria-pressed="true"]{color:var(--band-fg);border-color:var(--band-fg)}
+.tchip[aria-pressed="false"] i{opacity:.35}
+.level{display:inline-flex;border:1px solid var(--band-line);border-radius:999px;overflow:hidden}
+.level button{font-family:var(--ui);font-size:13px;font-weight:600;background:none;border:0;color:var(--band-dim);padding:5px 12px;cursor:pointer}
+.level button[aria-pressed="true"]{background:var(--band-fg);color:var(--band)}
+body.expert .teach{display:none!important}
+.tpill{display:inline-flex;align-items:center;gap:6px}
+.tpill i{width:8px;height:8px;border-radius:50%;background:var(--tc);box-shadow:0 0 0 1.5px rgba(255,255,255,.6)}
+.summary .tl{font-weight:700}
+
+/* Lesson of the day */
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,280px);gap:18px 28px;background:var(--surface);border:1px solid var(--line);border-left:0;border-radius:14px;padding:20px 22px;position:relative;overflow:hidden}
+.lesson::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--tc,var(--hot))}
+.lesson .eyebrow{font-family:var(--ui);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 12px}
+.lesson h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,3vw,32px);line-height:1.1;margin:6px 0 10px;letter-spacing:-.01em}
+.lesson p{margin:0;font-size:16px;line-height:1.6;max-width:68ch}
+.lesson aside{display:grid;gap:10px;align-content:start;font-size:14px;color:var(--muted)}
+.lesson>*{min-width:0}
+@media (max-width:900px){.lesson{grid-template-columns:1fr}}
+.lesson aside b{color:var(--fg)}
+.lesson aside a{color:var(--hot);font-weight:600;text-decoration:none}
+.lesson aside a:hover{text-decoration:underline}
+
+/* Key terms */
+.terms{display:grid;gap:5px;background:color-mix(in srgb,var(--hot) 7%,var(--surface));border:1px solid color-mix(in srgb,var(--hot) 25%,var(--line));border-radius:9px;padding:9px 11px}
+.terms .lbl{color:var(--hot)!important;margin:0!important}
+.terms p{font-size:14px!important;margin:0}
+.terms b{font-family:var(--ui)}
+
+/* Numbers per topic */
+.numgroup{display:grid;gap:10px}
+.numgroup + .numgroup{margin-top:18px}
+.numgroup h3{margin:0;font-family:var(--ui);font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.numgroup h3 i{width:10px;height:10px;border-radius:50%;background:var(--tc)}
+.numgroup h3 span{font-weight:400;color:var(--muted);font-size:13.5px}
+.kpi svg{display:block;width:100%;height:34px;margin-top:6px}
+.kpi svg path.l{fill:none;stroke:var(--fg);stroke-width:1.6;vector-effect:non-scaling-stroke}
+.kpi svg path.a{fill:var(--track);stroke:none}
 </style>
-<script src="desk.js"></script>
-
-<div class="banner">{{name}} // {{tagline}} // <span id="asof">Loading</span></div>
-
-<header class="top wrap">
-  <div class="eyebrow">{{tagline}}</div>
-  <h1>{{name}}</h1>
-  <nav class="desks" id="desks" aria-label="Desks"></nav>
+</head>
+<body>
+<header class="band gut">
+  <div class="wrap">
+    <div class="navrow">
+      <a class="brand" href="./"><b id="brandname"></b><small id="tagline"></small></a>
+      <nav aria-label="Pages" id="nav"></nav>
+    </div>
+    <p class="date" id="date">Loading today's brief…</p>
+    <h1 id="hello">Good morning. Here's what to learn today.</h1>
+    <div class="controls">
+      <span class="lab">You follow:</span><div class="tchips" id="tchips" aria-label="Topics"></div>
+      <span class="lab">Level:</span><div class="level" role="group" aria-label="Level"><button data-level="beginner">Beginner</button><button data-level="expert">Expert</button></div>
+    </div>
+    <p class="summary" id="summary"></p>
+    <div class="facts" id="facts"></div>
+  </div>
 </header>
 
-<nav class="tabs" aria-label="Sections">
-  <div class="wrap" role="tablist" id="tabs">
-    <button role="tab" data-tab="today" aria-selected="true">Today</button>
-    <button role="tab" data-tab="pulse" aria-selected="false">Big picture</button>
-    <button role="tab" data-tab="updates" aria-selected="false">All updates</button>
-    <button role="tab" data-tab="sectors" aria-selected="false" data-v="themes"></button>
-    <button role="tab" data-tab="calendar" aria-selected="false">Coming up</button>
-    <button role="tab" data-tab="companies" aria-selected="false" data-v="entities"></button>
-    <button role="tab" data-tab="build" aria-selected="false" data-v="ideas" hidden></button>
-    <button role="tab" data-tab="research" aria-selected="false" hidden>Research</button>
-  </div>
-</nav>
+<main class="gut" id="top">
+  <section class="wrap teach" id="lesson-wrap" aria-label="Lesson of the day" hidden></section>
 
-<main class="wrap">
-<div id="offline" class="notice" hidden></div>
-
-<section class="panel" data-panel="today">
-  <article class="brief" id="brief"><p class="b-loading">Loading today's brief…</p></article>
-</section>
-
-<section class="panel" data-panel="pulse" hidden>
-  <div class="meta-row" id="meta-row" style="margin-top:0"><span>Loading…</span></div>
-  <div class="thesis" id="thesis" hidden><p id="headline"></p></div>
-  <div id="forces-wrap" hidden>
-    <div class="head-row" style="margin-bottom:12px"><h3>Forces at work</h3></div>
-    <div class="grid g4" id="forces"></div>
-  </div>
-  <div>
-    <div class="head-row" style="margin-bottom:12px"><h3 id="heat-title"></h3><span class="legend"><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span> momentum · count = stories in the last 30 days</span></div>
-    <div class="heat" id="heat"></div>
-  </div>
-  <div class="grid g2">
-    <div class="box"><div class="head-row" style="margin-bottom:6px"><h3>Latest</h3><button class="linkish" data-goto="updates">All updates →</button></div><div class="feed" id="pulse-latest" style="border-top:0"></div></div>
-    <div class="box"><div class="head-row" style="margin-bottom:6px"><h3>Coming up</h3><button class="linkish" data-goto="calendar">Full calendar →</button></div><div class="cal" id="pulse-next" style="border-top:0"></div></div>
-  </div>
-</section>
-
-<section class="panel" data-panel="updates" hidden>
-  <div style="display:grid;gap:14px;align-content:start">
-    <div style="display:grid;gap:6px"><h2>Updates</h2><p class="sub" id="updates-intro"></p></div>
-    <div class="toolbar">
-      <input type="search" id="u-q" placeholder="Search" aria-label="Search updates">
-      <select id="u-sector" aria-label="Filter"></select>
+  <section class="wrap" aria-labelledby="top5">
+    <div class="sec-head">
+      <h2 id="top5">Today's most important stories</h2>
+      <p>The stories that matter most in each topic you follow, ranked within each topic. Every card says what happened and why it matters to you; open one for the full story, the key terms and the bigger picture.</p>
     </div>
-    <div class="filters" id="u-types"></div>
-    <div class="status" id="u-count"></div>
-    <div class="feed" id="u-list"></div>
-  </div>
-</section>
+    <div class="deck" id="deck"></div>
+    <p class="swipe" id="swipe">Swipe sideways for the next stories →</p>
+  </section>
 
-<section class="panel" data-panel="sectors" hidden>
-  <div style="display:grid;gap:6px"><h2 id="sectors-title"></h2><p class="sub">The current state of each one, what to watch, and the stories behind it. Rewritten from the latest news as it comes in.</p></div>
-  <select class="sec-select" id="sec-select" aria-label="Choose"></select>
-  <div class="sec-layout">
-    <nav class="sec-nav" id="sec-nav"></nav>
-    <div class="sec-detail" id="sec-detail"></div>
-  </div>
-</section>
+  <section class="wrap" aria-labelledby="nums">
+    <div class="sec-head">
+      <h2 id="nums">Your numbers</h2>
+      <p>The figures behind each topic you follow, with how they changed.</p>
+    </div>
+    <div id="numbers"></div>
+  </section>
 
-<section class="panel" data-panel="companies" hidden>
-  <div style="display:grid;gap:6px"><h2 id="companies-title"></h2><p class="sub">Who and what this desk tracks. New names are added as they keep showing up in the news.</p></div>
-  <div class="toolbar">
-    <input type="search" id="c-q" placeholder="Search" aria-label="Search">
-    <select id="c-sector" aria-label="Filter"></select>
-  </div>
-  <div class="filters" id="c-types"></div>
-  <div class="scroll-x"><table class="co"><thead><tr id="c-head"></tr></thead><tbody id="c-body"></tbody></table></div>
-</section>
+  <section class="wrap trio" aria-label="Deals and companies" data-kind="news" id="deals-wrap">
+    <div class="panel">
+      <div class="sec-head"><h2>Biggest deals this week</h2><p id="deals-sub">Contracts, funding rounds, loans, acquisitions and sales announced with a dollar amount, largest first.</p></div>
+      <ul class="deals" id="deals"></ul>
+      <p class="method" id="deals-note"></p>
+    </div>
+    <div class="panel">
+      <div class="sec-head"><h2 id="cos-h">Most-mentioned companies</h2><p id="cos-p">Named most often in this week's stories. Tap one to ask about it.</p></div>
+      <ul class="cos" id="cos"></ul>
+    </div>
+  </section>
 
-<section class="panel" data-panel="calendar" hidden>
-  <div style="display:grid;gap:6px"><h2>What's next</h2><p class="sub">Dated deadlines, decisions and milestones found in the news. Dates marked ≈ are estimates.</p></div>
-  <div class="cal" id="cal"></div>
-</section>
+  <section class="wrap duo" aria-label="Coming up and busiest areas" data-kind="news" id="duo-wrap">
+    <div class="panel">
+      <div class="sec-head"><h2>Coming up</h2><p>Dates found in the news that could move things.</p></div>
+      <div id="events"></div>
+      <div class="idea" id="idea" hidden></div>
+    </div>
+    <div class="panel">
+      <div class="sec-head"><h2 id="areas-h">Busiest areas this week</h2><p>Stories collected in each area over the 7 days to this brief, and the change from the week before. Areas marked “in today's brief” have a story above.</p></div>
+      <ul class="areas" id="areas"></ul>
+      <a class="more" href="desk.html#sectors" id="all-areas">See every area →</a>
+    </div>
+  </section>
 
-<section class="panel" data-panel="build" hidden>
-  <div style="display:grid;gap:6px"><h2 id="ideas-title"></h2><p class="sub" id="ideas-intro"></p></div>
-  <div class="grid g3" id="ideas"></div>
-</section>
+  <section class="wrap" aria-label="Earlier briefs"><div class="archive" id="archive"></div></section>
 
-<section class="panel" data-panel="research" hidden>
-  <div style="display:grid;gap:6px"><h2>Research library</h2><p class="sub">Reports, documents and data worth reading.</p></div>
-  <div class="toolbar"><input type="search" id="r-q" placeholder="Search research" aria-label="Search research"><select id="r-sector" aria-label="Filter"></select></div>
-  <div id="r-list"></div>
-</section>
+  <div id="detail" hidden></div>
+
+  <footer class="wrap" id="foot">Every morning <span class="sitename">this site</span> reads public news sources and picks the most important stories for the topics you follow, with the terms and numbers you need to understand them. Stories from aggregator sites are unconfirmed. For learning, not investment advice. <a href="docs.html">How it works</a></footer>
 </main>
 
-<footer class="wrap">{{name}} compiles open sources and updates itself every day; stories tagged “aggregator” are unconfirmed. For learning and research, not advice. <a href="docs.html">How it works</a></footer>
-
+<script src="desk.js"></script>
 <script>
-const TIERS={primary:{name:"Primary",desc:"Official releases, filings and first-hand sources"},news:{name:"News",desc:"Reported journalism and trade press"},research:{name:"Research",desc:"Think tanks, analysts and data providers"},aggregator:{name:"Aggregator",desc:"Secondary compilations; confirm before relying on them"}};
-const S={pack:null,meta:{},briefs:[],sectors:[],updates:[],companies:[],catalysts:[],research:[],ideas:[]};
-let V={};
-const $=s=>document.querySelector(s);
-const esc=DESK.esc;
-const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"";
-const MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-const MONTH=["January","February","March","April","May","June","July","August","September","October","November","December"];
-const ls={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
-const today=()=>{const d=new Date();return new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));};
-const toDate=s=>{const [y,m,d]=String(s).split("-").map(Number);return new Date(Date.UTC(y,(m||1)-1,d||1));};
-const daysUntil=s=>Math.round((toDate(s)-today())/864e5);
-function dtg(d,approx){const [y,m,dd]=String(d).split("-");if(!m)return esc(d);return `<b>${approx?"≈":""}${dd} ${MON[+m-1]} ${y.slice(2)}</b>${y}`;}
-const secName=id=>S.sectors.find(s=>s.id===id)?.name||id;
-const secChip=id=>`<button class="chip" data-sector="${esc(id)}">${esc(secName(id))}</button>`;
-const entChip=n=>`<button class="chip" data-company="${esc(n)}">${esc(n)}</button>`;
-const srcChip=s=>{if(!s)return"";const u=safeUrl(s.u);return u?`<a class="chip tier ${esc(s.q)}" href="${esc(u)}" target="_blank" rel="noopener" title="${esc(TIERS[s.q]?.name||"")}">${esc(s.t)} ↗</a>`:`<span class="chip tier ${esc(s.q)}">${esc(s.t)}</span>`;};
-const byDateDesc=(a,b)=>String(b.d).localeCompare(String(a.d));
-const kindLabel=id=>S.pack?.entityKinds?.find(k=>k.id===id)?.label||id||"";
-const recentCount=(id,days=30)=>{const cut=new Date(today()-days*864e5);return S.updates.filter(u=>(u.sectors||[]).includes(id)&&toDate(u.d)>=cut).length;};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+const askUrl = q => "app/?q=" + encodeURIComponent(q);
+const DAY = 864e5;
+const day = d => Date.parse(String(d).slice(0, 10) + "T12:00:00Z");
+const fmtDay = (d, o) => new Date(day(d)).toLocaleDateString("en-US", { timeZone: "UTC", ...o });
+// Lowercase the first letter for use mid-sentence, unless the name is Title Case ("Trade Policy & Tariffs").
+const lc = s => !s ? s : /^[A-Z][a-z]*( (&|and|of|the|[a-z][\w-]*|[A-Z]{2,}[\w-]*|[\d$€£][\w.-]*))*[,:]?(\s|$)/.test(s) && !/\s[A-Z][a-z]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+// Feed footers ("The post … first appeared on …") are removed at collection; this also cleans older stories.
+const clean = t => String(t || "").replace(/\s*The post .{0,400}? (?:first )?appeared (?:first )?on .{1,120}$/i, "").trim();
+const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
-/* ---------- tabs ---------- */
-let currentSector=ls.get("desk-sector");
-function show(tab){
-  document.querySelectorAll("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==tab);
-  document.querySelectorAll("[data-tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab?"true":"false"));
-  ls.set("desk-tab",tab);
+// One color per area (sector id), the same every day; topics get their own dot colors.
+const COLORS = {
+  ai:["#3E3A6B","#F1F0FA"], air:["#C99332","#1E1608",1], sea:["#1E5560","#EAF6F7"], ground:["#5A4A2E","#F6F1E8"],
+  space:["#1F3A5F","#F3F6FA"], missiledef:["#4B2E5A","#F6EFFA"], strike:["#6E2A2A","#FBEFEF"], cuas:["#2E5A4B","#ECF7F2"],
+  ew:["#3A4F7A","#EEF2FA"], cyber:["#28435A","#ECF3F9"], sensing:["#4A5A2E","#F3F7EA"], mfg:["#2F4A3A","#EFF5F0"],
+  minerals:["#6B4A2A","#F9F1E8"], energy:["#8A5A1E","#FBF3E6"], bio:["#2E6A55","#EAF7F1"], policy:["#45505E","#F0F3F6"],
+  capital:["#2F5E3A","#EDF7EF"], primes:["#3B3F46","#F0F1F3"], global:["#9A3B26","#FDF2EE"], adversary:["#4A1626","#FBEDF1"],
+  housing:["#0F5B5E","#E8F6F6"],
+};
+// Areas without a fixed color (other sites' themes) take one from this palette, in theme order.
+const PALETTE = [["#1F3A5F","#F3F6FA"],["#9A3B26","#FDF2EE"],["#2F4A3A","#EFF5F0"],["#C99332","#1E1608",1],["#3E3A6B","#F1F0FA"],["#1E5560","#EAF6F7"],["#6E2A2A","#FBEFEF"],["#4A5A2E","#F3F7EA"],["#4B2E5A","#F6EFFA"],["#8A5A1E","#FBF3E6"],["#28435A","#ECF3F9"],["#2E6A55","#EAF7F1"]];
+const colorOf = id => COLORS[id] || (S && S.sectors.findIndex(x => x.id === id) >= 0 ? PALETTE[S.sectors.findIndex(x => x.id === id) % PALETTE.length] : ["#3B3F46", "#F0F1F3"]);
+const TOPIC_DOTS = ["#E2722F", "#14B8A6", "#8B5CF6", "#EAB308", "#3B82F6"];
+// Words that are never a company name on their own (the tagger sometimes reads "Space Radar" as one).
+const GENERIC = new Set("space radar radars drone drones missile missiles defense defence air ground sea naval navy army force forces cyber laser lasers satellite satellites system systems production loan contract program office new the and of for to a us u.s. military".split(" "));
+const isName = n => n && n.split(/\s+/).some(w => !GENERIC.has(w.toLowerCase()));
+// Why a housing story matters, by the housing desk's topic tags.
+const HOUSING_WHY = {
+  rates: "Mortgage rates set the monthly payment, so they decide what buyers can afford and whether a rental's rent covers its loan.",
+  prices: "Price trends tell you whether you'd be buying near a peak or into a dip, and how much equity you could build.",
+  rents: "Rents are a landlord's income; how fast they grow decides a rental's cash flow and value.",
+  inventory: "The number of homes for sale shows who has the upper hand: few listings favor sellers, more favor buyers.",
+  sales: "Sales volume shows how active the market is and where prices are likely to head next.",
+  construction: "New building is future supply; more of it eases prices and rents over time.",
+  investing: "This is about the economics of owning rentals: returns, financing and strategy.",
+  policy: "Rules and taxes change what owning and renting cost, sometimes overnight.",
+};
+
+let S, H = null, HN = [], G = [], SERIES = null, CFG = {}, TOPICS = [], ON = new Set(), LEVEL = "beginner";
+
+function navHTML(cfg) {
+  const desks = (cfg.desks || []).filter(d => d.enabled !== false);
+  return desks.map(d => `<a href="${esc(d.page)}"${d.id === "brief" || d.page === "./" ? ' aria-current="page"' : ""}>${esc(d.label)}</a>`).join("") + '<a class="ask" href="app/">Ask ' + esc(cfg.site?.name || "") + '</a>';
 }
-document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>show(b.dataset.tab));
-document.addEventListener("click",e=>{
-  const g=e.target.closest("[data-goto]"); if(g){show(g.dataset.goto);window.scrollTo({top:0});return;}
-  const s=e.target.closest("[data-sector]"); if(s){openSector(s.dataset.sector);return;}
-  const c=e.target.closest("[data-company]"); if(c){show("companies");$("#c-q").value=c.dataset.company;renderCompanies();window.scrollTo({top:0});return;}
-  const br=e.target.closest("[data-brief]"); if(br){briefPick=br.dataset.brief;renderToday();window.scrollTo({top:0});return;}
-  const ou=e.target.closest("[data-open-update]"); if(ou){show("updates");$("#u-q").value="";$("#u-sector").value="all";uType="all";renderUpdates();const it=document.getElementById("item-"+ou.dataset.openUpdate);if(it){it.querySelector("details").open=true;it.scrollIntoView({block:"center"});}}
+
+/** The topics this site teaches: from the settings, or worked out from the data that exists. */
+function topicsFrom(cfg) {
+  let t = (cfg.topics || []).slice();
+  if (!t.length) {
+    // No topics set: name the news topic after the first phrase of the subject ("Retail strategy, …" → "Retail strategy").
+    const first = (cfg.topic?.domain || "").split(/,|;| and /)[0].trim();
+    t.push({ id: "main", label: first ? first.charAt(0).toUpperCase() + first.slice(1) : (cfg.site?.name || "News"), kind: "news" });
+    if (H) t.push({ id: "housing", label: "Housing", kind: "housing" });
+    if (SERIES?.series?.length) t.push({ id: "data", label: "Data", kind: "series" });
+  }
+  return t.filter(x => x.kind !== "housing" || H).filter(x => x.kind !== "series" || SERIES?.series?.length)
+    .map((x, i) => ({ ...x, dot: TOPIC_DOTS[i % TOPIC_DOTS.length] }));
+}
+
+/** Glossary terms found in a piece of text (whole words; acronyms match case). */
+function termsIn(text, topicKind) {
+  const found = [];
+  for (const g of G) {
+    if (found.length >= 3) break;
+    const names = [g.term, ...(g.aliases || [])];
+    const hit = names.some(n => {
+      const re = new RegExp(`(^|[^A-Za-z0-9])${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z0-9])`, /^[A-Z0-9-]+$/.test(n) ? "" : "i");
+      return re.test(text);
+    });
+    if (hit) found.push(g);
+  }
+  return found;
+}
+const termsHTML = list => list.length ? `<div class="terms teach"><p class="lbl">Key terms</p>${list.map(g => `<p><b>${esc(g.term)}:</b> ${esc(g.short)}</p>`).join("")}</div>` : "";
+
+function render() {
+  TOPICS = topicsFrom(CFG);
+  const saved = (store.get("anu-topics") || "").split(",").filter(Boolean);
+  ON = new Set(saved.length ? TOPICS.map(t => t.id).filter(id => saved.includes(id)) : TOPICS.map(t => t.id));
+  if (!ON.size) ON = new Set(TOPICS.map(t => t.id));
+  LEVEL = store.get("anu-level") === "expert" ? "expert" : "beginner";
+
+  const briefs = [...S.briefs].sort((a, b) => b.date.localeCompare(a.date));
+  const want = new URLSearchParams(location.search).get("d");
+  const brief = briefs.find(b => b.date === want) || briefs[0] || { date: new Date().toISOString().slice(0, 10), stories: [] };
+  const sectors = new Map(S.sectors.map(s => [s.id, s]));
+  const byId = new Map(S.updates.map(u => [u.id, u]));
+  const t = day(brief.date);
+  const within = (d, days) => { const x = day(d); return x <= t && x > t - days * DAY; };
+  const last2 = S.updates.filter(u => within(u.d, 2)), week = S.updates.filter(u => within(u.d, 7));
+  const prev = S.updates.filter(u => { const d = day(u.d); return d <= t - 7 * DAY && d > t - 14 * DAY; });
+  const count = list => { const m = new Map(); list.forEach(u => (u.sectors || []).forEach(s => m.set(s, (m.get(s) || 0) + 1))); return m; };
+  const c2 = count(last2), c7 = count(week), cp = count(prev);
+  const busy2 = [...c2.entries()].sort((a, b) => b[1] - a[1]);
+  const nameOf = id => sectors.get(id)?.name || id;
+  const newsT = TOPICS.find(x => x.kind === "news"), houseT = TOPICS.find(x => x.kind === "housing"), dataT = TOPICS.find(x => x.kind === "series");
+
+  // ---- stories: the news brief, then the housing desk's top stories, each labeled by topic
+  const cards = [];
+  if (newsT) (brief.stories || []).forEach(s => {
+    const u = byId.get(s.ref) || {};
+    const area = (u.sectors || [])[0] || [...sectors.values()].find(x => x.name === s.tag)?.id || "";
+    cards.push({ topic: newsT, kind: "news", h: s.h, what: clean(s.what || u.body), full: clean(u.body || s.what), you: s.you, src: u.src || null, d: u.d || brief.date, u, area, areaName: nameOf(area) || s.tag });
+  });
+  if (houseT) {
+    const pick = HN.filter(n => within(n.d, 3)).sort((a, b) => (b.topics || []).includes("rates") - (a.topics || []).includes("rates") || b.d.localeCompare(a.d));
+    const seen = new Set();
+    pick.filter(n => { const k = (n.topics || [])[0] || "x"; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 2).forEach(n => {
+      const tag = (n.topics || [])[0] || "";
+      cards.push({ topic: houseT, kind: "housing", h: n.title, what: clean(n.body) || n.title, full: clean(n.body) || n.title, you: HOUSING_WHY[tag] || HOUSING_WHY.prices, src: n.src || null, d: n.d, u: n, area: "housing", areaName: tag ? `Housing · ${tag}` : "Housing" });
+    });
+  }
+  window.CARDS = cards;
+  const inBrief = new Set(cards.filter(c => c.kind === "news").map(c => c.area));
+
+  // ---- band
+  const site = CFG.site || {};
+  $("#tagline").textContent = site.tagline || "Your morning brief";
+  const nm = site.name || "Brief";
+  $("#brandname").innerHTML = `${esc(nm.slice(0, -1))}<span>${esc(nm.slice(-1))}</span>`;
+  document.title = `${site.name || "Today"}: your morning brief`;
+  document.querySelectorAll(".sitename").forEach(el => el.textContent = site.name || "this site");
+  const vocab = CFG.topic?.vocab || {};
+  if (vocab.entities) $("#cos-h").textContent = /,/.test(vocab.entities) || vocab.entities.length > 24 ? "Most-mentioned names" : `Most-mentioned ${vocab.entities.toLowerCase()}`;
+  $("#hello").textContent = `Good morning${site.owner ? `, ${site.owner}` : ""}. Here's what to learn today.`;
+  const latest = brief === briefs[0];
+  const genAt = S.generatedAt ? new Date(S.generatedAt).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" }) : "";
+  $("#date").textContent = `${fmtDay(brief.date, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}${latest && genAt ? ` · Updated ${genAt} ET` : latest ? "" : " · An earlier brief"}`;
+  $("#tchips").innerHTML = TOPICS.map(x => `<button class="tchip" data-topic="${esc(x.id)}" aria-pressed="${ON.has(x.id)}" style="--tc:${x.dot}"><i></i>${esc(x.label)}</button>`).join("");
+  document.querySelectorAll("[data-level]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.level === LEVEL)));
+  document.body.classList.toggle("expert", LEVEL === "expert");
+
+  const top2 = busy2.slice(0, 2).map(([id]) => lc(nameOf(id)));
+  const m = H?.mortgage, nat = H?.national;
+  const rateLine = m?.rate30 != null ? `The 30-year mortgage rate is ${m.rate30.toFixed(2)}%${m.rate30YearAgo != null ? `, ${m.rate30 >= m.rate30YearAgo ? "up" : "down"} ${Math.abs(m.rate30 - m.rate30YearAgo).toFixed(2)} points from a year ago` : ""}${nat?.priceYoY != null ? `, and the typical US home is worth ${Math.abs(nat.priceYoY)}% ${nat.priceYoY >= 0 ? "more" : "less"} than a year ago` : ""}.` : "";
+  const parts = [];
+  const firstNews = cards.find(c => c.kind === "news");
+  if (newsT && ON.has(newsT.id) && firstNews) parts.push(`<span class="tl">${esc(newsT.label)}:</span> ${esc(firstNews.h.replace(/\.$/, ""))}. Most news in the last two days was about ${esc(top2.join(" and ") || "the areas below")}.`);
+  if (houseT && ON.has(houseT.id) && rateLine) parts.push(`<span class="tl">${esc(houseT.label)}:</span> ${esc(rateLine)}`);
+  $("#summary").innerHTML = parts.join(" ");
+
+  const next = [...S.catalysts].filter(c => day(c.d) >= t).sort((a, b) => a.d.localeCompare(b.d));
+  const n1 = next[0], inDays = n1 ? Math.round((day(n1.d) - t) / DAY) : null;
+  const facts = [];
+  if (newsT && ON.has(newsT.id)) facts.push(`<div class="fact"><b>${last2.length}</b><span><strong>new ${esc(lc(newsT.label))} stories</strong> in the last 2 days. ${esc(site.name || "This brief")} picked the ${cards.filter(c => c.kind === "news").length} that matter most.</span></div>`);
+  if (houseT && ON.has(houseT.id) && m?.rate30 != null) facts.push(`<div class="fact"><b>${m.rate30.toFixed(2)}%</b><span><strong>30-year mortgage rate</strong> (Freddie Mac, week of ${esc(fmtDay(m.week, { month: "short", day: "numeric" }))}).</span></div>`);
+  if (newsT && ON.has(newsT.id) && n1) facts.push(`<div class="fact soon"><b>${inDays}</b><span><strong>${inDays === 1 ? "day" : "days"} until</strong> ${esc(n1.title)} (${esc(fmtDay(n1.d, { weekday: "short", month: "short", day: "numeric" }))}).</span></div>`);
+  if (facts.length < 3 && houseT && ON.has(houseT.id) && nat?.rentYoY != null) facts.push(`<div class="fact"><b>${nat.rentYoY >= 0 ? "+" : ""}${nat.rentYoY}%</b><span><strong>typical US rent</strong> over the past year ($${Math.round(nat.rent).toLocaleString("en-US")} a month).</span></div>`);
+  $("#facts").innerHTML = facts.slice(0, 3).join("");
+
+  // ---- lesson of the day: a glossary lesson for a term in today's stories, rotating by date
+  const lessons = G.filter(g => g.long && TOPICS.some(x => ON.has(x.id) && (x.kind === "news" ? g.topic !== "housing" : x.kind === "housing" ? g.topic === "housing" : true)));
+  const shown = cards.filter(c => ON.has(c.topic.id));
+  const inToday = lessons.map(g => ({ g, c: shown.find(c => termsIn(`${c.h} ${c.what} ${c.full}`).includes(g)) })).filter(x => x.c);
+  const dayNum = Math.floor(t / DAY);
+  const L = inToday.length ? inToday[dayNum % inToday.length] : lessons.length ? { g: lessons[dayNum % lessons.length], c: null } : null;
+  if (L) {
+    const tp = TOPICS.find(x => x.kind === (L.g.topic === "housing" ? "housing" : "news")) || TOPICS[0];
+    const words = L.g.long.split(/\s+/).length;
+    $("#lesson-wrap").hidden = false;
+    $("#lesson-wrap").innerHTML = `<div class="lesson" style="--tc:${tp.dot}">
+      <div><div class="eyebrow"><span>Lesson of the day</span><span>${Math.max(1, Math.round(words / 200))}-minute read</span><span class="tpill"><i></i>${esc(tp.label)}</span></div>
+        <h2>${esc(L.g.term.charAt(0).toUpperCase() + L.g.term.slice(1))}${/^[A-Z0-9-]+$/.test(L.g.term) && L.g.aliases?.[0] ? ` <span style="font-weight:600;opacity:.7">(${esc(L.g.aliases[0].toLowerCase())})</span>` : ""}</h2><p>${esc(L.g.long)}</p></div>
+      <aside>${L.c ? `<span><b>Why today:</b> it comes up in “${esc(L.c.h)}”.</span><button class="open" data-open="${cards.indexOf(L.c) + 1}" style="margin:0">Open that story →</button>` : `<span><b>From your glossary:</b> a term that comes up often in ${esc(lc(tp.label))}.</span>`}
+        <a href="${esc(askUrl(`Teach me more about ${L.g.term}, with examples from recent news.`))}">Ask ${esc(CFG.site?.name || "")} to go deeper →</a>
+        <span>Switch to Expert at the top to hide lessons and key terms.</span></aside></div>`;
+  } else $("#lesson-wrap").hidden = true;
+
+  // ---- cards
+  const counts = new Map();
+  $("#deck").innerHTML = cards.map((x, i) => {
+    const [c, ci, light] = colorOf(x.area);
+    const n = (counts.get(x.topic.id) || 0) + 1; counts.set(x.topic.id, n);
+    const of = cards.filter(y => y.topic.id === x.topic.id).length;
+    const url = safeUrl(x.src?.u);
+    const terms = termsIn(`${x.h} ${x.what}`);
+    return `<article class="card${i === 0 ? " big" : ""}" data-topic="${esc(x.topic.id)}" style="--c:${c};--ci:${ci};--tc:${x.topic.dot}" aria-label="${esc(x.topic.label)} story ${n} of ${of}">
+      <div class="face${light ? " lightbg" : ""}"><div class="k"><span class="pill tpill"><i></i>${esc(x.topic.label)} · ${n === 1 ? "top story" : `${n} of ${of}`}</span><span>${esc(x.areaName)}</span></div><h3><button data-open="${i + 1}">${esc(x.h)}</button></h3></div>
+      <div class="body">
+        <div><p class="lbl">What happened</p><p class="what">${esc(x.what)}</p></div>
+        ${x.you ? `<div><p class="lbl">Why it matters</p><p>${esc(x.you)}</p></div>` : ""}
+        ${termsHTML(terms)}
+        <button class="open" data-open="${i + 1}">See the full story, context and related news →</button>
+        <div class="links">${url ? `<a class="src" href="${esc(url)}" target="_blank" rel="noopener">Read it at ${esc(x.src.t)}, ${esc(fmtDay(x.d, { month: "short", day: "numeric" }))} ↗</a>` : "<span></span>"}<a class="ask" href="${esc(askUrl(`Tell me more about: ${x.h}`))}">Ask about this →</a></div>
+      </div>
+    </article>`;
+  }).join("") || `<p class="notice">No stories yet today.</p>`;
+
+  // ---- numbers per topic
+  const delta = (now, before) => {
+    const d = now - before;
+    return `<span class="delta ${d > 0 ? "up" : d < 0 ? "down" : "flat"}">${d > 0 ? "▲ +" : d < 0 ? "▼ −" : "± "}${Math.abs(d)} vs last week</span>`;
+  };
+  const groups = [];
+  if (newsT) {
+    const MONEY = /\$\s?(\d+(?:\.\d+)?)\s?(billion|million|bn|b|m)\b/i;
+    const DEAL = /\b(raises?|raised|secures?|secured|lands?|wins?|won|awards?|awarded|taps|orders?|ordered|acquires?|acquired|acquisition|buys?|bought|loans?|contract|deal|sale|approves?|commits?|invests?|investment|funding|offers?|series [a-f])\b/i;
+    // Money that isn't a deal: refunds, budgets, aid, losses, fines.
+    const NOT_DEAL = /\brefunds?|\btariffs?\b|budget|appropriation|\baid\b|deficit|\blosses?\b|\bfines?\b|penalt|lawsuit|settlement|stimulus/i;
+    const dealsOf = list => {
+      const out = [];
+      for (const u of list) {
+        const typed = /Contract/.test(u.type || ""); // a summary's amount counts only for contract stories
+        if (NOT_DEAL.test(u.title)) continue;
+        const mm = (DEAL.test(u.title) && MONEY.exec(u.title)) || (typed && MONEY.exec(u.body || ""));
+        if (!mm) continue;
+        const usd = +mm[1] * (/^b/i.test(mm[2]) ? 1e9 : 1e6);
+        if (usd < 1e6 || out.some(o => Math.abs(o.usd - usd) < 1 && Math.abs(day(o.u.d) - day(u.d)) <= 3 * DAY)) continue;
+        const tl = u.title.toLowerCase();
+        const kind = /\bloan/.test(tl) ? "Loan" : /acquir|acquisition|\bbuys?\b/.test(tl) ? "Acquisition" : /\bsale\b/.test(tl) ? "Sale"
+          : /rais|series|funding|invest|secur/.test(tl) || /Funding/.test(u.type || "") ? "Funding" : "Contract";
+        out.push({ u, usd, kind });
+      }
+      return out.sort((a, b) => b.usd - a.usd);
+    };
+    const dw = dealsOf(week), dp = dealsOf(prev);
+    const sum = l => l.reduce((a, d) => a + d.usd, 0);
+    const money = v => v >= 1e9 ? `$${(v / 1e9).toFixed(v >= 1e10 ? 0 : 1)}B` : `$${Math.round(v / 1e6)}M`;
+    const md = sum(dw) - sum(dp);
+    const perDay = [...Array(7)].map((_, i) => { const d = new Date(t - (6 - i) * DAY).toISOString().slice(0, 10); return { d, n: S.updates.filter(u => u.d === d).length }; });
+    const maxDay = Math.max(1, ...perDay.map(x => x.n));
+    const tc = re => [week.filter(u => re.test(u.type || "")).length, prev.filter(u => re.test(u.type || "")).length];
+    // Two story-type tiles: contracts and funding when the site has those types, else its two most common types.
+    const typesWeek = [...new Set(week.map(u => u.type).filter(Boolean))];
+    const hasC = typesWeek.some(x => /contract|award/i.test(x)), hasF = typesWeek.some(x => /fund|m&a|ipo|invest|deal/i.test(x));
+    const defaultType = (S.pack?.types || []).at(-1) || "News";
+    const topTypes = [...new Map(week.map(u => [u.type, 0])).keys()].filter(x => x && x !== defaultType).map(x => [x, week.filter(u => u.type === x).length]).sort((a, b) => b[1] - a[1]).map(x => x[0]);
+    const esc2 = x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const reA = hasC ? /contract|award/i : new RegExp(`^${esc2(topTypes[0] || "~")}$`), reB = hasF ? /fund|m&a|ipo|invest|deal/i : new RegExp(`^${esc2(topTypes[1] || "~")}$`);
+    const labA = hasC ? ["Contract stories", "awards, orders and procurements"] : [`${topTypes[0] || "Top"} stories`, "the most common kind this week"];
+    const labB = hasF ? ["Funding & acquisitions", "raises, mergers, IPOs and buyouts"] : [`${topTypes[1] || "Other"} stories`, "the next most common kind"];
+    const [nC, pC] = tc(reA), [nF, pF] = tc(reB);
+    groups.push(`<div class="numgroup" data-topic="${esc(newsT.id)}" style="--tc:${newsT.dot}"><h3><i></i>${esc(newsT.label)} <span>this week vs last week</span></h3><div class="kpis">
+      <div class="kpi"><span class="lbl">Stories collected</span><span class="val">${week.length}</span>${delta(week.length, prev.length)}
+        <div class="spark" aria-label="Stories per day: ${perDay.map(x => x.n).join(", ")}">${perDay.map((x, i) => `<i class="${i === 6 ? "now" : ""}" style="height:${Math.max(8, x.n / maxDay * 100)}%" title="${x.d}: ${x.n}"></i>`).join("")}</div>
+        <div class="spark-l"><span>${esc(fmtDay(perDay[0].d, { weekday: "short" }))}</span><span>per day</span><span>${esc(fmtDay(perDay[6].d, { weekday: "short" }))}</span></div></div>
+      <div class="kpi"><span class="lbl">Money announced</span>${dw.length ? `<span class="val">${money(sum(dw))}</span><span class="delta ${md > 0 ? "up" : md < 0 ? "down" : "flat"}">${md > 0 ? "▲ +" : md < 0 ? "▼ −" : "± "}${money(Math.abs(md))} vs last week</span><span class="sub">across ${dw.length} deal${dw.length === 1 ? "" : "s"} with a dollar amount</span>` : `<span class="val">None</span><span class="sub">no deals with a dollar amount this week</span>`}</div>
+      <div class="kpi"><span class="lbl">${esc(labA[0])}</span><span class="val">${nC}</span>${delta(nC, pC)}<span class="sub">${esc(labA[1])}</span></div>
+      <div class="kpi"><span class="lbl">${esc(labB[0])}</span><span class="val">${nF}</span>${delta(nF, pF)}<span class="sub">${esc(labB[1])}</span></div></div></div>`);
+    $("#deals").innerHTML = dw.slice(0, 6).map(({ u, usd, kind }) => {
+      const url = safeUrl(u.src?.u), area = (u.sectors || [])[0];
+      return `<li><span class="amt">${money(usd)}</span>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(u.title)}</a>` : `<span>${esc(u.title)}</span>`}
+        <span class="m"><span class="kind">${esc(kind)}</span>${area ? `<span>${esc(nameOf(area))}</span>` : ""}<span>${esc(u.src?.t || "")} · ${esc(fmtDay(u.d, { month: "short", day: "numeric" }))}</span></span></li>`;
+    }).join("") || `<li><span style="color:var(--muted)">No deals with a dollar amount this week.</span></li>`;
+    $("#deals-note").textContent = dw.length ? "Counted from headlines that announce a deal; the same deal reported by two outlets is counted once. Dollar amounts only." : "";
+    const NOT_CO = /strike group|stockpile|network|program|office|agency|command|ministry|department|congress|parliament|party|army|navy|air force|marine|guard|forces|government|council|white house|pentagon|nato|united nations/i;
+    const known = new Set(S.companies.map(c => c.name.toLowerCase()));
+    const cc = new Map();
+    week.forEach(u => new Set(u.companies || []).forEach(n => { if (isName(n) && !NOT_CO.test(n)) cc.set(n, (cc.get(n) || 0) + 1); }));
+    const coRows = [...cc.entries()].sort((a, b) => b[1] - a[1] || known.has(b[0].toLowerCase()) - known.has(a[0].toLowerCase())).slice(0, 8);
+    const coMax = Math.max(1, ...coRows.map(r => r[1]));
+    $("#cos").innerHTML = coRows.map(([n, c]) => `<li><a href="${esc(askUrl(`What's the latest on ${n}?`))}"><span class="nm">${esc(n)}</span><span class="n">${c} ${c === 1 ? "story" : "stories"}</span><span class="bar" aria-hidden="true"><i style="width:${(c / coMax * 100).toFixed(0)}%"></i></span></a></li>`).join("") || `<li>No companies tagged this week.</li>`;
+    $("#deals-wrap").dataset.topic = newsT.id; $("#duo-wrap").dataset.topic = newsT.id;
+  } else { $("#deals-wrap").hidden = true; $("#duo-wrap").hidden = true; }
+
+  if (houseT && H) {
+    const mo = H.mortgage || {}, hist = mo.history || [];
+    const spark = pts => {
+      if (pts.length < 2) return "";
+      const vs = pts.map(p => p[1]), lo = Math.min(...vs), hi = Math.max(...vs), W = 200, Hh = 34;
+      const d = pts.map((p, i) => `${i ? "L" : "M"}${(i / (pts.length - 1) * W).toFixed(1)},${(Hh - 3 - ((p[1] - lo) / (hi - lo || 1)) * (Hh - 6)).toFixed(1)}`).join("");
+      return `<svg viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" role="img" aria-label="Past year: low ${lo.toFixed(2)}%, high ${hi.toFixed(2)}%"><path class="a" d="${d}L${W},${Hh}L0,${Hh}Z"/><path class="l" d="${d}"/></svg>`;
+    };
+    const pts = (v, unit = "") => `${v >= 0 ? "▲ +" : "▼ −"}${Math.abs(v).toFixed(2)}${unit}`;
+    const n = H.national || {};
+    const asof = H.asOf || {};
+    groups.push(`<div class="numgroup" data-topic="${esc(houseT.id)}" style="--tc:${houseT.dot}"><h3><i></i>${esc(houseT.label)} <span>latest readings</span></h3><div class="kpis">
+      ${mo.rate30 != null ? `<div class="kpi"><span class="lbl">30-year mortgage rate</span><span class="val">${mo.rate30.toFixed(2)}%</span>${mo.rate30YearAgo != null ? `<span class="delta ${mo.rate30 > mo.rate30YearAgo ? "down" : "up"}">${pts(mo.rate30 - mo.rate30YearAgo, " pts")} vs a year ago</span>` : ""}${spark(hist)}<span class="sub">Freddie Mac weekly average, ${esc(fmtDay(mo.week, { month: "short", day: "numeric" }))}</span></div>` : ""}
+      ${mo.rate15 != null ? `<div class="kpi"><span class="lbl">15-year mortgage rate</span><span class="val">${mo.rate15.toFixed(2)}%</span><span class="sub">Lower rate, higher payment, paid off in half the time</span></div>` : ""}
+      ${n.price != null ? `<div class="kpi"><span class="lbl">Typical US home value</span><span class="val">$${Math.round(n.price / 1000)}k</span><span class="delta ${n.priceYoY >= 0 ? "up" : "down"}">${n.priceYoY >= 0 ? "▲ +" : "▼ −"}${Math.abs(n.priceYoY)}% vs a year ago</span><span class="sub">Zillow, ${esc(asof.prices || "")}${n.forecast12m != null ? ` · forecast ${n.forecast12m >= 0 ? "+" : ""}${n.forecast12m}% next 12 months` : ""}</span></div>` : ""}
+      ${n.rent != null ? `<div class="kpi"><span class="lbl">Typical US rent</span><span class="val">$${Math.round(n.rent).toLocaleString("en-US")}</span><span class="delta ${n.rentYoY >= 0 ? "up" : "down"}">${n.rentYoY >= 0 ? "▲ +" : "▼ −"}${Math.abs(n.rentYoY)}% vs a year ago</span><span class="sub">per month, Zillow, ${esc(asof.rents || "")}</span></div>` : ""}
+    </div><a class="more" href="housing.html">Open the housing desk: metros, rent yields and a rental calculator →</a></div>`);
+  }
+  if (dataT && SERIES?.series?.length) {
+    const ss = [...SERIES.series].filter(x => x.latest).sort((a, b) => !!b.notable - !!a.notable).slice(0, 4);
+    groups.push(`<div class="numgroup" data-topic="${esc(dataT.id)}" style="--tc:${dataT.dot}"><h3><i></i>${esc(dataT.label)} <span>latest readings</span></h3><div class="kpis">${ss.map(x => `<div class="kpi"><span class="lbl">${esc(x.name)}</span><span class="val">${esc(String(+x.latest.value.toFixed(2)))}</span>${x.change?.pct != null ? `<span class="delta ${x.change.pct >= 0 ? "up" : "down"}">${x.change.pct >= 0 ? "▲ +" : "▼ −"}${Math.abs(x.change.pct).toFixed(1)}% vs last reading</span>` : ""}<span class="sub">${esc(x.unit || "")}${x.notable ? " · notable move" : ""}</span></div>`).join("")}</div><a class="more" href="data.html">Open the data desk →</a></div>`);
+  }
+  $("#numbers").innerHTML = groups.join("");
+
+  // ---- coming up, idea, busiest areas
+  $("#events").innerHTML = next.slice(0, 3).map(c => {
+    const d = Math.round((day(c.d) - t) / DAY);
+    return `<div class="event"><div class="cal" aria-hidden="true"><i>${esc(fmtDay(c.d, { month: "short" }).toUpperCase())}</i><b>${esc(fmtDay(c.d, { day: "numeric" }))}</b></div>
+      <div><span class="in">${esc(fmtDay(c.d, { weekday: "long" }))} · ${d === 0 ? "today" : d === 1 ? "tomorrow" : `in ${d} days`}${c.approx ? " (approximate date)" : ""}</span><h4>${esc(c.title)}</h4></div>${c.why ? `<p>${esc(c.why)}</p>` : ""}</div>`;
+  }).join("") || `<p style="margin:0;color:var(--muted)">No dates on the calendar yet.</p>`;
+  if (brief.idea?.h) {
+    $("#idea").hidden = false;
+    $("#idea").innerHTML = `<div class="sec-head" style="margin-bottom:0"><h2>One idea from the news</h2><p>A business opening suggested by this week's stories.</p></div>
+      <h4>${esc(brief.idea.h)}</h4><p>${esc(brief.idea.why || "")}</p><a class="btn" href="${esc(askUrl(`Pressure-test this idea: ${brief.idea.h}. ${brief.idea.why || ""}`))}">Ask if it holds up</a>`;
+  }
+  const themesWord = vocab.themes && !/,/.test(vocab.themes) && vocab.themes.length <= 24 ? vocab.themes.toLowerCase() : "areas";
+  $("#areas-h").textContent = `Busiest ${themesWord} this week`;
+  const rows = [...c7.entries()].filter(([id]) => sectors.has(id)).sort((a, b) => b[1] - a[1]).slice(0, 11);
+  const maxN = Math.max(1, ...rows.map(r => r[1]));
+  $("#areas").innerHTML = rows.map(([id, n]) => {
+    const tagged = inBrief.has(id), d = n - (cp.get(id) || 0);
+    return `<li style="${tagged ? `--fill:${colorOf(id)[0]}` : ""}"><span class="nm">${esc(nameOf(id))}${tagged ? `<span class="tagin">in today's brief</span>` : ""}</span><span class="n"><b>${n}</b> ${n === 1 ? "story" : "stories"}<span class="d ${d > 0 ? "up" : d < 0 ? "down" : "flat"}">${d > 0 ? "+" : d < 0 ? "−" : "±"}${Math.abs(d)}</span></span><span class="bar" aria-hidden="true"><i style="width:${(n / maxN * 100).toFixed(0)}%"></i></span></li>`;
+  }).join("");
+  $("#all-areas").textContent = `See all ${S.sectors.length} areas →`;
+
+  $("#archive").innerHTML = `<span>Earlier briefs:</span>` + briefs.slice(0, 6).map((b, i) =>
+    `<a href="${i === 0 ? "./" : `?d=${esc(b.date)}`}"${b === brief ? ' aria-current="page"' : ""}>${i === 0 ? "Latest" : esc(fmtDay(b.date, { weekday: "short", month: "short", day: "numeric" }))}</a>`).join("")
+    + (briefs.length > 6 ? `<a href="desk.html#today">All ${briefs.length} briefs</a>` : "");
+
+  // ---- detail data per card
+  window.DETAIL = cards.map(x => {
+    const u = x.u;
+    if (x.kind === "housing") {
+      const tags = u.topics || [];
+      const rel = HN.filter(n => n.id !== u.id && within(n.d, 7) && (n.topics || []).some(tg => tags.includes(tg))).slice(0, 4).map(n => ({ title: n.title, d: n.d, src: n.src }));
+      const mo = H?.mortgage, nn = H?.national || {};
+      const ctx = [
+        mo?.rate30 != null ? ["Mortgage rates now", `The 30-year fixed averages ${mo.rate30.toFixed(2)}% (a year ago: ${mo.rate30YearAgo?.toFixed(2) ?? "n/a"}%); the 15-year, ${mo.rate15?.toFixed(2) ?? "n/a"}%.`] : null,
+        nn.price != null ? ["Prices and rents", `The typical US home is worth about $${Math.round(nn.price / 1000)}k (${nn.priceYoY >= 0 ? "+" : ""}${nn.priceYoY}% in a year); typical rent is $${Math.round(nn.rent).toLocaleString("en-US")} a month (${nn.rentYoY >= 0 ? "+" : ""}${nn.rentYoY}%).`] : null,
+        nn.forecast12m != null ? ["What to watch next", `Zillow expects home values to change ${nn.forecast12m >= 0 ? "+" : ""}${nn.forecast12m}% over the next 12 months. Watch weekly rates and listings for a turn.`] : null,
+      ].filter(Boolean);
+      return { names: [], also: [], rel, ctx, area: "US housing", qs: [`What does this mean for someone buying a rental now?`, `How do mortgage rates affect rental cash flow?`, `Which US metros look best for rentals right now?`] };
+    }
+    const sec = sectors.get(x.area) || {};
+    const names = [...new Set([...(u.companies || []), ...(u.orgs || [])])].filter(isName);
+    const key = names.map(n => n.toLowerCase());
+    const also = S.updates.filter(v => v.id !== u.id && v.src?.t !== u.src?.t && Math.abs(day(v.d) - day(u.d || brief.date)) <= 3 * DAY
+      && key.length && [...(v.companies || []), ...(v.orgs || [])].some(n => key.includes(n.toLowerCase())) && (v.sectors || [])[0] === x.area).slice(0, 3);
+    const alsoIds = new Set(also.map(v => v.id)), cardIds = new Set(cards.map(c => c.u.id));
+    const mine = new Set(u.sectors || []);
+    const rel = week.filter(v => v.id !== u.id && !cardIds.has(v.id) && !alsoIds.has(v.id) && (v.sectors || []).includes(x.area))
+      .map(v => ({ v, score: (v.sectors || []).filter(s => mine.has(s)).length * 2 + (v.companies || []).filter(n => key.includes(n.toLowerCase())).length * 3 }))
+      .sort((a, b) => b.score - a.score || b.v.d.localeCompare(a.v.d)).slice(0, 4).map(r => r.v);
+    const who = names.find(n => S.companies.some(c => c.name.toLowerCase() === n.toLowerCase())) || names[0];
+    const ctx = [sec.state ? ["Where it stands", sec.state] : null, sec.money ? ["Where the money comes from", sec.money] : null, sec.watch ? ["What to watch next", sec.watch] : null].filter(Boolean);
+    return { names, also, rel, ctx, area: x.areaName,
+      qs: [who ? `What should I know about ${who}?` : "What happened before this story?", who ? `Who competes with ${who}?` : "Which companies could benefit from this?", `What's driving ${lc(x.areaName)} right now?`] };
+  });
+  applyTopics();
+  fromHash();
+}
+
+/** Shows only the topics you've turned on. */
+function applyTopics() {
+  document.querySelectorAll("[data-topic]").forEach(el => { if (el.classList.contains("tchip")) return; el.hidden = !ON.has(el.dataset.topic); });
+  const vis = [...document.querySelectorAll("#deck .card")].filter(c => !c.hidden);
+  document.querySelectorAll("#deck .card").forEach(c => c.classList.remove("big"));
+  vis[0]?.classList.add("big");
+  $("#swipe").hidden = vis.length < 2;
+}
+
+// ---- Detail panel: a side panel on wide screens, a sheet on phones. #story-N opens one directly.
+const detail = $("#detail");
+let lastFocus = null;
+function openDetail(n) {
+  const x = window.CARDS?.[n - 1], d = window.DETAIL?.[n - 1];
+  if (!x || !d) return;
+  lastFocus = document.activeElement;
+  const [c, ci, light] = colorOf(x.area);
+  const url = safeUrl(x.src?.u);
+  const link = v => safeUrl(v.src?.u) ? `<a href="${esc(v.src.u)}" target="_blank" rel="noopener">` : `<a href="desk.html#updates">`;
+  const terms = termsIn(`${x.h} ${x.what} ${x.full}`);
+  detail.innerHTML = `<div class="scrim" data-close></div>
+  <aside class="sheet" role="dialog" aria-modal="true" aria-labelledby="dh" style="--c:${c};--ci:${ci};--tc:${x.topic.dot}">
+    <div class="sheet-top${light ? " lightbg" : ""}">
+      <div class="row"><span class="k tpill"><i></i>${esc(x.topic.label)} · ${esc(d.area)}${x.u.type ? ` · ${esc(x.u.type)}` : ""}</span><button class="close" data-close>Close ✕</button></div>
+      <h2 id="dh">${esc(x.h)}</h2>
+      ${x.src ? `<span class="meta">Reported by ${esc(x.src.t)} on ${esc(fmtDay(x.d, { month: "long", day: "numeric" }))}</span>` : ""}
+    </div>
+    <div class="sheet-body">
+      <div class="blk"><h4>The full story</h4><p>${esc(x.full)}</p>
+        ${url ? `<a class="srcbtn" href="${esc(url)}" target="_blank" rel="noopener">Read the original at ${esc(x.src.t)} ↗</a>` : ""}
+        ${d.also.length ? `<p class="dim">Also reported by ${d.also.map(v => `${link(v)}${esc(v.src?.t || "another source")}</a> (${esc(fmtDay(v.d, { month: "short", day: "numeric" }))})`).join(", ")}.</p>` : ""}</div>
+      ${x.you ? `<div class="blk"><h4>Why it matters to you</h4><p>${esc(x.you)}</p></div>` : ""}
+      ${terms.length ? `<div class="blk"><h4>Key terms in this story</h4>${terms.map(g => `<p><b>${esc(g.term)}:</b> ${esc(g.short)}</p>`).join("")}</div>` : ""}
+      ${d.names.length ? `<div class="blk"><h4>Who and what it mentions</h4><div class="chips">${d.names.map(nm => `<span>${esc(nm)}</span>`).join("")}</div></div>` : ""}
+      ${d.ctx.length ? `<div class="blk"><h4>The bigger picture in ${esc(d.area)}</h4><dl class="ctx">${d.ctx.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>` : ""}
+      ${d.rel.length ? `<div class="blk"><h4>More from ${esc(d.area)} this week</h4><ul class="rel">${d.rel.map(v => `<li>${link(v)}<b>${esc(v.title)}</b><span>${esc(v.src?.t || "")} · ${esc(fmtDay(v.d, { month: "short", day: "numeric" }))} ↗</span></a></li>`).join("")}</ul></div>` : ""}
+      <div class="blk"><h4>Ask ${esc(CFG.site?.name || "")}</h4><div class="qs">${d.qs.map(q => `<a href="${esc(askUrl(q))}">${esc(q)} →</a>`).join("")}</div></div>
+    </div>
+  </aside>`;
+  detail.hidden = false;
+  document.body.style.overflow = "hidden";
+  detail.querySelector(".close").focus();
+  if (location.hash !== `#story-${n}`) history.replaceState(null, "", `${location.pathname}${location.search}#story-${n}`);
+}
+function closeDetail() {
+  if (detail.hidden) return;
+  detail.hidden = true; detail.innerHTML = "";
+  document.body.style.overflow = "";
+  history.replaceState(null, "", location.pathname + location.search);
+  lastFocus?.focus?.();
+}
+document.addEventListener("click", e => {
+  const o = e.target.closest("[data-open]"); if (o) { openDetail(+o.dataset.open); return; }
+  if (e.target.closest("[data-close]")) { closeDetail(); return; }
+  const tb = e.target.closest(".tchip");
+  if (tb) {
+    const id = tb.dataset.topic;
+    if (ON.has(id) && ON.size > 1) ON.delete(id); else ON.add(id);
+    store.set("anu-topics", [...ON].join(","));
+    render(); return;
+  }
+  const lv = e.target.closest("[data-level]");
+  if (lv) { store.set("anu-level", lv.dataset.level); render(); }
 });
-function openSector(id){currentSector=id;ls.set("desk-sector",id);renderSectors();show("sectors");window.scrollTo({top:0});}
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeDetail();
+  if (e.key === "Tab" && !detail.hidden) {
+    const f = [...detail.querySelectorAll("a,button")], first = f[0], last = f.at(-1);
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+function fromHash() { const m = location.hash.match(/^#story-(\d+)$/); m ? openDetail(+m[1]) : closeDetail(); }
+addEventListener("hashchange", fromHash);
 
-/* ---------- today ---------- */
-let briefPick=null;
-const fmtLong=d=>toDate(d).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",timeZone:"UTC"});
-function renderToday(){
-  const el=$("#brief"),list=[...S.briefs].sort((a,b)=>String(b.date).localeCompare(a.date));
-  if(!list.length){el.innerHTML=`<p class="b-loading">No brief yet. The first one is written on the next daily run; <button class="linkish" data-goto="updates">all updates</button> are already here.</p>`;return;}
-  const b=list.find(x=>x.date===briefPick)||list[0];
-  const mins=Math.max(2,Math.round(JSON.stringify(b).split(/\s+/).length/230));
-  el.innerHTML=`<header><div class="b-date"><span>${esc(fmtLong(b.date))}</span><span>${mins} min read</span></div>
-      <h2 class="b-hello">${esc(b.title)}</h2>${b.big?`<p class="b-big">${esc(b.big)}</p>`:""}</header>
-    <section class="b-sec"><h3>What happened</h3>
-      ${(b.stories||[]).map(s=>`<div class="story">${s.tag?`<div class="tag">${esc(s.tag)}</div>`:""}<h4>${esc(s.h)}</h4>${s.what&&s.what!==s.h?`<p>${esc(s.what)}</p>`:""}
-        ${s.you?`<div class="you"><b>Why it matters:</b> ${esc(s.you)}</div>`:""}${s.ref?`<button class="more" data-open-update="${esc(s.ref)}">Details and source →</button>`:""}</div>`).join("")}</section>
-    ${b.watch?.h&&b.watch.h!=="Nothing scheduled"?`<div class="b-card"><div class="k">Keep an eye on</div><h4>${esc(b.watch.h)}</h4><p>${esc(b.watch.why)}</p></div>`:""}
-    ${b.idea?.h?`<div class="b-card"><div class="k">${esc(V.ideas)}</div><h4>${esc(b.idea.h)}</h4><p>${esc(b.idea.why)}</p></div>`:""}
-    <div class="b-foot"><span>Want more? <button class="linkish" data-goto="updates">All updates</button> · <a class="linkish" href="app/">Ask a question</a></span>
-      ${list.length>1?`<span class="archive">Past briefs: ${list.slice(0,7).map(x=>`<button class="fbtn" aria-pressed="${x.date===b.date}" data-brief="${esc(x.date)}">${esc(String(x.date).slice(5))}</button>`).join("")}</span>`:""}</div>`;
-}
-
-/* ---------- big picture ---------- */
-function renderPulse(){
-  const m=S.meta||{};
-  $("#thesis").hidden=!m.headline;$("#headline").textContent=m.headline||"";
-  $("#forces-wrap").hidden=!(m.forces||[]).length;
-  $("#forces").innerHTML=(m.forces||[]).map(f=>`<div class="box force"><h4>${esc(f.t)}</h4><p>${esc(f.b)}</p><div class="chips">${(f.s||[]).map(secChip).join("")}</div></div>`).join("");
-  $("#heat").innerHTML=S.sectors.map(s=>`<button class="tile" data-sector="${esc(s.id)}"><span class="nm">${esc(s.name)}</span><span class="row"><span class="pips" title="Momentum ${s.heat}/5">${[1,2,3,4,5].map(i=>`<span class="pip ${i<=s.heat?"on":""}"></span>`).join("")}</span><span class="cnt"><b>${recentCount(s.id)}</b> recent</span></span></button>`).join("");
-  $("#pulse-latest").innerHTML=[...S.updates].sort(byDateDesc).slice(0,6).map(u=>itemHTML(u)).join("")||`<p class="status">No stories yet.</p>`;
-  $("#pulse-next").innerHTML=S.catalysts.filter(c=>daysUntil(c.d)>=0).sort((a,b)=>String(a.d).localeCompare(b.d)).slice(0,6).map(calRow).join("")||`<p class="status">Nothing dated yet.</p>`;
-  const cover=S.updates.length?[...S.updates].sort(byDateDesc):[];
-  $("#meta-row").innerHTML=`<span><b>${S.updates.length}</b> stories</span><span><b>${S.sectors.length}</b> ${esc(V.themes.toLowerCase())}</span><span><b>${S.companies.length}</b> ${esc(V.entities.toLowerCase())}</span>${cover.length?`<span>from ${esc(cover.at(-1).d)} to ${esc(cover[0].d)}</span>`:""}`;
-}
-
-/* ---------- updates ---------- */
-let uType="all";
-function itemHTML(u){
-  return `<div class="item" id="item-${esc(u.id)}"><div class="dtg">${dtg(u.d,u.dApprox)}</div><details class="ud"><summary>
-    <h4>${esc(u.title)}</h4>${u.why?`<div class="why">${esc(u.why)}</div>`:""}<span class="open-hint">Details and source ▸</span></summary>
-    ${u.body&&u.body!==u.title?`<p class="body" style="margin-top:8px">${esc(u.body)}</p>`:""}
-    <div class="chips">${u.type?`<span class="chip type">${esc(u.type)}</span>`:""}${(u.sectors||[]).map(secChip).join("")}${(u.companies||[]).map(entChip).join("")}${srcChip(u.src)}</div>
-  </details></div>`;
-}
-function renderUpdates(){
-  const q=($("#u-q").value||"").toLowerCase(),sec=$("#u-sector").value;
-  const types=S.pack?.types||[...new Set(S.updates.map(u=>u.type))];
-  $("#u-types").innerHTML=["all",...types].map(t=>`<button class="fbtn" aria-pressed="${t===uType}" data-t="${esc(t)}">${t==="all"?"All types":esc(t)}</button>`).join("");
-  $("#u-types").querySelectorAll("button").forEach(b=>b.onclick=()=>{uType=b.dataset.t;renderUpdates();});
-  const list=[...S.updates].sort(byDateDesc).filter(u=>(uType==="all"||u.type===uType)&&(sec==="all"||(u.sectors||[]).includes(sec))&&(!q||JSON.stringify(u).toLowerCase().includes(q)));
-  $("#u-count").textContent=`${list.length} of ${S.updates.length} stories`;
-  let html="",last="";
-  for(const u of list.slice(0,400)){const [y,m]=String(u.d).split("-");const key=y+"-"+m;if(key!==last){html+=`<div class="month">${MONTH[+m-1]||""} ${y}</div>`;last=key;}html+=itemHTML(u);}
-  $("#u-list").innerHTML=html||`<p class="status" style="padding:16px 0">Nothing matches. Clear a filter or search more broadly.</p>`;
-}
-$("#u-q").addEventListener("input",renderUpdates);$("#u-sector").addEventListener("change",renderUpdates);
-
-/* ---------- themes ---------- */
-function renderSectors(){
-  if(!S.sectors.length)return;
-  if(!S.sectors.find(s=>s.id===currentSector))currentSector=S.sectors[0].id;
-  $("#sec-nav").innerHTML=S.sectors.map(s=>`<button data-sec="${esc(s.id)}" aria-current="${s.id===currentSector}"><span>${esc(s.name)}</span><span class="status">${recentCount(s.id)}</span></button>`).join("");
-  $("#sec-nav").querySelectorAll("button").forEach(b=>b.onclick=()=>openSector(b.dataset.sec));
-  $("#sec-select").innerHTML=S.sectors.map(s=>`<option value="${esc(s.id)}" ${s.id===currentSector?"selected":""}>${esc(s.name)}</option>`).join("");
-  const s=S.sectors.find(x=>x.id===currentSector);
-  const ups=S.updates.filter(u=>(u.sectors||[]).includes(s.id)).sort(byDateDesc);
-  const ents=S.companies.filter(c=>(c.sectors||[]).includes(s.id));
-  const cats=S.catalysts.filter(c=>(c.sectors||[]).includes(s.id)&&daysUntil(c.d)>=0).sort((a,b)=>String(a.d).localeCompare(b.d));
-  const field=(k,label)=>s[k]?`<div><div class="lbl">${esc(label)}</div><p>${esc(s[k])}</p></div>`:"";
-  $("#sec-detail").innerHTML=`<div class="head-row"><h2>${esc(s.name)}</h2><span class="pips">${[1,2,3,4,5].map(i=>`<span class="pip ${i<=s.heat?"on":""}"></span>`).join("")}</span></div>
-    ${field("state",V.state)}${field("money",V.money)}${field("watch",V.watch)}
-    ${!s.state?`<p class="status">The brief for this one is written once enough stories have come in.</p>`:""}
-    ${ents.length?`<div><div class="lbl">${esc(V.entities)}</div><div class="chips">${ents.map(c=>entChip(c.name)).join("")}</div></div>`:""}
-    ${cats.length?`<div><div class="lbl">Coming up</div><div class="cal">${cats.slice(0,5).map(calRow).join("")}</div></div>`:""}
-    <div><div class="head-row"><div class="lbl">Stories (${ups.length})</div><a class="linkish" href="app/">Ask about this →</a></div><div class="feed">${ups.slice(0,40).map(u=>itemHTML(u)).join("")||`<p class="status" style="padding:12px 0">No stories yet.</p>`}</div></div>`;
-}
-$("#sec-select").addEventListener("change",e=>openSector(e.target.value));
-
-/* ---------- entities ---------- */
-let cKind="all";
-function renderCompanies(){
-  const q=($("#c-q").value||"").toLowerCase(),sec=$("#c-sector").value;
-  const kindOf=c=>c.kind||c.type||"";
-  const kinds=[...new Set(S.companies.map(kindOf).filter(Boolean))].sort();
-  $("#c-types").innerHTML=kinds.length>1?["all",...kinds].map(t=>`<button class="fbtn" aria-pressed="${t===cKind}" data-t="${esc(t)}">${t==="all"?"All":esc(kindLabel(t))}</button>`).join(""):"";
-  $("#c-types").querySelectorAll("button").forEach(b=>b.onclick=()=>{cKind=b.dataset.t;renderCompanies();});
-  $("#c-head").innerHTML=`<th>${esc(V.entity)}</th><th>${esc(V.themes)}</th><th>Kind</th><th>About</th><th>Latest</th>`;
-  const list=S.companies.filter(c=>(cKind==="all"||kindOf(c)===cKind)&&(sec==="all"||(c.sectors||[]).includes(sec))&&(!q||JSON.stringify(c).toLowerCase().includes(q))).sort((a,b)=>String(a.name).localeCompare(String(b.name)));
-  $("#c-body").innerHTML=list.map(c=>`<tr><td class="n">${esc(c.name)}</td><td><div class="chips">${(c.sectors||[]).map(secChip).join("")}</div></td><td>${esc(kindLabel(kindOf(c)))}${c.hq?` · ${esc(c.hq)}`:""}</td><td>${esc(c.about||c.edge||"")}</td><td>${esc(c.latest||"")}</td></tr>`).join("")||`<tr><td colspan="5" class="status">Nothing matches.</td></tr>`;
-}
-$("#c-q").addEventListener("input",renderCompanies);$("#c-sector").addEventListener("change",renderCompanies);
-
-/* ---------- calendar, ideas, research ---------- */
-function calRow(c){const n=daysUntil(c.d);return `<div class="cal-row"><div class="cd">${n>=0?n:"–"}<small>${n>0?"days":""}</small></div><div class="dtg">${dtg(c.d,c.approx)}</div><div><h4>${esc(c.title)}</h4><p>${esc(c.why||"")}</p><div class="chips">${(c.sectors||[]).map(secChip).join("")}${c.ref?`<button class="chip" data-open-update="${esc(c.ref)}">source story</button>`:""}</div></div></div>`;}
-function renderCalendar(){$("#cal").innerHTML=S.catalysts.filter(c=>daysUntil(c.d)>=0).sort((a,b)=>String(a.d).localeCompare(b.d)).map(calRow).join("")||`<p class="status">No dated events yet. They are picked out of the news as they appear.</p>`;}
-function renderIdeas(){$("#ideas").innerHTML=S.ideas.map(x=>`<article class="box idea"><h4>${esc(x.t)}</h4><p>${esc(x.what||"")}</p>${x.why?`<p class="status">${esc(x.why)}</p>`:""}<div class="chips">${(x.sectors||[]).map(secChip).join("")}</div></article>`).join("");}
-function renderResearch(){const q=($("#r-q").value||"").toLowerCase(),sec=$("#r-sector").value;
-  $("#r-list").innerHTML=S.research.filter(r=>(sec==="all"||(r.sectors||[]).includes(sec))&&(!q||JSON.stringify(r).toLowerCase().includes(q))).map(r=>`<div class="item"><div><h4>${safeUrl(r.u)?`<a href="${esc(r.u)}" target="_blank" rel="noopener">${esc(r.t)} ↗</a>`:esc(r.t)}</h4><p class="status">${esc(r.who||"")}</p><p>${esc(r.why||"")}</p></div></div>`).join("")||`<p class="status">Nothing yet.</p>`;}
-$("#r-q").addEventListener("input",renderResearch);$("#r-sector").addEventListener("change",renderResearch);
-
-/* ---------- load ---------- */
-function fillSelects(){
-  const opts=`<option value="all">All ${esc(V.themes.toLowerCase())}</option>`+S.sectors.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("");
-  for(const id of ["#u-sector","#c-sector","#r-sector"]){const el=$(id),v=el.value||"all";el.innerHTML=opts;el.value=[...el.options].some(o=>o.value===v)?v:"all";}
-}
-function applyVocab(){
-  document.querySelectorAll("[data-v]").forEach(el=>el.textContent=V[el.dataset.v]);
-  $("#heat-title").textContent=`${V.themes} at a glance`;$("#sectors-title").textContent=V.themes;$("#companies-title").textContent=V.entities;
-  $("#ideas-title").textContent=V.ideas;$("#ideas-intro").textContent=V.ideasIntro;$("#updates-intro").textContent=V.updatesIntro;
-  if(V.searchExample)$("#u-q").placeholder=`Search (e.g. ${V.searchExample})`;
-}
-(async()=>{
-  const [cfg,all]=await Promise.all([DESK.config(),fetch("api/v1/all.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject(r.status))]).catch(()=>[null,null]);
-  if(!all){$("#offline").hidden=false;$("#offline").textContent="The data couldn't load. Refresh the page to try again.";return;}
-  Object.assign(S,all);V=S.pack?.vocab||{};
-  DESK.renderDesks($("#desks"),cfg,"news");
-  applyVocab();
-  document.querySelector('[data-tab="build"]').hidden=!S.ideas.length;
-  document.querySelector('[data-tab="research"]').hidden=!S.research.length;
-  $("#asof").textContent=all.meta?.collectedAt?`Updated ${new Date(all.meta.collectedAt).toLocaleDateString("en-US",{month:"short",day:"numeric"})}`:"";
-  fillSelects();renderToday();renderPulse();renderUpdates();renderSectors();renderCompanies();renderCalendar();renderIdeas();renderResearch();
-  const initTab=(location.hash||"").slice(1)||ls.get("desk-tab")||"today";
-  if(document.querySelector(`[data-panel="${initTab}"]`)&&!document.querySelector(`[data-tab="${initTab}"]`)?.hidden)show(initTab);
+(async () => {
+  const get = f => fetch(`api/v1/${f}`, { cache: "no-cache" }).then(r => r.ok ? r.json() : null).catch(() => null);
+  try { CFG = await (window.DESK || window.ANU).config(); $("#nav").innerHTML = navHTML(CFG); } catch {}
+  // Data series are only fetched when a topic uses them (or no topics are set and the site may have them).
+  const wantsSeries = !(CFG.topics || []).length ? (CFG.desks || []).some(d => d.id === "data") : CFG.topics.some(x => x.kind === "series");
+  const wantsHousing = !(CFG.topics || []).length ? (CFG.desks || []).some(d => /housing/.test(d.page)) : CFG.topics.some(x => x.kind === "housing");
+  const none = Promise.resolve(null);
+  const [all, hs, hn, gl, se] = await Promise.all([get("all.json"), wantsHousing ? get("housing-summary.json") : none, wantsHousing ? get("housing-news.json") : none, get("glossary.json"), wantsSeries ? get("series.json") : none]);
+  if (!all) {
+    $("#date").textContent = "The brief couldn't load right now.";
+    $("#deck").innerHTML = `<p class="notice">Something went wrong loading today's data. Refresh in a minute, or <a href="desk.html#updates">see all stories</a>.</p>`;
+    return;
+  }
+  S = all; H = hs; HN = hn || []; G = gl || []; SERIES = se;
+  render();
 })();
 </script>
+</body>
+</html>

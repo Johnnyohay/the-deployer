@@ -8,6 +8,8 @@
  * - Coming up: dated future events picked out of the newest stories, linked to the story.
  * - Directory: names that keep showing up in stories but aren't tracked yet get a profile.
  * - Ideas: a few grounded ideas a week, when the pack wants them (topic.yaml curate.ideas).
+ * - Glossary: the terms a beginner needs (one-line definitions, a few longer lessons), started
+ *   from the subject and then topped up weekly with terms the stories use but nobody defined.
  *
  * Without an AI only momentum runs; everything else waits for the next run that has one.
  */
@@ -185,6 +187,65 @@ else {
     });
   }
 }
+
+// ---- glossary (data/glossary.json): key terms on the brief and the lesson of the day ----
+interface Term { term: string; aliases: string[]; topic: string; short: string; long?: string; by?: string; at?: string }
+const glossary = JSON.parse(await readFile("data/glossary.json", "utf8").catch(() => "[]")) as Term[];
+const glossaryBefore = glossary.length;
+if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6))) {
+  const has = new Set(glossary.flatMap((g) => [g.term, ...g.aliases].map((x) => x.toLowerCase())));
+  const names = new Set(desk.companies.map((c) => String(c.name).toLowerCase()));
+  const TermOut = z.object({
+    term: z.string().min(2).max(60),
+    aliases: z.array(z.string().min(2).max(60)).max(4).default([]),
+    short: z.string().min(20).max(220).describe("One plain sentence a beginner understands, no jargon"),
+    long: z.string().max(1100).default("").describe("Only when asked: 80-150 words, a short lesson with why it matters to the reader"),
+  });
+  const keep = (x: z.infer<typeof TermOut>, withLong: boolean) => {
+    const k = x.term.toLowerCase();
+    if (has.has(k) || names.has(k) || x.short.toLowerCase().includes("i don't know")) return;
+    const words = x.long.split(/\s+/).filter(Boolean).length;
+    // An alias must be an abbreviation or share a word with the term, so a loose synonym
+    // ("Dock Strike" for "Port Congestion") never tags the wrong stories.
+    const termWords = new Set(x.term.toLowerCase().match(/[a-z0-9]+/g) ?? []);
+    const aliases = x.aliases.filter((a) => !has.has(a.toLowerCase()) && (/^[A-Z0-9&-]{2,8}$/.test(a) || (a.toLowerCase().match(/[a-z0-9]+/g) ?? []).some((w) => w.length > 3 && termWords.has(w))));
+    glossary.push({ term: x.term, aliases, topic: "main", short: x.short.trim(),
+      ...(withLong && words >= 60 && words <= 200 ? { long: x.long.trim() } : {}), by: ai, at: today });
+    has.add(k);
+  };
+  try {
+    if (glossary.length === 0) {
+      // Day one: the basics of the subject, so the brief can teach from the first morning.
+      const out = await askJson(z.object({ terms: z.array(TermOut).min(6).max(14) }), {
+        tier: "smart",
+        system: `You teach ${domain} to ${audience}. List the terms a beginner must know to follow news on ${domain}. Give 8 of them a "long" lesson of 80-150 words; leave "long" empty for the rest. Be accurate, neutral and factual, with no opinions or contested claims; skip any term you are unsure about.`,
+        user: `The subject's themes: ${desk.sectors.map((s) => s.name).join("; ")}.`,
+      });
+      out.terms.forEach((x) => keep(x, true));
+    } else {
+      // Weekly: acronyms and repeated phrases in the last month's stories that aren't defined yet.
+      const text = desk.updates.filter((u) => u.d > daysAgo(30)).map((u) => `${u.title}. ${u.body ?? ""}`).join(" ");
+      const counts = new Map<string, number>();
+      for (const m of text.matchAll(/\b[A-Z][A-Z0-9]{1,5}\b/g)) counts.set(m[0], (counts.get(m[0]) ?? 0) + 1);
+      const STOP = new Set(["US", "UK", "EU", "AI", "CEO", "CFO", "IPO", "LLC", "INC", "USA", "THE", "II", "III", "IV", "TV", "Q1", "Q2", "Q3", "Q4"]);
+      const cands = [...counts].filter(([k, n]) => n >= 3 && !STOP.has(k) && !has.has(k.toLowerCase()) && !names.has(k.toLowerCase())).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k]) => k);
+      if (cands.length) {
+        const out = await askJson(z.object({ terms: z.array(TermOut).max(8) }), {
+          tier: "smart",
+          system: `You explain terms from ${domain} news to ${audience}. Define only the candidates that a newcomer would need explained and that you are sure about, neutrally and factually; skip names of companies, people and places. Give at most 2 a "long" lesson of 80-150 words.`,
+          user: `Candidates (from recent stories): ${cands.join(", ")}\nExample uses:\n${desk.updates.filter((u) => u.d > daysAgo(30) && cands.some((c) => u.title.includes(c))).slice(0, 15).map(line).join("\n")}`,
+        });
+        out.terms.forEach((x) => keep(x, true));
+      }
+    }
+    meta.glossaryAt = new Date().toISOString();
+    if (glossary.length > glossaryBefore) changes.push(`added ${glossary.length - glossaryBefore} glossary terms`);
+  } catch (err) {
+    if (err instanceof AiUnavailable) console.warn("Glossary skipped: no AI.");
+    else console.warn(`Glossary skipped: ${(err as Error).message.split("\n")[0]}`);
+  }
+}
+if (glossary.length !== glossaryBefore) await writeFile("data/glossary.json", JSON.stringify(glossary, null, 2) + "\n");
 
 // Keep each tracked name's latest story line current (no AI).
 for (const c of desk.companies) {

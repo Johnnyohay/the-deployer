@@ -34,6 +34,9 @@ const SiteConfig = z.object({
   site: z.object({ name: z.string().default("My desk"), owner: z.string().default(""), tagline: z.string().default("") }).default({ name: "My desk", owner: "", tagline: "" }),
   desks: z.array(z.object({ id: z.string(), label: z.string(), page: z.string(), enabled: z.boolean().default(true) })).min(1),
   flags: z.record(z.string(), z.boolean()).default({}),
+  // The subjects this site teaches ("You follow: …" on the brief). kind says where each one's
+  // stories and numbers come from. Empty: worked out from the pack (its news, housing, series).
+  topics: z.array(z.object({ id: z.string().regex(/^[a-z][a-z0-9-]*$/), label: z.string(), kind: z.enum(["news", "housing", "series"]) })).default([]),
   housing: z.object({
     defaults: z.object({ metric: z.string().default("score"), size: z.number().int().default(200), budget: z.number().default(0) }).default({ metric: "score", size: 200, budget: 0 }),
     budgets: z.array(z.number().positive()).default([200000, 300000, 400000, 500000]),

@@ -53,6 +53,13 @@ export async function buildApi(desk: Desk): Promise<void> {
     await put("housing-news.json", desk.housing.news);
   }
   if (desk.videos) await put("videos.json", desk.videos);
+  // A small housing summary for the brief page (the full market file is about 1 MB).
+  if (desk.housing) {
+    const m = desk.housing.market as unknown as { asOf?: Record<string, string>; mortgage?: { history?: [string, number][] } & Record<string, unknown>; national?: Record<string, number> };
+    await put("housing-summary.json", { asOf: m.asOf ?? {}, mortgage: m.mortgage ? { ...m.mortgage, history: (m.mortgage.history ?? []).slice(-53) } : null, national: m.national ?? null });
+  }
+  // Key terms and lessons (data/glossary.json, kept by the curator).
+  if (existsSync("data/glossary.json")) await put("glossary.json", JSON.parse(await readFile("data/glossary.json", "utf8")));
   // The data desk: one file with every series, so the Data page and Ask read the same numbers.
   const series = existsSync("data/series.json") ? JSON.parse(await readFile("data/series.json", "utf8")) : null;
   if (series) await put("series.json", series);
@@ -60,13 +67,17 @@ export async function buildApi(desk: Desk): Promise<void> {
   // Settings from topic/*.yaml that the pages read (tabs, flags, defaults, custom attributes, requests).
   const site = await loadSiteConfig();
   const video = existsSync("topic/videos.yaml") ? await loadVideoConfig() : { channels: [], match: {}, keepDays: 0 };
-  const topic = await loadTopic();
   const feeds = (await loadSources()).feeds;
+  const topic = await loadTopic();
   await buildPages({ name: site.site.name, tagline: site.site.tagline, domain: topic.domain });
-  // A pack with series gets a Data tab even if its site.yaml predates the data desk.
-  const desks = series?.series?.length && !site.desks.some((d) => d.id === "data")
-    ? [...site.desks.slice(0, -1), { id: "data", label: "Data", page: "data.html", enabled: true }, ...site.desks.slice(-1)]
-    : site.desks;
+  // The brief links to the full story list and the themes (desk.html), and a pack with series gets
+  // a Data tab, even when its site.yaml predates them.
+  const desks = [...site.desks];
+  if (!desks.some((d) => d.page.startsWith("desk.html"))) {
+    const at = Math.max(1, desks.findIndex((d) => d.page === "./") + 1);
+    desks.splice(at, 0, { id: "stories", label: "All stories", page: "desk.html#updates", enabled: true }, { id: "themes", label: `By ${topic.vocab.theme.toLowerCase()}`, page: "desk.html#sectors", enabled: true });
+  }
+  if (series?.series?.length && !desks.some((d) => d.id === "data")) desks.splice(Math.max(0, desks.length - 1), 0, { id: "data", label: "Data", page: "data.html", enabled: true });
   await put("config.json", {
     generatedAt,
     ...site,
