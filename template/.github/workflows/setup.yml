@@ -85,4 +85,4 @@ jobs:
             if [ "$PAGES_ON" != "yes" ]; then echo; echo "**One click needed:** Settings → Pages → Source: **GitHub Actions**. Then run Actions → Daily refresh → Run workflow."; fi
           } > "$RUNNER_TEMP/reply.md"
           gh issue comment ${{ github.event.issue.number }} --repo "${{ github.repository }}" --body-file "$RUNNER_TEMP/reply.md"
-          [ -f "$RUNNER_TEMP/report.md" ] && gh issue close ${{ github.event.issue.number }} --repo "${{ github.repository }}" || true
+          if [ -f "$RUNNER_TEMP/report.md" ]; then gh issue close ${{ github.event.issue.number }} --repo "${{ github.repository }}" || true; fi
