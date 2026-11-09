@@ -192,7 +192,8 @@ else {
 interface Term { term: string; aliases: string[]; topic: string; short: string; long?: string; by?: string; at?: string }
 const glossary = JSON.parse(await readFile("data/glossary.json", "utf8").catch(() => "[]")) as Term[];
 const glossaryBefore = glossary.length;
-if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6))) {
+// Runs on day one, weekly, and any day the site has fewer than 3 lessons (so a new site gets lessons fast).
+if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6) || glossary.filter((g) => g.long).length < 3)) {
   const has = new Set(glossary.flatMap((g) => [g.term, ...g.aliases].map((x) => x.toLowerCase())));
   const names = new Set(desk.companies.map((c) => String(c.name).toLowerCase()));
   const TermOut = z.object({
