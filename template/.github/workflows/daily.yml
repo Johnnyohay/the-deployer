@@ -24,7 +24,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # A repo that isn't set up yet (the template itself, or a fresh copy) skips the refresh
+  # instead of failing every morning; a skipped job counts as a successful run.
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if [ -f topic/topic.yaml ]; then echo "ready=true" >> "$GITHUB_OUTPUT"
+          else echo "ready=false" >> "$GITHUB_OUTPUT"; echo "::notice::Not set up yet. Open a 'Set me up' issue first; the daily refresh starts after that."; fi
+
   refresh:
+    needs: check
+    if: needs.check.outputs.ready == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     environment:
@@ -32,8 +47,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check that setup is done
-        run: test -f topic/topic.yaml || { echo "Not set up yet. Open a 'Set me up' issue first."; exit 1; }
 
       - uses: Johnnyohay/the-deployer/.github/actions/setup@v0
         with:
