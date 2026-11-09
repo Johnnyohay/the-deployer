@@ -23,6 +23,8 @@ const read = async (file: string) => norm(JSON.parse(await readFile(file, "utf8"
 test("ANU pack reproduces ANU's daily collect", async () => {
   const pack = await mkdtemp(path.join(os.tmpdir(), "deployer-golden-"));
   await cp(path.join(root, "packs", "anu-defense-housing", "topic"), path.join(pack, "topic"), { recursive: true });
+  // The pack's own pages too: they decide whether the generic brief's extra links are added.
+  await cp(path.join(root, "packs", "anu-defense-housing", "site"), path.join(pack, "site"), { recursive: true });
   await cp(path.join(golden, "seed"), path.join(pack, "data"), { recursive: true });
   execFileSync(process.execPath, ["--import", path.join(root, "test", "mock-fetch.mjs"), "--import", "tsx", path.join(root, "src", "cli.ts"), "collect", "--pack", pack], {
     env: { ...process.env, FIXTURE_DIR: path.join(golden, "feeds"), DESK_DATE: DATE },

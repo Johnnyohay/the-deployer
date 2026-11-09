@@ -73,7 +73,8 @@ export async function buildApi(desk: Desk): Promise<void> {
   // The brief links to the full story list and the themes (desk.html), and a pack with series gets
   // a Data tab, even when its site.yaml predates them.
   const desks = [...site.desks];
-  if (!desks.some((d) => d.page.startsWith("desk.html"))) {
+  // Only for the standard brief: a pack with its own home page (site/index.html) keeps its own tabs.
+  if (!existsSync("site/index.html") && !desks.some((d) => d.page.startsWith("desk.html"))) {
     const at = Math.max(1, desks.findIndex((d) => d.page === "./") + 1);
     desks.splice(at, 0, { id: "stories", label: "All stories", page: "desk.html#updates", enabled: true }, { id: "themes", label: `By ${topic.vocab.theme.toLowerCase()}`, page: "desk.html#sectors", enabled: true });
   }
