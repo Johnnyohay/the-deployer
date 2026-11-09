@@ -199,7 +199,7 @@ if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6)))
     term: z.string().min(2).max(60),
     aliases: z.array(z.string().min(2).max(60)).max(4).default([]),
     short: z.string().min(20).max(220).describe("One plain sentence a beginner understands, no jargon"),
-    long: z.string().max(1100).default("").describe("Only when asked: 80-150 words, a short lesson with why it matters to the reader"),
+    long: z.string().max(1400).default("").describe("Only when asked: 90-150 words, a short lesson with why it matters to the reader"),
   });
   const keep = (x: z.infer<typeof TermOut>, withLong: boolean) => {
     const k = x.term.toLowerCase();
@@ -210,7 +210,7 @@ if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6)))
     const termWords = new Set(x.term.toLowerCase().match(/[a-z0-9]+/g) ?? []);
     const aliases = x.aliases.filter((a) => !has.has(a.toLowerCase()) && (/^[A-Z0-9&-]{2,8}$/.test(a) || (a.toLowerCase().match(/[a-z0-9]+/g) ?? []).some((w) => w.length > 3 && termWords.has(w))));
     glossary.push({ term: x.term, aliases, topic: "main", short: x.short.trim(),
-      ...(withLong && words >= 60 && words <= 200 ? { long: x.long.trim() } : {}), by: ai, at: today });
+      ...(withLong && words >= 40 && words <= 220 ? { long: x.long.trim() } : {}), by: ai, at: today });
     has.add(k);
   };
   try {
@@ -218,7 +218,7 @@ if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6)))
       // Day one: the basics of the subject, so the brief can teach from the first morning.
       const out = await askJson(z.object({ terms: z.array(TermOut).min(6).max(14) }), {
         tier: "smart",
-        system: `You teach ${domain} to ${audience}. List the terms a beginner must know to follow news on ${domain}. Give 8 of them a "long" lesson of 80-150 words; leave "long" empty for the rest. Be accurate, neutral and factual, with no opinions or contested claims; skip any term you are unsure about.`,
+        system: `You teach ${domain} to ${audience}. List the terms a beginner must know to follow news on ${domain}. Give 8 of them a "long" lesson of 90-150 words (at least 90); leave "long" empty for the rest. Be accurate, neutral and factual, with no opinions or contested claims; skip any term you are unsure about.`,
         user: `The subject's themes: ${desk.sectors.map((s) => s.name).join("; ")}.`,
       });
       out.terms.forEach((x) => keep(x, true));
@@ -228,14 +228,35 @@ if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6)))
       const counts = new Map<string, number>();
       for (const m of text.matchAll(/\b[A-Z][A-Z0-9]{1,5}\b/g)) counts.set(m[0], (counts.get(m[0]) ?? 0) + 1);
       const STOP = new Set(["US", "UK", "EU", "AI", "CEO", "CFO", "IPO", "LLC", "INC", "USA", "THE", "II", "III", "IV", "TV", "Q1", "Q2", "Q3", "Q4"]);
-      const cands = [...counts].filter(([k, n]) => n >= 3 && !STOP.has(k) && !has.has(k.toLowerCase()) && !names.has(k.toLowerCase())).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k]) => k);
+      // An acronym that starts a tracked name, or is followed by a capitalized word in most of its
+      // uses ("DP World"), is part of a name, not a term to define.
+      const partOfName = (k: string) => {
+        if ([...names].some((n) => n.startsWith(`${k.toLowerCase()} `))) return true;
+        const uses = [...text.matchAll(new RegExp(`\\b${k}\\b(\\s+[A-Z][a-z]+)?`, "g"))];
+        return uses.filter((m) => m[1]).length > uses.length * 0.6;
+      };
+      const cands = [...counts].filter(([k, n]) => n >= 3 && !STOP.has(k) && !has.has(k.toLowerCase()) && !names.has(k.toLowerCase()) && !partOfName(k)).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k]) => k);
       if (cands.length) {
         const out = await askJson(z.object({ terms: z.array(TermOut).max(8) }), {
           tier: "smart",
-          system: `You explain terms from ${domain} news to ${audience}. Define only the candidates that a newcomer would need explained and that you are sure about, neutrally and factually; skip names of companies, people and places. Give at most 2 a "long" lesson of 80-150 words.`,
+          system: `You explain terms from ${domain} news to ${audience}. Define only the candidates that a newcomer would need explained and that you are sure about, neutrally and factually; skip names of companies, people and places. Give at most 2 a "long" lesson of 90-150 words.`,
           user: `Candidates (from recent stories): ${cands.join(", ")}\nExample uses:\n${desk.updates.filter((u) => u.d > daysAgo(30) && cands.some((c) => u.title.includes(c))).slice(0, 15).map(line).join("\n")}`,
         });
         out.terms.forEach((x) => keep(x, true));
+      }
+      // Lessons grow too: up to 3 defined terms without a lesson get one each week.
+      const bare = glossary.filter((g) => !g.long).slice(0, 3);
+      if (bare.length) {
+        const out = await askJson(z.object({ lessons: z.array(z.object({ term: z.string(), long: z.string().max(1400) })).max(3) }), {
+          tier: "smart",
+          system: `You teach ${domain} to ${audience}. For each term, write a lesson of 90-150 words: what it is, a concrete example, and why it matters to the reader. Neutral and factual; skip a term you are unsure about.`,
+          user: bare.map((g) => `${g.term}: ${g.short}`).join("\n"),
+        });
+        for (const l of out.lessons) {
+          const g = bare.find((b) => b.term.toLowerCase() === l.term.toLowerCase());
+          const words = l.long.split(/\s+/).filter(Boolean).length;
+          if (g && words >= 40 && words <= 220) { g.long = l.long.trim(); changes.push(`wrote a lesson on ${g.term}`); }
+        }
       }
     }
     meta.glossaryAt = new Date().toISOString();
@@ -245,7 +266,7 @@ if (ai && (glossary.length === 0 || String(meta.glossaryAt ?? "") < daysAgo(6)))
     else console.warn(`Glossary skipped: ${(err as Error).message.split("\n")[0]}`);
   }
 }
-if (glossary.length !== glossaryBefore) await writeFile("data/glossary.json", JSON.stringify(glossary, null, 2) + "\n");
+if (glossary.length) await writeFile("data/glossary.json", JSON.stringify(glossary, null, 2) + "\n");
 
 // Keep each tracked name's latest story line current (no AI).
 for (const c of desk.companies) {
