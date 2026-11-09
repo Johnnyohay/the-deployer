@@ -253,7 +253,7 @@ body.expert .teach{display:none!important}
       <nav aria-label="Pages" id="nav"></nav>
     </div>
     <p class="date" id="date">Loading today's brief…</p>
-    <h1 id="hello">Good morning. Here's what to learn today.</h1>
+    <h1 id="hello">Today's brief</h1>
     <div class="controls">
       <span class="lab">You follow:</span><div class="tchips" id="tchips" aria-label="Topics"></div>
       <span class="lab">Level:</span><div class="level" role="group" aria-label="Level"><button data-level="beginner">Beginner</button><button data-level="expert">Expert</button></div>
@@ -444,7 +444,6 @@ function render() {
   document.querySelectorAll(".sitename").forEach(el => el.textContent = site.name || "this site");
   const vocab = CFG.topic?.vocab || {};
   if (vocab.entities) $("#cos-h").textContent = /,/.test(vocab.entities) || vocab.entities.length > 24 ? "Most-mentioned names" : `Most-mentioned ${vocab.entities.toLowerCase()}`;
-  $("#hello").textContent = `Good morning${site.owner ? `, ${site.owner}` : ""}. Here's what to learn today.`;
   const latest = brief === briefs[0];
   const genAt = S.generatedAt ? new Date(S.generatedAt).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" }) : "";
   $("#date").textContent = `${fmtDay(brief.date, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}${latest && genAt ? ` · Updated ${genAt} ET` : latest ? "" : " · An earlier brief"}`;
