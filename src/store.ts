@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
 import path from "node:path";
 import type { Brief, Catalyst, Sector, Update } from "./schema.ts";
 import type { Housing, HousingMarket, Video } from "./housing-kb.ts";
+import type { SeriesData } from "./series.ts";
 import { applyAttributes, loadSiteConfig } from "./config.ts";
 import { loadTopic, packInfo, type PackInfo } from "./topic.ts";
 
@@ -32,6 +33,8 @@ export interface Desk {
   housing?: Housing;
   /** Videos and Shorts from data/video-channels.json (src/videos.ts). */
   videos?: Video[];
+  /** The data desk (src/series.ts), when the pack has topic/series.yaml. */
+  series?: SeriesData[];
 }
 
 async function optional<T>(load: () => Promise<T>): Promise<T | undefined> {
@@ -62,14 +65,14 @@ export async function loadDeskRemote(url: string): Promise<Desk> {
 }
 
 /** The housing desk and videos are published next to all.json; either may be missing. */
-async function loadExtrasRemote(url: string): Promise<Pick<Desk, "housing" | "videos">> {
+async function loadExtrasRemote(url: string): Promise<Pick<Desk, "housing" | "videos" | "series">> {
   const get = (file: string) => optional(async () => {
     const res = await fetch(new URL(file, url), { signal: AbortSignal.timeout(30000) });
     if (!res.ok) throw new Error(String(res.status));
     return res.json();
   });
-  const [market, news, videos] = await Promise.all([get("housing.json"), get("housing-news.json"), get("videos.json")]);
-  return { housing: market ? { market, news: news ?? [] } : undefined, videos };
+  const [market, news, videos, series] = await Promise.all([get("housing.json"), get("housing-news.json"), get("videos.json"), get("series.json")]);
+  return { housing: market ? { market, news: news ?? [] } : undefined, videos, series: series?.series };
 }
 
 /**
@@ -104,6 +107,7 @@ export async function loadDesk(): Promise<Desk> {
       news: (await optional(() => readJson<Housing["news"]>("housing/news.json"))) ?? [],
     })),
     videos: await optional(() => readJson<Video[]>("videos.json")),
+    series: (await optional(() => readJson<{ series: SeriesData[] }>("series.json")))?.series,
   };
 }
 

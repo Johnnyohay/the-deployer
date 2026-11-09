@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{name}}: Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="desk.css">
+<style>
+:root{--good:#15803D;--bad:#B91C1C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--good:#4ADE80;--bad:#F87171}}
+:root[data-theme="dark"]{--good:#4ADE80;--bad:#F87171}
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;align-content:start}
+.card.notable{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.card h3{margin:0;font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:.02em;line-height:1.15}
+.big{font-family:var(--display);font-weight:700;font-size:34px;line-height:1}
+.unit{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.moves{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);font-size:12.5px}
+.good{color:var(--good)}.bad{color:var(--bad)}.flat{color:var(--muted)}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:2px 9px}
+.chart{width:100%;height:120px;display:block}
+.chart path.line{fill:none;stroke:var(--ink);stroke-width:1.6;vector-effect:non-scaling-stroke}
+.chart path.area{fill:var(--accent-soft);stroke:none}
+.chart circle{fill:var(--accent)}
+.axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.ranges{display:flex;gap:4px}
+.ranges button{font-family:var(--mono);font-size:11px;background:none;border:1px solid var(--line);border-radius:4px;color:var(--muted);padding:2px 7px;cursor:pointer}
+.ranges button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.why{color:var(--ink-2);font-size:14px;margin:0}
+.foot{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.foot a{color:var(--muted)}
+.stale{font-family:var(--mono);font-size:11.5px;color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="banner">{{name}} // Data // <span id="asof">Loading</span></div>
+<header class="top wrap">
+  <div class="eyebrow">The numbers behind the news</div>
+  <h1>{{name}} <span>Data</span></h1>
+  <p class="lede">The figures {{name}} tracks for {{domain}}, refreshed every day from public sources that need no account. A card is marked when its latest change is unusually large compared with its own history.</p>
+  <nav class="desks" id="desks" aria-label="Desks"></nav>
+</header>
+
+<main class="wrap">
+<div id="offline" class="notice" hidden></div>
+<section style="display:grid;gap:16px">
+  <div class="bar">
+    <div class="filters" id="themes" aria-label="Theme"></div>
+    <div class="ranges" id="ranges" aria-label="Time range">
+      <button data-r="1">1Y</button><button data-r="5">5Y</button><button data-r="0">All</button>
+    </div>
+  </div>
+  <div class="status" id="count"></div>
+  <div class="cards" id="list"></div>
+</section>
+</main>
+
+<footer class="wrap">Numbers come from the sources linked on each card. {{name}} copies them as published; check the source before relying on a figure. <a href="docs.html">How it works</a></footer>
+
+<script src="desk.js"></script>
+<script>
+const $=s=>document.querySelector(s), esc=DESK.esc;
+const ls={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
+let CFG={}, S=[], theme=location.hash.slice(1)||"all", range=+(ls.get("desk-data-range")??5);
+
+const fmt=(v,unit)=>{const a=Math.abs(v);const n=a>=1e9?(v/1e9).toFixed(2)+"B":a>=1e6?(v/1e6).toFixed(2)+"M":a>=1e3?Math.round(v).toLocaleString("en-US"):a>=100?v.toFixed(1):v.toFixed(2);return unit==="%"?n+"%":n;};
+const sign=n=>n>0?"+":n<0?"−":"±";
+const tone=(s,n)=>!n||s.better==="neither"?"flat":(n>0)===(s.better==="up")?"good":"bad";
+// A % series moves in points; anything else shows its change and the % change.
+const move=(s,m,label)=>{if(!m)return"";const pts=s.unit==="%";const body=pts?`${sign(m.abs)}${Math.abs(m.abs).toFixed(2)} pts`:`${sign(m.abs)}${fmt(Math.abs(m.abs),"")}${m.pct!=null?` (${sign(m.pct)}${Math.abs(m.pct).toFixed(1)}%)`:""}`;return `<span class="${tone(s,m.abs)}">${label} ${body}</span>`;};
+const day=d=>new Date(d+"T00:00:00Z").toLocaleDateString("en-US",{month:"short",year:"numeric",timeZone:"UTC"});
+const freqWord={daily:"day",weekly:"week",monthly:"month",quarterly:"quarter",yearly:"year"};
+
+function chart(s){
+  let pts=s.points;
+  if(range){const cut=Date.parse(pts.at(-1)[0])-range*365.25*864e5;const sl=pts.filter(p=>Date.parse(p[0])>=cut);if(sl.length>=2)pts=sl;}
+  if(pts.length<2)return"";
+  const W=300,H=110,t0=Date.parse(pts[0][0]),t1=Date.parse(pts.at(-1)[0]);
+  const vs=pts.map(p=>p[1]),lo=Math.min(...vs),hi=Math.max(...vs),span=hi-lo||1;
+  const X=t=>((t-t0)/(t1-t0||1))*W, Y=v=>H-6-((v-lo)/span)*(H-12);
+  const d=pts.map((p,i)=>`${i?"L":"M"}${X(Date.parse(p[0])).toFixed(1)},${Y(p[1]).toFixed(1)}`).join("");
+  const last=pts.at(-1);
+  const label=`${s.name}: from ${fmt(pts[0][1],s.unit)} in ${day(pts[0][0])} to ${fmt(last[1],s.unit)} in ${day(last[0])}; low ${fmt(lo,s.unit)}, high ${fmt(hi,s.unit)}.`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(label)}">
+    <path class="area" d="${d}L${W},${H}L0,${H}Z"/><path class="line" d="${d}"/>
+    <circle cx="${X(Date.parse(last[0])).toFixed(1)}" cy="${Y(last[1]).toFixed(1)}" r="3.2"/></svg>
+    <div class="axis"><span>${esc(day(pts[0][0]))}</span><span>low ${esc(fmt(lo,s.unit))} · high ${esc(fmt(hi,s.unit))}</span><span>${esc(day(last[0]))}</span></div>`;
+}
+
+function card(s){
+  if(!s.latest)return"";
+  const per=freqWord[s.frequency]||"reading";
+  return `<article class="card${s.notable&&!s.error?" notable":""}" id="${esc(s.id)}">
+    <div class="bar"><h3>${esc(s.name)}</h3>${s.notable&&!s.error?`<span class="badge" title="The latest change is ${s.notable.sigma} standard deviations from its usual size">Notable ${s.notable.direction==="up"?"rise":"drop"}</span>`:""}</div>
+    <div><span class="big">${esc(fmt(s.latest.value,s.unit))}</span> <span class="unit">${esc(s.unit)}</span></div>
+    <div class="moves">${move(s,s.change,`vs last ${per}`)}${s.frequency!=="yearly"?move(s,s.yoy,"vs a year ago"):""}</div>
+    ${chart(s)}
+    ${s.why?`<p class="why">${esc(s.why)}</p>`:""}
+    ${s.error?`<div class="stale">Couldn't refresh today (${esc(s.error)}); showing the last good numbers.</div>`:""}
+    <div class="foot"><span>Latest: ${esc(day(s.latest.date))}</span><a href="${esc(s.sourceUrl)}" target="_blank" rel="noopener">Source ↗</a></div>
+  </article>`;
+}
+
+function render(){
+  const names=new Map((CFG.topic?.sectors||[]).map(t=>[t.id,t.name]));
+  const used=["all",...new Set(S.map(s=>s.theme).filter(Boolean))];
+  if(!used.includes(theme))theme="all";
+  $("#themes").innerHTML=used.length>2?used.map(t=>`<button class="fbtn" aria-pressed="${t===theme}" data-t="${esc(t)}">${esc(t==="all"?"All":names.get(t)||t)}</button>`).join(""):"";
+  $("#themes").querySelectorAll("button").forEach(b=>b.onclick=()=>{theme=b.dataset.t;history.replaceState(null,"",theme==="all"?location.pathname:"#"+theme);render();});
+  document.querySelectorAll("#ranges button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.r===range)));
+  const shown=S.filter(s=>theme==="all"||s.theme===theme).sort((a,b)=>(!!b.notable-!!a.notable));
+  const notable=shown.filter(s=>s.notable&&!s.error).length;
+  $("#count").textContent=`${shown.length} series${notable?` · ${notable} with a notable move`:""}`;
+  $("#list").innerHTML=shown.map(card).join("")||`<p class="status">No series yet. Add some in topic/series.yaml, or open a “Change my setup” issue.</p>`;
+}
+document.querySelectorAll("#ranges button").forEach(b=>b.onclick=()=>{range=+b.dataset.r;ls.set("desk-data-range",String(range));render();});
+
+(async()=>{
+  CFG=await DESK.config();
+  DESK.renderDesks($("#desks"),CFG,"data");
+  try{
+    const r=await fetch("api/v1/series.json",{cache:"no-cache"});
+    if(!r.ok)throw new Error(r.status);
+    const body=await r.json();
+    S=body.series||[];
+    $("#asof").textContent=`Updated ${new Date(body.updatedAt).toLocaleDateString("en-US",{month:"short",day:"numeric"})}`;
+  }catch{
+    $("#offline").hidden=false;$("#offline").textContent="The data isn't available right now. Try again in a minute.";$("#asof").textContent="Offline";
+  }
+  render();
+})();
+</script>
+</body>
+</html>

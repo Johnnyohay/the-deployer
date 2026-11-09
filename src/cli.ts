@@ -19,6 +19,7 @@ const COMMANDS: Record<string, { file: string; about: string }> = {
   housing: { file: "housing.ts", about: "collect the housing desk (Zillow, Freddie Mac, housing news)" },
   "housing-coords": { file: "housing-coords.ts", about: "one time: map positions for metros" },
   videos: { file: "videos.ts", about: "collect videos from topic/videos.yaml" },
+  series: { file: "series.ts", about: "collect the data desk from topic/series.yaml (FRED, World Bank, CSV, JSON)" },
   "build-api": { file: "build-api.ts", about: "check the pack and rebuild public/ from data/" },
   "build-app": { file: "build-pages.ts", about: "build the in-browser Ask app into public/app" },
   enrich: { file: "enrich.ts", about: "tag companies on stored updates" },

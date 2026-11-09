@@ -53,6 +53,9 @@ export async function buildApi(desk: Desk): Promise<void> {
     await put("housing-news.json", desk.housing.news);
   }
   if (desk.videos) await put("videos.json", desk.videos);
+  // The data desk: one file with every series, so the Data page and Ask read the same numbers.
+  const series = existsSync("data/series.json") ? JSON.parse(await readFile("data/series.json", "utf8")) : null;
+  if (series) await put("series.json", series);
 
   // Settings from topic/*.yaml that the pages read (tabs, flags, defaults, custom attributes, requests).
   const site = await loadSiteConfig();
@@ -60,9 +63,14 @@ export async function buildApi(desk: Desk): Promise<void> {
   const topic = await loadTopic();
   const feeds = (await loadSources()).feeds;
   await buildPages({ name: site.site.name, tagline: site.site.tagline, domain: topic.domain });
+  // A pack with series gets a Data tab even if its site.yaml predates the data desk.
+  const desks = series?.series?.length && !site.desks.some((d) => d.id === "data")
+    ? [...site.desks.slice(0, -1), { id: "data", label: "Data", page: "data.html", enabled: true }, ...site.desks.slice(-1)]
+    : site.desks;
   await put("config.json", {
     generatedAt,
     ...site,
+    desks,
     videos: { topics: [...new Set(video.channels.map((c) => c.topic).filter((t) => t !== "mixed").concat(Object.keys(video.match)))], channels: video.channels, keepDays: video.keepDays },
     requests: existsSync("topic/requests.yaml") ? await loadRequests() : [],
     formulaFields: FORMULA_FIELDS,

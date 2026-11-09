@@ -169,6 +169,25 @@ export function toolSpecs(desk: Desk, opts: ToolOptions, onEvidence: (items: Evi
       }),
     );
   }
+  if (desk.series?.length) {
+    const series = desk.series;
+    const summary = (x: (typeof series)[number]) => ({ id: x.id, name: x.name, unit: x.unit, theme: x.theme, frequency: x.frequency, latest: x.latest, change: x.change, yearOnYear: x.yoy, notable: x.notable, why: x.why, source: x.sourceUrl, stale: x.error });
+    tools.push(
+      spec({
+        name: "get_data",
+        description: `The numbers ${desk.pack.name} tracks (${series.map((x) => x.name).join("; ")}). Omit id for every series' latest value, change since the last reading, change against a year ago and whether the move is notable (unusually large for that series). Give an id for one series with its recent readings. Cite the source link when you use a number.`,
+        inputSchema: z.object({
+          id: z.enum(series.map((x) => x.id) as [string, ...string[]]).optional(),
+          points: z.number().int().optional().describe("How many recent readings to return for one series. Default 24, max 120"),
+        }),
+        run: async ({ id, points }) => {
+          if (!id) return json(series.map(summary));
+          const x = series.find((s) => s.id === id)!;
+          return json({ ...summary(x), readings: x.points.slice(-Math.min(Math.max(points ?? 24, 1), 120)) });
+        },
+      }),
+    );
+  }
   if (opts.papers)
     tools.push(
         spec({

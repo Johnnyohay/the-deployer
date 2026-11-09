@@ -179,6 +179,55 @@ export async function loadTopic(): Promise<Topic> {
 
 export const loadSources = () => loadYaml("topic/sources.yaml", Sources);
 
+// topic/series.yaml (optional): the data desk. Each series is a number tracked over time from
+// a source that needs no key: FRED's public CSV, World Bank, or any CSV/JSON URL.
+const SeriesSource = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("fred"), code: z.string().regex(/^[A-Za-z0-9_.]+$/, "a FRED series code, e.g. RSXFS") }),
+  z.object({
+    kind: z.literal("worldbank"),
+    indicator: z.string().describe("A World Bank indicator code, e.g. NE.IMP.GNFS.ZS"),
+    country: z.string().default("WLD").describe("ISO code, e.g. US, CN, or WLD for the world"),
+  }),
+  z.object({
+    kind: z.literal("csv"),
+    url: z.url(),
+    date: z.string().default("date").describe("The date column's header"),
+    value: z.string().describe("The value column's header"),
+  }),
+  z.object({
+    kind: z.literal("json"),
+    url: z.url(),
+    items: z.string().default("").describe("Dot path to the array of points, e.g. 'data.rows'; empty when the response is the array"),
+    date: z.string().default("date"),
+    value: z.string().default("value"),
+  }),
+]);
+const Series = z.object({
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/, "use lowercase letters, digits and dashes"),
+  name: z.string(),
+  unit: z.string().default(""),
+  theme: z.string().optional().describe("The sector id this series belongs to, so the theme page can show it"),
+  why: z.string().default("").describe("One line on why this number matters to the audience"),
+  better: z.enum(["up", "down", "neither"]).default("neither").describe("Which direction is good news, for coloring"),
+  source: SeriesSource,
+});
+const SeriesFile = z.object({
+  series: z.array(Series).default([]),
+  notableSigma: z.number().positive().default(2).describe("A change bigger than this many standard deviations of past changes is notable"),
+});
+export type Series = z.infer<typeof Series>;
+export type SeriesSource = z.infer<typeof SeriesSource>;
+export const loadSeriesConfig = () => loadYaml("topic/series.yaml", SeriesFile);
+
+/** The page a person can open to see where a series comes from. */
+export function seriesSourceUrl(s: SeriesSource): string {
+  switch (s.kind) {
+    case "fred": return `https://fred.stlouisfed.org/series/${s.code}`;
+    case "worldbank": return `https://data.worldbank.org/indicator/${s.indicator}?locations=${s.country}`;
+    default: return s.url;
+  }
+}
+
 /** Every story type name: the ruled ones in order, then the default. */
 export const typeNames = (t: Topic) => [...new Set([...t.storyTypes.map((s) => s.name), t.defaultType.name])];
 export const typeWeights = (t: Topic): Record<string, number> =>

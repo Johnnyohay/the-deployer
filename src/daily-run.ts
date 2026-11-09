@@ -1,6 +1,6 @@
 /**
  * `deployer daily`: the whole morning refresh for a pack, in order. Each step runs on its
- * own, so a source that is down (videos, housing) never stops the brief or the site.
+ * own, so a source that is down (videos, housing, a data series) never stops the brief or the site.
  */
 import { existsSync } from "node:fs";
 import { runStep } from "./run-step.ts";
@@ -8,6 +8,7 @@ import { runStep } from "./run-step.ts";
 const steps = [
   ["collect", true],
   ["videos", existsSync("topic/videos.yaml")],
+  ["series", existsSync("topic/series.yaml")],
   ["housing", existsSync("data/housing/metro-coords.json")],
   ["curate", true],
   ["build-api", true],
