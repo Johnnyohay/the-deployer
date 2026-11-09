@@ -26,6 +26,7 @@
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.55}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--hot);outline-offset:2px}
@@ -218,6 +219,15 @@ footer a{color:var(--muted)}
 .level{display:inline-flex;border:1px solid var(--band-line);border-radius:999px;overflow:hidden}
 .level button{font-family:var(--ui);font-size:13px;font-weight:600;background:none;border:0;color:var(--band-dim);padding:5px 12px;cursor:pointer}
 .level button[aria-pressed="true"]{background:var(--band-fg);color:var(--band)}
+.level{overflow:visible}
+.level button{position:relative}
+.level button:first-child{border-radius:999px 0 0 999px}.level button:last-child{border-radius:0 999px 999px 0}
+/* What each level changes: a tooltip on hover or keyboard focus. */
+.level button::after{content:attr(data-tip);position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);width:max-content;max-width:260px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-family:var(--body);font-size:13px;font-weight:400;line-height:1.4;text-align:left;white-space:normal;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+.level button::before{content:"";position:absolute;left:50%;top:calc(100% + 5px);transform:translateX(-50%) rotate(45deg);width:9px;height:9px;background:var(--surface);border-left:1px solid var(--line);border-top:1px solid var(--line);opacity:0;transition:opacity .12s;z-index:31}
+.level button:hover::after,.level button:focus-visible::after,.level button:hover::before,.level button:focus-visible::before{opacity:1}
+.levelnote{font-size:13px;color:var(--band-dim)}
+@media (hover:hover){.levelnote{display:none}}
 body.expert .teach{display:none!important}
 .tpill{display:inline-flex;align-items:center;gap:6px}
 .tpill i{width:8px;height:8px;border-radius:50%;background:var(--tc);box-shadow:0 0 0 1.5px rgba(255,255,255,.6)}
@@ -264,7 +274,9 @@ body.expert .teach{display:none!important}
     <h1 id="hello">Today's brief</h1>
     <div class="tabs" id="tabs" role="tablist" aria-label="Topics"></div>
     <div class="controls">
-      <span class="lab">Level:</span><div class="level" role="group" aria-label="Level"><button data-level="beginner">Beginner</button><button data-level="expert">Expert</button></div>
+      <span class="lab">Level:</span><div class="level" role="group" aria-label="Level"><button data-level="beginner" aria-describedby="tip-beginner" data-tip="Beginner: shows the lesson of the day and a “Key terms” box on every story, explaining the jargon.">Beginner</button><button data-level="expert" aria-describedby="tip-expert" data-tip="Expert: hides the lesson and the key terms for a faster read, with just the news and the numbers.">Expert</button></div>
+      <span class="levelnote" id="levelnote" aria-live="polite"></span>
+      <span class="visually-hidden" id="tip-beginner">Shows the lesson of the day and key terms on every story.</span><span class="visually-hidden" id="tip-expert">Hides the lesson and key terms for a faster read.</span>
     </div>
     <p class="summary" id="summary"></p>
     <div class="facts" id="facts"></div>
@@ -468,6 +480,8 @@ function render() {
   if (cur) { $("#nums").textContent = `${cur.label} in numbers`; $("#nums-sub").textContent = cur.kind === "news" ? "The 7 days to this brief, compared with the 7 days before." : "The latest readings, with how they changed."; }
   if (cur) $("#top5").textContent = `Today's top ${cur.kind === "housing" ? lc(cur.label) : lc(cur.label)} stories`;
   document.querySelectorAll("[data-level]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.level === LEVEL)));
+  // On touch screens (no hover), a short line says what the current level shows.
+  $("#levelnote").textContent = LEVEL === "beginner" ? "Lessons and key terms on." : "Lessons and key terms hidden.";
   document.body.classList.toggle("expert", LEVEL === "expert");
 
   const top2 = busy2.slice(0, 2).map(([id]) => lc(nameOf(id)));
