@@ -24,6 +24,17 @@ async function buildPages(words: Record<string, string>) {
   }
 }
 
+// The best rental markets among the 200 largest metros (easy to buy and sell in), for the brief.
+type Metro = { name: string; state: string; rank?: number; price?: number; rent?: number; grossYield?: number; capRate?: number; cashFlow?: number; rentYoY?: number; priceYoY?: number; forecast12m?: number; score?: number };
+function topMetros(metros: Metro[]) {
+  const pick = ({ name, state, price, rent, grossYield, capRate, cashFlow, rentYoY, priceYoY, forecast12m, score }: Metro) => ({ name, state, price, rent, grossYield, capRate, cashFlow, rentYoY, priceYoY, forecast12m, score });
+  const big = metros.filter((x) => (x.rank ?? 9999) <= 200 && x.price && x.rent);
+  return {
+    topScore: [...big].sort((a, b) => (b.score ?? 0) - (a.score ?? 0)).slice(0, 8).map(pick),
+    topYield: [...big].sort((a, b) => (b.grossYield ?? 0) - (a.grossYield ?? 0)).slice(0, 5).map(pick),
+  };
+}
+
 async function put(file: string, value: unknown) {
   const full = path.join(API_DIR, file);
   await mkdir(path.dirname(full), { recursive: true });
@@ -56,7 +67,7 @@ export async function buildApi(desk: Desk): Promise<void> {
   // A small housing summary for the brief page (the full market file is about 1 MB).
   if (desk.housing) {
     const m = desk.housing.market as unknown as { asOf?: Record<string, string>; mortgage?: { history?: [string, number][] } & Record<string, unknown>; national?: Record<string, number> };
-    await put("housing-summary.json", { asOf: m.asOf ?? {}, mortgage: m.mortgage ? { ...m.mortgage, history: (m.mortgage.history ?? []).slice(-53) } : null, national: m.national ?? null });
+    await put("housing-summary.json", { asOf: m.asOf ?? {}, mortgage: m.mortgage ? { ...m.mortgage, history: (m.mortgage.history ?? []).slice(-53) } : null, national: m.national ?? null, ...topMetros((desk.housing.market as unknown as { metros?: Metro[] }).metros ?? []) });
   }
   // Key terms and lessons (data/glossary.json, kept by the curator).
   if (existsSync("data/glossary.json")) await put("glossary.json", JSON.parse(await readFile("data/glossary.json", "utf8")));

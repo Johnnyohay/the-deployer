@@ -199,14 +199,22 @@ footer a{color:var(--muted)}
 }
 @media (prefers-reduced-motion:no-preference){.sheet{animation:in .22s ease-out}@keyframes in{from{transform:translateX(24px);opacity:0}}}
 
+/* ---- Topic tabs and level ---- */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 6px}
+.tab{font-family:var(--ui);font-size:16px;font-weight:700;border:1px solid var(--band-line);background:var(--band-chip);color:var(--band-dim);border-radius:10px;padding:9px 16px;cursor:pointer;display:inline-flex;gap:9px;align-items:center}
+.tab i{width:10px;height:10px;border-radius:50%;background:var(--tc)}
+.tab:hover{color:var(--band-fg)}
+.tab[aria-selected="true"]{background:var(--band-fg);color:var(--band);border-color:var(--band-fg)}
+.markets{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.markets th{font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);text-align:right;padding:0 0 8px 10px;border-bottom:1px solid var(--line)}
+.markets th:first-child,.markets td:first-child{text-align:left;padding-left:0}
+.markets td{text-align:right;padding:9px 0 9px 10px;border-bottom:1px solid var(--line)}
+.markets td b{font-weight:600}
+.markets .neg{color:var(--bad)}.markets .pos{color:var(--good)}
+.scroll-x{overflow-x:auto}
 /* ---- Topics and level ---- */
 .controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:14px 0 4px}
 .controls .lab{font-size:13.5px;color:var(--band-dim)}
-.tchips{display:flex;flex-wrap:wrap;gap:6px}
-.tchip{font-family:var(--ui);font-size:13.5px;font-weight:600;border:1px solid var(--band-line);background:var(--band-chip);color:var(--band-dim);border-radius:999px;padding:5px 12px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
-.tchip i{width:9px;height:9px;border-radius:50%;background:var(--tc)}
-.tchip[aria-pressed="true"]{color:var(--band-fg);border-color:var(--band-fg)}
-.tchip[aria-pressed="false"] i{opacity:.35}
 .level{display:inline-flex;border:1px solid var(--band-line);border-radius:999px;overflow:hidden}
 .level button{font-family:var(--ui);font-size:13px;font-weight:600;background:none;border:0;color:var(--band-dim);padding:5px 12px;cursor:pointer}
 .level button[aria-pressed="true"]{background:var(--band-fg);color:var(--band)}
@@ -254,8 +262,8 @@ body.expert .teach{display:none!important}
     </div>
     <p class="date" id="date">Loading today's brief…</p>
     <h1 id="hello">Today's brief</h1>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Topics"></div>
     <div class="controls">
-      <span class="lab">You follow:</span><div class="tchips" id="tchips" aria-label="Topics"></div>
       <span class="lab">Level:</span><div class="level" role="group" aria-label="Level"><button data-level="beginner">Beginner</button><button data-level="expert">Expert</button></div>
     </div>
     <p class="summary" id="summary"></p>
@@ -268,8 +276,8 @@ body.expert .teach{display:none!important}
 
   <section class="wrap" aria-labelledby="top5">
     <div class="sec-head">
-      <h2 id="top5">Today's most important stories</h2>
-      <p>The stories that matter most in each topic you follow, ranked within each topic. Every card says what happened and why it matters to you; open one for the full story, the key terms and the bigger picture.</p>
+      <h2 id="top5">Today's top stories</h2>
+      <p>Ranked by how much each one could matter to you. Every card says what happened and why it matters; open one for the full story, the key terms and the bigger picture.</p>
     </div>
     <div class="deck" id="deck"></div>
     <p class="swipe" id="swipe">Swipe sideways for the next stories →</p>
@@ -281,6 +289,13 @@ body.expert .teach{display:none!important}
       <p>The figures behind each topic you follow, with how they changed.</p>
     </div>
     <div id="numbers"></div>
+  </section>
+
+  <section class="wrap panel" aria-labelledby="mk-h" id="markets-wrap" hidden>
+    <div class="sec-head"><h2 id="mk-h">Best markets for rentals</h2><p>The highest-scoring of the 200 largest US metros on ANU's rental score (rent yield, rent growth, forecast, price trend and inventory), so they're big enough to buy and sell in. Cash flow assumes 25% down at today's 30-year rate, after typical costs.</p></div>
+    <div class="scroll-x"><table class="markets" id="markets"></table></div>
+    <p class="method" id="yield-note"></p>
+    <a class="more" href="housing.html">Rank all metros, map them and run the rental calculator →</a>
   </section>
 
   <section class="wrap trio" aria-label="Deals and companies" data-kind="news" id="deals-wrap">
@@ -397,9 +412,10 @@ const termsHTML = list => list.length ? `<div class="terms teach"><p class="lbl"
 
 function render() {
   TOPICS = topicsFrom(CFG);
-  const saved = (store.get("anu-topics") || "").split(",").filter(Boolean);
-  ON = new Set(saved.length ? TOPICS.map(t => t.id).filter(id => saved.includes(id)) : TOPICS.map(t => t.id));
-  if (!ON.size) ON = new Set(TOPICS.map(t => t.id));
+  // One topic at a time: from the link (?t=housing), else the last one opened, else the first.
+  const wantT = new URLSearchParams(location.search).get("t") || store.get("anu-topic");
+  const cur = TOPICS.find(x => x.id === wantT) || TOPICS[0];
+  ON = new Set(cur ? [cur.id] : []);
   LEVEL = store.get("anu-level") === "expert" ? "expert" : "beginner";
 
   const briefs = [...S.briefs].sort((a, b) => b.date.localeCompare(a.date));
@@ -427,7 +443,8 @@ function render() {
   if (houseT) {
     const pick = HN.filter(n => within(n.d, 3)).sort((a, b) => (b.topics || []).includes("rates") - (a.topics || []).includes("rates") || b.d.localeCompare(a.d));
     const seen = new Set();
-    pick.filter(n => { const k = (n.topics || [])[0] || "x"; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 2).forEach(n => {
+    const varied = pick.filter(n => { const k = (n.topics || [])[0] || "x"; if (seen.has(k)) return false; seen.add(k); return true; });
+    [...varied, ...pick.filter(n => !varied.includes(n))].slice(0, 5).forEach(n => {
       const tag = (n.topics || [])[0] || "";
       cards.push({ topic: houseT, kind: "housing", h: n.title, what: clean(n.body) || n.title, full: clean(n.body) || n.title, you: HOUSING_WHY[tag] || HOUSING_WHY.prices, src: n.src || null, d: n.d, u: n, area: "housing", areaName: tag ? `Housing · ${tag}` : "Housing" });
     });
@@ -447,7 +464,9 @@ function render() {
   const latest = brief === briefs[0];
   const genAt = S.generatedAt ? new Date(S.generatedAt).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" }) : "";
   $("#date").textContent = `${fmtDay(brief.date, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}${latest && genAt ? ` · Updated ${genAt} ET` : latest ? "" : " · An earlier brief"}`;
-  $("#tchips").innerHTML = TOPICS.map(x => `<button class="tchip" data-topic="${esc(x.id)}" aria-pressed="${ON.has(x.id)}" style="--tc:${x.dot}"><i></i>${esc(x.label)}</button>`).join("");
+  $("#tabs").innerHTML = TOPICS.length > 1 ? TOPICS.map(x => `<button class="tab" role="tab" data-tab="${esc(x.id)}" aria-selected="${ON.has(x.id)}" style="--tc:${x.dot}"><i></i>${esc(x.label)}</button>`).join("") : "";
+  if (cur) { $("#nums").textContent = `${cur.label} in numbers`; $("#nums-sub").textContent = cur.kind === "news" ? "The 7 days to this brief, compared with the 7 days before." : "The latest readings, with how they changed."; }
+  if (cur) $("#top5").textContent = `Today's top ${cur.kind === "housing" ? lc(cur.label) : lc(cur.label)} stories`;
   document.querySelectorAll("[data-level]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.level === LEVEL)));
   document.body.classList.toggle("expert", LEVEL === "expert");
 
@@ -467,6 +486,8 @@ function render() {
   if (houseT && ON.has(houseT.id) && m?.rate30 != null) facts.push(`<div class="fact"><b>${m.rate30.toFixed(2)}%</b><span><strong>30-year mortgage rate</strong> (Freddie Mac, week of ${esc(fmtDay(m.week, { month: "short", day: "numeric" }))}).</span></div>`);
   if (newsT && ON.has(newsT.id) && n1) facts.push(`<div class="fact soon"><b>${inDays}</b><span><strong>${inDays === 1 ? "day" : "days"} until</strong> ${esc(n1.title)} (${esc(fmtDay(n1.d, { weekday: "short", month: "short", day: "numeric" }))}).</span></div>`);
   if (facts.length < 3 && houseT && ON.has(houseT.id) && nat?.rentYoY != null) facts.push(`<div class="fact"><b>${nat.rentYoY >= 0 ? "+" : ""}${nat.rentYoY}%</b><span><strong>typical US rent</strong> over the past year ($${Math.round(nat.rent).toLocaleString("en-US")} a month).</span></div>`);
+  if (facts.length < 3 && newsT && ON.has(newsT.id)) { const act = [...c2.keys()].filter(k => sectors.has(k)).length; facts.splice(1, 0, `<div class="fact"><b>${act}</b><span><strong>of ${S.sectors.length} areas</strong> had news${top2.length ? `, led by ${esc(top2.join(" and "))}` : ""}.</span></div>`); }
+  if (facts.length < 3 && houseT && ON.has(houseT.id) && nat?.price != null) facts.push(`<div class="fact"><b>$${Math.round(nat.price / 1000)}k</b><span><strong>typical US home value</strong>, ${nat.priceYoY >= 0 ? "up" : "down"} ${Math.abs(nat.priceYoY)}% in a year.</span></div>`);
   $("#facts").innerHTML = facts.slice(0, 3).join("");
 
   // ---- lesson of the day: a glossary lesson for a term in today's stories, rotating by date
@@ -496,7 +517,7 @@ function render() {
     const url = safeUrl(x.src?.u);
     const terms = termsIn(`${x.h} ${x.what}`);
     return `<article class="card${i === 0 ? " big" : ""}" data-topic="${esc(x.topic.id)}" style="--c:${c};--ci:${ci};--tc:${x.topic.dot}" aria-label="${esc(x.topic.label)} story ${n} of ${of}">
-      <div class="face${light ? " lightbg" : ""}"><div class="k"><span class="pill tpill"><i></i>${esc(x.topic.label)} · ${n === 1 ? "top story" : `${n} of ${of}`}</span><span>${esc(x.areaName)}</span></div><h3><button data-open="${i + 1}">${esc(x.h)}</button></h3></div>
+      <div class="face${light ? " lightbg" : ""}"><div class="k"><span class="pill">${n === 1 ? "Top story" : `Story ${n} of ${of}`}</span><span>${esc(x.areaName)}</span></div><h3><button data-open="${i + 1}">${esc(x.h)}</button></h3></div>
       <div class="body">
         <div><p class="lbl">What happened</p><p class="what">${esc(x.what)}</p></div>
         ${x.you ? `<div><p class="lbl">Why it matters</p><p>${esc(x.you)}</p></div>` : ""}
@@ -592,6 +613,16 @@ function render() {
       ${n.rent != null ? `<div class="kpi"><span class="lbl">Typical US rent</span><span class="val">$${Math.round(n.rent).toLocaleString("en-US")}</span><span class="delta ${n.rentYoY >= 0 ? "up" : "down"}">${n.rentYoY >= 0 ? "▲ +" : "▼ −"}${Math.abs(n.rentYoY)}% vs a year ago</span><span class="sub">per month, Zillow, ${esc(asof.rents || "")}</span></div>` : ""}
     </div><a class="more" href="housing.html">Open the housing desk: metros, rent yields and a rental calculator →</a></div>`);
   }
+  // Best markets for rentals (housing topic)
+  const mk = $("#markets-wrap");
+  if (houseT && H?.topScore?.length) {
+    mk.dataset.topic = houseT.id;
+    const money = v => v == null ? "–" : `$${Math.round(v).toLocaleString("en-US")}`;
+    $("#markets").innerHTML = `<thead><tr><th>Metro</th><th>Score</th><th>Typical price</th><th>Rent / mo</th><th>Rent yield</th><th>Cash flow / mo</th><th>Rent, 1 yr</th></tr></thead><tbody>` +
+      H.topScore.map(x => `<tr><td><a href="${esc(askUrl(`Is ${x.name}, ${x.state} a good place to buy a rental right now?`))}"><b>${esc(x.name)}, ${esc(x.state)}</b></a></td><td>${x.score ?? "–"}</td><td>${money(x.price)}</td><td>${money(x.rent)}</td><td>${x.grossYield != null ? x.grossYield.toFixed(1) + "%" : "–"}</td><td class="${(x.cashFlow ?? 0) < 0 ? "neg" : "pos"}">${x.cashFlow == null ? "–" : (x.cashFlow < 0 ? "−" : "+") + money(Math.abs(x.cashFlow))}</td><td>${x.rentYoY != null ? (x.rentYoY >= 0 ? "+" : "") + x.rentYoY + "%" : "–"}</td></tr>`).join("") + "</tbody>";
+    $("#yield-note").textContent = H.topYield?.length ? `Highest rent yields among the 200 largest metros: ${H.topYield.map(x => `${x.name}, ${x.state} (${x.grossYield.toFixed(1)}%)`).join(" · ")}.` : "";
+  } else mk.removeAttribute("data-topic"), mk.hidden = true;
+
   if (dataT && SERIES?.series?.length) {
     const ss = [...SERIES.series].filter(x => x.latest).sort((a, b) => !!b.notable - !!a.notable).slice(0, 4);
     groups.push(`<div class="numgroup" data-topic="${esc(dataT.id)}" style="--tc:${dataT.dot}"><h3><i></i>${esc(dataT.label)} <span>latest readings</span></h3><div class="kpis">${ss.map(x => `<div class="kpi"><span class="lbl">${esc(x.name)}</span><span class="val">${esc(String(+x.latest.value.toFixed(2)))}</span>${x.change?.pct != null ? `<span class="delta ${x.change.pct >= 0 ? "up" : "down"}">${x.change.pct >= 0 ? "▲ +" : "▼ −"}${Math.abs(x.change.pct).toFixed(1)}% vs last reading</span>` : ""}<span class="sub">${esc(x.unit || "")}${x.notable ? " · notable move" : ""}</span></div>`).join("")}</div><a class="more" href="data.html">Open the data desk →</a></div>`);
@@ -658,7 +689,7 @@ function render() {
 
 /** Shows only the topics you've turned on. */
 function applyTopics() {
-  document.querySelectorAll("[data-topic]").forEach(el => { if (el.classList.contains("tchip")) return; el.hidden = !ON.has(el.dataset.topic); });
+  document.querySelectorAll("[data-topic]").forEach(el => { el.hidden = !ON.has(el.dataset.topic); });
   const vis = [...document.querySelectorAll("#deck .card")].filter(c => !c.hidden);
   document.querySelectorAll("#deck .card").forEach(c => c.classList.remove("big"));
   vis[0]?.classList.add("big");
@@ -710,12 +741,12 @@ function closeDetail() {
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openDetail(+o.dataset.open); return; }
   if (e.target.closest("[data-close]")) { closeDetail(); return; }
-  const tb = e.target.closest(".tchip");
+  const tb = e.target.closest("[data-tab]");
   if (tb) {
-    const id = tb.dataset.topic;
-    if (ON.has(id) && ON.size > 1) ON.delete(id); else ON.add(id);
-    store.set("anu-topics", [...ON].join(","));
-    render(); return;
+    store.set("anu-topic", tb.dataset.tab);
+    const q = new URLSearchParams(location.search); q.set("t", tb.dataset.tab);
+    history.replaceState(null, "", `${location.pathname}?${q}`);
+    render(); window.scrollTo({ top: 0 }); return;
   }
   const lv = e.target.closest("[data-level]");
   if (lv) { store.set("anu-level", lv.dataset.level); render(); }
